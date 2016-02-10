@@ -9,6 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String mainboard1() {
+		
+		
+		return "temp";
+	}
+	
+	
+	
 	//메인 입니다. 에러 발생
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard() {
@@ -16,6 +25,8 @@ public class HomeController {
 		return "temp";
 		
 	}
+	
+	
 	
 	
 }
