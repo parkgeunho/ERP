@@ -15,7 +15,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard() {
 		
-		return "temp";
+		return "temp1";
 		
 	}
 	
