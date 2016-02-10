@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	//¸ŞÀÎ¼öÁ¤  
+	//ë©”ì¸ ì£¼ì„ í•œê¸€ ë³€ê²½
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard() {
 		
