@@ -8,13 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class HomeController {
-
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainboard1() {
-		
-		
-		return "temp";
-	}
 	
 	
 	
