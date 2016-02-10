@@ -10,22 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 
-	//메인 입니다. 에러 발생
+	//메인 홈페이지 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainboard2() {
+	public String mainboard() {
 		
 		return "temp";
 		
 	}
 	
-	//메인 입니다. 에러 발생
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String mainboard() {
-		
-		return "temp2";
-		
-	}
-	
+
 
 	
 	
