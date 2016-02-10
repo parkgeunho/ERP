@@ -17,5 +17,12 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String did() {
+		
+		return "el";
+		
+	}
+	
 	
 }
