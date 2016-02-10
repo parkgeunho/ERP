@@ -1,0 +1,153 @@
+@CHARSET "UTF-8";
+
+.line{
+	
+	box-shadow:1px 1px 1px 1px gray;
+	border-top-left-radius : 10px;
+	border-top-right-radius : 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+
+}
+
+.ma{
+	
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	height: 50px;
+	width: 570px;
+	font-size: 20pt;
+	font-weight: bold;
+	line-height: 48px;
+	
+	
+	
+	border-top-left-radius : 10px;
+	border-top-right-radius : 10px;
+	
+}
+.sub{
+	
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	
+	background-color:white;
+	padding:0px;
+	height: 205px;
+	width:570px;
+	font-size: 20pt;
+	font-weight: bold;
+	
+}
+
+.back{
+	height:255px;
+	width: 570px; 
+	background-color: white;
+	border-top-left-radius : 10px;
+	border-top-right-radius : 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+
+
+.menubar{
+border:none;
+border:0px;
+margin:0px;
+width:1920px;
+font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+font-size:20px;
+font-weight:bolder;
+}
+
+
+.menubar ul{
+background: rgb(109,109,109);
+height:50px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.menubar li{
+float:left;
+padding:0px;
+}
+#a {
+	display: none;
+	
+}
+
+
+.menubar li a{
+background: rgb(109,109,109);
+color:#cccccc;
+display:block;
+font-weight:normal;
+line-height:50px;
+width:120px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+}
+/*  하위 메뉴에 마우스 오버를 한 상태에서도 상위메뉴 색 변경하기 */
+.menubar li a:hover, .menubar ul li:hover a{
+background: rgb(71,71,71);
+color:#FFFFFF;
+text-decoration:none;
+}
+
+.menubar li ul{
+background: rgb(109,109,109);
+display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin:0px;
+border:0px;
+position:absolute;
+width:170px;
+z-index:200;
+/*top:1em;
+/*left:0;*/
+}
+
+.menubar li:hover ul{
+display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+}
+
+.menubar li li {
+background: rgb(109,109,109);
+display:block;
+float:none;
+margin:0px;
+padding:0px;
+width:170px;
+}
+
+.menubar li:hover li a{
+background:none;
+}
+
+.menubar li ul a{
+display:block;
+height:50px;
+font-size:12px;
+font-style:normal;
+width:120px;
+margin:0px;
+/* padding:0px 10px 0px 15px; */
+text-align:left;
+}
+
+.menubar li ul a:hover, .menubar li ul li:hover a{
+background: rgb(71,71,71);
+border:0px;
+color:#ffffff;
+text-decoration:none;
+}
+
+.menubar p{
+clear:left;
+}

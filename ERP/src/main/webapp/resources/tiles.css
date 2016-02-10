@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+#top{
+	position: absolute;
+	height: 160px;
+	
+	
+
+	
+}
+
+#left{
+	margin-top:160px;
+	
+	float:left;
+	height: 910px;
+	width: 80px;
+
+	background-color: blue;
+	
+}
+
+#main{
+	
+	
+	margin-top:160px;
+	
+	float:left;
+	height: 910px;
+	width: 1840px;
+
+		
+	
+}
