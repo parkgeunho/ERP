@@ -9,18 +9,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/erp/resources/sidemenu.css">
 </head>
 <body>
 <div>
-	<div><img style="padding-left: 10px;" align="middle" src="/erp/resources/image/mailon.png"><br/>
-	메일함
+
+	<div class="quick" >QUICK</div>
+
+
+	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/mail.png"><br/>
+	메일 쓰기
 	</div>
-	<div style="height: 1px;background-color: black">&nbsp;</div>
-	<div style="padding-top: 5px;">
-	<img src="/test/resources/image/maiof.png"><br>
-	확인
+	
+	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
+	결제 작성
+	</div>
+	
+	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
+	직원 검색
 	</div>
 
+	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>
+	도움말
+	</div>
+
+	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/option.png"><br/>
+	환경설정
+	</div>
 </div>
 </body>
 </html>

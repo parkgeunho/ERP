@@ -16,11 +16,11 @@
 <title>
 	타일즈
 </title>
-<body>
-<div style="width: 1920px;">
-<div id="top"><tiles:insertAttribute name="header"/></div>
-<div id="left"><tiles:insertAttribute name="menu"/></div>
-<div id="main"><tiles:insertAttribute name="main"/></div>
+<body style="width: 1920px; height: 1080px;">
+	<div style="width: 1920px; height: 1080px;">
+	<div id="top"><tiles:insertAttribute name="header"/></div>
+	<div id="left"><tiles:insertAttribute name="menu"/></div>
+	<div id="main"><tiles:insertAttribute name="main"/></div>
 </div>
 
 

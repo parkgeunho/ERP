@@ -3,8 +3,7 @@
 #top{
 	position: absolute;
 	height: 160px;
-	
-	
+
 
 	
 }
@@ -14,9 +13,10 @@
 	
 	float:left;
 	height: 910px;
-	width: 80px;
-
-	background-color: blue;
+	width: 79px;
+	border-right :1px solid;
+	border-right-color:#CCCCCC;
+	background-color: #f2f2f2;
 	
 }
 
