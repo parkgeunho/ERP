@@ -57,7 +57,7 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">일정</a></li>
+		<li><a href="schedule">일정</a></li>
 		
 		<li style="line-height: 50px">|</li>
 		

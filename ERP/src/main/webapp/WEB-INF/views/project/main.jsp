@@ -60,7 +60,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div style="width:1840px; height: 1010px; ">
+<div style="width:1840px; height: 910px; ">
 
 <!-- 왼쪽 첫번재 div -->
 <div style="margin-top :100px; margin-left: 35px; float: left;">
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		<div class="sub" id="mail">메일아이콘과 결제 관련아이콘이 들어가는 자리 입니다.</div>
 	</div>
 	
-	<div  class="line" style="margin-top: 20px;" >
+	<div class="line" style="margin-top: 20px;" >
 			<div id="nonmail" class="ma">안읽은메일</div>
 			<div id="ex" class="sub">
 				<div>1</div>
