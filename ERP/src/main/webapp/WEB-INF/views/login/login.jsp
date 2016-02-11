@@ -34,7 +34,7 @@ function login(){
 		return;
 	}
 	
-	f.action = "<%=cp%>/join/login_ok.do";
+	f.action = "<%=cp%>/login.action";
 	f.submit();
 	
 	
@@ -106,7 +106,7 @@ function pass(){
 
 <tr height="30">
 	<td colspan="2" align="center">
-	<button type="button" style="width: 530px; height: 50px; margin-left: 5px; font-size: 15pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/join/find.do';">Forget</button>
+	<button type="button" style="width: 515px; height: 50px; margin-left: 5px; font-size: 15pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/login.action';">Forget</button>
 	</td>
 </tr>	
 <tr height="5"><td colspan="2" bgcolor="#ffffff"></td></tr>
