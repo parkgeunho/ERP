@@ -16,7 +16,7 @@
 	
 	<!-- 왼쪽 부서 관련  -->
 	<div style="width: 500px;float: left;">
-		<div class="buseo">
+		<div class="buseo" >
 		부서
 		</div>
 		
@@ -24,6 +24,21 @@
 		부서명이 떠야되는 부분 입니다.
 		
 		</div>
+	</div>
+	
+	<div style="width: 1340px;float: left;">
+		<div class="buseo">
+		사원정보
+		</div>
+		
+		<div style="background-color: red; height: 830px; position: absolute; width: 1340px;">
+		
+			<div style="margin-top: 70px;margin-left: 600px;">
+			<input type="text" name="">
+			</div>
+		
+		</div>
+	
 	</div>
 
 
