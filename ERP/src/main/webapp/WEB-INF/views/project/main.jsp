@@ -60,10 +60,10 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<div style="width:1840px; height: 1010px; ">
+<div style="width:1840px; height: 807px;">
 
 <!-- 왼쪽 첫번재 div -->
-<div style="margin-top :100px; margin-left: 35px; float: left;">
+<div style="margin-top :100px; margin-left: 27px; float: left;">
 	<div class="line">
 		<div id="test33" class="ma">메일/결제 알림판</div>
 		<div class="sub" id="mail">메일아이콘과 결제 관련아이콘이 들어가는 자리 입니다.</div>
@@ -93,7 +93,7 @@ $(document).ready(function(){
 </div>
 
 
-<div style="margin-top :100px; margin-left: 35px; float: left;" >
+<div style="margin-top :100px; margin-left: 27px; float: left;" >
 	
 	<div class="line">
 		<div id="name" class="ma">공지사항</div>
@@ -123,7 +123,7 @@ $(document).ready(function(){
 	
 </div>
 
-	<div  style="margin-top :100px; margin-left: 35px; float: left;">
+	<div  style="margin-top :100px; margin-left: 27px; float: left;">
 
 		<div class="line">
 		

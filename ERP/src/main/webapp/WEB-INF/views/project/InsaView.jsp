@@ -12,37 +12,29 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/insaview.css">
 </head>
 <body>
-<div style="width: 1840px;height: 910px;">
+<div  style="width:1800px; height: 807px; border: 1px solid;">
 	
 	<!-- 왼쪽 부서 관련  -->
 	<div style="width: 500px;float: left;">
 		<div class="buseo" >
 		부서
 		</div>
-		
-		<div style="background-color: yellow; height: 830px;">
+		<div style="background-color: yellow; height: 726px;">
 		부서명이 떠야되는 부분 입니다.
-		
 		</div>
 	</div>
 	
-	<div style="width: 1340px;float: left;">
+	<div style="width: 1300px;float: left;">
 		<div class="buseo">
 		사원정보
 		</div>
 		
-		<div style="background-color: red; height: 830px; position: absolute; width: 1340px;">
-		
-			<div style="margin-top: 70px;margin-left: 600px;">
-			<input type="text" name="">
+		<div style=" height: 727px; width: 1340px;">
+			<div style="margin-left: 570px; height: 24px;">
+			<input type="text" name="" style="height: 16px;"><span style="margin-left: 5px;"><a href="#"><img align="middle" src="/erp/resources/image/find.png"></a></span>
 			</div>
-		
 		</div>
-	
 	</div>
-
-
-
 </div>
 
 
