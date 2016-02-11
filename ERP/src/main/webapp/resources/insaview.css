@@ -14,6 +14,43 @@
 
 }
 
+.button{
+	
+	 margin-left: 480px;
+	 background-color: #49B5F4;
+	 width: 100px;
+	 border-radius: 5px;
+	 text-align: center;
+	 color: white;
+	
+}
+
+
+
+.button:HOVER{
+	
+	background-color:#BDBDBD;
+	color: black;
+	
+}
+
+.data td{
+	
+	
+	border-bottom: 1px dashed ;
+	border-bottom-color: #BDBDBD;
+	text-align: center;
+	
+}
+.op{
+	
+	background-color: #49B5F4;
+	text-align: center;
+	color: white;
+	font-family: 고딕;
+	font-weight: bold;
+	
+}
 
 .sawon{
 	

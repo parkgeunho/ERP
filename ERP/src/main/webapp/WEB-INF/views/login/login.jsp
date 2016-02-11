@@ -34,7 +34,7 @@ function login(){
 		return;
 	}
 	
-	f.action = "<%=cp%>/join/login_ok.do";
+	f.action = "<%=cp%>/login.action";
 	f.submit();
 	
 	
@@ -66,12 +66,12 @@ function pass(){
 
  	<table border="0" width="1000" height="200" align="center" style="margin-top: 150px;">
 		<tr>
-			<td align="center" style="vertical-align: bottom;"><img alt="" src="../images/torrentname.png" width="600" height="100"></td>
+			<td align="center" style="vertical-align: bottom;">이미지들어갈부분</td>
 		</tr>
 	</table>
 	
 
-	<table align="center" cellpadding="0" cellspacing="0" border="0" style="width: 400px;">
+	<table align="center" cellpadding="0" cellspacing="0" border="0" style="width:500px;">
 	
 	
 <tr height="30" style="margin-bottom: 5px;">
@@ -80,36 +80,39 @@ function pass(){
 
 
 
-<tr height="40">
+<tr height="40" >
 	
-	<td width="120" style="padding-left: 5px;">
+	<td width="200" style="padding-left: 5px;">
 	  			<input type="text" class="form-control" id="usr" name="userId" placeholder="Id" style="height: 50px; font-size: 20px; font-family: 고딕; width: 400px;">
 	</td>
+	<td rowspan="3" width="40" height="40"><button type="button" style="width: 110px; height: 110px; font-size: 20pt; font-family: 고딕; margin-left: 5px;" class="btn btn-success" onclick="login();">Sign in</button></td>
 </tr>
 
-<tr height="3"><td colspan="2" bgcolor="#ffffff"></td></tr>
+<tr height="3">
+	<td colspan="2" bgcolor="#ffffff"></td>
+	<td></td>
+</tr>
 
 
 <tr height="40">
 	
-	<td width="120" style="padding-left: 5px;">
+	<td width="200" style="padding-left: 5px;">
 	<input type="password" class="form-control" id="pwd" name="userPwd" placeholder="Password" style="height: 50px; font-size: 20px; font-family: 고딕; width: 400px;">
 	</td>
 </tr>
 
-<tr height="10"><td colspan="2" bgcolor="#ffffff"></td></tr>
+<tr height="15"><td colspan="2" bgcolor="#ffffff"></td></tr>
 
 
 <tr height="30">
 	<td colspan="2" align="center">
-	<button type="button" style="width: 400px; height: 50px; font-size: 20px; font-family: 고딕; margin-left: 5px;" class="btn btn-warning" onclick="login();">Sign in</button>
+	<button type="button" style="width: 515px; height: 50px; margin-left: 5px; font-size: 15pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/login.action';">Forget</button>
 	</td>
 </tr>	
-<tr height="10"><td colspan="2" bgcolor="#ffffff"></td></tr>
+<tr height="5"><td colspan="2" bgcolor="#ffffff"></td></tr>
 <tr>
 <td colspan="2" align="center">	
-	<button type="button" style="width: 180px;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/join/join.do';">Register</button>
-	<button type="button" style="width: 180px;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/join/find.do';">Forget</button>
+	
 </td>
 </tr>
 
