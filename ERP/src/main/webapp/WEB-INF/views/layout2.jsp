@@ -13,11 +13,11 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/tiles.css">
 </head>
 <body style="margin: 0px;">
-<div style="width: 1920px; height: 1080px;">
+<div style="width: 1920px; height: 982px;;">
 	<div id="top"><tiles:insertAttribute name="header"/></div>
 	<div id="left"><tiles:insertAttribute name="menu"/></div>
-	<div style="float: left;margin-top:70px; width: 500px; height:1010px; background-color: yellow;"><tiles:insertAttribute name="leftmenu"/></div>
-	<div style="float: left;margin-top:70px; width: 1340px; height:1010px; background-color: black;"><tiles:insertAttribute name="left2main"/></div>
+	<div style="float: left;margin-top:160px; width: 270px; height:822px; background-color: yellow;"><tiles:insertAttribute name="leftmenu"/></div>
+	<div style="float: left;margin-top:160px; width: 1570px; height:822px; background-color: black;"><tiles:insertAttribute name="left2main"/></div>
 </div>
 
 </body>

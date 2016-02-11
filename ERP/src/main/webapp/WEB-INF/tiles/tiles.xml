@@ -13,7 +13,7 @@
         <!-- 아래 name을 "/sample/egovSampleList"라고 정합니다.
                "/sample/egovSampleLIst"는 컨트롤러가 리턴하는 값입니다.
                컨트롤러에서 리턴할 때 맨앞에 "/"가 포함되어 있다는 점을 잊지 마세요. -->
-	<definition name="ex" extends="temp">
+	<definition name="insa" extends="temp">
 		<put-attribute name="main"	value="/WEB-INF/views/project/InsaView.jsp" />
 	</definition>
 	
