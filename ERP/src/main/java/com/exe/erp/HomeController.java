@@ -33,22 +33,4 @@ public class HomeController {
 	}
 	
 	
-	
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//	
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
-	@RequestMapping(value = "/approvalArticle", method = RequestMethod.GET)
-	public String approvalArticle() {
-		
-		return "approval/approvalArticle";
-	}
-
-	@RequestMapping(value = "/approvalCreated", method = RequestMethod.GET)
-	public String approvalCreated() {
-		
-		return "approval/approvalCreated";
-	}	
-	
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
-	
 }
