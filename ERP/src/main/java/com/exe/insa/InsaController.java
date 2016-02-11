@@ -21,6 +21,11 @@ public class InsaController {
 	public String test() {
 		
 		return "ep";
+	}
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public String test2() {
+		
+		return "ep1";
 	}	
 	
 
