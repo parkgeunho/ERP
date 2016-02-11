@@ -29,7 +29,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/test2", method = RequestMethod.GET)
 	public String test2() {
-		return "project/InsaView";
+		return "ex";
 	}
 	
 	
