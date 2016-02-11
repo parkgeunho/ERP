@@ -13,5 +13,17 @@ public class HomeController {
 		
 		return "temp";
 		
-	}	
+	}
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public String test() {
+		return "ep";
+	}
+	
+	
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public String test2() {
+		return "project/InsaView";
+	}
+	
 }
