@@ -12,7 +12,13 @@ public class HomeController {
 	public String mainboard() {
 		
 		return "temp";
+	}	
+
+	//메인 홈페이지 이동
+	@RequestMapping(value = "/main2", method = RequestMethod.GET)
+	public String mainboard2() {
 		
+		return "ep";
 	}
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -25,5 +31,24 @@ public class HomeController {
 	public String test2() {
 		return "project/InsaView";
 	}
+	
+	
+	
+	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//	
+	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
+	@RequestMapping(value = "/approvalArticle", method = RequestMethod.GET)
+	public String approvalArticle() {
+		
+		return "approval/approvalArticle";
+	}
+
+	@RequestMapping(value = "/approvalCreated", method = RequestMethod.GET)
+	public String approvalCreated() {
+		
+		return "approval/approvalCreated";
+	}	
+	
+	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
+	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
 	
 }

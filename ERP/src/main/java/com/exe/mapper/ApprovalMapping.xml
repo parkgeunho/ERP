@@ -8,7 +8,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert" parameterType="com.exe.approval.ApprovalCommentDTO">
 		insert into approval (approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
-		values (#{approvalNum},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
+		values (#{int},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
 	</insert>
 		
 	<select id="list" resultType="com.exe.springmybatis.CustomDTO" parameterType="String">

@@ -4,7 +4,7 @@
 	
 <tiles-definitions>
 	<definition name="temp" template="/WEB-INF/views/layout.jsp">
-		<put-attribute name="title"		value="테일즈테스트" />
+		<put-attribute name="title"		value="타일즈테스트" />
 		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
 		<put-attribute name="menu"		value="/WEB-INF/views//project/sidemenu.jsp" />
 		<put-attribute name="main"	value="/WEB-INF/views/project/main.jsp" />
@@ -19,7 +19,7 @@
 	</definition>
 	
 	<definition name="ep" template="/WEB-INF/views/layout2.jsp">
-		<put-attribute name="title"		value="테일즈테스트" />
+		<put-attribute name="title"		value="타일즈테스트" />
 		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
 		<put-attribute name="menu"		value="/WEB-INF/views//project/sidemenu.jsp" />
 		<put-attribute name="leftmenu"		value="/WEB-INF/views/ex.jsp" />
@@ -27,10 +27,7 @@
 	</definition>
 	
 	<definition name="ep1" extends="ep">
-<put-attribute name="left2main"	value="/WEB-INF/views/ex3.jsp" />
+		<put-attribute name="left2main"	value="/WEB-INF/views/ex3.jsp" />
 	</definition>
-	
-	
-
 	
 </tiles-definitions>		
