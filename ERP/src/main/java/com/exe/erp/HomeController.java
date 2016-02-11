@@ -14,21 +14,5 @@ public class HomeController {
 		return "temp";
 	}	
 	
-	
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
-	public String test2() {
-		return "ex";
-	}
-	
-	
-	
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//	
-	//기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈기훈//
-	@RequestMapping(value = "/approvalArticle", method = RequestMethod.GET)
-	public String approvalArticle() {
-		
-		return "approval/approvalArticle";
-	}
 
-	
 }

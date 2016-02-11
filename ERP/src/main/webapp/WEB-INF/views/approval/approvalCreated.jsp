@@ -7,74 +7,31 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="/erp/resources/script/editor/ckeditor/ckeditor.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 
-<c:set var="result" value="3"/>
-<table border="1">
-
-<tr>
-<c:forEach var="i" begin="1" end="${result}">
-
-<c:if test="${i==1}">
-<td>결</td>
-<td>기안자</td>
-</c:if>
-
-<c:if test="${i!=1}">
-<td>결재자</td>
-</c:if>
-
-</c:forEach>
-</tr>
-
-<tr>
-<c:forEach var="i" begin="1" end="${result}">
-
-<c:if test="${i==1}">
-<td>재</td>
-<td>서명</td>
-</c:if>
-
-<c:if test="${i!=1}">
-<td>서명</td>
-</c:if>
-</c:forEach>
-</tr>
-
-<tr>
-<c:forEach var="i" begin="1" end="${result}">
-
-<c:if test="${i==1}">
-<td>라</td>
-<td>서명</td>
-</c:if>
-
-<c:if test="${i!=1}">
-<td>서명</td>
-</c:if>
-
-</c:forEach>
-</tr>
-
-<tr>
-<c:forEach var="i" begin="1" end="${result}">
-
-<c:if test="${i==1}">
-<td>인</td>
-<td>기안일</td>
-</c:if>
-
-<c:if test="${i!=1}">
-<td>기안일</td>
-</c:if>
-
-</c:forEach>
-</tr>
-
-
-</table>
+        <form>
+            <textarea name="editor1" id="editor1" rows="10" cols="80">
+                개쩐다 씨부럴
+            </textarea>
+            <script>
+          CKEDITOR.replace( 
+           'editor1',
+           {
+            toolbar : 'Basic',     
+            filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
+            width : '100%',       //---넓이값
+            height : '200'        //---높이값
+           }
+          );
+            </script>
+        </form>
 
 </body>
 </html>
+
+
+
+

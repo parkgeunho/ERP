@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%
 	String cp = request.getContextPath();
 %>
@@ -9,6 +10,81 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<c:set var="result" value="3"/>
+
+
+<table border="1" cellspacing="0"> 
+
+<c:forEach var="i" begin="1" end="4">
+	<tr>
+		<c:choose>
+		
+			<c:when test="${i==1}">			
+				<c:forEach var="j" begin="1" end="${result}">
+					
+					<c:if test="${j==1}">
+					<tr>
+					<td>결</td>
+					<td>기안자</td>
+					</c:if>
+					
+					<c:if test="${j!=1}">
+					<td>결재자</td>
+					</c:if>
+					
+				</c:forEach>						
+			</c:when>
+				
+			<c:when test="${i==2}">			
+				<c:forEach var="j" begin="1" end="${result}">
+					<c:if test="${j==1}">
+					<tr>
+					<td>재</td>
+					<td>기안자이름</td>
+					</c:if>
+					
+					<c:if test="${j!=1}">
+					<td>결재자</td>
+					</c:if>
+				</c:forEach>						
+			</c:when>	
+				
+			<c:when test="${i==3}">			
+				<c:forEach var="j" begin="1" end="${result}">
+					<c:if test="${j==1}">
+					<tr>
+					<td>라</td>
+					<td>기안자</td>
+					</c:if>
+					
+					<c:if test="${j!=1}">
+					<td>결재자</td>
+					</c:if>
+				</c:forEach>						
+			</c:when>	
+						
+			<c:when test="${i==4}">
+				<c:forEach var="j" begin="1" end="${result}">
+					<c:if test="${j==1}">
+					<tr>
+					<td>인</td>
+					<td>dto.created</td>
+					</c:if>
+					
+					<c:if test="${j!=1}">
+					<td>결재자</td>
+					</c:if>
+				</c:forEach>						
+			</c:when>	
+						
+		</c:choose>
+	</tr>
+</c:forEach>
+
+</table>
+
+
 
 </body>
 </html>
