@@ -45,7 +45,7 @@ $(document).ready(function(){
  		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">결제</a></li>
+		<li><a href="#">결재</a></li>
 		
 		<li style="line-height: 50px">|</li>
 		
@@ -54,6 +54,14 @@ $(document).ready(function(){
 		<li style="line-height: 50px">|</li>
 		
 		<li><a href="#">게시판</a></li>
+		
+		<li style="line-height: 50px">|</li>
+		
+		<li><a href="#">일정</a></li>
+		
+		<li style="line-height: 50px">|</li>
+		
+		<li><a href="#">메일</a></li>
 	</ul>
 </div>
 
