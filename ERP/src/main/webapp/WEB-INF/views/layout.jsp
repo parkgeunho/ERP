@@ -17,11 +17,11 @@
 	타일즈
 </title>
 <body style="margin: 0px;">
-	<div style="width: 1920px; height: 1080px;">
-	<div id="top"><tiles:insertAttribute name="header"/></div>
-	<div id="left"><tiles:insertAttribute name="menu"/></div>
-	<div id="main"><tiles:insertAttribute name="main"/></div>
-</div>
+	<div style="width: 1920px; height: 982px;">
+		<div id="top"><tiles:insertAttribute name="header"/></div>
+		<div id="left"><tiles:insertAttribute name="menu"/></div>
+		<div id="main"><tiles:insertAttribute name="main"/></div>
+	</div>
 
 
 
