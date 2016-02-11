@@ -12,12 +12,12 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/tiles.css">
 </head>
-<body>
+<body style="margin: 0px;">
 <div style="width: 1920px; height: 1080px;">
 	<div id="top"><tiles:insertAttribute name="header"/></div>
 	<div id="left"><tiles:insertAttribute name="menu"/></div>
-	<div style="float: left;margin-top:70px; width: 100px; height:1010px; background-color: yellow;"><tiles:insertAttribute name="leftmenu"/></div>
-	<div style="float: left;margin-top:70px; width: 1740px; height:1010px; background-color: black;"><tiles:insertAttribute name="left2main"/></div>
+	<div style="float: left;margin-top:70px; width: 500px; height:1010px; background-color: yellow;"><tiles:insertAttribute name="leftmenu"/></div>
+	<div style="float: left;margin-top:70px; width: 1340px; height:1010px; background-color: black;"><tiles:insertAttribute name="left2main"/></div>
 </div>
 
 </body>

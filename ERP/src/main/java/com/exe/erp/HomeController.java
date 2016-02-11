@@ -12,6 +12,8 @@ public class HomeController {
 	public String mainboard() {
 		
 		return "temp";
-		
-	}	
+	}
+	
+
+	
 }
