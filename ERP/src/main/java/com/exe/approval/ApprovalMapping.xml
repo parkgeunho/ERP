@@ -4,7 +4,7 @@
 PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.exe.mapper.ApprovalMapping">
+<mapper namespace="ApprovalMapping">
 
 	<insert id="insert" parameterType="com.exe.approval.ApprovalCommentDTO">
 		insert into approval (approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
