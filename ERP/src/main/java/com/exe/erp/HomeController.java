@@ -12,6 +12,12 @@ public class HomeController {
 	public String mainboard() {
 		
 		return "temp";
+	}	
+
+	//메인 홈페이지 이동
+	@RequestMapping(value = "/main2", method = RequestMethod.GET)
+	public String mainboard2() {
 		
+		return "ep";
 	}	
 }
