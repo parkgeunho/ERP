@@ -4,6 +4,7 @@ public class BoardDTO {
 	
 	private int boardNum;
 	private String id;
+	private String name;
 	private String subject;
 	private String content;
 	private String created;
@@ -44,6 +45,12 @@ public class BoardDTO {
 	}
 	public void setHitCount(int hitCount) {
 		this.hitCount = hitCount;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
