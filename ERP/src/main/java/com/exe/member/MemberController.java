@@ -11,7 +11,14 @@ public class MemberController {
 		
 		return "member/login";
 		
-	}	
+	}
+	
+	@RequestMapping(value = "/join.action")
+	public String joinView() {
+		
+		
+		return "member/join";
+	}
 	
 	
 

@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+.color{
+	
+	background: linear-gradient(140deg,#49B5F4,#669900);
+	font-size: 15pt; 
+	font-family: 고딕;
+	font-weight: bold;
+	color: white;
+	border-radius : 10px;
+	
+}
