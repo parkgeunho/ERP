@@ -1,15 +1,15 @@
-package com.exe.login;
+package com.exe.member;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class LoginController {
+public class MemberController {
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
 		
-		return "login/login";
+		return "member/login";
 		
 	}	
 	
