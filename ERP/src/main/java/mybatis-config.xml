@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<properties>
+		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.16.15:1521:TestDB"/>
+		<property name="username" value="SUZI"/>
+		<property name="password" value="A123"/>
+	</properties>
+	
+	<!-- 위에서 정의한 것들을 가져다 쓸 때 EL형식으로 가져다 쓴다  -->
+	 <environments default="development">
+      <environment id="development">
+         <transactionManager type="JDBC"/>
+         <dataSource type="POOLED">
+            <property name="driver" value="${driver}"/>
+            <property name="url" value="${url}"/>
+            <property name="username" value="${username}"/>
+            <property name="password" value="${password}"/>
+         </dataSource>
+      </environment>
+   
+   </environments>
+   
+   <mappers>
+      <mapper resource="com/exe/insa/InsaMapper.xml"/>
+      
+   </mappers>
+
+	
+	
+	
+	
+	
+	
+	
+	
+</configuration>

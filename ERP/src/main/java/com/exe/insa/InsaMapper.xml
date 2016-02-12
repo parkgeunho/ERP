@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.insa">
+
+	<select id="buseolist" resultType="com.exe.insa.BuseoDTO">
+		select nvl(depth1,0) depth1,nvl(depth2,0) depth2,nvl(depth3,0) depth3,
+		nvl(depth4,0) depth4,nvl(depth5,0) depth5 from buseo
+		order by depth1 asc,depth2 asc,depth3 asc, depth4 asc, depth5 asc			
+	</select>
+	
+	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
+	select depth1 from buseo group by depth1 having count(*)>=1 and depth1 is not null
+	</select>
+	
+	<select id="depth1etc" resultType="com.exe.insa.BuseoDTO">
+	select depth1 from buseo group by depth1 having count(*)>1 and depth1 is not null
+	</select>
+	
+	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
+		select depth2 from buseo group by depth2 having count(*)>=1 and depth2 is not null
+	</select>
+	
+	<select id="depth2etc" resultType="com.exe.insa.BuseoDTO">
+		select depth2 from buseo group by depth2 having count(*)>1 and depth2 is not null
+	</select>
+	
+	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
+		select depth3 from buseo group by depth3 having count(*)>=1 and depth3 is not null
+	</select>
+	
+	<select id="depth3etc" resultType="com.exe.insa.BuseoDTO">
+		select depth3 from buseo group by depth3 having count(*)>1 and depth3 is not null
+	</select>
+	
+	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
+		select depth4 from buseo group by depth4 having count(*)>=1 and depth4 is not null
+	</select>
+	
+	<select id="depth4etc" resultType="com.exe.insa.BuseoDTO">
+		select depth4 from buseo group by depth4 having count(*)>1 and depth4 is not null
+	</select>
+</mapper>
+
