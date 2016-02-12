@@ -18,5 +18,10 @@ public class ApprovalController {
 		
 		return "approval/approvalCreated";
 	}	
-	
+
+	@RequestMapping(value = "/approvalTest", method = RequestMethod.GET)
+	public String approvalTest() {
+		
+		return "approval/approvalTest";
+	}	
 }

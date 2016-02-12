@@ -12,9 +12,18 @@
 </head>
 <body>
 
-        <form>
+<table width="100%" cellspacing="0">
+<tr height="1" bgcolor="#8C8C8C"><td bgcolor="#8C8C8C" width="1px"></td><td></td><td bgcolor="#8C8C8C"></td></tr>
+<tr height="30"><td bgcolor="#EAEAEA"><font style="font-size: 16pt">결재 - ${dto.type}</font></td></tr>
+<tr height="35" ><td align="right" >
+<input type="button" name="approvalLine" value="결재선 지정" />
+<input type="button" name="approvalSave" value="저장" />
+<input type="button" name="approvalClose" value="닫기" />
+</td></tr>
+<tr><td>
+
             <textarea name="editor1" id="editor1" rows="10" cols="80">
-                개쩐다 씨부럴
+                결재
             </textarea>
             <script>
           CKEDITOR.replace( 
@@ -23,12 +32,15 @@
             toolbar : 'Basic',     
             filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
             width : '100%',       //---넓이값
-            height : '200'        //---높이값
+            height : '400'        //---높이값
            }
           );
             </script>
-        </form>
+</td></tr>
 
+
+
+</table>
 </body>
 </html>
 
