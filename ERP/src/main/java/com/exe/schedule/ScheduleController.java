@@ -14,4 +14,15 @@ public class ScheduleController {
 		return "scheTile";
 	}
 
+	@RequestMapping(value = "/calendar", method=RequestMethod.GET)
+	public String calendar() {
+		
+		return "leftCalendar";
+	}
+
+	@RequestMapping(value = "/schedulemain2", method=RequestMethod.GET)
+	public String scheduleMain2() {
+		
+		return "scheduleMain2";
+	}
 }

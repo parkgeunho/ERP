@@ -13,26 +13,50 @@
         <!-- 아래 name을 "/sample/egovSampleList"라고 정합니다.
                "/sample/egovSampleLIst"는 컨트롤러가 리턴하는 값입니다.
                컨트롤러에서 리턴할 때 맨앞에 "/"가 포함되어 있다는 점을 잊지 마세요. -->
-
-	<definition name="scheTile" extends="temp">
+               
+    <definition name="scheTile" extends="temp">
 		<put-attribute name="main" value="scheduleMain" />
 	</definition>
 	
-	<definition name="scheduleMain" template="/WEB-INF/views/layoutMain.jsp">
+	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
+		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight.jsp" />
+	</definition>
+	
+	<definition name="scheduleMain2" extends="temp">
+		<put-attribute name="main" value="scheduleMain">
+			<definition extends="scheduleMain">
+				<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	
+	<definition name="leftCalendar" extends="temp">
+		<put-attribute name="main" value="scheduleMain">
+			<definition extends="scheduleMain">
+				<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+
+	<!-- <definition name="scheTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
+		<put-attribute name="title"		value="타일즈테스트" />
+		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
+		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
+		<put-attribute name="leftMain"	value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
 		<put-attribute name="rightMain"	value="/WEB-INF/views/schedule/scheduleRight.jsp" />
 	</definition>
+	
+	<definition name="scheduleMain" extends="scheTile">
+		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
+	</definition> -->
 	
 
             
 
 	<definition name="insa" extends="temp">
-
 		<put-attribute name="main"	value="/WEB-INF/views/project/InsaView.jsp" />
 	</definition>
-	
-	
-	
 	
 	<definition name="ep" template="/WEB-INF/views/layout2.jsp">
 		<put-attribute name="title"		value="타일즈테스트" />
