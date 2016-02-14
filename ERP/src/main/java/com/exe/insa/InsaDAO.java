@@ -97,6 +97,16 @@ public class InsaDAO {
 		
 	}
 	
+	
+	public List<BuseoDTO> depth5(){
+		
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth5");
+		
+		return lists;
+		
+	}
+	
 
 
 }
