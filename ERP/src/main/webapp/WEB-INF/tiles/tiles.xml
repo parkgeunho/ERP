@@ -28,7 +28,7 @@
 
 	<definition name="insa" extends="temp">
 
-		<put-attribute name="main"	value="/WEB-INF/views/project/InsaView.jsp" />
+		<put-attribute name="main"	value="/WEB-INF/views/project/ManagementView.jsp" />
 	</definition>
 	
 	

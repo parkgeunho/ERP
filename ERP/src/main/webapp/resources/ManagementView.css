@@ -16,11 +16,12 @@
 
 .button{
 	
-	 margin-left: 480px;
+	 margin-left: 350px;
 	 background-color: #49B5F4;
 	 width: 100px;
 	 border-radius: 5px;
 	 text-align: center;
+	 line-height:25px;
 	 color: white;
 	
 }
