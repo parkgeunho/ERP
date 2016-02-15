@@ -29,9 +29,10 @@
 
 <body style="font-size: 13px; font-style: 나눔고딕체;">
 
-<table border="0" align="center" cellpadding="0" cellspacing="0">
+<table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
 	<tr style="height: 40px; background-color: #D5D5D5">
-		<td style="width: 1400px;" align="right" colspan="6">
+		<td style="width: 900px;" align="left">&nbsp;&nbsp;&nbsp;게시판 명</td>
+		<td style="width: 500px;" align="right">
 			<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
 					<option value="subject">제목</option>
@@ -44,17 +45,21 @@
 			</form>	
 		</td>	
 	</tr>
+</table>		
 		
+<table border="1" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
-		<td style="width: 1400px" align="right" colspan="6">
+		<td style="width: 1380px" align="right" colspan="6">
 			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
+		</td>
+		<td style="width: 20px;">
 		</td>
 	</tr>
 	
 	<tr style="height: 30px; background-color: #E7E7E7">
 		<td style="width: 100px" align="center" class="boardnum">No</td>
-		<td style="width: 700px;" align="center" class="subject">제목
+		<td style="width: 750px;" align="center" class="subject">제목
 		</td>
 		
 		<td style="width: 150px;" align="center" class="name">작성자
@@ -66,14 +71,53 @@
 		<td style="width: 150px;" align="center" class="file">첨부		
 		</td>
 		
-		<td style="width: 150px;" align="center" class="hitCount">조회수
+		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
 		</td>
 	
 	</tr>	
 	
+	<tr style="height: 30px; background-color: ">
+		<td style="width: 100px" align="center" class="boardnum">No</td>
+		<td style="width: 750px;" align="center" class="subject">제목
+		</td>
+		
+		<td style="width: 150px;" align="center" class="name">작성자
+		</td>
+		
+		<td style="width: 150px;" align="center" class="created">작성일
+		</td>
+		
+		<td style="width: 150px;" align="center" class="file">첨부		
+		</td>
+		
+		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
+		</td>
+	
+	</tr>	
+	
+	<tr style="height: 30px; background-color: ">
+		<td style="width: 100px" align="center" class="boardnum">No</td>
+		<td style="width: 750px;" align="center" class="subject">제목
+		</td>
+		
+		<td style="width: 150px;" align="center" class="name">작성자
+		</td>
+		
+		<td style="width: 150px;" align="center" class="created">작성일
+		</td>
+		
+		<td style="width: 150px;" align="center" class="file">첨부		
+		</td>
+		
+		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
+		</td>
+	
+	</tr>	
+	
+	
 </table>
 
-<table id="lists">
+<table border="0" cellpadding="0" cellspacing="0" align="center">
 	<c:forEach var="dto" items="${lists }">
 		<tr>
 			<td class="boardum">${dto.boardNum}</td>
@@ -83,13 +127,26 @@
 			<td class="name">
 			</td>
 			<td class="created">${dto.created}</td>
-			<td class="file">${dto.file }</td>
 			<td class="hitCount">${dto.hitCount }</td>		
 		</tr>	
 	</c:forEach>
+		<tr style="height: 10px;">
+			<td style="width: 1400px;">
+			</td>
+		</tr>		
 </table>
 
-<table id="pooter">
+<table border="1" cellpadding="0" cellspacing="0" align="center">
+	<tr style="height: 1px; ">
+		<td style="width: 1400px; background: #B2EBF4"></td>
+	</tr>
+	
+	<tr style="height: 10px;">
+		<td></td>
+	</tr>
+	
+	<tr style="height: 55px;">
+		<td style="width: 1400px;">
 	<p>
 		<c:if test="${dataCount!=0 }">
 			${pageIndexList }
@@ -99,7 +156,9 @@
 					등록된게시물이 없습니다.
 		</c:if>	
 	</p>
-
+	
+		</td>
+	</tr>
 
 </table>
 
