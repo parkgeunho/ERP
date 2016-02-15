@@ -10,8 +10,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+
+$(document).ready(function() {
+	
+	var vs =""; //클래스명 받기
+	$('[id^="edit-"]').dblclick(function(){
+		
+		var obj = $('.'+ this.id).val();
+		
+		var av = document.getElementById(this.id).innerText;
+		 document.getElementById(this.id).innerHTML="<form name='update'><input type='text' value="+av+" name="+obj+ "></form>"; 
+	
+	});
+		
+	
+	
+});
+</script>
 </head>
 <body>
+
+
+
+
 <table style="border: 1px solid;">
 <tr>
 	<td style="width: 250px;">
@@ -22,7 +45,7 @@
 			
 		</div>
 	
-		<div style="height: 500px; overflow:scroll; ">
+		<div style="height: 500px; overflow:scroll; " >
 			
 		<c:forEach var="depth1" items="${depth1}">
 			
@@ -30,9 +53,8 @@
 				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1}">
 					<div>
 					<img id="dep-${depth1.depth1 }" src="/erp/resources/image/minus.png">
-					<a onclick="$"></a>
-					<input type="text" id="in-${depth1.depth1}" value="${buseo.depth1 }" >
-					
+					<label id="edit-${depth1.depth1}" >${buseo.depth1 }</label>
+					<input type="hidden" class="edit-${depth1.depth1}" value="depth1">
 					
 					</div>
 				</c:if>

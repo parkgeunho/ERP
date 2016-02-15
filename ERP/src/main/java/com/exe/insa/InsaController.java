@@ -57,7 +57,7 @@ public class InsaController {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		
-		return "project/InsaView2";
+		return "project/test";
 	}
 	@RequestMapping(value = "/test2", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {

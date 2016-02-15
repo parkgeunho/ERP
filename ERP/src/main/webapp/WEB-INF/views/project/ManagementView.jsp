@@ -22,13 +22,7 @@ $(document).ready(function(){
      var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
      $(this).attr('src',src);
  
-		
-		
-		
-		
-		
-		
-		
+	
 		var obj = $('.'+ this.id);
 		
 		if(obj.css('display')=='none')
@@ -54,14 +48,20 @@ $(document).ready(function(){
 		<div style="height: 740px; overflow:scroll;">
 			
 		<c:forEach var="depth1" items="${depth1}">
-			
+				<c:set var="test" value="${depth1.depth1}"/>
+				<c:forEach var="dep1" items="${depth1etc }">
+					<c:if test="${test==dep1.depth1 }">
+						<c:set var="test1" value="etc"/>
+					</c:if>
+				</c:forEach>
 			<c:forEach var="buseo" items="${buseoLists}">
-				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1}">
+			
+				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1 && test1=='etc'}">
 					<div>
 					<img id="dep-${depth1.depth1 }" src="/erp/resources/image/minus.png">${buseo.depth1 }
 					</div>
 				</c:if>
-			</c:forEach>
+			
 			
 			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
 			<div class="dep-${depth1.depth1 }">
@@ -137,7 +137,7 @@ $(document).ready(function(){
 										</c:forEach>
 									</div>
 								</c:when>
-								<c:when test="${depth2.depth2==buseo.depth2 && test!='etc' &&buseo.depth3=='0' }">
+								<c:when test="${depth2.depth2==buseo.depth2 && test1!='etc' &&buseo.depth3=='0' }">
 								<div style="margin-left: 40px;">${buseo.depth2 }</div>
 								</c:when>
 							</c:choose>
@@ -146,7 +146,14 @@ $(document).ready(function(){
 					
 				</c:forEach>
 				<!-- 두번째 부서 명 에다가 하위부서가 있으면 +를 붙여주기 -->
+				
+			
+				
 			</div>
+				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1 && test!='etc'}">
+				<div>${buseo.depth1 }</div>
+				</c:if>
+			</c:forEach>
 			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
 			
 		</c:forEach>	
