@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+.line1{
+	
+	width: 150px;
+	background-color: #dddddd;
+	border-right: none;
+	font-size: 18pt;
+	font-family: 고딕;
+	font-weight: bold;
+	
+	
+}
+
+.line2{
+	
+	
+	width: 250px;
+	border-left: none;
+}
+
+.lineS{
+	
+	width: 100px;
+	background-color: #dddddd;
+	border-right: none;
+	font-size: 18pt;
+	font-family: 고딕;
+	font-weight: bold;
+	
+	
+}
+
+.pic{
+	
+	width: 200px;
+	
+}
