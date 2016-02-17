@@ -146,17 +146,6 @@ $(document).ready(function(){
 	</tr>
 </table>
 
-<table>
-	<tr>
-		<td>
-	
-	</tr>
-
-
-
-</table>
-
-
 
 <!-- 댓글보기 -->
 <table border="1" align="center" cellpadding="0" cellspacing="0"  >
