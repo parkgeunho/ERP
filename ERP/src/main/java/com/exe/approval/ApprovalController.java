@@ -22,7 +22,6 @@ public class ApprovalController {
 		return "approval/approvalCreated";
 	}	
 
-	
 	@RequestMapping(value="/approvalCreated_ok", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalCreated_ok(ApprovalDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
@@ -37,12 +36,12 @@ public class ApprovalController {
 	}	
 	
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/approvalLine", method = RequestMethod.GET)
+	public String approvalLine() {
+		
+		return "approval/approvalLine";
+	}	
+		
 	
 	
 	//HttpSession session = request.getSession();
