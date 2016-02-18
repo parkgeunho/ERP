@@ -178,7 +178,7 @@ $(document).ready(function(){
 			</span>
 			
 			<div style="float: left;height: 25px" class="button" onclick="javascript:buseoManagement();">부서관리</div>		
-			<div class="button" style="float: left;height: 25px;margin-left: 10px;" >사원등록</div>			
+			<div class="button" style="float: left;height: 25px;margin-left: 10px;" onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</div>			
 			</div>
 			
 			<div style="padding-top :130px;">

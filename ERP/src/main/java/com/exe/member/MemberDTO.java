@@ -4,7 +4,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MemberDTO {
 	
-	private String num;
+	private int num;
+	private String usernum;
 	private int birth;
 	private String name;
 	private String jumin;
@@ -31,8 +32,11 @@ public class MemberDTO {
 	private MultipartFile upload;
 	
 	
-	public String getNum() {
+	public int getNum() {
 		return num;
+	}
+	public String getUsernum() {
+		return usernum;
 	}
 	public int getBirth() {
 		return birth;
@@ -106,8 +110,11 @@ public class MemberDTO {
 	public MultipartFile getUpload() {
 		return upload;
 	}
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
+	}
+	public void setUsernum(String usernum) {
+		this.usernum = usernum;
 	}
 	public void setBirth(int birth) {
 		this.birth = birth;
@@ -181,6 +188,8 @@ public class MemberDTO {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
+	
+	
 	
 	
 	

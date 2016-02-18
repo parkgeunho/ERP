@@ -18,6 +18,14 @@ public class MemberDAO {
 		
 	}
 	
+	public int maxNum(){
+		
+		int result = sessionTemplate.selectOne("com.exe.member.maxNum");
+		
+		return result;
+		
+	}
+	
 	
 	
 	
