@@ -38,16 +38,16 @@
 					<option value="subject">제목</option>
 					<option value="name">작성자</option>
 					<option value="content">내용</option>
-				</select>&nbsp;&nbsp;				
-						<input type="text" name="searchValue" class="textField" style="width: 150px; height: 20px;">&nbsp;
-						<img alt="" src="/erp/resources/image/search001.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</select>	
+						<input type="text" name="searchValue" class="textField" style="width: 150px; height: 20px;">
+						<img alt="" src="/erp/resources/image/search001.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <input type="button" value="상세"  onclick="" >	 -->
 			</form>	
 		</td>	
 	</tr>
 </table>		
 		
-<table border="1" align="center" cellpadding="0" cellspacing="0">			
+<table border="0" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
 		<td style="width: 1380px" align="right" colspan="6">
 			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/created.action';">
@@ -68,12 +68,16 @@
 		<td style="width: 150px;" align="center" class="created">작성일
 		</td>
 		
-		<td style="width: 150px;" align="center" class="file">첨부		
+		<td style="width: 150px;" align="center" class="file">파일		
 		</td>
 		
 		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
 		</td>
 	
+	</tr>
+	
+	<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="7"></td>
 	</tr>	
 	
 	<tr style="height: 30px; background-color: ">
@@ -87,13 +91,18 @@
 		<td style="width: 150px;" align="center" class="created">작성일
 		</td>
 		
-		<td style="width: 150px;" align="center" class="file">첨부		
+		<td style="width: 150px;" align="center" class="file">
+			<img alt="" src="/erp/resources/image/file001.png">		
 		</td>
 		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
+		<td style="width: 100px;" align="center" class="hitCount" colspan="2">${dto.hitCount }
 		</td>
 	
 	</tr>	
+	
+	<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="7"></td>
+	</tr>
 	
 	<tr style="height: 30px; background-color: ">
 		<td style="width: 100px" align="center" class="boardnum">No</td>
@@ -106,13 +115,17 @@
 		<td style="width: 150px;" align="center" class="created">작성일
 		</td>
 		
-		<td style="width: 150px;" align="center" class="file">첨부		
+		<td style="width: 150px;" align="center" class="file">
+			<img alt="" src="/erp/resources/image/file001.png">		
 		</td>
 		
 		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
 		</td>
 	
 	</tr>	
+	<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="7"></td>
+	</tr>
 	
 	
 </table>

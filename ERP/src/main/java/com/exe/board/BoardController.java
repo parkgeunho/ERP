@@ -50,6 +50,13 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping(value = "/board/test", method = RequestMethod.GET)
+	public String test() {
+		
+		return "board/test";
+		
+	}
+	
 	
 	
 	

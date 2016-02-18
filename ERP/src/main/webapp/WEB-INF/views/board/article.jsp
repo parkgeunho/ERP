@@ -9,24 +9,41 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-    $("#hide").click(function(){
-        $("p").hide();
+/* $(document).ready(function(){
+    $("#a").click(function(){
+        $("#b,#c,#d").slideToggle("slow");
     });
     $("#show").click(function(){
         $("p").show();
     });
-});
+}); */
 
 $(document).ready(function(){
-    $("button").click(function(){
-        alert($("div").scrollTop() + " px");
+    $("#a").click(function(){
+        $("#b").animate({
+            height: 'toggle'
+        });
     });
 });
+
+
+
+
+ $(document).ready(function(){
+    $("#b").click(function(){
+        $("#a").animate({
+            height: 'toggle'
+        });
+    });
+});  
+ 
+ 
+
+
+
+
 
 
 </script>
@@ -81,7 +98,42 @@ $(document).ready(function(){
 		</td>
 			
 		<td style="width: 70px;" align="center">
+		<div id="a">
 			<img alt="" src="/erp/resources/image/image015.png" style="width: 60px; height: 55px;">
+		</div>
+		
+		<div id="b">
+			<img alt="" src="/erp/resources/boardimage/image001.PNG" style="height: 20px; width: 20px;">						
+		</div>
+		<!-- <div id="c">
+			<img alt="" src="/erp/resources/boardimage/image002.PNG" style="height: 20px; width: 20px;">			
+		</div>
+		<div id="d">
+			<img alt="" src="/erp/resources/boardimage/image003.PNG" style="height: 20px; width: 20px;">			
+		</div>
+		<div id="d">	
+			<img alt="" src="/erp/resources/boardimage/image004.PNG" style="height: 20px; width: 20px;">
+		</div>
+		<div id="e">
+			<img alt="" src="/erp/resources/boardimage/image005.PNG" style="height: 20px; width: 20px;">
+		</div>
+		<div id="f">
+			<img alt="" src="/erp/resources/boardimage/image006.PNG" style="height: 20px; width: 20px;">
+		</div>
+		<div id="g">
+			<img alt="" src="/erp/resources/boardimage/image007.PNG" style="height: 20px; width: 20px;">
+		</div>
+		<div id="h">
+			<img alt="" src="/erp/resources/boardimage/image008.PNG" style="height: 20px; width: 20px;">
+		</div>
+		<div id="i">
+			<img alt="" src="/erp/resources/boardimage/image009.PNG" style="height: 20px; width: 20px;">
+		</div> -->
+		
+		
+		
+		
+		
 		</td>
 		<td style="width: 1200px;">
 			<textarea rows="" cols="" style="width: 1200px; height: 55px;"></textarea>
@@ -94,9 +146,20 @@ $(document).ready(function(){
 	</tr>
 </table>
 
+<table>
+	<tr>
+		<td>
+	
+	</tr>
+
+
+
+</table>
+
+
 
 <!-- 댓글보기 -->
-<table border="1" align="center" cellpadding="0" cellspacing="0" >
+<table border="1" align="center" cellpadding="0" cellspacing="0"  >
 	<tr style="height: 30px; background: ">
 		<td style="width: 70px;" align="center" rowspan="2">
 			<img alt="" src="/erp/resources/image/image.jpg" style="width: 60px; height: 55px;">

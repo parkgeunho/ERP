@@ -61,6 +61,7 @@ public class InsaController {
 		
 		return "project/test";
 	}
+	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
 		
