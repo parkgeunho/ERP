@@ -65,7 +65,6 @@ public class InsaController {
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
 		
-		
 		List<BuseoDTO> buseoLists = insaDAO.getBuseo();
 		List<BuseoDTO> depth1 = insaDAO.depth1();
 		List<BuseoDTO> depth2 = insaDAO.depth2();
@@ -86,7 +85,8 @@ public class InsaController {
 		request.setAttribute("depth1etc", depth1etc);
 		request.setAttribute("depth2etc", depth2etc);
 		request.setAttribute("depth3etc", depth3etc);
-		request.setAttribute("depth4etc", depth4etc);
+		request.setAttribute("depth4etc", depth4etc);		
+
 		
 		List<BuseoDTO> test = insaDAO.depth3();
 		request.setAttribute("test", test);
