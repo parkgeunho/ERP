@@ -9,15 +9,39 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/join.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+<script type="text/javascript">
+
+	function sendIt(){
+			
+			f = document.myForm;
+
+		f.action = "<%=cp%>/created_ok.action";
+		f.submit();
+		
+		
+	}
+
+
+
+
+</script>
+
 </head>
 <body>
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" name="myForm" enctype="multipart/form-data">
 <center>
-<table border="0" width="1000" height="50" align="center" style="margin-top: 50px; border-radius : 10px; background: linear-gradient(100deg,#49B5F4,#669900);">
+<table border="0" align="center" width="1000" style="margin-top: 50px;" cellpadding="0" cellspacing="0">
+	
+<tr><td height="2" width="1000" style="background-color: #bbbbbb;"></td></tr>
+
 	<tr>
-		<td align="center" style=" font-size: 20pt; font-family: 고딕;font-weight: bold; color: white; " >인사카드 작성</td>
+		<td align="center" style="font-size: 30pt; font-family: 고딕; font-weight: bold;">인사카드 작성</td>
 	</tr>
+	
+<tr><td height="2" width="1000" style="background-color: #bbbbbb;"></td></tr>
+
+
 </table>
 
 <table border="0" width="1000"align="center" style="margin: 20px;">
@@ -25,14 +49,14 @@
 		<td width="100" align="center" style="font-size: 11pt;font-weight: bold;">사 진 업로드 : </td>
 		<td width="400" colspan="3"><input type="file" name="upload" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;"></td>
 		<td width="500" align="right" colspan="2">
-		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; font-weight: bold;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/login.action';">등록하기</button>
-		<button type="button" style="width: 50px; height: 30px; font-size: 10pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/login.action';">취소</button>
+		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; font-weight: bold;" class="btn btn-default" onclick="sendIt();">등록하기</button>
+		<button type="button" style="width: 50px; height: 30px; font-size: 10pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/insa.action';">취소</button>
 		</td>
 		
 	</tr>
 </table>
 
-<table border="0" width="1000"align="center" style="margin: 20px; background: linear-gradient(270deg,#66cc00,#ffffff); border-radius : 10px;">
+<table border="0" width="1000"align="center" style="margin: 20px ; border-radius : 10px; background-color: #eeeeee">
 	
 	<tr height="40">
 		<td width="100" class="color" align="center">이 름</td>
@@ -54,7 +78,7 @@
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">부 서</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="jumin" placeholder="ex) 사업부" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="depth5" placeholder="ex) 사업부" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 		<td width="100" class="color" align="center">E-Mail</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
