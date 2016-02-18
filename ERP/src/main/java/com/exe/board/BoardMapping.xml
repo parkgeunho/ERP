@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapping">
+
+	<insert id="insert" parameterType="com.exe.board.BoardDTO">
+		insert into approval (BoardNum,id,name,subject,content,created,hitCount) 
+		values (#{BoardNum},#{id},#{name},#{subject},#{content},sysdate,0)		
+	</insert>
+		
+	<select id="list" resultType="com.exe.board.BoardDTO" parameterType="String">
+		
+	</select>
+	
+	<select id="listOne" resultType="com.exe.board.BoardDTO" parameterType="int">
+		
+	</select>
+	
+	<update id="update" parameterType="com.exe.board.BoardDTO">
+		
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		
+	</delete>
+
+</mapper>

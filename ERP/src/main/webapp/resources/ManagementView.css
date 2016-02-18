@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+
+.buseo{
+	
+	height: 80px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 80px;
+	text-align: center;
+	font-size: 20pt;
+	font-weight: bold;
+	border-right:1px solid;
+	border-color: #CCCCCC;
+
+}
+
+.button{
+	
+	 margin-left: 350px;
+	 background-color: #49B5F4;
+	 width: 100px;
+	 border-radius: 5px;
+	 text-align: center;
+	 line-height:25px;
+	 color: white;
+	
+}
+
+
+
+.button:HOVER{
+	
+	background-color:#BDBDBD;
+	color: black;
+	
+}
+
+.data td{
+	
+	
+	border-bottom: 1px dashed ;
+	border-bottom-color: #BDBDBD;
+	text-align: center;
+	
+}
+.op{
+	
+	background-color: #49B5F4;
+	text-align: center;
+	color: white;
+	font-family: 고딕;
+	font-weight: bold;
+	
+}
+
+.sawon{
+	
+	height: 80px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 80px;
+	text-align: center;
+	font-size: 20pt;
+	font-weight: bold;
+
+}
