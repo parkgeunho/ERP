@@ -23,6 +23,15 @@
 		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight.jsp" />
 	</definition>
 	
+	<definition name="approvalTile" extends="temp">
+		<put-attribute name="main" value="approvalMain" />
+	</definition>
+	
+	<definition name="approvalMain" template="/WEB-INF/views/approval/approvalMain.jsp">
+		<put-attribute name="leftMain" value="/WEB-INF/views/approval/approvalLeft.jsp" />
+		<put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" />
+	</definition>	
+	
 	<definition name="scheduleMain2" extends="temp">
 		<put-attribute name="main" value="scheduleMain">
 			<definition extends="scheduleMain">

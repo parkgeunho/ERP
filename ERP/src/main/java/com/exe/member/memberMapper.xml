@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.member">
+
+	<insert id="insertData" parameterType="com.exe.member.MemberDTO">
+		insert into insadb (num,birth,name,jumin,addr,id,pwd,oPhone,mPhone,email,blood,reli,hobby,memo,grade,duty,
+		dal,depth5) values (TO_CHAR(sysdate,'yymmddhhmiss'),#{birth},#{name},#{jumin},#{addr},#{id},#{pwd},#{oPhone},#{mPhone},#{email},
+		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth5})
+	</insert>
+	
+	
+</mapper>
+
