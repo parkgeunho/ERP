@@ -31,6 +31,7 @@ public class InsaController {
 		List<BuseoDTO> depth1 = insaDAO.depth1();
 		List<BuseoDTO> depth2 = insaDAO.depth2();
 		List<BuseoDTO> depth3 = insaDAO.depth3();
+		
 		List<BuseoDTO> depth4 = insaDAO.depth4();
 		List<BuseoDTO> depth5 = insaDAO.depth5();
 		List<BuseoDTO> depth1etc = insaDAO.depth1etc();
@@ -42,6 +43,7 @@ public class InsaController {
 		request.setAttribute("depth1", depth1);
 		request.setAttribute("depth2", depth2);
 		request.setAttribute("depth3", depth3);
+	
 		request.setAttribute("depth4", depth4);
 		request.setAttribute("depth5", depth5);
 		request.setAttribute("depth1etc", depth1etc);
@@ -59,7 +61,7 @@ public class InsaController {
 		
 		return "project/test";
 	}
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
 		
 		
@@ -85,8 +87,19 @@ public class InsaController {
 		request.setAttribute("depth3etc", depth3etc);
 		request.setAttribute("depth4etc", depth4etc);
 		
+		List<BuseoDTO> test = insaDAO.depth3();
+		request.setAttribute("test", test);
+		
+		
 		return "project/buseoManagement";
 	}	
+	
+	@RequestMapping(value = "/buseoManagement", method = RequestMethod.POST)
+	public String buseoManagemenet(HttpServletRequest request,HttpServletResponse response) {
+		
+		
+		return "project/buseoManagement";
+	}
 	
 
 }
