@@ -50,18 +50,9 @@
 	<definition name="scheduleMain" extends="scheTile">
 		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
 	</definition> -->
-	
 
-            
-
-<<<<<<< HEAD
 	<definition name="insa" extends="temp">
-		<put-attribute name="main"	value="/WEB-INF/views/project/InsaView.jsp" />
-=======
-	<definition name="insa" extends="temp">
-
 		<put-attribute name="main"	value="/WEB-INF/views/project/ManagementView.jsp" />
->>>>>>> branch 'master' of https://github.com/parkgeunho/ERP.git
 	</definition>
 	
 	<definition name="ep" template="/WEB-INF/views/layout2.jsp">
