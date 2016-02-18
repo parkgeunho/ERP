@@ -30,7 +30,7 @@ public class MemberController {
 	public String joinView() {
 		
 		
-		return "member/join";
+		return "info";
 	}
 	
 	
@@ -44,6 +44,10 @@ public class MemberController {
 	@RequestMapping(value = "/created_ok.action" , method = {RequestMethod.POST,RequestMethod.GET})
 	public String upload(MultipartHttpServletRequest request,MemberDTO dto, HttpServletResponse response) throws Exception{
 		
+		int maxNum = dao.maxNum();
+		
+		
+		dto.setNum(maxNum+1);
 	
 		
 		dao.insertData(dto);
