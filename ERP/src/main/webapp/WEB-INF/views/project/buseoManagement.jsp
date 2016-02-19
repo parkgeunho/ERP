@@ -75,12 +75,24 @@ $(document).ready(function() {
 	//클릭을 했을 시 인풋 박스로 변경 시킨다.
 	$('[id^="edit-"]').dblclick(function(){
 		
+ 		var v = $(":text").length;
+		 
 		var obj = $('.'+ this.id).val();
+		  if(v==0){
+			 var av = document.getElementById(this.id).innerText;
+			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">"; 
+		}else{
+			
+			alert("이미다른걸수정중이므로 수정을 완료해주세요");
+			return;
+		} 
+		
+		/* var obj = $('.'+ this.id).val();
 		
 		
 		 
 		var av = document.getElementById(this.id).innerText;
-		 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">"; 
+		 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">";  */
 	
 	});
 		
@@ -89,11 +101,16 @@ $(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
-function deleted(){
-	
-	
 
+function sendit(){
+	var s = $(":text").length;
+	var v = $.session.get("num");
+	alert(v);
+	alert(s);
 	
+}
+
+function deleted(){
 
 	var f = document.myForm;
 	var del;
@@ -107,11 +124,6 @@ function deleted(){
 	}else{
 		return;
 	}
-	
-	
-	 
-	
-	
 }
 
 </script>
@@ -121,7 +133,7 @@ function deleted(){
 
 
 
-<form name="myForm">
+<form name="myForm" onsubmit="return false">
 <table >
 <tr>
 	<td style="width: 300px;">
@@ -278,7 +290,7 @@ function deleted(){
 
 <tr>
 <td  width="250px;">
-<div class="buseoManagement" style="margin-right: 75px;">확인</div>
+<div class="buseoManagement" style="margin-right: 75px; " onclick="sendit();">확인</div>
 </td>
 </tr>
 <tr>

@@ -47,5 +47,54 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="depth5" resultType="com.exe.insa.BuseoDTO">
 		select depth5 from buseo group by depth5 having count(*)>=1 and depth5!='0' order by depth5 
 	</select>
+	
+	
+	<!-- 새로 다시 짜기 시작 -->
+	
+	<!-- 부서 고유 번호 구하기  -->
+	<select id="maxNum" resultType="integer">
+	select nvl(max(buseoNum),0) from buseo	
+	</select>
+	
+	<!-- 생성 -->
+	<insert id="buseoCreated" parameterType="com.exe.insa.BuseoDTO">
+	insert into buseo(buseoNum,groupNum,depth,orderNo,parent)
+	values (#{buseoNum},#{groupNum},#{depth},#{orderNo},#{parent})
+	
+	</insert>
+	
+	<!-- 리스트출력 -->
+	<select id="list" resultType="com.exe.insa.BuseoDTO">
+	
+	select buseoNum,buseoName,groupNum,depth,orderNo,parent,checked from buseo order by groupNum desc, orderNo asc
+	
+	</select>
+	
+	<!-- 하위 개수 -->
+   <select id="replyNum" resultType="Integer" parameterType="map">
+      select count(*) from buseo where groupNum=#{groupNum} and depth=#{depth}+1 and parent=#{buseoNum}
+   </select>
+   
+   <!-- 하위갯수변경 -->
+   <update id="setReplyNum" parameterType="map">
+      update buseo set replyNum=#{replyNum} where buseoNum=#{buseoNum}
+   </update>
+	
+	 <!-- 하위가 생길 경우 순서변경 -->
+   <update id="orderNoUpdate" parameterType="map">
+      update buseo set orderNo=orderNo + 1
+      where groupNum=#{groupNum} and orderNo>#{orderNo}
+   </update>
+	
+	<!-- 정보읽기 -->
+	<select id="ReadData" parameterType="integer" resultType="com.exe.insa.BuseoDTO">
+		select buseoNum,buseoName,groupNum,depth,orderNo,parent,replyNum,checked from buseo where buseoNum=#{buseoNum}
+	
+	</select>
+	
+	
+	
+	
+	
 </mapper>
 
