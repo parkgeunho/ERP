@@ -45,7 +45,7 @@ $(document).ready(function(){
  		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">결재</a></li>
+		<li><a href="approval">결재</a></li>
 		
 		<li style="line-height: 50px">|</li>
 		

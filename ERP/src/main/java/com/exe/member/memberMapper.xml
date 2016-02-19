@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.member">
+
+	<select id="maxNum" resultType="integer">
+		select nvl(max(num),0) from insadb
+	</select>
+	
+	
+	<insert id="insertData" parameterType="com.exe.member.MemberDTO">
+		insert into insadb (num,userNum,birth,name,jumin,addr,id,pwd,oPhone,mPhone,email,blood,reli,hobby,memo,grade,duty,
+		dal,depth1,depth2,depth3,depth4,depth5,upload) values (#{num},TO_CHAR(sysdate,'yymmddhhmiss'),#{birth},#{name},#{jumin},#{addr},#{id},#{pwd},#{oPhone},#{mPhone},#{email},
+		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth1},#{depth2},#{depth3},#{depth4},#{depth5},#{upload})
+	</insert>
+	
+	<select id="idOk" parameterType="String" resultType="String">
+		select id from insadb where id=#{id}
+	</select>
+	
+	
+	
+	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
+	select depth1 from buseo group by depth1 having count(*)>=1 and depth1!='0' order by depth1
+	</select>
+	
+	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
+		select depth2 from buseo group by depth2 having count(*)>=1 and depth2!='0' order by depth2
+	</select>
+	
+	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
+		select depth3 from buseo group by depth3 having count(*)>=1 and depth3!='0' order by depth3
+	</select>
+	
+	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
+		select depth4 from buseo group by depth4 having count(*)>=1 and depth4!='0' order by depth4
+	</select>
+	
+	<select id="depth5" resultType="com.exe.insa.BuseoDTO">
+		select depth5 from buseo group by depth5 having count(*)>=1 and depth5!='0' order by depth5 
+	</select>
+	
+	
+</mapper>
+

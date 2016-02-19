@@ -2,45 +2,82 @@ package com.exe.insa;
 
 public class BuseoDTO {
 	
+	private int buseoNum;
+	private String buseoName;
+	private int groupNum;
+	private int depth;
+	private int orderNo;
+	private int parent;
+	private int replyNum;
+	private int depthGap;
+	private String checked;
 	
-	private String depth1;
-	private String depth2;
-	private String depth3;
-	private String depth4;
-	private String depth5;
 	
 	
-	public String getDepth1() {
-		return depth1;
+	
+	
+	public String getChecked() {
+		return checked;
 	}
-	public void setDepth1(String depth1) {
-		this.depth1 = depth1;
+	public void setChecked(String checked) {
+		this.checked = checked;
 	}
-	public String getDepth2() {
-		return depth2;
+	public int getReplyNum() {
+		return replyNum;
 	}
-	public void setDepth2(String depth2) {
-		this.depth2 = depth2;
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
 	}
-	public String getDepth3() {
-		return depth3;
+	public int getDepthGap() {
+		return depthGap;
 	}
-	public void setDepth3(String depth3) {
-		this.depth3 = depth3;
+	public void setDepthGap(int depthGap) {
+		this.depthGap = depthGap;
 	}
-	public String getDepth4() {
-		return depth4;
+	public int getBuseoNum() {
+		return buseoNum;
 	}
-	public void setDepth4(String depth4) {
-		this.depth4 = depth4;
+	public void setBuseoNum(int buseoNum) {
+		this.buseoNum = buseoNum;
 	}
-	public String getDepth5() {
-		return depth5;
+	public String getBuseoName() {
+		return buseoName;
 	}
-	public void setDepth5(String depth5) {
-		this.depth5 = depth5;
+	public void setBuseoName(String buseoName) {
+		this.buseoName = buseoName;
+	}
+	public int getGroupNum() {
+		return groupNum;
+	}
+	public void setGroupNum(int groupNum) {
+		this.groupNum = groupNum;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+	public int getOrderNo() {
+		return orderNo;
+	}
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+	public int getParent() {
+		return parent;
+	}
+	public void setParent(int parent) {
+		this.parent = parent;
 	}
 	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

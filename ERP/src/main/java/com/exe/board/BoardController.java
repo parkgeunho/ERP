@@ -15,20 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
-
 @Controller
 public class BoardController {
 	
-	/*@Autowired
-	@Qualifier("boardDAO")
+	@Autowired
+	@Qualifier("BoardDAO")
 	BoardDAO dao;
 	
 	@Autowired
-	MyUtil myUtil;*/
+	MyUtil myUtil;
 	
 	
-	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public String list() {
 		
 		return "board/list";
@@ -50,10 +48,17 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping(value = "/board/test", method = RequestMethod.GET)
+	public String test() {
+		
+		return "board/test";
+		
+	}
+	*/
 	
 	
 	
-	/*@RequestMapping(value="/created.action")
+	@RequestMapping(value="/board/created.action")
 	   public ModelAndView created(){
 	      
 	      ModelAndView mav = new ModelAndView();
@@ -61,7 +66,7 @@ public class BoardController {
 	      
 	      return mav;
 	   }
-	 @RequestMapping(value="/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
+	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 	      int maxNum = dao.getMaxNum();
@@ -74,7 +79,7 @@ public class BoardController {
 	   }
 	 
 	 
-	 @RequestMapping(value="/list.action",method={RequestMethod.GET,RequestMethod.POST})
+	 @RequestMapping(value="/board/list.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 	      String cp = request.getContextPath();
@@ -119,14 +124,14 @@ public class BoardController {
 	         param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
 	      }
 	      
-	      String listUrl = cp + "/list.action";
+	      String listUrl = cp + "/board/list.action";
 	      
 	      if(!param.equals(""))
 	         listUrl = listUrl + "?" + param;
 	      
 	      String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	      
-	      String articleUrl = cp + "/article.action?pageNum=" + currentPage;
+	      String articleUrl = cp + "/board/article.action?pageNum=" + currentPage;
 	      
 	      if(!param.equals(""))
 	         articleUrl = articleUrl + "&" + param;
@@ -138,7 +143,132 @@ public class BoardController {
 	      
 	      return "board/list";
 	   }
-	*/
+	
+	 @RequestMapping(value="/board/article.action",method={RequestMethod.GET,RequestMethod.POST})
+	   /*public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{*/
+	   
+	   public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		    
+	      
+	      String cp = request.getContextPath();
+	      
+	      int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+	      String pageNum = request.getParameter("pageNum");
+	      
+	      String searchKey = request.getParameter("searchKey");
+	      String searchValue = request.getParameter("searchValue");
+	      
+	      if(searchKey!=null)
+	         searchValue = URLDecoder.decode(searchValue, "UTF-8");
+	      
+	      dao.updateHitCount(boardNum);
+	      
+	      BoardDTO dto = dao.getReadData(boardNum);
+	      
+	      if(dto==null){
+	         
+	         String url = cp + "/board/list.action";
+	         response.sendRedirect(url);
+	      }
+	      
+	      int lineSu = dto.getContent().split("\n").length;
+	      
+	      dto.setContent(dto.getContent().replaceAll("\n", "<br/>"));
+	      
+	      String param = "pageNum=" + pageNum;
+	      
+	      if(searchKey!=null){
+	         
+	         param += "&searchKey=" + searchKey;
+	         param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+	      }
+	      
+	      ModelAndView mav = new ModelAndView();
+	      
+	      mav.setViewName("/boardboard/article");
+	      
+	      mav.addObject("dto", dto);
+	      mav.addObject("param", param);
+	      mav.addObject("lineSu", lineSu);
+	      mav.addObject("pageNum", pageNum);
+	      
+	     return mav; 	      
+	      
+	   }
+	 
+	 @RequestMapping(value="/board/updated.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String updated(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  
+		  String cp = request.getContextPath();
+		  
+		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+	      String pageNum = request.getParameter("pageNum");
+	      
+	      BoardDTO dto = dao.getReadData(boardNum);
+	      
+	      if(dto==null){
+	    	  String url = cp + "board/list.action";
+	    	  response.sendRedirect(url);
+	    	  
+	      }
+	      
+	      request.setAttribute("dto", dto);
+	      request.setAttribute("pageNum", pageNum);
+	      
+		  return "board/updated";
+	  
+	}
+	 
+	 
+	 @RequestMapping(value="/board/updated_ok.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  
+		  String pageNum = request.getParameter("pageNum");
+		 		 	  
+		  dto.setBoardNum(Integer.parseInt(request.getParameter("boardNum")));
+		  dto.setSubject(request.getParameter("subject"));
+		  dto.setName(request.getParameter("name"));		  
+		  dto.setContent(request.getParameter("content"));
+		  
+		  dao.updateData(dto);
+	  
+		  return "redirect:/board/list.action?pageNum=" + pageNum;
+		  
+	  }
+	  
+	  @RequestMapping(value="/board/deleted.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String deleted(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  
+		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		  String pageNum = request.getParameter("pageNum");
+	  
+		  dao.deleteData(boardNum);
+	  
+		  return "redirect:/board/list.action?pageNum=" + pageNum;
+	 
+	  
+	  }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
 }
 
