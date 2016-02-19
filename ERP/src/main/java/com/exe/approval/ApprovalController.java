@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ApprovalController {
 
+
+	
+	@RequestMapping(value = "/approval", method=RequestMethod.GET)
+	public String scheduleMain() {
+		
+		return "approvalTile";
+	}
+	
 	@RequestMapping(value = "/approvalArticle", method = RequestMethod.GET)
 	public String approvalArticle() {
 
@@ -30,15 +38,18 @@ public class ApprovalController {
 	}
 
 	@RequestMapping(value = "/approvalTest", method = RequestMethod.GET)
-	public String approvalTest() {
+	public String approvalTest(HttpServletRequest request) {
 		
+
+
 		return "approval/approvalTest";
 	}	
 	
-	
-	@RequestMapping(value = "/approvalLine", method = RequestMethod.GET)
-	public String approvalLine() {
+	//
+	@RequestMapping(value = "/approvalLine.action", method = RequestMethod.GET)
+	public String approvalLine(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
+	
 		return "approval/approvalLine";
 	}	
 		

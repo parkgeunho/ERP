@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.member">
+
+	<select id="maxNum" resultType="integer">
+		select nvl(max(num),0) from insadb
+	</select>
+	
+	
+	<insert id="insertData" parameterType="com.exe.member.MemberDTO">
+		insert into insadb (num,userNum,birth,name,jumin,addr,id,pwd,oPhone,mPhone,email,blood,reli,hobby,memo,grade,duty,
+		dal,depth5) values (#{num},TO_CHAR(sysdate,'yymmddhhmiss'),#{birth},#{name},#{jumin},#{addr},#{id},#{pwd},#{oPhone},#{mPhone},#{email},
+		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth5})
+	</insert>
+	
+	
+</mapper>
+

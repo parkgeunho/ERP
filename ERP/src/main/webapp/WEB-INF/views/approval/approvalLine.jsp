@@ -1,12 +1,87 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String cp = request.getContextPath();
+	request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/erp/resources/insa/jquery.session.js"></script>
+<script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
+<link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
+
 <title>Insert title here</title>
+
+<script>
+$(document).ready(function() {
+	//스크롤바 변경
+	  $(".content").mCustomScrollbar();
+	
+	//하위 접고 열기 +  이미지 변경
+	  $('[id^="dep-"]').click(function(){
+			
+		     var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+		     $(this).attr('src',src);
+		 
+			
+				var obj = $('.'+ this.id);
+				
+				if(obj.css('display')=='none')
+					obj.show();
+				else
+					obj.hide();
+				
+				
+			});
+	  	  
+	//클릭한 div에 대한 색상 변경
+	var dds = $('[id^="edit-"]');
+
+ 	$('[id^="edit-"]').click(function(){
+ 		
+ 		for(var i=1;i<dds.length+1;i++){
+ 			
+ 			
+ 			var v = "edit-"+i;
+ 			if(v==this.id){
+ 				
+ 				document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
+ 				
+ 			}else{
+ 				
+ 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
+ 			}
+ 			
+ 		} 		
+ 		
+ 		/* document.getElementById(this.id).style.backgroundColor = "#E8D9FF"; */
+ 		//클릭한 것을 세션에 넣어줌
+/* 		var obj = $('.num'+this.id).val();
+		$.session.set("num",obj); */
+				
+	});
+	 
+	
+	//클릭을 했을 시 인풋 박스로 변경 시킨다.
+	$('[id^="edit-"]').dblclick(function(){
+		
+		var obj = $('.'+ this.id).val();
+		
+		
+		 
+		var av = document.getElementById(this.id).innerText;
+		 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">"; 
+	
+	});
+
+});
+</script>
+
 
 <script language="JavaScript" type="text/javascript">
  
@@ -186,8 +261,8 @@
 <td width="10"></td>
 
 <td width="1" bgcolor="#8C8C8C"></td>
-<td width="35" bgcolor=""></td>
-<td width="35" bgcolor=""></td>
+<td width="35" bgcolor="">이</td>
+<td width="35" bgcolor="">히</td>
 <td width="1" bgcolor="#8C8C8C"></td>
 
 <td width="10"></td>
@@ -305,12 +380,7 @@
 
 <td width="1" bgcolor="#8C8C8C"></td>
 <td width="4" bgcolor=""></td>
-<td width="100" bgcolor="" colspan="2">
-<select id="selectX" multiple="multiple" style="width: 200px; height: 350px">
-	<option value="original1" selected="selected">Orig1</option>
-</select>
-<br/>
-</td>
+<td width="100" bgcolor="" colspan="2"></td>
 <td width="4" bgcolor=""></td>
 <td width="1" bgcolor="#8C8C8C"></td>
 

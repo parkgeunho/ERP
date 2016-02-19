@@ -31,7 +31,27 @@ $(document).ready(function() {
 </script>
     </head>
     <body>
-    <c:set var="test" value="32"/>
-        <div id="edit1">Sometext</div>
+    
+    
+    
+    
+    <table>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>2</td>
+    <td>
+    
+    
+    </td>
+    </tr>
+   
+    </table>
+    
+    
     </body>
 </html>

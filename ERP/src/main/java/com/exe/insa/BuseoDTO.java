@@ -2,7 +2,7 @@ package com.exe.insa;
 
 public class BuseoDTO {
 	
-	
+	private int buseoNum;
 	private String depth1;
 	private String depth2;
 	private String depth3;
@@ -10,6 +10,14 @@ public class BuseoDTO {
 	private String depth5;
 	
 	
+	
+	
+	public int getBuseoNum() {
+		return buseoNum;
+	}
+	public void setBuseoNum(int buseoNum) {
+		this.buseoNum = buseoNum;
+	}
 	public String getDepth1() {
 		return depth1;
 	}
