@@ -75,11 +75,11 @@ public class BoardController {
 	      
 	      dao.insertData(dto);
 	      
-	      return "redirect:/board/list.action";
+	      return "redirect:/list.action";
 	   }
 	 
 	 
-	 @RequestMapping(value="/board/list.action",method={RequestMethod.GET,RequestMethod.POST})
+	 @RequestMapping(value="/list.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 	      String cp = request.getContextPath();

@@ -20,7 +20,7 @@ public class BoardDAO {
 	      
 	      int result = 0;
 	      
-	      result = sessionTemplate.selectOne("com.board.boardmapper.maxNum");
+	      result = sessionTemplate.selectOne("com.exe.board.BoardMapper.maxNum");
 	      
 	      return result;
 	   }
@@ -28,7 +28,7 @@ public class BoardDAO {
 	   //입력(created.jsp->created_ok.jsp)
 	   public void insertData(BoardDTO dto){
 	      
-	      sessionTemplate.insert("com.board.boardmapper.insertData",dto);
+	      sessionTemplate.insert("com.exe.board.BoardMapper.insertData",dto);
 	   }
 	   
 	   //전체데이터
@@ -41,7 +41,7 @@ public class BoardDAO {
 	      params.put("searchKey", searchKey);
 	      params.put("searchValue", searchValue);
 	      
-	      List<BoardDTO> lists = sessionTemplate.selectList("com.board.boardmapper.getLists",params);
+	      List<BoardDTO> lists = sessionTemplate.selectList("com.exe.board.BoardMapper.getLists",params);
 	      
 	      return lists;
 	   }
@@ -56,7 +56,7 @@ public class BoardDAO {
 	      params.put("searchKey", searchKey);
 	      params.put("searchValue", searchValue);
 	      
-	      result = sessionTemplate.selectOne("com.board.boardmapper.getDataCount",params);
+	      result = sessionTemplate.selectOne("com.exe.board.BoardMapper.getDataCount",params);
 	      
 	      return result;
 	      
@@ -65,13 +65,13 @@ public class BoardDAO {
 	   //조회수증가
 	   public void updateHitCount(int boardNum){
 	      
-	      sessionTemplate.update("com.board.boardmapper.updateHitCount",boardNum);
+	      sessionTemplate.update("com.exe.board.BoardMapper.updateHitCount",boardNum);
 	   }
 	   
 	   //한명의 데이터 출력
 	   public BoardDTO getReadData(int boardNum){
 	      
-	      BoardDTO dto = sessionTemplate.selectOne("com.board.boardmapper.getReadData",boardNum);
+	      BoardDTO dto = sessionTemplate.selectOne("com.exe.board.BoardMapper.getReadData",boardNum);
 	      
 	      return dto;
 	   }
@@ -79,13 +79,13 @@ public class BoardDAO {
 	   //삭제
 	   public void deleteData(int boardNum){
 	      
-	      sessionTemplate.delete("com.board.boardmapper.deleteData",boardNum);
+	      sessionTemplate.delete("com.exe.board.BoardMapper.deleteData",boardNum);
 	   }
 	   
 	   //수정
 	   public void updateData(BoardDTO dto){
 
-	      sessionTemplate.update("com.board.boardmapper.updateData",dto);
+	      sessionTemplate.update("com.exe.board.BoardMapper.updateData",dto);
 	   }
 	   
 	
