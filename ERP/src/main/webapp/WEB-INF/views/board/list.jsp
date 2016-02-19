@@ -133,19 +133,17 @@
 <table border="0" cellpadding="0" cellspacing="0" align="center">
 	<c:forEach var="dto" items="${lists }">
 		<tr>
-			<td class="boardum">${dto.boardNum}</td>
+			<td class="boardNum">${dto.boardNum}</td>
 			<td class="subject">
-			<a href="${articleUrl}&num=${dto.boardnum}">
+			<a href="${articleUrl}&boardNum=${dto.boardNum}">
 				${dto.subject }</a></td>
-			<td class="name">
-			</td>
+			<td class="name">${dto.name}</td>
 			<td class="created">${dto.created}</td>
 			<td class="hitCount">${dto.hitCount }</td>		
 		</tr>	
 	</c:forEach>
 		<tr style="height: 10px;">
-			<td style="width: 1400px;">
-			</td>
+			<td style="width: 1400px;"></td>			
 		</tr>		
 </table>
 
