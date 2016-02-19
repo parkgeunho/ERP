@@ -80,49 +80,7 @@
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>	
 	
-	<tr style="height: 30px; background-color: ">
-		<td style="width: 100px" align="center" class="boardnum">No</td>
-		<td style="width: 750px;" align="center" class="subject">제목
-		</td>
-		
-		<td style="width: 150px;" align="center" class="name">작성자
-		</td>
-		
-		<td style="width: 150px;" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px;" align="center" class="file">
-			<img alt="" src="/erp/resources/image/file001.png">		
-		</td>
-		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">${dto.hitCount }
-		</td>
-	
-	</tr>	
-	
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
-	</tr>
-	
-	<tr style="height: 30px; background-color: ">
-		<td style="width: 100px" align="center" class="boardnum">No</td>
-		<td style="width: 750px;" align="center" class="subject">제목
-		</td>
-		
-		<td style="width: 150px;" align="center" class="name">작성자
-		</td>
-		
-		<td style="width: 150px;" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px;" align="center" class="file">
-			<img alt="" src="/erp/resources/image/file001.png">		
-		</td>
-		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
-		</td>
-	
-	</tr>	
+
 	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>
@@ -133,19 +91,17 @@
 <table border="0" cellpadding="0" cellspacing="0" align="center">
 	<c:forEach var="dto" items="${lists }">
 		<tr>
-			<td class="boardum">${dto.boardNum}</td>
+			<td class="boardNum">${dto.boardNum}</td>
 			<td class="subject">
-			<a href="${articleUrl}&num=${dto.boardnum}">
+			<a href="${articleUrl}&boardNum=${dto.boardNum}">
 				${dto.subject }</a></td>
-			<td class="name">
-			</td>
+			<td class="name">${dto.name}</td>
 			<td class="created">${dto.created}</td>
 			<td class="hitCount">${dto.hitCount }</td>		
 		</tr>	
 	</c:forEach>
 		<tr style="height: 10px;">
-			<td style="width: 1400px;">
-			</td>
+			<td style="width: 1400px;"></td>			
 		</tr>		
 </table>
 
@@ -159,7 +115,7 @@
 	</tr>
 	
 	<tr style="height: 55px;">
-		<td style="width: 1400px;">
+		<td style="width: 1400px;" align="center">
 	<p>
 		<c:if test="${dataCount!=0 }">
 			${pageIndexList }

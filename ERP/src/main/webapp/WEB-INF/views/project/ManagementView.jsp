@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%        
-	
+<%
 	String cp = request.getContextPath();
+
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +18,6 @@ function buseoManagement(){
 	
 	window.open("buseoManagement","","width=300px,height=580px");
 	
-	
 }
 
 
@@ -33,15 +32,12 @@ $(document).ready(function(){
      var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
      $(this).attr('src',src);
  
-	
 		var obj = $('.'+ this.id);
 		
 		if(obj.css('display')=='none')
 			obj.show();
 		else
 			obj.hide();
-		
-		
 	});
 	
 });
@@ -178,7 +174,7 @@ $(document).ready(function(){
 			</span>
 			
 			<div style="float: left;height: 25px" class="button" onclick="javascript:buseoManagement();">부서관리</div>		
-			<div class="button" style="float: left;height: 25px;margin-left: 10px;" >사원등록</div>			
+			<div class="button" style="float: left;height: 25px;margin-left: 10px;" onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</div>			
 			</div>
 			
 			<div style="padding-top :130px;">

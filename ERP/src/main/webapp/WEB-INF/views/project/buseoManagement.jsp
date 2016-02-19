@@ -37,11 +37,7 @@ $(document).ready(function() {
 				
 				
 			});
-	  
-	  
-	  
-	  
-	  
+	  	  
 	//클릭한 div에 대한 색상 변경
 	var dds = $('[id^="edit-"]');
 
@@ -60,15 +56,13 @@ $(document).ready(function() {
  				document.getElementById(v).style.backgroundColor = "#FFFFFF";
  			}
  			
- 		}
- 		
+ 		} 		
  		
  		/* document.getElementById(this.id).style.backgroundColor = "#E8D9FF"; */
  		//클릭한 것을 세션에 넣어줌
 		var obj = $('.num'+this.id).val();
 		$.session.set("num",obj);
-		
-		
+				
 	});
 	 
 	
@@ -95,9 +89,7 @@ $(document).ready(function() {
 		 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">";  */
 	
 	});
-		
-	
-	
+
 });
 </script>
 <script type="text/javascript">

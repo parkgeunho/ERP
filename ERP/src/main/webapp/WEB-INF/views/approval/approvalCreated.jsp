@@ -8,17 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script src="/erp/resources/script/editor/ckeditor/ckeditor.js"></script>
-<script src="/erp/resources/script/editor/ckeditor/config.js"></script>
+<script src="/erp/resources/script/ckeditor/ckeditor.js"></script>
+<script src="/erp/resources/script/ckeditor/config.js"></script>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
 
-<link rel="stylesheet" href="<%=cp%>/resources/schedule/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resources/schedule/jquery-2.2.0.js"></script>	<!-- jquery-2.2.0.min.js 이 오고난 후, -->
-<script type="text/javascript" src="<%=cp%>/resources/schedule/jquery-ui.js"></script>
+<script type="text/javascript" src="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 
 
 <script type="text/javascript">
@@ -31,7 +31,7 @@
 				
 				modal:true,
 				open:function(){
-					$(this).load("approvalLine");
+					$(this).load("approvalLine.action");
 				},
 				height:500,
 				width:870,
@@ -44,7 +44,7 @@
 </script>
 
 
-<title>Insert title here</title>
+<title>결재 상신</title>
 </head>
 <body>
 
