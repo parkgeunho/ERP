@@ -5,6 +5,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
 	<properties>
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
 		<property name="url" value="jdbc:oracle:thin:@192.168.16.8:1521:TestDB"/>
@@ -27,12 +28,13 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
    </environments>
    
    <mappers>
+
+      <mapper resource="com/exe/board/boardmapper.xml"/>
+      
+
       <mapper resource="com/exe/insa/InsaMapper.xml"/>
       <mapper resource="com/exe/member/memberMapper.xml"/>
-      
+
    </mappers>
 
-	
-	
-	
 </configuration>
