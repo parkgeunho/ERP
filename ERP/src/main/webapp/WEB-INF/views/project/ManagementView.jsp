@@ -18,7 +18,6 @@ function buseoManagement(){
 	
 	window.open("buseoManagement","","width=300px,height=580px");
 	
-	
 }
 
 
