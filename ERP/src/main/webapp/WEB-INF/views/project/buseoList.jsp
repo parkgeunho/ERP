@@ -33,8 +33,8 @@ $(document).ready(function() {
                     url:'buseoList',
                     type:'POST',
                     
-                    error:function(xhr,status,e){
-                           alert('Error');
+                    error:function(args){
+                           alert('최대 하위 부서 입니다.');
                     },
                     success: function(args){
                     	 $("#buseoList").html(args);                           
@@ -85,8 +85,8 @@ function created(){
 	var url = "<%=cp%>/buseocreated";
 	$.post(url,{num:num},function(args){
 	$("#buseoList").html(args);
-	num=0;
-	});
+	
+	}).error(function(){alert("이미 최하 부서입니다.")});
 }
 
 

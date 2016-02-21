@@ -84,8 +84,7 @@ int restDiv = (Integer)request.getAttribute("restDiv");
    
 </script>
 
-
-	<div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
+<div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
 
 <c:forEach var="dto" items="${lists }">
    <c:forEach begin="1" end="${dto.depthGap }" step="1">

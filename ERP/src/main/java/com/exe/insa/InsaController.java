@@ -142,8 +142,11 @@ public class InsaController {
 	
 		
 		int buseoNum = Integer.parseInt(request.getParameter("num"));
-		
-		if(buseoNum==0){		
+	
+		if(buseoNum==0){
+			
+			
+			
 			int maxNum = insaDAO.maxNum();
 			dto.setBuseoNum(maxNum+1);
 			dto.setGroupNum(dto.getBuseoNum());
@@ -151,10 +154,11 @@ public class InsaController {
 			dto.setOrderNo(0);
 			dto.setParent(0);
 			insaDAO.buseoCreated(dto);
-		}
-			
-		else{
-			
+		}else{
+			dto = insaDAO.readData(buseoNum);
+			if(dto.getDepth()==4){
+				return "read-error";
+			}
 			dto = insaDAO.readData(buseoNum);
 			System.out.println(dto.getGroupNum());
 			Map<String, Object> hMap = new HashMap<String, Object>();
