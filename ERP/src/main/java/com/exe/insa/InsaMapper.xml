@@ -5,51 +5,6 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.exe.insa">
-
-	<select id="buseolist" resultType="com.exe.insa.BuseoDTO">
-		select buseoNum,depth1, depth2, depth3,depth4,depth5 from buseo
-		order by depth1,depth2 ,depth3 , depth4 , depth5 			
-	</select>
-	
-	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
-	select depth1 from buseo group by depth1 having count(*)>=1 and depth1!='0' order by depth1
-	</select>
-	
-	<select id="depth1etc" resultType="com.exe.insa.BuseoDTO">
-	select depth1 from buseo group by depth1 having count(*)>1 and depth1!='0' order by depth1
-	</select>
-	
-	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
-		select depth2 from buseo group by depth2 having count(*)>=1 and depth2!='0' order by depth2
-	</select>
-	
-	<select id="depth2etc" resultType="com.exe.insa.BuseoDTO">
-		select depth2 from buseo group by depth2 having count(*)>1 and depth2!='0' order by depth2
-	</select>
-	
-	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
-		select depth3 from buseo group by depth3 having count(*)>=1 and depth3!='0' order by depth3
-	</select>
-	
-	<select id="depth3etc" resultType="com.exe.insa.BuseoDTO">
-		select depth3 from buseo group by depth3 having count(*)>1 and depth3!='0' order by depth3
-	</select>
-	
-	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
-		select depth4 from buseo group by depth4 having count(*)>=1 and depth4!='0' order by depth4
-	</select>
-	
-	<select id="depth4etc" resultType="com.exe.insa.BuseoDTO">
-		select depth4 from buseo group by depth4 having count(*)>1 and depth4!='0' order by depth4
-	</select>
-	
-	
-	<select id="depth5" resultType="com.exe.insa.BuseoDTO">
-		select depth5 from buseo group by depth5 having count(*)>=1 and depth5!='0' order by depth5 
-	</select>
-	
-	
-	<!-- 새로 다시 짜기 시작 -->
 	
 	<!-- 부서 고유 번호 구하기  -->
 	<select id="maxNum" resultType="integer">
@@ -89,10 +44,23 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 정보읽기 -->
 	<select id="ReadData" parameterType="integer" resultType="com.exe.insa.BuseoDTO">
 		select buseoNum,buseoName,groupNum,depth,orderNo,parent,replyNum,checked from buseo where buseoNum=#{buseoNum}
-	
 	</select>
 	
+	<!-- 계층형 구조를 출력 하기 위한 필요정보 출력해오기 -->
+	<select id="group" resultType="com.exe.insa.BuseoDTO">
+		select groupNum,count(*) replyNum from buseo group by groupNum order by groupNum desc
+	</select>	
 	
+	<select id="depth" resultType="com.exe.insa.BuseoDTO">
+		select parent,count(*) replyNum from buseo group by parent having parent!='0' 
+	</select>
+	
+	<delete id="buseoDelete" parameterType="integer">
+		delete from buseo where buseoNum in
+		(select buseoNum from buseo start with buseoNum=#{buseoNum}
+		connect by prior buseoNum=parent)
+				
+	</delete>
 	
 	
 	

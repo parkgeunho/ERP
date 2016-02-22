@@ -4,6 +4,7 @@
 
 	String cp = request.getContextPath();
 int restDiv = (Integer)request.getAttribute("restDiv");
+
 %>
 <script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/erp/resources/insa/jquery.session.js"></script>
@@ -34,31 +35,37 @@ int restDiv = (Integer)request.getAttribute("restDiv");
       });
    });
 
-	var dds = $('[id^="edit-"]');
+	
 	
  	$('[id^="edit-"]').click(function(){
  		
+ 	var dds = ${maxNum};
  		
- 		
- 		for(var i=1;i<dds.length+1;i++){
+ 		for(var i=1;i<dds+1;i++){
  			
  			
  			var v = "edit-"+i;
- 			if(v==this.id){
- 				
- 				document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
- 				
- 			}else{
- 				
- 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
- 			}
  			
+ 			
+ 		if($("#"+v)>0){
+ 			alert(v);
+	 			if(v==this.id){
+	 				
+	 				document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
+	 				
+	 			}else{
+	 				
+	 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
+	 			}
+ 			
+ 			}
  		}
- 		
  		
  		/* document.getElementById(this.id).style.backgroundColor = "#E8D9FF"; */
  		//클릭한 것을 세션에 넣어줌
-		num= $('.num'+this.id).val();		
+ 		
+		num= $('.num'+this.id).val();
+ 		alert(num);
 	});
  	
  	
@@ -111,8 +118,8 @@ int restDiv = (Integer)request.getAttribute("restDiv");
    <% for(int i=0; i<restDiv; i++){ %>
    </div>
    <%} %>
-</div>
 	</div>
+</div>
 	
 
 
