@@ -1,5 +1,7 @@
 package com.exe.insa;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -76,11 +78,7 @@ public class InsaController {
 	}
 	
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test() {
-		
-		return "project/buseoList";
-	}
+
 	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
@@ -118,7 +116,7 @@ public class InsaController {
 			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
-			System.out.println(vo.getReplyNum());
+			
 			
 			hMap.put("replyNum", vo.getReplyNum());
 			insaDAO.updateReply(hMap);
@@ -142,9 +140,9 @@ public class InsaController {
 	public String buseoCreate(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
 	
 		
-		int buseoNum = Integer.parseInt(request.getParameter("num"));
-	
-		if(buseoNum==0){
+		Integer buseoNum = Integer.parseInt(request.getParameter("num"));
+		System.out.println(buseoNum);
+		if(buseoNum.equals(0) || buseoNum.equals(null)){
 			
 			
 			
@@ -183,11 +181,7 @@ public class InsaController {
 		
 	}
 	
-	@RequestMapping(value = "/te", method = {RequestMethod.GET,RequestMethod.POST})
-	public String te(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
-		
-	return "project/test";
-	}
+	
 	
 	@RequestMapping(value = "/buseodeleted", method = {RequestMethod.GET,RequestMethod.POST})
 	public String buseoDeleted(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
@@ -197,6 +191,29 @@ public class InsaController {
 		//원래 여기에 조건을 줘서 인사쪽을 확인하고 나서 있냐 없냐 여부 확인 후 없으면 삭제를 진행
 		//아니면 에러 처리를 실행해서 삭제가 안되게 해야됨
 		insaDAO.deleteBuseo(buseoNum);
+		
+		return buseolist(request, response);
+	}
+	
+	
+
+	@RequestMapping(value = "/buseoUpdated", method = {RequestMethod.GET,RequestMethod.POST})
+	public String updated(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) throws UnsupportedEncodingException {
+		
+		int maxNum = insaDAO.maxNum();
+				
+		for(int i=1 ; i<maxNum+1; i++){
+			
+			String buseoName = request.getParameter("buseo"+i);
+			
+			if(buseoName!=null){
+				int buseoNum = i;
+				dto.setBuseoName(buseoName);
+				dto.setBuseoNum(buseoNum);
+				dto.setChecked("ok");
+				insaDAO.updateBuseo(dto);
+			}
+		}
 		
 		return buseolist(request, response);
 	}

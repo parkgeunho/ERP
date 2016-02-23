@@ -62,6 +62,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 				
 	</delete>
 	
+	<update id="buseoUpdate" parameterType="com.exe.insa.BuseoDTO">
+		update buseo set buseoName=#{buseoName},checked=#{checked} where buseoNum=#{buseoNum}
+	</update>
+	
 	
 	
 </mapper>

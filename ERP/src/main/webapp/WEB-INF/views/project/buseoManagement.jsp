@@ -22,6 +22,28 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 $(document).ready(function() {
 
 	
+	
+	
+	$("#updated").click(function(){
+		
+		var myForm = $("#myForm").serialize();
+		
+		  $.ajax({
+             url:'buseoUpdated',
+             type:'POST',
+             data: myForm,
+             error:function(args){
+                    alert('에러래');
+             },
+             success: function(args){
+             	 $("#buseoList").html(args);                           
+             }
+ 		});
+		 
+	});
+	
+	
+	
 
 
 
@@ -32,7 +54,7 @@ $(document).ready(function() {
 	    $.ajax({
                     url:'buseoList',
                     type:'POST',
-                    
+                      
                     error:function(args){
                            alert('최대 하위 부서 입니다.');
                     },
@@ -56,11 +78,13 @@ $(document).ready(function() {
 
 
 function sendit(){
-
-/* 	
-	var v = $.session.get("num");
-	alert(v); */
-	alert("양");
+	var url = "<%=cp%>/buseoUpdated";
+	var f=document.myForm;
+	
+	$.post(url,{list:f},function(args){
+		$("#buseoList").html(args);
+	});
+	
 	
 }
 
@@ -100,7 +124,7 @@ function created(){
 
 
 
-<form name="myForm" onsubmit="return false">
+
 <table >
 <tr>
 	<td style="width: 300px;">
@@ -117,7 +141,7 @@ function created(){
 
 <tr>
 <td  width="250px;">
-<div id="ededede" class="buseoManagement" style="margin-right: 75px; ">확인</div>
+<div id="updated" class="buseoManagement" style="margin-right: 75px; ">확인</div>
 </td>
 </tr>
 <tr>
@@ -134,6 +158,6 @@ function created(){
 </tr>
 
 </table>
-</form>
+
 </body>
 </html>

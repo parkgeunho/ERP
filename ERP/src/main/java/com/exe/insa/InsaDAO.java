@@ -77,6 +77,10 @@ public class InsaDAO {
 		sessionTemplate.delete("com.exe.insa.buseoDelete", buseoNum);
 	}
 	
+	public void updateBuseo(BuseoDTO dto){
+		
+		sessionTemplate.update("com.exe.insa.buseoUpdate",dto);
+	}
 
 
 }
