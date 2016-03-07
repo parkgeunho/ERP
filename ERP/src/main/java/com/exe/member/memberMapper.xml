@@ -23,24 +23,24 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	<select id="depth0" resultType="com.exe.insa.BuseoDTO">
+		select buseoName from buseo where depth=0
+	</select>
+	
 	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
-	select depth1 from buseo group by depth1 having count(*)>=1 and depth1!='0' order by depth1
+		select buseoName from buseo where depth=1
 	</select>
 	
 	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
-		select depth2 from buseo group by depth2 having count(*)>=1 and depth2!='0' order by depth2
+		select buseoName from buseo where depth=2
 	</select>
 	
 	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
-		select depth3 from buseo group by depth3 having count(*)>=1 and depth3!='0' order by depth3
+		select buseoName from buseo where depth=3
 	</select>
-	
+		
 	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
-		select depth4 from buseo group by depth4 having count(*)>=1 and depth4!='0' order by depth4
-	</select>
-	
-	<select id="depth5" resultType="com.exe.insa.BuseoDTO">
-		select depth5 from buseo group by depth5 having count(*)>=1 and depth5!='0' order by depth5 
+		 select buseoName from buseo where depth=4
 	</select>
 	
 	
