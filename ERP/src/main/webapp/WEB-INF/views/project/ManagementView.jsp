@@ -91,7 +91,7 @@ function buseoManagement(){
 					<label id="ch-${depth0.buseoName}">${depth0.buseoName }</label>
 					<input type="hidden" class="numch-${depth0.buseoName }" value="${depth0.buseoNum }">
 					</div>
-						<div class="fold-${depth0.buseoName}">
+						<div class="fold-${depth0.buseoNum}">
 						
 						
 						<c:forEach var="depth1" items="${lists }">
