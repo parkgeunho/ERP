@@ -41,7 +41,7 @@ public class MemberDAO {
 	public List<BuseoDTO> depth1(){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth1");
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth0");
 		
 		return lists;
 		
@@ -51,7 +51,7 @@ public class MemberDAO {
 	public List<BuseoDTO> depth2(){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth2");
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth1");
 		
 		return lists;
 		
@@ -60,7 +60,7 @@ public class MemberDAO {
 	public List<BuseoDTO> depth3(){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth3");
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth2");
 		
 		return lists;
 		
@@ -69,7 +69,7 @@ public class MemberDAO {
 	public List<BuseoDTO> depth4(){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth4");
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth3");
 		
 		return lists;
 		
@@ -79,7 +79,7 @@ public class MemberDAO {
 	public List<BuseoDTO> depth5(){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth5");
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.depth4");
 		
 		return lists;
 		
