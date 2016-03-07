@@ -1,10 +1,13 @@
 package com.exe.insa;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.exe.member.MemberDTO;
 
 
 
@@ -81,6 +84,34 @@ public class InsaDAO {
 		
 		sessionTemplate.update("com.exe.insa.buseoUpdate",dto);
 	}
+	
+	public BuseoDTO readBuseo(int buseoNum){
+		BuseoDTO dto =  sessionTemplate.selectOne("com.exe.insa.readBuseo", buseoNum);
+		return dto;
+		
+	}
+	
+	public List<MemberDTO> getMemberList(int start, int end,int buseoNum){
+		
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("start", start);
+		params.put("end", end);
+		params.put("buseoNum", buseoNum);
+		
+		
+		
+		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.insa.memberList",params);
+		return lists;
+	}
+	
+	public int dataCount(int buseoNum){
+		
+		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",buseoNum);
+		return result;
+	}
+
 
 
 }

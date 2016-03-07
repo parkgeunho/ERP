@@ -1,7 +1,7 @@
 package com.exe.insa;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.scripting.bsh.BshScriptUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.exe.board.MyUtil;
+import com.exe.member.MemberDTO;
+
 
 
 
@@ -27,9 +31,12 @@ public class InsaController {
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
 	
+	@Autowired
+	MyUtil myUtil;
+	
 	
 	//메인 홈페이지 이동
-	@RequestMapping(value = "/insa", method = RequestMethod.GET)
+	@RequestMapping(value = "/insa", method = {RequestMethod.GET,RequestMethod.POST})
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
 	
 		
@@ -216,6 +223,90 @@ public class InsaController {
 		}
 		
 		return buseolist(request, response);
+	}
+	
+	
+	@RequestMapping(value = "/memberList", method = {RequestMethod.GET,RequestMethod.POST})
+	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
+		
+		String cp = request.getContextPath();
+		String num = request.getParameter("num");
+		System.out.println("찍힘?!");
+		if(num == null){
+			
+			num="1";
+		}
+		int buseoNum = Integer.parseInt(num);
+		int currentPage = 1;
+		System.out.println("찍힘?2!");
+		int dataCount = insaDAO.dataCount(buseoNum);
+		System.out.println("찍힘?3!");
+		int numPerPage = 15;
+		
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		
+		if(currentPage>totalPage)
+			currentPage=totalPage;
+		
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+		
+		List<MemberDTO> lists = insaDAO.getMemberList(start,end,buseoNum);
+		ListIterator<MemberDTO> it = lists.listIterator();
+		while(it.hasNext()){
+			MemberDTO mDto = it.next();
+			BuseoDTO bDto = null;
+			if(mDto.getDepth1()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
+				System.out.println("얍"+mDto.getDepth1());
+				System.out.println("확인"+bDto.getBuseoName());
+				mDto.setDepth1(bDto.getBuseoName());
+			}
+			if(mDto.getDepth2()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
+				mDto.setDepth2(bDto.getBuseoName());
+				
+			}
+			if(mDto.getDepth3()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
+				mDto.setDepth3(bDto.getBuseoName());
+				
+			}
+			if(mDto.getDepth4()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
+				mDto.setDepth4(bDto.getBuseoName());
+				
+			}
+			if(mDto.getDepth5()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
+				mDto.setDepth5(bDto.getBuseoName());
+				
+			}	
+			
+		}
+		System.out.println("왜 안뜨니 ");
+		
+		
+		
+		
+		
+		String listUrl = cp +"/memberList";
+		
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		
+		int size = lists.size();
+		int max = 15;
+		System.out.println("사이즈 : "+size);
+		
+		request.setAttribute("max", max);
+		request.setAttribute("lists", lists);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("size", size);
+		request.setAttribute("dataCount", dataCount);
+		
+		
+		
+		return "project/memberList";
 	}
 	
 	
