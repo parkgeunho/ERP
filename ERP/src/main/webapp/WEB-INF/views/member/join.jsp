@@ -11,7 +11,34 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script type="text/javascript" src="/erp/resources/member/util.js"></script>
 
+
 <script type="text/javascript">
+	
+	//아이디 중복검사 ajax
+	function compareId(){
+		
+		$.ajax({
+			
+					url:"compareID",
+					type:'POST',
+					data : {compID : document.myForm.id.value},
+					
+					success: function(args){
+						$("#result").html(args);
+					},
+					error:function(e){
+		  				alert(e.responseText);
+		
+					}
+
+		});
+
+	}
+</script>
+
+<script type="text/javascript">
+	
+
 
 	function sendIt(){
 			
@@ -119,20 +146,23 @@
 
 </table>
 
-<table border="0" width="1000"align="center" style="margin: 20px;">
+<table border="0" width="1000"align="center" style="margin-top: 20px; margin-bottom: 0px;">
 	<tr height="40">
-		<td width="100" align="center" style="font-size: 11pt;font-weight: bold;">사 진 업로드 : </td>
+		<td width="100" align="center" style="font-size: 12pt;font-weight: bold;">사 진 업로드 : </td>
 		<td width="400" colspan="3"><input type="file" name="file" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;"></td>
 		<td width="500" align="right" colspan="2">
 		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; font-weight: bold;" class="btn btn-default" onclick="sendIt();">등록하기</button>
 		<button type="button" style="width: 50px; height: 30px; font-size: 10pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/insa.action';">취소</button>
 		</td>
-		
-	</tr>
 </table>
 
-<table border="0" width="1000"align="center" style="margin: 20px ; border-radius : 10px; background-color: #eeeeee">
-	
+
+<table border="0" width="1000" align="center" style="margin: 0px;">
+	<tr>
+	<td height="40" style=""><div id="result">${compID}</div></td>
+	</tr>
+</table>
+<table border="0" width="1000"align="center" style="margin:0px ; border-radius : 10px; background-color: #eeeeee">
 	<tr height="40">
 		<td width="100" class="color" align="center">이 름</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="name" placeholder="ex) 홍 길 동" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
@@ -157,35 +187,35 @@
 		<select name="depth1" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth1 }">
-    		<option value="${dto.buseoName }">${dto.buseoName }</option>
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth2" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth2 }">
-    		<option value="${dto.buseoName }">${dto.buseoName }</option>
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth3" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth3 }">
-    		<option value="${dto.buseoName }">${dto.buseoName }</option>
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth4" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth4 }">
-    		<option value="${dto.buseoName }">${dto.buseoName }</option>
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth5" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth5 }">
-    		<option value="${dto.buseoName }">${dto.buseoName }</option>
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		</td>
@@ -194,7 +224,7 @@
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">아이디</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150" ><input type="text" class="form-control" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;" onkeyup="compareId();"></td>
 		<td width="100" class="color" align="center">비밀번호</td>
 		<td width="150" ><input type="text" class="form-control" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
 		<td width="100" class="color" align="center">직 급</td>

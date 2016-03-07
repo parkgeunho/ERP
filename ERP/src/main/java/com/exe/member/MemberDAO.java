@@ -32,7 +32,7 @@ public class MemberDAO {
 	
 	public String idOk(String id){
 		
-		String result = sessionTemplate.selectOne("com.exe.member.idOk",id);
+		String result = sessionTemplate.selectOne("com.exe.member.idOK",id);
 		
 		return result;
 		
@@ -84,6 +84,8 @@ public class MemberDAO {
 		return lists;
 		
 	}
+	
+	
 	
 	
 	

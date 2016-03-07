@@ -17,30 +17,33 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth1},#{depth2},#{depth3},#{depth4},#{depth5},#{upload})
 	</insert>
 	
-	<select id="idOk" parameterType="String" resultType="String">
+	<select id="idOK" parameterType="String" resultType="String">
 		select id from insadb where id=#{id}
 	</select>
 	
 	
 	
+	
+	
+	
 	<select id="depth0" resultType="com.exe.insa.BuseoDTO">
-		select buseoName from buseo where depth=0
+		select buseoName,buseoNum from buseo where depth=0
 	</select>
 	
 	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
-		select buseoName from buseo where depth=1
+		select buseoName,buseoNum from buseo where depth=1
 	</select>
 	
 	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
-		select buseoName from buseo where depth=2
+		select buseoName,buseoNum from buseo where depth=2
 	</select>
 	
 	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
-		select buseoName from buseo where depth=3
+		select buseoName,buseoNum from buseo where depth=3
 	</select>
 		
 	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
-		 select buseoName from buseo where depth=4
+		 select buseoName,buseoNum from buseo where depth=4
 	</select>
 	
 	
