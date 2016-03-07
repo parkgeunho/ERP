@@ -12,7 +12,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/erp/resources/insa/jquery.session.js"></script>
+<script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
+
+<script>
+$(document).ready(function(){
+	/* $(".content").mCustomScrollbar(); */
+
+	
+	$('[id^="ch-"]').click(function(){
+		
+		alert(this.id);
+		var num= $('.num'+this.id).val();
+		alert(num);
+		
+	});
+	
+	
+	
+	
+    $('[id^="fold-"]').click(function(){
+    	
+    	
+       
+         var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+          $(this).attr('src',src);
+        
+        var obj = $('.'+ this.id);
+        
+        if(obj.css('display')=='none')
+           obj.show();
+        else
+           obj.hide(); 
+        
+     }); 
+
+});
+</script>
+
+
+
+
+
 
 <script type="text/javascript">
 function buseoManagement(){
@@ -25,25 +68,7 @@ function buseoManagement(){
 </script>
 
 
-<script>
-$(document).ready(function(){
-	$(".content").mCustomScrollbar();
 
-	$('[id^="fold-"]').click(function(){
-	  
-	  var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
-	    $(this).attr('src',src);
-	  
-	  var obj = $('.'+ this.id);
-	  
-	  if(obj.css('display')=='none')
-	     obj.show();
-	  else
-	     obj.hide();
-	});
-
-});
-</script>
 
 </head>
 <body>
@@ -55,37 +80,137 @@ $(document).ready(function(){
 		<div class="buseo" >
 		부서
 		</div>
-		<div style="height: 740px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
+		<div>
+			<c:forEach var="parent" items="${parent }">
+				<c:forEach var="depth0" items="${lists }">
+					<c:choose>
+					
+					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
+					<div>
+					<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
+					<label id="ch-${depth0.buseoName}">${depth0.buseoName }</label>
+					<input type="hidden" class="numch-${depth0.buseoName }" value="${depth0.buseoNum }">
+					</div>
+						<div class="fold-${depth0.buseoNum}">
+						
+						
+						<c:forEach var="depth1" items="${lists }">
+										
+							<c:choose>
+							
+							
+							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
+								<div style="margin-left: 20px;">
+								<img id="fold-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
+								<label id="ch-${depth1.buseoName }">${depth1.buseoName }</label>
+								<input type="hidden" class="numch-${depth1.buseoName }" value="${depth1.buseoNum }">
+								</div>
+								<div class="fold-${depth1.buseoNum}">
+								
+								
+									<c:forEach var="depth2" items="${lists}">
+																		
+									<c:choose>
+									
+									
+										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
+											<div style="margin-left: 40px;">
+											<img id="fold-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
+											
+											<label id="ch-${depth2.buseoName }">${depth2.buseoName }</label>
+											<input type="hidden" class="numch-${depth2.buseoName }" value="${depth2.buseoNum }">
+											</div>
+											<div class="fold-${depth2.buseoNum}">
+											
+											
+												<c:forEach var="depth3" items="${lists }" >
+												
+													<c:choose>
+													
+													
+													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
+														<div style="margin-left: 60px;">
+														<img id="fold-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
+														<label id="ch-${depth3.buseoName }">${depth3.buseoName }</label>
+														<input type="hidden" class="numch-${depth3.buseoName }" value="${depth3.buseoNum }">
+														
+														</div>
+														<div class="fold-${depth3.buseoNum}">
+												
+														<c:forEach var="depth4" items="${lists }">
+														
+															<c:choose>
+															
+																<c:when test="${depth4.parent==depth3.buseoNum }">
+																	<div style="margin-left: 80px;">
+																	<label id="ch-${depth4.buseoName }">${depth4.buseoName }</label>
+																	<input type="hidden" class="numch-${depth4.buseoName }" value="${depth4.buseoNum }">
+																	</div>
+																</c:when>
+															</c:choose>
+														
+														</c:forEach>
+														</div>
+													</c:when>
+													
+													
+													
+													
+													
+													
+													
+													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
+														<div style="margin-left: 60px;">
+														<label id="ch-${depth3.buseoName }">${depth3.buseoName }</label>
+														<input type="hidden" class="numch-${depth3.buseoName }" value="${depth3.buseoNum }">
+														</div>
+													</c:when>
+												
+													</c:choose>
+												</c:forEach>
+											</div>
+										</c:when>
+										
+										
+										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
+											<div style="margin-left: 40px;">
+											<label id="ch-${depth2.buseoName }">${depth2.buseoName }</label>
+											<input type="hidden" class="numch-${depth2.buseoName }" value="${depth2.buseoNum }">
+											</div>
+										</c:when>
+									</c:choose>
+								
+									</c:forEach>
+								</div>
+							</c:when>
+							
+							
+							
+							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
+								<div style="margin-left: 20px;">
+								<label id="ch-${depth1.buseoName }">${depth1.buseoName }</label>
+								<input type="hidden" class="numch-${depth1.buseoName }" value="${depth1.buseoNum }">
+								</div>
+							</c:when>
+							
+							</c:choose>
+						</c:forEach>
+						</div>
+								
+					</c:when>
+					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
+					<div>
+					<label id="ch-${depth0.buseoName }">${depth0.buseoName }</label>
+					<input type="hidden" class="numch-${depth0.buseoName }" value="${depth0.buseoNum }">
 
-			<c:forEach var="dto" items="${lists }">
-   				<c:forEach begin="1" end="${dto.depthGap }" step="1">
-   				</div>
-   				<% restDiv = restDiv - 1;%>
-   				</c:forEach>
-				<div class="fold-${dto.parent}" id="lists">
-  
-		         <c:if test="${dto.depth != 0}">
-		            <c:forEach begin="1" end="${dto.depth }" step="1">
-		               &nbsp;
-            </c:forEach>
-	         </c:if>
-	         <c:if test="${dto.replyNum == 0 && dto.depth != 0}">
-	            &nbsp; &nbsp;
-	         </c:if>
-	         <c:if test="${dto.replyNum != 0}">
-	         <img id="fold-${dto.buseoNum}" src="/erp/resources/image/minus.png"/>
-	         </c:if>
-	        
-	        <label id="edit-${dto.buseoNum}">${dto.buseoName }</label>
-			<input type="hidden" class="numedit-${dto.buseoNum}" value="${dto.buseoNum }" >
+					</div>
+					</c:when>
+					</c:choose>
+				</c:forEach>
 			</c:forEach>
-			   <% for(int i=0; i<restDiv; i++){ %>
-			   </div>
-			   <%} %>
-			</div>
 		</div>
 	</div>
-	
+
 	<div style="width: 1340px; height: 740px;float: left;">
 		
 		<div class="buseo">
