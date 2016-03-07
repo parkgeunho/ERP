@@ -29,6 +29,40 @@
 
 <title>Insert title here</title>
 
+<script type="text/javascript" src="/springweb/resources/js/util.js"></script>
+
+<script type="text/javascript">
+
+function sendIt(){
+	
+	f = document.myForm;
+	
+	str = f.subject.value;
+	str = str.trim();
+	if(!str){
+		alert("\n제목을 입력하세요.");
+		f.subject.focus();
+		return;
+	
+		
+	}
+	f.subject.value = str;
+	
+	str = f.content.value;
+	str = str.trim();
+	if(!str){
+		alert("\n내용을 입력하세요.");
+		f.name.focus();
+		return;
+	}			
+	f.content.value = str;
+
+	f.action = "<%=cp%>/board/created_ok.action";
+	f.submit();
+
+}
+
+</script>
 
 		
 
@@ -53,7 +87,7 @@
 	<tr style="height: 30px; background: #00D8FF" >
 		<td style="width: 200px; height: 22px; font-style: " align="center">제&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">
-			<input type="text" style="width:1000px; height: 22px;">		
+			<input type="text" name="subject" style="width:1000px; height: 22px;">		
 		</td>	
 	</tr>
 	
@@ -143,9 +177,9 @@
 	<tr style="height: 33px;" align="right">
 		<td style="width: 1400px;">
 			<input type="button" value="올리기" class="btn2" style="background: #FFFFFF"
-				onclick="">
+				onclick="sendIt();">
 			<input type="button" value="취소" class="btn2"  style="background: #FFFFFF"
-				onclick="">
+				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
 		</td>
 		<td width="5"></td>	
 	</tr>
