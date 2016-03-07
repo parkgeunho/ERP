@@ -157,35 +157,35 @@
 		<select name="depth1" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth1 }">
-    		<option value="${dto.depth1 }">${dto.depth1 }</option>
+    		<option value="${dto.buseoName }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth2" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth2 }">
-    		<option value="${dto.depth2 }">${dto.depth2 }</option>
+    		<option value="${dto.buseoName }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth3" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth3 }">
-    		<option value="${dto.depth3 }">${dto.depth3 }</option>
+    		<option value="${dto.buseoName }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth4" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth4 }">
-    		<option value="${dto.depth4 }">${dto.depth4 }</option>
+    		<option value="${dto.buseoName }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		
 		<select name="depth5" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			<option value="">없음</option>
    			<c:forEach var="dto" items="${depth5 }">
-    		<option value="${dto.depth5 }">${dto.depth5 }</option>
+    		<option value="${dto.buseoName }">${dto.buseoName }</option>
     		</c:forEach>
 		</select>
 		</td>
