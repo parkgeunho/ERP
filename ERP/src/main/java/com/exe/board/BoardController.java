@@ -1,11 +1,14 @@
 package com.exe.board;
 
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,12 +18,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
+
+//-------------- 게시판 -------------
+
 @Controller
 public class BoardController {
 	
 	@Autowired
 	@Qualifier("BoardDAO")
 	BoardDAO dao;
+	
+	
 	
 	@Autowired
 	MyUtil myUtil;
@@ -185,7 +194,7 @@ public class BoardController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      
-	      mav.setViewName("/boardboard/article");
+	      mav.setViewName("/board/article");
 	      
 	      mav.addObject("dto", dto);
 	      mav.addObject("param", param);
@@ -247,27 +256,15 @@ public class BoardController {
 		  return "redirect:/board/list.action?pageNum=" + pageNum;
 	 
 	  
+	  
+	 
+
+	 
+	
+	 
 	  }
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	  
 	 
 
 }

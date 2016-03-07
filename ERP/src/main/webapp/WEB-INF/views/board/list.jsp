@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
+
 
 <script type="text/javascript">
 
@@ -26,7 +26,7 @@
 
 </script>
 
-
+</head>
 <body style="font-size: 13px; font-style: 나눔고딕체;">
 
 <table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
@@ -50,7 +50,7 @@
 <table border="0" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
 		<td style="width: 1380px" align="right" colspan="6">
-			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/created.action';">
+			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
 		</td>
 		<td style="width: 20px;">
