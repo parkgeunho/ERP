@@ -4,26 +4,26 @@
 PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"      
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.board.BoardMapper">
+<mapper namespace="com.exe.board.BoardMapper">
 
    <select id="maxNum" resultType="int">
-      select nvl(max(boardNum),0) from board
+      select nvl(max(boardNum),0) from erpboard
    </select>
 
    <insert id="insertData" parameterType="com.exe.board.BoardDTO">
-      insert into board (boardNum,name,subject,content,hitCount,created) 
+      insert into erpboard (boardNum,name,subject,content,hitCount,created) 
       values (#{boardNum},#{name},#{subject},#{content},0,sysdate)
    </insert>
    
    <select id="getDataCount" parameterType="hashMap" resultType="int">
-      select nvl(count(*),0) from board where ${searchKey} like '%' || #{searchValue} || '%'
+      select nvl(count(*),0) from erpboard where ${searchKey} like '%' || #{searchValue} || '%'
    </select>
    
    <select id="getLists" parameterType="hashMap" resultType="com.exe.board.BoardDTO">
       select * from (
       select rownum rnum, data.* from (
       select boardNum,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created
-      from board where ${searchKey} like '%' || #{searchValue} || '%'
+      from erpboard where ${searchKey} like '%' || #{searchValue} || '%'
       order by boardNum desc) data)
    <![CDATA[
       where rnum>=#{start} and rnum<=#{end}
@@ -31,19 +31,19 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    </select>
    
    <update id="updateHitCount" parameterType="int">
-      update board set hitCount=hitCount+1 where boardNum=#{boardNum}
+      update erpboard set hitCount=hitCount+1 where boardNum=#{boardNum}
    </update>
    
    <select id="getReadData" parameterType="int" resultType="com.exe.board.BoardDTO">
-      select boardNum,name,subject,content,hitCount,created from board where boardNum=#{boardNum}
+      select boardNum,name,subject,content,hitCount,created from erpboard where boardNum=#{boardNum}
    </select>
    
    <update id="updateData" parameterType="com.exe.board.BoardDTO">
-      update board set name=#{name},subject=#{subject},content=#{content} where boardNum=#{boardNum}
+      update erpboard set name=#{name},subject=#{subject},content=#{content} where boardNum=#{boardNum}
    </update>
    
    <delete id="deleteData" parameterType="int">
-      delete board where boardNum=#{boardNum}
+      delete erpboard where boardNum=#{boardNum}
    </delete>
 
 </mapper>

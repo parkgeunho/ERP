@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <% String cp = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,12 +9,113 @@
 <title>인사카드 작성</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/join.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script type="text/javascript" src="/erp/resources/member/util.js"></script>
+
 
 <script type="text/javascript">
+	
+	//아이디 중복검사 ajax
+	function compareId(){
+		
+		$.ajax({
+			
+					url:"compareID",
+					type:'POST',
+					data : {compID : document.myForm.id.value},
+					
+					success: function(args){
+						$("#result").html(args);
+					},
+					error:function(e){
+		  				alert(e.responseText);
+		
+					}
+
+		});
+
+	}
+</script>
+
+<script type="text/javascript">
+	
+
 
 	function sendIt(){
 			
-			f = document.myForm;
+		f = document.myForm;
+		
+		str = f.name.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\n이름을 입력하세요. ");
+            f.name.focus();
+            return;
+        }
+        f.name.value = str;
+        
+        
+        if(!isValidJumin(f.jumin.value)) {
+            alert("\n정상적인 주민등록번호를 입력하세요. ");
+            f.jumin.focus();
+            return;
+        }
+        
+        
+        str = f.mPhone.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\n휴대전화를 입력하세요. ");
+            f.mPhone.focus();
+            return;
+        }
+        f.mPhone.value = str;
+        
+        
+        if(f.email.value) {
+	    	if(!isValidEmail(f.email.value)) {
+                alert("\n정상적인 E-Mail을 입력하세요. ");
+                f.email.focus();
+                return;
+	    	}
+        }
+        
+        str = f.id.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\n아이디를 입력하세요. ");
+            f.id.focus();
+            return;
+        }
+        f.id.value = str;
+        
+        str = f.pwd.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\비밀번호를 입력하세요. ");
+            f.pwd.focus();
+            return;
+        }
+        f.pwd.value = str;
+        
+        str = f.grade.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\직급을 선택 하세요. ");
+            f.grade.focus();
+            return;
+        }
+        f.grade.value = str;
+        
+        str = f.file.value;
+    	str = str.trim();
+        if(!str) {
+            alert("\사진을 업로드 하세요. ");
+            f.file.focus();
+            return;
+        }
+        f.file.value = str;
+        
+		
 
 		f.action = "<%=cp%>/created_ok.action";
 		f.submit();
@@ -44,20 +146,23 @@
 
 </table>
 
-<table border="0" width="1000"align="center" style="margin: 20px;">
+<table border="0" width="1000"align="center" style="margin-top: 20px; margin-bottom: 0px;">
 	<tr height="40">
-		<td width="100" align="center" style="font-size: 11pt;font-weight: bold;">사 진 업로드 : </td>
-		<td width="400" colspan="3"><input type="file" name="upload" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;"></td>
+		<td width="100" align="center" style="font-size: 12pt;font-weight: bold;">사 진 업로드 : </td>
+		<td width="400" colspan="3"><input type="file" name="file" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;"></td>
 		<td width="500" align="right" colspan="2">
 		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; font-weight: bold;" class="btn btn-default" onclick="sendIt();">등록하기</button>
 		<button type="button" style="width: 50px; height: 30px; font-size: 10pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/insa.action';">취소</button>
 		</td>
-		
-	</tr>
 </table>
 
-<table border="0" width="1000"align="center" style="margin: 20px ; border-radius : 10px; background-color: #eeeeee">
-	
+
+<table border="0" width="1000" align="center" style="margin: 0px;">
+	<tr>
+	<td height="40" style=""><div id="result">${compID}</div></td>
+	</tr>
+</table>
+<table border="0" width="1000"align="center" style="margin:0px ; border-radius : 10px; background-color: #eeeeee">
 	<tr height="40">
 		<td width="100" class="color" align="center">이 름</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="name" placeholder="ex) 홍 길 동" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
@@ -78,17 +183,64 @@
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">부 서</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="depth5" placeholder="ex) 사업부" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center">
+		<select name="depth1" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth1 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+		</select>
+		
+		<select name="depth2" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth2 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+		</select>
+		
+		<select name="depth3" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth3 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+		</select>
+		
+		<select name="depth4" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth4 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+		</select>
+		
+		<select name="depth5" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth5 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+		</select>
+		</td>
 		<td width="100" class="color" align="center">E-Mail</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">아이디</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150" ><input type="text" class="form-control" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;" onkeyup="compareId();"></td>
 		<td width="100" class="color" align="center">비밀번호</td>
 		<td width="150" ><input type="text" class="form-control" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
 		<td width="100" class="color" align="center">직 급</td>
-		<td width="150"><input type="text" class="form-control" id="usr" name="grade" placeholder="ex) 대리" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150">
+		<select name="grade" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 150px;">
+   			<option value="">선택</option>
+    		<option value="사원">사원</option>
+    		<option value="대리">대리</option>
+    		<option value="과장">과장</option>
+    		<option value="차장">차장</option>
+    		<option value="실장">실장</option>
+    		<option value="부장">부장</option>
+    		<option value="부사장">부사장</option>
+    		<option value="사장">사장</option>
+		</select>
+		</td>
 		<td width="100" class="color" align="center">직 책</td>
 		<td width="150"><input type="text" class="form-control" id="usr" name="duty" placeholder="ex) 팀장" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
 	</tr>
