@@ -2,6 +2,7 @@ package com.exe.member;
 
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -93,11 +94,6 @@ public class MemberController {
 			String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 			String newFileName = dto.getNum() + dto.getName() + fileExt;
 			String fullFileName = path + File.separator + newFileName;
-			
-			//사진형식 아닌 것들 제외하기
-			
-			if(fileExt!="")
-			
 			
 			
 			//폴더에 업로드

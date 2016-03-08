@@ -8,7 +8,7 @@
 
 
 
-<table border="1px solid;" >
+<table style= "border:1px solid;">
 	<Tr height="30px;">
 		<td width="110px;">사원번호</td>
 		<td width="80px;">이름</td>
