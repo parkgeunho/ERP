@@ -24,7 +24,7 @@
 	<c:forEach var="dto" items="${lists}">
 		<tr height="30px;" >
 			<td width="110px;">${dto.usernum }</td>
-			<td width="8px;">${dto.name }</td>
+			<td width="8px;"><a href="<%=cp%>/insaView.action?num=${dto.num}">${dto.name }</a></td>
 			<td width="100px;">${dto.id }</td>
 			<td width="110px;">${dto.oPhone }</td>
 			<td width="110px;">${dto.mPhone }</td>

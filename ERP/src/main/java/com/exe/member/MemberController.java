@@ -2,7 +2,6 @@ package com.exe.member;
 
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -112,6 +111,8 @@ public class MemberController {
 			String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 			String newFileName = dto.getNum() + dto.getName() + fileExt;
 			String fullFileName = path + File.separator + newFileName;
+			
+			//사진 파일 이름 형식 바꾸기
 			
 			//폴더에 업로드
 			f = new File(fullFileName);
