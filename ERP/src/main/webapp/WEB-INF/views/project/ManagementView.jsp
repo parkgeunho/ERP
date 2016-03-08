@@ -105,7 +105,7 @@ function buseoManagement(){
 	
 	
 	<!-- 왼쪽 부서 관련  -->
-	<div style="width: 500px;float: left;">
+	<div style="width: 350px;float: left;">
 		<div class="buseo" >
 		부서
 		</div>
@@ -240,15 +240,15 @@ function buseoManagement(){
 		</div>
 	</div>
 
-	<div style="width: 1340px; height: 740px;float: left;">
+	<div style="width: 1490px; height: 740px;float: left;">
 		
 		<div class="buseo">
 		사원정보
 		</div>
 		
 		
-		<div style=" height: 740px; width: 1340px;">
-			<div style="margin-top:50px; margin-left: 570px; height: 40px; float: left;">
+		<div style=" height: 740px; width: 1490px;">
+			<div style="margin-top:50px; margin-left: 660px; height: 40px; float: left;">
 			<input type="text" name="" style="height: 16px; float: left;">
 			
 			<span style="margin-left: 5px; float: left;">

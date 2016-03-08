@@ -2,11 +2,12 @@ package com.exe.member;
 
 
 import java.io.File;
-import java.util.Calendar;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.exe.insa.BuseoDTO;
+import com.exe.insa.InsaDAO;
 
 @Controller
 public class MemberController {
@@ -25,7 +27,9 @@ public class MemberController {
 	@Qualifier("memberDAO")
 	MemberDAO dao;
 	
-	
+	@Autowired
+	@Qualifier("insaDAO")
+	InsaDAO insaDAO;
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
@@ -38,18 +42,49 @@ public class MemberController {
 	public String joinView(HttpServletRequest request,HttpServletResponse response) {
 		
 		//이부분에서 부서명(depth1~5 셋어드리뷰트하기)
+		HttpSession session = request.getSession();
 		
-		List<BuseoDTO> depth1 = dao.depth1();
-		List<BuseoDTO> depth2 = dao.depth2();
-		List<BuseoDTO> depth3 = dao.depth3();
-		List<BuseoDTO> depth4 = dao.depth4();
-		List<BuseoDTO> depth5 = dao.depth5();
+		int buseoNum = Integer.parseInt((String) session.getAttribute("buseoNum"));
 		
-		request.setAttribute("depth1", depth1);
-		request.setAttribute("depth2", depth2);
-		request.setAttribute("depth3", depth3);
-		request.setAttribute("depth4", depth4);
-		request.setAttribute("depth5", depth5);
+		
+		BuseoDTO dto = insaDAO.readBuseo(buseoNum);
+		
+		int max = dto.getDepth();
+		
+		for(int i = max; i>=0 ; i--){
+			
+			if(i==4){
+				
+				request.setAttribute("depth5", dto);
+			}
+			if(i==3){
+				
+				request.setAttribute("depth4", dto);
+			}
+			if(i==2){
+			
+				request.setAttribute("depth3", dto);
+			}
+			if(i==1){
+				
+				request.setAttribute("depth2", dto);
+			}
+			if(i==0){
+				
+				request.setAttribute("depth1", dto);
+			}
+			dto = insaDAO.readBuseo(dto.getParent());
+		}
+		
+		
+		
+	
+		
+
+		
+
+		
+	
 		
 		
 		
@@ -58,7 +93,15 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/insaView.action" , method = {RequestMethod.POST,RequestMethod.GET})
-	public String insaView() {
+	public String insaView(HttpServletRequest request,HttpServletResponse response) {
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		request.setAttribute("dto", dto);
+		
+		
 		
 		
 		return "member/insaView";
@@ -94,6 +137,7 @@ public class MemberController {
 			String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 			String newFileName = dto.getNum() + dto.getName() + fileExt;
 			String fullFileName = path + File.separator + newFileName;
+			
 			
 			//폴더에 업로드
 			f = new File(fullFileName);

@@ -31,7 +31,7 @@
 
 .button{
 	
-	 margin-left: 350px;
+	 margin-left: 430px;
 	 background-color: #49B5F4;
 	 width: 100px;
 	 border-radius: 5px;
@@ -67,6 +67,16 @@
 	font-weight: bold;
 	
 }
+
+.op td{
+	
+	border-top-left-radius : 5px;
+	border-top-right-radius : 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+}
+
 
 .sawon{
 	
