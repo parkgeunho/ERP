@@ -44,29 +44,46 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		
 		int buseoNum = Integer.parseInt((String) session.getAttribute("buseoNum"));
+		
+		
 		BuseoDTO dto = insaDAO.readBuseo(buseoNum);
 		
-		if(dto.getDepth()!=4){
-			int parent = dto.getParent();
-			for(int i = dto.getDepth(); i<=0 ; i--){
-				
-				
-			}
+		int max = dto.getDepth();
+		
+		for(int i = max; i>=0 ; i--){
 			
+			if(i==4){
+				
+				request.setAttribute("depth5", dto);
+			}
+			if(i==3){
+				
+				request.setAttribute("depth4", dto);
+			}
+			if(i==2){
+			
+				request.setAttribute("depth3", dto);
+			}
+			if(i==1){
+				
+				request.setAttribute("depth2", dto);
+			}
+			if(i==0){
+				
+				request.setAttribute("depth1", dto);
+			}
+			dto = insaDAO.readBuseo(dto.getParent());
 		}
 		
 		
-		List<BuseoDTO> depth1 = dao.depth1();
-		List<BuseoDTO> depth2 = dao.depth2();
-		List<BuseoDTO> depth3 = dao.depth3();
-		List<BuseoDTO> depth4 = dao.depth4();
-		List<BuseoDTO> depth5 = dao.depth5();
 		
-		request.setAttribute("depth1", depth1);
-		request.setAttribute("depth2", depth2);
-		request.setAttribute("depth3", depth3);
-		request.setAttribute("depth4", depth4);
-		request.setAttribute("depth5", depth5);
+	
+		
+
+		
+
+		
+	
 		
 		
 		

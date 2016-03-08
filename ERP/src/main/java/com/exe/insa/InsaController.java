@@ -42,6 +42,12 @@ public class InsaController {
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
 	
 		
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", "1");
+		
+		
+		
 		List<BuseoDTO> lists = insaDAO.buseoList();
 		
 		ListIterator<BuseoDTO> it = lists.listIterator();
@@ -63,7 +69,7 @@ public class InsaController {
 			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
-			System.out.println(vo.getReplyNum());
+			
 			
 			hMap.put("replyNum", vo.getReplyNum());
 			insaDAO.updateReply(hMap);
@@ -150,7 +156,7 @@ public class InsaController {
 	
 		
 		Integer buseoNum = Integer.parseInt(request.getParameter("num"));
-		System.out.println(buseoNum);
+		
 		if(buseoNum.equals(0) || buseoNum.equals(null)){
 			
 			
@@ -168,7 +174,7 @@ public class InsaController {
 				return "read-error";
 			}
 			dto = insaDAO.readData(buseoNum);
-			System.out.println(dto.getGroupNum());
+	
 			Map<String, Object> hMap = new HashMap<String, Object>();
 		      hMap.put("groupNum", dto.getGroupNum());
 		      hMap.put("orderNo", dto.getOrderNo());
@@ -290,7 +296,7 @@ public class InsaController {
 			}	
 			
 		}
-		System.out.println("왜 안뜨니 ");
+		
 		
 		
 		
@@ -302,7 +308,7 @@ public class InsaController {
 		
 		int size = lists.size();
 		int max = 15;
-		System.out.println("사이즈 : "+size);
+		
 		
 		request.setAttribute("max", max);
 		request.setAttribute("lists", lists);

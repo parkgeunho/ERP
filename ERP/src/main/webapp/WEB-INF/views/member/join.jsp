@@ -185,38 +185,38 @@
 		<td width="100" class="color" align="center">부 서</td>
 		<td width="400" colspan="3" align="center">
 		<select name="depth1" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
-   			<option value="">없음</option>
-   			<c:forEach var="dto" items="${depth1 }">
-    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
-    		</c:forEach>
+   			
+   			
+    		<option value="${depth1.buseoNum }"  selected="selected">${depth1.buseoName }</option>
+    		
 		</select>
 		
 		<select name="depth2" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
-   			<option value="">없음</option>
-   			<c:forEach var="dto" items="${depth2 }">
-    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
-    		</c:forEach>
+   			
+   			
+    		<option value="${depth2.buseoNum }"  selected="selected">${depth2.buseoName }</option>
+    		
 		</select>
 		
 		<select name="depth3" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
-   			<option value="">없음</option>
-   			<c:forEach var="dto" items="${depth3 }">
-    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
-    		</c:forEach>
+   			
+   			
+    		<option value="${depth3.buseoNum }"  selected="selected">${depth3.buseoName }</option>
+    		
 		</select>
 		
 		<select name="depth4" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
-   			<option value="">없음</option>
-   			<c:forEach var="dto" items="${depth4 }">
-    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
-    		</c:forEach>
+   			
+   			
+    		<option value="${depth4.buseoNum }"  selected="selected">${depth4.buseoName }</option>
+    		
 		</select>
 		
 		<select name="depth5" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
-   			<option value="">없음</option>
-   			<c:forEach var="dto" items="${depth5 }">
-    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
-    		</c:forEach>
+   		
+   			
+    		<option value="${depth5.buseoNum }" selected="selected">${depth5.buseoName }</option>
+    		
 		</select>
 		</td>
 		<td width="100" class="color" align="center">E-Mail</td>
