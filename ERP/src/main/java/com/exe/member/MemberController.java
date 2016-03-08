@@ -112,8 +112,62 @@ public class MemberController {
 		
 		return "redirect:/insa";
 	}
+	
+	@RequestMapping(value = "/compareID" , method = {RequestMethod.POST})
+	public String compareID(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		
+		
+		String compID = request.getParameter("compID");
+		System.out.println(compID);
+		
+		String id = dao.idOk(compID);
+		
+		
+		
+		
+		if(id==null || id.equals("")){
+		String result = "ok";
+			
+		request.setAttribute("result", result);
+			
+			
+			return "member/compareID";
+		}
+		
+		
 
+		if (dao.idOk(compID).equals(compID)) {
 
+			String result = "no";
+
+			request.setAttribute("result", result);
+
+			return "member/compareID";
+		}
+		
+		return "member/compareID";
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
