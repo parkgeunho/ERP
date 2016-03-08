@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
+
 
 <script type="text/javascript">
 
@@ -26,7 +26,7 @@
 
 </script>
 
-
+</head>
 <body style="font-size: 13px; font-style: 나눔고딕체;">
 
 <table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
@@ -50,7 +50,7 @@
 <table border="0" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
 		<td style="width: 1380px" align="right" colspan="6">
-			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/created.action';">
+			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
 		</td>
 		<td style="width: 20px;">
@@ -80,49 +80,7 @@
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>	
 	
-	<tr style="height: 30px; background-color: ">
-		<td style="width: 100px" align="center" class="boardnum">No</td>
-		<td style="width: 750px;" align="center" class="subject">제목
-		</td>
-		
-		<td style="width: 150px;" align="center" class="name">작성자
-		</td>
-		
-		<td style="width: 150px;" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px;" align="center" class="file">
-			<img alt="" src="/erp/resources/image/file001.png">		
-		</td>
-		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">${dto.hitCount }
-		</td>
-	
-	</tr>	
-	
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
-	</tr>
-	
-	<tr style="height: 30px; background-color: ">
-		<td style="width: 100px" align="center" class="boardnum">No</td>
-		<td style="width: 750px;" align="center" class="subject">제목
-		</td>
-		
-		<td style="width: 150px;" align="center" class="name">작성자
-		</td>
-		
-		<td style="width: 150px;" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px;" align="center" class="file">
-			<img alt="" src="/erp/resources/image/file001.png">		
-		</td>
-		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
-		</td>
-	
-	</tr>	
+
 	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>
@@ -157,7 +115,7 @@
 	</tr>
 	
 	<tr style="height: 55px;">
-		<td style="width: 1400px;">
+		<td style="width: 1400px;" align="center">
 	<p>
 		<c:if test="${dataCount!=0 }">
 			${pageIndexList }

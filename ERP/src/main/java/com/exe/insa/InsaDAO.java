@@ -1,9 +1,13 @@
 package com.exe.insa;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.exe.member.MemberDTO;
 
 
 
@@ -16,97 +20,98 @@ public class InsaDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
-	
-	
-	
-	public List<BuseoDTO> getBuseo(){
 		
+	public int maxNum(){
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.buseolist");
+		int result = sessionTemplate.selectOne("com.exe.insa.maxNum");
+		return result;
+	}
+	
+	public void buseoCreated(BuseoDTO dto){
+		
+		sessionTemplate.insert("com.exe.insa.buseoCreated", dto);
+		
+	}
+	
+	public List<BuseoDTO> buseoList(){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.list");
 		
 		return lists;
 		
 	}
-	
-	public List<BuseoDTO> depth1(){
+	public int replyNum(Map<String, Object> hMap){
 		
+		int result = sessionTemplate.selectOne("com.exe.insa.replyNum",hMap);
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth1");
-		
-		return lists;
+		return result;
 		
 	}
 	
-	public List<BuseoDTO> depth1etc(){
+	public void updateReply(Map<String, Object> hMap){
 		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth1etc");
-		
-		return lists;
+		sessionTemplate.update("com.exe.insa.setReplyNum", hMap);
 		
 	}
 	
-	public List<BuseoDTO> depth2(){
+	public BuseoDTO readData(int buseoNum){
 		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth2");
-		
-		return lists;
+		BuseoDTO dto = sessionTemplate.selectOne("com.exe.insa.ReadData", buseoNum);
+		return dto;
+	}
+	
+	public void updateOrder(Map<String, Object> hMap){
+		sessionTemplate.update("com.exe.insa.orderNoUpdate",hMap);
 		
 	}
-	public List<BuseoDTO> depth2etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth2etc");
-		
+	
+	public List<BuseoDTO> getGroup(){
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.group");
 		return lists;
-		
 	}
-	public List<BuseoDTO> depth3(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth3");
-		
+	
+	public List<BuseoDTO> getDepth(){
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth");
 		return lists;
 		
 	}
 	
-	public List<BuseoDTO> depth3etc(){
+	public void deleteBuseo(int buseoNum){
+		sessionTemplate.delete("com.exe.insa.buseoDelete", buseoNum);
+	}
+	
+	public void updateBuseo(BuseoDTO dto){
 		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth3etc");
-		
-		return lists;
+		sessionTemplate.update("com.exe.insa.buseoUpdate",dto);
+	}
+	
+	public BuseoDTO readBuseo(int buseoNum){
+		BuseoDTO dto =  sessionTemplate.selectOne("com.exe.insa.readBuseo", buseoNum);
+		return dto;
 		
 	}
-	public List<BuseoDTO> depth4(){
+	
+	public List<MemberDTO> getMemberList(int start, int end,int buseoNum){
 		
 		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth4");
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		
+		params.put("start", start);
+		params.put("end", end);
+		params.put("buseoNum", buseoNum);
+		
+		
+		
+		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.insa.memberList",params);
 		return lists;
+	}
+	
+	public int dataCount(int buseoNum){
 		
+		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",buseoNum);
+		return result;
 	}
 
-	public List<BuseoDTO> depth4etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth4etc");
-		
-		return lists;
-		
-	}
-	
-	
-	public List<BuseoDTO> depth5(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth5");
-		
-		return lists;
-		
-	}
-	
 
 
 }

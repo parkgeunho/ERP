@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String cp = request.getContextPath();
+	int restDiv = (Integer)request.getAttribute("restDiv");
 
 	
 %>
@@ -11,7 +12,66 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="/erp/resources/insa/jquery.session.js"></script>
+<script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
+
+<script>
+$(document).ready(function(){
+	/* $(".content").mCustomScrollbar(); */
+	
+		    $.ajax({
+                    url:'memberList',
+                    type:'POST',
+                    
+                    error:function(args){
+                        
+                    },
+                    success: function(args){
+                    	 $("#memberList").html(args);                           
+                    }
+	    });
+
+	
+	
+	
+
+	
+	$('[id^="ch-"]').click(function(){
+		
+		alert(this.id);
+		var num= $('.num'+this.id).val();
+		alert(num);
+		
+	});
+	
+	
+	
+	
+    $('[id^="fold-"]').click(function(){
+    	
+    	
+       
+         var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+          $(this).attr('src',src);
+        
+        var obj = $('.'+ this.id);
+        
+        if(obj.css('display')=='none')
+           obj.show();
+        else
+           obj.hide(); 
+        
+     }); 
+
+});
+</script>
+
+
+
+
+
 
 <script type="text/javascript">
 function buseoManagement(){
@@ -24,24 +84,7 @@ function buseoManagement(){
 </script>
 
 
-<script>
-$(document).ready(function(){
-	
-	$('[id^="dep-"]').click(function(){
-		
-     var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
-     $(this).attr('src',src);
- 
-		var obj = $('.'+ this.id);
-		
-		if(obj.css('display')=='none')
-			obj.show();
-		else
-			obj.hide();
-	});
-	
-});
-</script>
+
 
 </head>
 <body>
@@ -53,111 +96,137 @@ $(document).ready(function(){
 		<div class="buseo" >
 		부서
 		</div>
-		<div style="height: 740px; overflow:scroll; " >
-			
-		<c:forEach var="depth1" items="${depth1}">
-			
-			<c:forEach var="buseo" items="${buseoLists}">
-				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1}">
+		<div>
+			<c:forEach var="parent" items="${parent }">
+				<c:forEach var="depth0" items="${lists }">
+					<c:choose>
+					
+					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 					<div>
-					<img id="dep-${depth1.depth1 }" src="/erp/resources/image/minus.png">
-					<label id="edit-${depth1.depth1}" >${buseo.depth1 }</label>
-					<input type="hidden" class="edit-${depth1.depth1}" value="depth1">
-					
+					<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
+					<label id="ch-${depth0.buseoNum}">${depth0.buseoName }</label>
+					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
 					</div>
-				</c:if>
-			</c:forEach>
-			
-			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
-			<div class="dep-${depth1.depth1 }">
-				<!-- 두번째 부서 명 출력 -->
-				<c:set var="dept2" value="1"/>
-				<c:forEach var="depth2" items="${depth2}">
-					
-					<c:set var="test" value="${depth2.depth2}"/> <!-- 두번째 부서중에 하위 부서가 있는 지 없는지를 구분 하기 위한 조건문 -->
-						<c:forEach var="dep2" items="${depth2etc}">
-							<c:if test="${test==dep2.depth2}">
-								<c:set var="test" value="etc"/>
-							</c:if>						
-						</c:forEach>
-						<c:forEach var="buseo" items="${buseoLists}">
+						<div class="fold-${depth0.buseoNum}">
+						
+						
+						<c:forEach var="depth1" items="${lists }">
+										
 							<c:choose>
-								<c:when test="${depth2.depth2==buseo.depth2 && test=='etc' &&buseo.depth3=='0' }">
-									<div style="margin-left: 20px;">
-									<img id="dep-${buseo.depth2 }" src="/erp/resources/image/minus.png">
-									${buseo.depth2 }
-									</div>
-									<div class="dep-${buseo.depth2 }" style="display: block;">
-										<c:forEach var="depth3" items="${depth3 }">
-											<c:set var="test" value="${depth3.depth3 }"/>
-											<c:forEach var="dep3" items="${depth3etc }">
-												<c:if test="${test==dep3.depth3 }">
-													<c:set var="test" value="etc"/>
-												</c:if>
-											</c:forEach>
-											<c:forEach var="buseo" items="${buseoLists}">
-												<c:choose>
-													<c:when test="${buseo.depth2==depth2.depth2 && buseo.depth3==depth3.depth3 && test=='etc' && buseo.depth4=='0' }">
-														<div style="margin-left: 40px;">
-														<img id="dep-${buseo.depth3 }" src="/erp/resources/image/minus.png">${buseo.depth3}</div>
-													<div class="dep-${buseo.depth3 }">
-														<c:forEach var="depth4" items="${depth4}">
-															<c:set var="test" value="${depth4.depth4 }"/>
-															<c:forEach var="dep4" items="${depth4etc }">
-															<c:if test="${test==dep4.depth4 }">
-																<c:set var="test" value="etc"/>
-															</c:if>
-															</c:forEach>
-															<c:forEach var="buseo" items="${buseoLists}">
-																<c:choose>
-																	<c:when test="${buseo.depth3==depth3.depth3&& buseo.depth4==depth4.depth4 && test=='etc' &&buseo.depth5=='0' }">
-																		<div style="margin-left: 60px;">
-																		<img id="dep-${buseo.depth4 }" src="/erp/resources/image/minus.png">${buseo.depth4 }
-																		</div>
-																		<div class="dep-${buseo.depth4 }">
-																			<c:forEach var="depth5" items="${depth5}">
-																				<c:forEach var="buseo" items="${buseoLists}">
-																					<c:if test="${buseo.depth4==depth4.depth4 && buseo.depth5==depth5.depth5 }">
-																					<div style="margin-left: 80px;">${buseo.depth5 }</div>
-																					</c:if>
-																				</c:forEach>
-																			</c:forEach>
-																		</div>
-																	</c:when>
-																	<c:when test="${buseo.depth3==depth3.depth3&& buseo.depth4==depth4.depth4 && test!='etc' &&buseo.depth5=='0' }">
-																		<div style="margin-left:60px;">${buseo.depth4 }</div>
-																	</c:when>
-																</c:choose>															
-															</c:forEach>
+							
+							
+							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
+								<div style="margin-left: 20px;">
+								<img id="fold-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
+								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
+								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
+								</div>
+								<div class="fold-${depth1.buseoNum}">
+								
+								
+									<c:forEach var="depth2" items="${lists}">
+																		
+									<c:choose>
+									
+									
+										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
+											<div style="margin-left: 40px;">
+											<img id="fold-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
+											
+											<label id="ch-${depth2.buseoNum }">${depth2.buseoName }</label>
+											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
+											</div>
+											<div class="fold-${depth2.buseoNum}">
+											
+											
+												<c:forEach var="depth3" items="${lists }" >
+												
+													<c:choose>
+													
+													
+													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
+														<div style="margin-left: 60px;">
+														<img id="fold-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
+														<label id="ch-${depth3.buseoNum }">${depth3.buseoName } 확인</label>
+														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
+														
+														</div>
+														<div class="fold-${depth3.buseoNum}">
+												
+														<c:forEach var="depth4" items="${lists }">
+														
+															<c:choose>
+															
+																<c:when test="${depth3.buseoNum==depth4.parent }">
+																	<div style="margin-left: 80px;">
+																	<label id="ch-${depth4.buseoNum }">${depth4.buseoName }, ${depth4.buseoNum } ,${depth3.buseoNum } 화긴</label>
+																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
+																	</div>
+																</c:when>
+															</c:choose>
+														
 														</c:forEach>
-													</div>	
+														</div>
 													</c:when>
 													
-													<c:when test="${buseo.depth2==depth2.depth2 && buseo.depth3==depth3.depth3 && test!='etc' && buseo.depth4=='0' }">
-														<div style="margin-left: 40px;">${buseo.depth3}</div>
+													
+													
+													
+													
+													
+													
+													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
+														<div style="margin-left: 60px;">
+														<label id="ch-${depth3.buseoNum }">${depth3.buseoName } ㅁ</label>
+														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
+														</div>
 													</c:when>
-												</c:choose>
-											
-											</c:forEach>
-										</c:forEach>
-									</div>
-								</c:when>
-								<c:when test="${depth2.depth2==buseo.depth2 && test!='etc' &&buseo.depth3=='0' }">
-									<div style="margin-left: 20px;">${buseo.depth2 }</div>
-								</c:when>
+												
+													</c:choose>
+												</c:forEach>
+											</div>
+										</c:when>
+										
+										
+										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
+											<div style="margin-left: 40px;">
+											<label id="ch-${depth2.buseoNum }">${depth2.buseoName } ㅠ</label>
+											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
+											</div>
+										</c:when>
+									</c:choose>
+								
+									</c:forEach>
+								</div>
+							</c:when>
+							
+							
+							
+							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
+								<div style="margin-left: 20px;">
+								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
+								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
+								</div>
+							</c:when>
+							
 							</c:choose>
 						</c:forEach>
-					
-					
+						</div>
+								
+					</c:when>
+					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
+					<div>
+					<label id="ch-${depth0.buseoNum }">${depth0.buseoName }</label>
+					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
+
+					</div>
+					</c:when>
+					</c:choose>
 				</c:forEach>
-				<!-- 두번째 부서 명 에다가 하위부서가 있으면 +를 붙여주기 -->
-			</div>
-			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
-			
-		</c:forEach>	
+			</c:forEach>
 		</div>
 	</div>
-	
+
 	<div style="width: 1340px; height: 740px;float: left;">
 		
 		<div class="buseo">
@@ -177,118 +246,8 @@ $(document).ready(function(){
 			<div class="button" style="float: left;height: 25px;margin-left: 10px;" onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</div>			
 			</div>
 			
-			<div style="padding-top :130px;">
-				<table style="margin-left: 20px;"  cellpadding="0" cellspacing="0">
+			<div id="memberList" style="padding-top :130px;">
 				
-					<tr style="height: 35px;"class="op">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					<tr style="height: 35px;" class="data">
-						<td style="width: 150px;">사원번호</td>
-						<td style="width: 200px;">이름</td>
-						<td style="width: 250px;">사내전화</td>
-						<td style="width: 250px;">휴대전화</td>
-						<td style="width: 100px;">직급</td>
-						<td style="width: 250px;">부서</td>
-						<td style="width: 105px;">근태</td>
-					</tr>
-					
-					
-					
-					
-					
-
-					
-				</table>
 			</div>
 			
 		</div>
