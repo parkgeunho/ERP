@@ -45,6 +45,8 @@
    <beans:property name="defaultEncoding" value="UTF-8"/>
    </beans:bean>
     
+       
+    
     
     <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
@@ -57,6 +59,10 @@
    <beans:bean id="BoardDAO" class="com.exe.board.BoardDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
+   
+   <!-- <beans:bean id="BoardFileDAO" class="com.exe.board.BoardFileDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
+   </beans:bean> -->
    
    
    
