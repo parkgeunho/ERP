@@ -13,6 +13,11 @@
 
 
 <script type="text/javascript">
+
+	
+
+
+
 	
 	//아이디 중복검사 ajax
 	function compareId(){
@@ -41,9 +46,26 @@
 
 
 	function sendIt(){
-			
-		f = document.myForm;
 		
+		f = document.myForm;
+
+		alert("1");
+
+		thumbext = document.getElementById("file").value;
+		
+
+		thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+
+		if(thumbext != "jpg" && thumbext != "png" &&  thumbext != "gif" &&  thumbext != "bmp" && thumbext != "jpeg"){ //확장자를 확인합니다.
+
+			alert('썸네일은 이미지 파일(jpg, jpeg, png, gif, bmp)만 등록 가능합니다.');
+
+			return;
+
+		}
+		
+			
+			
 		str = f.name.value;
     	str = str.trim();
         if(!str) {
@@ -141,95 +163,135 @@
 		<td align="center" style="font-size: 30pt; font-family: 고딕; font-weight: bold;">인사카드 작성</td>
 	</tr>
 	
-<tr><td height="2" width="1000" style="background-color: #bbbbbb;"></td></tr>
+<tr><td height="2" width="1100" style="background-color: #bbbbbb;"></td></tr>
 
 
 </table>
 
-<table border="0" width="1000"align="center" style="margin-top: 20px; margin-bottom: 0px;">
+<table border="0" width="1000"align="center" style="margin-top: 20px; margin-bottom: 0px;" cellpadding="0" cellspacing="0">
 	<tr height="40">
-		<td width="100" align="center" style="font-size: 12pt;font-weight: bold;">사 진 업로드 : </td>
-		<td width="400" colspan="3"><input type="file" name="file" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;"></td>
+		<td width="200" align="center" style="font-size: 14pt;font-weight: bold;">사 진 업로드 : </td>
+		<td width="300" colspan="3"><input type="file"  id="file" name="file" style="height: 30px; font-size: 12pt; font-family: 고딕; width: 400px; font-weight: bold;  border: none;"></td>
 		<td width="500" align="right" colspan="2">
-		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; font-weight: bold;" class="btn btn-default" onclick="sendIt();">등록하기</button>
-		<button type="button" style="width: 50px; height: 30px; font-size: 10pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/insa.action';">취소</button>
+		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="sendIt();">등록하기</button>
+		<button type="button" style="width: 70px; height: 30px; font-size: 10pt; font-family: 고딕;" class="okbtn" onclick="javascript:location.href='<%=cp%>/insa.action';">취소</button>
 		</td>
 </table>
 
 
-<table border="0" width="1000" align="center" style="margin: 0px;">
+<table border="0" width="1000" style="margin: 0px;">
 	<tr>
 	<td height="40" style=""><div id="result">${compID}</div></td>
 	</tr>
 </table>
-<table border="0" width="1000"align="center" style="margin:0px ; border-radius : 10px; background-color: #eeeeee">
+<table border="0" align="center" style="margin:0px ; border-radius : 10px;" cellpadding="0">
 	<tr height="40">
 		<td width="100" class="color" align="center">이 름</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="name" placeholder="ex) 홍 길 동" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="name" placeholder="ex) 홍 길 동" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 95%;"></td>
 		<td width="100" class="color" align="center">주민번호</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="jumin" placeholder="ex) 123456-1234567" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="jumin" placeholder="ex) 123456-1234567" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">주 소</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="addr" placeholder="ex) 서울시 강남구 역삼동 ... " style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="addr" placeholder="ex) 서울시 강남구 역삼동 ... " style="height: 35px; font-size: 15pt; font-family: 고딕; width: 95%;"></td>
 		<td width="100" class="color" align="center">생 일</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="birth" placeholder="ex) 12월 25일" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="birth" placeholder="ex) 12월 25일" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">사내번호</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="oPhone" placeholder="ex) 070-1234-5678" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="oPhone" placeholder="ex) 070-1234-5678" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 95%;"></td>
 		<td width="100" class="color" align="center">휴대전화</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="mPhone" placeholder="ex) 010-1234-5678" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="mPhone" placeholder="ex) 010-1234-5678" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">부 서</td>
 		<td width="400" colspan="3" align="center">
+<<<<<<< HEAD
 		<select name="depth1" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			
    			
     		<option value="${depth1.buseoNum }"  selected="selected">${depth1.buseoName }</option>
     		
+=======
+		<select name="depth1" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth1 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+>>>>>>> refs/remotes/origin/master
 		</select>
 		
+<<<<<<< HEAD
 		<select name="depth2" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			
    			
     		<option value="${depth2.buseoNum }"  selected="selected">${depth2.buseoName }</option>
     		
+=======
+		<select name="depth2" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth2 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+>>>>>>> refs/remotes/origin/master
 		</select>
 		
+<<<<<<< HEAD
 		<select name="depth3" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			
    			
     		<option value="${depth3.buseoNum }"  selected="selected">${depth3.buseoName }</option>
     		
+=======
+		<select name="depth3" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth3 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+>>>>>>> refs/remotes/origin/master
 		</select>
 		
+<<<<<<< HEAD
 		<select name="depth4" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    			
    			
     		<option value="${depth4.buseoNum }"  selected="selected">${depth4.buseoName }</option>
     		
+=======
+		<select name="depth4" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth4 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+>>>>>>> refs/remotes/origin/master
 		</select>
 		
+<<<<<<< HEAD
 		<select name="depth5" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 80px;float: left;">
    		
    			
     		<option value="${depth5.buseoNum }" selected="selected">${depth5.buseoName }</option>
     		
+=======
+		<select name="depth5" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+   			<option value="">없음</option>
+   			<c:forEach var="dto" items="${depth5 }">
+    		<option value="${dto.buseoNum }">${dto.buseoName }</option>
+    		</c:forEach>
+>>>>>>> refs/remotes/origin/master
 		</select>
 		</td>
 		<td width="100" class="color" align="center">E-Mail</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="form-control" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">아이디</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;" onkeyup="compareId();"></td>
+		<td width="150" ><input type="text" class="dap_text_box" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;" onkeyup="compareId();"></td>
 		<td width="100" class="color" align="center">비밀번호</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150" ><input type="text" class="dap_text_box" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 90%;"></td>
 		<td width="100" class="color" align="center">직 급</td>
 		<td width="150">
-		<select name="grade" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 150px;">
+		<select name="grade" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 99%;">
    			<option value="">선택</option>
     		<option value="사원">사원</option>
     		<option value="대리">대리</option>
@@ -242,12 +304,12 @@
 		</select>
 		</td>
 		<td width="100" class="color" align="center">직 책</td>
-		<td width="150"><input type="text" class="form-control" id="usr" name="duty" placeholder="ex) 팀장" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="130"><input type="text" class="dap_text_box" id="usr" name="duty" placeholder="ex) 팀장" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 135px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">혈액형</td>
 		<td width="150" >
-		<select name="blood" class="form-control" id="usr" style="height: 35px; font-family: 고딕; width: 150px;">
+		<select name="blood" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 150px;">
    			<option value="">선택</option>
     		<option value="A">A</option>
     		<option value="B">B</option>
@@ -256,15 +318,15 @@
 		</select>
 		</td>
 		<td width="100" class="color" align="center">종 교</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="reli" placeholder="ex) 기독교" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150" ><input type="text" class="dap_text_box" id="usr" name="reli" placeholder="ex) 기독교" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 90%;"></td>
 		<td width="100" class="color" align="center">취 미</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="hobby" placeholder="ex) 농구" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="150" ><input type="text" class="dap_text_box" id="usr" name="hobby" placeholder="ex) 농구" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
 		<td width="100" class="color" align="center">근 태</td>
-		<td width="150" ><input type="text" class="form-control" id="usr" name="dal" placeholder="ex) 휴가" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;"></td>
+		<td width="130" ><input type="text" class="dap_text_box" id="usr" name="dal" placeholder="ex) 휴가" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 135px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">메 모</td>
-		<td width="400" colspan="7" ><textarea class="form-control" id="usr" name="memo" placeholder="ex) 특이사항" style="height: 200px; font-size: 15pt; font-family: 고딕; width: 900px;"></textarea></td>
+		<td width="400" colspan="8" ><textarea class="dap_text_box" id="usr" name="memo" placeholder="ex) 특이사항" style="height: 200px; font-size: 15pt; font-family: 고딕; width: 99%;"></textarea></td>
 	</tr>
 	
 	
