@@ -3,6 +3,8 @@ package com.exe.board;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-
+import org.springframework.web.multipart.MultipartRequest;
+import com.exe.board.FileManager;
 
 public class BoardFileController {
 
@@ -86,12 +89,12 @@ public class BoardFileController {
 				if(!f.exists())
 					f.mkdirs(); //directory 여러개일경우  ..  s안붙은건 한개만 올리때인데 잘 안쓴다
 				
-				if(uri.indexOf("write.action")!=-1){
+				if(uri.indexOf("created.action")!=-1){
 					
-					url = "/board/write.action";
+					url = "/board/created.action";
 					forward(req, resp, url);	
 					
-				}else if(uri.indexOf("/board/write_ok.do")!=-1){
+				}else if(uri.indexOf("/board/created_ok.do")!=-1){
 			  
 				//파일 업로드
 				/*String encType = "UTF-8";
@@ -99,12 +102,12 @@ public class BoardFileController {
 					
 				MultipartRequest mr = new MultipartRequest(req,
 						path, maxFileSize, encType,
-						new DefaultFileRenamePolicy());
-			  */
+						new DefaultFileRenamePolicy());*/
+			  
 				//DB에 저장
 				/*if(mr.getFile("upload")!=null){
 					
-					int maxNum = dao.getMaxNum();
+					int maxNum = filedao.getMaxNum();
 					
 					BoardFileDTO dto = new BoardFileDTO();
 					
@@ -112,11 +115,11 @@ public class BoardFileController {
 					dto.setSaveFileName(mr.getFilesystemName("upload"));
 					dto.setOriginalFileName(mr.getOriginalFileName("upload"));
 					
-					dao.insertData(dto);
+					filedao.insertData(dto);
 					
 				}
 				
-				url = cp + "/file/list.do";
+				url = cp + "/board/list.action";
 				resp.sendRedirect(url);
 				  
 			  
@@ -160,8 +163,8 @@ public class BoardFileController {
 				
 				
 				//이미지 넣기
-				String imagePath = cp + "/pds/saveFile";
-				req.setAttribute("imagePath", imagePath);
+				//String imagePath = cp + "/pds/saveFile";
+				//req.setAttribute("imagePath", imagePath);
 				
 			
 				//페이징 처리
@@ -191,7 +194,7 @@ public class BoardFileController {
 				//DB삭제
 				//filedao.deleteData(BoardNum);			
 						
-				url = cp + "/file/list.do";
+				url = cp + "/board/list.action";
 				resp.sendRedirect(url);
 				
 				

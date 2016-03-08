@@ -73,10 +73,12 @@ public class BoardController {
 	   }
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
-	      
+	     
 	      int maxNum = dao.getMaxNum();
 	      
-	      dto.setBoardNum(maxNum + 1);	      
+	     
+	      dto.setBoardNum(maxNum + 1);	  
+	      dto.setName("확ㅇ");  //이름값 
 	      
 	      dao.insertData(dto);
 	      
@@ -110,7 +112,7 @@ public class BoardController {
 	      
 	      int dataCount = dao.getDataCount(searchKey, searchValue);
 	      
-	      int numPerPage = 10;
+	      int numPerPage = 20;
 	      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 	      
 	      if(currentPage>totalPage)
@@ -150,9 +152,9 @@ public class BoardController {
 	   }
 	
 	 @RequestMapping(value="/board/article.action",method={RequestMethod.GET,RequestMethod.POST})
-	   /*public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{*/
+	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
-	   public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		    
 	      
 	      String cp = request.getContextPath();
@@ -241,7 +243,7 @@ public class BoardController {
 		  
 	  }
 	  
-	  @RequestMapping(value="/board/deleted.action",method={RequestMethod.GET,RequestMethod.POST})
+	  @RequestMapping(value="/board/delete.action",method={RequestMethod.GET,RequestMethod.POST})
 	  public String deleted(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));

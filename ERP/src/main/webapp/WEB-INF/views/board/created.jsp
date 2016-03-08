@@ -52,45 +52,50 @@ function sendIt(){
 		
 	}
 	f.subject.value = str;
+	f.action = "<%=cp%>/board/created_ok.action";
+	f.submit();
 	
-	str = f.content.value;
+	
+ 	str = CKEDITOR.instances.editor1.getData();
+	
 	str = str.trim();
+	
 	if(!str){
-		alert("\n내용을 입력하세요.");
+		alert("\n내용을 입력하세요." );
 		f.content.focus();
 		return;
 	}			
 	f.content.value = str;
 
-	f.action = "<%=cp%>/board/created_ok.action";
-	f.submit();
+	 
 
 }
 
 </script>
 
 </head>
-<body>
+<body style="font-style: 나눔고딕코딩;">
 
 
 <form action="" name="myForm" method="post">
-<table border="0" cellpadding="0" cellspacing="0" >
+<table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 40px; background: #D4D4D4">
-		<td colspan="3" style="width: 1400px;" align="left">공지사항	
+		<td colspan="3" style="width: 1400px; letter-spacing: 5px; font-size: 20px; 
+			right: 100px;" align="center">공지사항	
 		</td>	
 	</tr>
 	
-	<tr style="height: 5px;">
+	<tr style="height: 2px;">
 		<td colspan="3" style="width: 1400px;" align="right">
 			
 		</td>
 	</tr>
 
 
-	<tr style="height: 30px; background: #00D8FF" >
+	<tr style="height: 30px; background: #80F5FF" >
 		<td style="width: 200px; height: 22px; font-style: " align="center">제&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">
-			<input type="text" name="subject" style="width:1000px; height: 22px;">		
+			<input type="text" name="subject" style="width:1000px; height: 22px;"/>	
 		</td>	
 	</tr>
 	
@@ -109,28 +114,26 @@ function sendIt(){
 	
 	</tr>
 
-
-
 </table>
 
-	
-            <textarea name="content" id="editor1" rows="10" cols="80">
-                
-            </textarea>
-            <script>
-          CKEDITOR.replace( 
-           'editor1',
-           {
-            toolbar : 'Basic',     
-            filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
-            width : '96%',       //---넓이값
-            height : '500'        //---높이값
-           }
-          );
-            </script>
-	
 
-<table style="font-size: 15px;" border="0"  cellspacing="0" >	
+
+
+<table border="0" align="center">
+	<tr>
+		<td style="width: 1400px;">
+	
+<textarea class="ckeditor" name="content" id="editor1" rows="10" cols="80" style="height: 800px;"></textarea>
+	    
+		</td>
+	</tr>    
+</table>
+
+
+
+
+
+<table style="font-size: 15px;" border="0"  cellspacing="0" align="center">	
 	<tr style="width: 10px;">
 		<td></td>
 	</tr>
@@ -139,7 +142,7 @@ function sendIt(){
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
-			onclick="javasctipt:location.href='<%=cp%>/board/">파일찾기	
+			onclick="">파일찾기	
 		
 		<img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;" 
 			onclick="">삭제
@@ -173,9 +176,9 @@ function sendIt(){
 	</tr> 
 </table>
 
-<table border="0" >
+<table border="0" align="center">
 
-	<tr style="height: 1px; background: #B1B1B1">
+	<tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1400px;"></td>
 	</tr>
 	
@@ -189,7 +192,7 @@ function sendIt(){
 		<td width="5"></td>	
 	</tr>
 	
-	<tr style="height: 1px; background: #B1B1B1">
+	<tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1400px;"></td>
 	</tr>
 
