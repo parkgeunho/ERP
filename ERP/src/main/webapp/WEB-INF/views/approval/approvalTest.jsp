@@ -6,246 +6,302 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<script src="/erp/resources/script/editor/ckeditor/ckeditor.js"></script>
-
-
-<title>Insert title here</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>jQuery UI Dialog - Modal form</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <style>
+    body { font-size: 62.5%; }
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { 
+    	border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+  </style>
+  
+  
+  
+  
+  
+  
+  
+<!--   <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-describedby="dialog-form" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 387.6px; top: 228.5px; left: 275px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Create new user</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div><div id="dialog-form" class="ui-dialog-content ui-widget-content" style="width: 366px; min-height: 0px; max-height: none; height: 202px;">
+  <p class="validateTips">All form fields are required.</p>
  
-<script language="JavaScript" type="text/javascript">
+  <form>
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
  
-	var count1 = 0;
-	var count2 = 0;
-	var count3 = 0;
-
-	//선택된 옵션을 삭제한다.
-
-	function removeOptionSelected(){
-		
-		var elSel = document.getElementById('selectX');
-		var i;
-		
-		for (i = elSel.length - 1; i>=0; i--) {
-			if (elSel.options[i].selected) {
-				elSel.remove(i);
-			}
-		}
-	}
- 
-
-	//마지막에 새로운 option을 추가한다.
-	function appendOptionLast(num){
-		  
-		var elOptNew = document.createElement('option');
-		elOptNew.text = 'Append' + num;
-		elOptNew.value = 'append' + num;
-		  
-		var elSel = document.getElementById('selectX');
-	    
-		try {
-			elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
-		}catch(ex) {
-			elSel.add(elOptNew); // IE only
-		}
+      Allow form submission with keyboard without duplicating the dialog button
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Create an account</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Cancel</span></button></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div></div> -->
+  
+  
+  
+  
+  
+  
+  <script>
+  
+  
+  $(function() {
 	  
-	}
+    var dialog, form,
+     
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      name = $( "#name" ),
+      email = $( "#email" ),
+      password = $( "#password" ),
+      allFields = $( [] ).add( name ).add( email ).add( password ),
+      tips = $( ".validateTips" );
+     
  
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+       
+    
+    
  
-	function menuMove(id,mode) {
-	 
-		var obj = document.getElementById(id);
-		var idx = obj.selectedIndex;
-	
-		if (idx < 0) 
-			idx = obj.selectedIndex = 0;
-	
-		var opt = obj.options[obj.selectedIndex];
-	
-		switch (mode) {
-			case 'first':
-			obj.insertBefore(opt, obj.options[0]);
-			break;
-			case 'last':
-			obj.appendChild(opt);
-			break;
-			case 'up':
-			if (idx > 0) 
-				obj.insertBefore(opt, obj.options[idx-1]);
-			break;
-			case 'down':
-			if (idx < obj.options.length-1) 
-				obj.insertBefore(obj.options[idx+1], opt);
-			break;
-			case 'move':
-				
-			break;
-		}
-	}
-	
-	function move(num) {
-		
-		var elSel = document.getElementById('selectX');
-		var i;
-		
-		for (i = elSel.length - 1; i>=0; i--) {
-			if (elSel.options[i].selected) {
-				elSel.remove(i);
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Length of " + n + " must be between " +
+          min + " and " + max + "." );
+        return false;
+      } else {
+        return true;
+      }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ 
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function addUser() {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+ 
+      valid = valid && checkLength( name, "username", 3, 16 );
+      valid = valid && checkLength( email, "email", 6, 80 );
+      valid = valid && checkLength( password, "password", 5, 16 );
+ 
+      valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+      valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+ 
+      if ( valid ) {
+        $( "#users tbody" ).append( 
+        	"<tr>" +
+        	"<td>" + name.val() + "</td>" +
+        	"<td>" + email.val() + "</td>" +
+          	"<td>" + password.val() + "</td>" +
+        	"</tr>" 
+        );
+        dialog.dialog( "close" );
+      }
+      return valid;
+    }
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      
+      
+      buttons: {
+      	"Create an account": addUser,
+      	Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      
+      
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );        
+      }
+      
+    });
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addUser();
+    });
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $( "#create-user" ).button().on( "click", function() {
+		dialog.dialog( "open" );
+    	/* $("<html>").dialog({
+			
+			modal:true,
+			open:function(){
+				$(this).load("approvalLine");
+			},
+			height:600,
+			width:900,
+			title:"결재선 지정",
+			close:function(){
+				alert('이히히히');
 			}
-		}		
-		
-		var elOptNew = document.createElement('option');
-		elOptNew.text = 'Append' + num;
-		elOptNew.value = 'append' + num;
-		  
-		var elSel = document.getElementById('select2');
-	    
-		try {
-			elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
-		}catch(ex) {
-			elSel.add(elOptNew); // IE only
-		}		
-		
-	}
-</script>
-
+		}); */
+    });
+    
+    
+    
+    
+    
+    
+  });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </head>
 <body>
-
-<form>
-
  
-<select id="selectX" size="30">
-	<option value="original1" selected="selected">Orig1</option>
-</select>
-<br/>
+<div id="dialog-form" title="Create new user">
+  
+  <p class="validateTips">All form fields are required.</p>
  
-<select id="select2" size="20">
-	<option value="op1" selected="selected">op1...........</option>
-</select>
+  <form>
+    <fieldset>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
  
-</form>
-
-<div>
-	<a href="javascript:menuMove('selectX','first')" >처음</a> |
-	<a href="javascript:menuMove('selectX','up')" >위로</a> |
-	<a href="javascript:menuMove('selectX','down')" >아래로</a> |
-	<a href="javascript:menuMove('selectX','last')" >마지막</a> |
-	<input type="button" value="삭제" onclick="removeOptionSelected();" />
-	<input type="button" value="추가" onclick="appendOptionLast(count2++);" />
-	<input type="button" value="이동" onclick="move(count3++);" />
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+  
 </div>
-
-
-<div style="height: 500px; overflow:scroll; " >
-			
-		<c:forEach var="depth1" items="${depth1}">
-			
-			<c:forEach var="buseo" items="${buseoLists}">
-				<c:if test="${buseo.depth2=='0' &&buseo.depth1==depth1.depth1}">
-					<div>
-					<img id="dep-${depth1.depth1 }" src="/erp/resources/image/minus.png">
-					<label id="edit-${depth1.depth1}" >${buseo.depth1 }</label>
-					<input type="hidden" class="edit-${depth1.depth1}" value="depth1">
-					
-					</div>
-				</c:if>
-			</c:forEach>
-			
-			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
-			<div class="dep-${depth1.depth1 }">
-				<!-- 두번째 부서 명 출력 -->
-				<c:set var="dept2" value="1"/>
-				<c:forEach var="depth2" items="${depth2}">
-					
-					<c:set var="test" value="${depth2.depth2}"/> <!-- 두번째 부서중에 하위 부서가 있는 지 없는지를 구분 하기 위한 조건문 -->
-						<c:forEach var="dep2" items="${depth2etc}">
-							<c:if test="${test==dep2.depth2}">
-								<c:set var="test" value="etc"/>
-							</c:if>						
-						</c:forEach>
-						<c:forEach var="buseo" items="${buseoLists}">
-							<c:choose>
-								<c:when test="${depth2.depth2==buseo.depth2 && test=='etc' &&buseo.depth3=='0' }">
-									<div style="margin-left: 20px;">
-									<img id="dep-${buseo.depth2 }" src="/erp/resources/image/minus.png">
-									${buseo.depth2 }
-									</div>
-									<div class="dep-${buseo.depth2 }" style="display: block;">
-										<c:forEach var="depth3" items="${depth3 }">
-											<c:set var="test" value="${depth3.depth3 }"/>
-											<c:forEach var="dep3" items="${depth3etc }">
-												<c:if test="${test==dep3.depth3 }">
-													<c:set var="test" value="etc"/>
-												</c:if>
-											</c:forEach>
-											<c:forEach var="buseo" items="${buseoLists}">
-												<c:choose>
-													<c:when test="${buseo.depth2==depth2.depth2 && buseo.depth3==depth3.depth3 && test=='etc' && buseo.depth4=='0' }">
-														<div style="margin-left: 40px;">
-														<img id="dep-${buseo.depth3 }" src="/erp/resources/image/minus.png">${buseo.depth3}</div>
-													<div class="dep-${buseo.depth3 }">
-														<c:forEach var="depth4" items="${depth4}">
-															<c:set var="test" value="${depth4.depth4 }"/>
-															<c:forEach var="dep4" items="${depth4etc }">
-															<c:if test="${test==dep4.depth4 }">
-																<c:set var="test" value="etc"/>
-															</c:if>
-															</c:forEach>
-															<c:forEach var="buseo" items="${buseoLists}">
-																<c:choose>
-																	<c:when test="${buseo.depth3==depth3.depth3&& buseo.depth4==depth4.depth4 && test=='etc' &&buseo.depth5=='0' }">
-																		<div style="margin-left: 60px;">
-																		<img id="dep-${buseo.depth4 }" src="/erp/resources/image/minus.png">${buseo.depth4 }
-																		</div>
-																		<div class="dep-${buseo.depth4 }">
-																			<c:forEach var="depth5" items="${depth5}">
-																				<c:forEach var="buseo" items="${buseoLists}">
-																					<c:if test="${buseo.depth4==depth4.depth4 && buseo.depth5==depth5.depth5 }">
-																					<div style="margin-left: 80px;">${buseo.depth5 }</div>
-																					</c:if>
-																				</c:forEach>
-																			</c:forEach>
-																		</div>
-																	</c:when>
-																	<c:when test="${buseo.depth3==depth3.depth3&& buseo.depth4==depth4.depth4 && test!='etc' &&buseo.depth5=='0' }">
-																		<div style="margin-left:60px;">${buseo.depth4 }</div>
-																	</c:when>
-																</c:choose>															
-															</c:forEach>
-														</c:forEach>
-													</div>	
-													</c:when>
-													
-													<c:when test="${buseo.depth2==depth2.depth2 && buseo.depth3==depth3.depth3 && test!='etc' && buseo.depth4=='0' }">
-														<div style="margin-left: 40px;">${buseo.depth3}</div>
-													</c:when>
-												</c:choose>
-											
-											</c:forEach>
-										</c:forEach>
-									</div>
-								</c:when>
-								<c:when test="${depth2.depth2==buseo.depth2 && test!='etc' &&buseo.depth3=='0' }">
-									<div style="margin-left: 20px;">${buseo.depth2 }</div>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-					
-					
-				</c:forEach>
-				<!-- 두번째 부서 명 에다가 하위부서가 있으면 +를 붙여주기 -->
-			</div>
-			<!-- 하위 목차 띄우기 시작 닫기를 위해 div로 감쌈 -->
-			
-		</c:forEach>	
-	</div>
-
-
+ 
+ 
+<div id="users-contain" class="ui-widget">
+  <h1>Existing Users:</h1>
+  <table id="users" class="ui-widget ui-widget-content">
+    <thead>
+      <tr class="ui-widget-header ">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John Doe</td>
+        <td>john.doe@example.com</td>
+        <td>johndoe1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button id="create-user">Create new user</button>
+ 
+ 
 </body>
 </html>
-
-
-<!-- <a href="javascript:'" onclick="window.open('http://localhost:8080/erp/approvalCreated','','width=800,height=900');">결재 상신</a>
-<input type="button" onclick="window.open('http://localhost:8080/erp/approvalCreated')"> -->
-
