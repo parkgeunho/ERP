@@ -11,16 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 public class BoardFileController {
 
 	@Qualifier("BoardFileDAO")
 	BoardFileDAO filedao;		  
 		  
-		  @RequestMapping("BoardFileController")
-		  /*public String fileUpload(@RequestParam("fileup")BoardFile file){
+		 /* @RequestMapping("BoardFileController")
+		  public String fileUpload(@RequestParam("fileup")BoardFile file){
 			  
 			  
 			  
@@ -34,8 +33,8 @@ public class BoardFileController {
 			  
 		  }
 		  
-		  public void setBoardFile(BoardFile boardFile)*/
-		  
+		  public void setBoardFile(BoardFile boardFile)
+		  */
 		  
 		  
 		  

@@ -29,7 +29,7 @@
 
 <title>Insert title here</title>
 
-<script type="text/javascript" src="/springweb/resources/js/util.js"></script>
+<script type="text/javascript" src="/ERP/src/resources/board/js/util.js"></script>
 
 <script type="text/javascript">
 
