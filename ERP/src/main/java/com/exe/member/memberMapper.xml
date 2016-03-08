@@ -27,23 +27,23 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="depth0" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=0
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=0
 	</select>
 	
 	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=1
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=1
 	</select>
 	
 	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=2
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=2
 	</select>
 	
 	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=3
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=3
 	</select>
 		
 	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
-		 select buseoName,buseoNum from buseo where depth=4
+		 select buseoName,buseoNum,replyNum,parent from buseo where depth=4
 	</select>
 	
 	
