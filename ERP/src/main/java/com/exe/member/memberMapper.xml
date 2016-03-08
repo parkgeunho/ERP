@@ -21,6 +21,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select id from insadb where id=#{id}
 	</select>
 	
+	<select id="readOne" parameterType="integer" resultType="com.exe.member.MemberDTO">
+		select * from insadb where num=#{num}
+	</select>
+	
 	
 	
 	

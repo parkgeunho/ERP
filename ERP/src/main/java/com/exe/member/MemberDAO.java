@@ -85,6 +85,15 @@ public class MemberDAO {
 		
 	}
 	
+	public MemberDTO readOne(int num){
+		
+		
+		MemberDTO dto = sessionTemplate.selectOne("com.exe.member.readOne",num);
+		
+		return dto;
+		
+	}
+	
 	
 	
 	

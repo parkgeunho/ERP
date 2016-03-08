@@ -93,7 +93,15 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/insaView.action" , method = {RequestMethod.POST,RequestMethod.GET})
-	public String insaView() {
+	public String insaView(HttpServletRequest request,HttpServletResponse response) {
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		request.setAttribute("dto", dto);
+		
+		
 		
 		
 		return "member/insaView";
