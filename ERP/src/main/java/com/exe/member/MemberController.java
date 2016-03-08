@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.exe.insa.BuseoDTO;
+import com.exe.insa.InsaDAO;
 
 @Controller
 public class MemberController {
@@ -25,7 +27,9 @@ public class MemberController {
 	@Qualifier("memberDAO")
 	MemberDAO dao;
 	
-	
+	@Autowired
+	@Qualifier("insaDAO")
+	InsaDAO insaDAO;
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
@@ -38,6 +42,20 @@ public class MemberController {
 	public String joinView(HttpServletRequest request,HttpServletResponse response) {
 		
 		//이부분에서 부서명(depth1~5 셋어드리뷰트하기)
+		HttpSession session = request.getSession();
+		
+		int buseoNum = Integer.parseInt((String) session.getAttribute("buseoNum"));
+		BuseoDTO dto = insaDAO.readBuseo(buseoNum);
+		
+		if(dto.getDepth()!=4){
+			int parent = dto.getParent();
+			for(int i = dto.getDepth(); i<=0 ; i--){
+				
+				
+			}
+			
+		}
+		
 		
 		List<BuseoDTO> depth1 = dao.depth1();
 		List<BuseoDTO> depth2 = dao.depth2();

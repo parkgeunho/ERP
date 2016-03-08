@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -237,6 +239,10 @@ public class InsaController {
 			
 			num="1";
 		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", num);
+		
 		int buseoNum = Integer.parseInt(num);
 		int currentPage = 1;
 		
