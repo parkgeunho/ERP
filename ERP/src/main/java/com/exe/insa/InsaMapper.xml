@@ -67,6 +67,13 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	
+	<update id="memberUpdate" >
+	
+	
+	</update>
+	
+	
 
 	<select id="memberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
 

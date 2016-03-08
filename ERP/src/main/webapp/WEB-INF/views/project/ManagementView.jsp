@@ -40,9 +40,22 @@ $(document).ready(function(){
 	
 	$('[id^="ch-"]').click(function(){
 		
-		alert(this.id);
+		
 		var num= $('.num'+this.id).val();
-		alert(num);
+	
+		
+			    $.ajax({
+		            url:'memberList',
+		            data:{num:num},
+		            type:'POST',
+		            
+		            error:function(args){
+		                alert("에러");
+		            },
+		            success: function(args){
+		            	 $("#memberList").html(args);                           
+		            }
+		});
 		
 	});
 	
@@ -147,7 +160,7 @@ function buseoManagement(){
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
 														<div style="margin-left: 60px;">
 														<img id="fold-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
-														<label id="ch-${depth3.buseoNum }">${depth3.buseoName } 확인</label>
+														<label id="ch-${depth3.buseoNum }">${depth3.buseoName }</label>
 														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														
 														</div>
@@ -159,7 +172,7 @@ function buseoManagement(){
 															
 																<c:when test="${depth3.buseoNum==depth4.parent }">
 																	<div style="margin-left: 80px;">
-																	<label id="ch-${depth4.buseoNum }">${depth4.buseoName }, ${depth4.buseoNum } ,${depth3.buseoNum } 화긴</label>
+																	<label id="ch-${depth4.buseoNum }">${depth4.buseoName }</label>
 																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
 																	</div>
 																</c:when>
@@ -177,7 +190,7 @@ function buseoManagement(){
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
 														<div style="margin-left: 60px;">
-														<label id="ch-${depth3.buseoNum }">${depth3.buseoName } ㅁ</label>
+														<label id="ch-${depth3.buseoNum }">${depth3.buseoName }</label>
 														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														</div>
 													</c:when>
@@ -190,7 +203,7 @@ function buseoManagement(){
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
 											<div style="margin-left: 40px;">
-											<label id="ch-${depth2.buseoNum }">${depth2.buseoName } ㅠ</label>
+											<label id="ch-${depth2.buseoNum }">${depth2.buseoName }</label>
 											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 										</c:when>

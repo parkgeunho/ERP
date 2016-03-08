@@ -226,21 +226,22 @@ public class InsaController {
 	}
 	
 	
+	//사원정보 아작스 리스트로 출력하기 위한것
 	@RequestMapping(value = "/memberList", method = {RequestMethod.GET,RequestMethod.POST})
 	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
 		
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
-		System.out.println("찍힘?!");
+		
 		if(num == null){
 			
 			num="1";
 		}
 		int buseoNum = Integer.parseInt(num);
 		int currentPage = 1;
-		System.out.println("찍힘?2!");
+		
 		int dataCount = insaDAO.dataCount(buseoNum);
-		System.out.println("찍힘?3!");
+		
 		int numPerPage = 15;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -258,23 +259,22 @@ public class InsaController {
 			BuseoDTO bDto = null;
 			if(mDto.getDepth1()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
-				System.out.println("얍"+mDto.getDepth1());
-				System.out.println("확인"+bDto.getBuseoName());
-				mDto.setDepth1(bDto.getBuseoName());
+			
+				mDto.setDepth1(bDto.getBuseoName()+" ▶ ");
 			}
 			if(mDto.getDepth2()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
-				mDto.setDepth2(bDto.getBuseoName());
+				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth3()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
-				mDto.setDepth3(bDto.getBuseoName());
+				mDto.setDepth3(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth4()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
-				mDto.setDepth4(bDto.getBuseoName());
+				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth5()!=null){
