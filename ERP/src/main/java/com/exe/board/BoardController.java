@@ -80,7 +80,7 @@ public class BoardController {
 	      
 	      dao.insertData(dto);
 	      
-	      return "redirect:/list.action";
+	      return "redirect:/board/list.action";
 	   }
 	 
 	 

@@ -29,6 +29,11 @@
 
 <title>Insert title here</title>
 
+<link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
+
+
+
 <script type="text/javascript" src="/ERP/src/resources/board/js/util.js"></script>
 
 <script type="text/javascript">
@@ -52,7 +57,7 @@ function sendIt(){
 	str = str.trim();
 	if(!str){
 		alert("\n내용을 입력하세요.");
-		f.name.focus();
+		f.content.focus();
 		return;
 	}			
 	f.content.value = str;
@@ -64,16 +69,14 @@ function sendIt(){
 
 </script>
 
-		
-
-
-
 </head>
 <body>
 
+
+<form action="" name="myForm" method="post">
 <table border="0" cellpadding="0" cellspacing="0" >
 	<tr style="height: 40px; background: #D4D4D4">
-		<td colspan="3" style="width: 1400px;" align="center">글 작성 게시판 명칭 뜨게 할것		
+		<td colspan="3" style="width: 1400px;" align="left">공지사항	
 		</td>	
 	</tr>
 	
@@ -110,8 +113,8 @@ function sendIt(){
 
 </table>
 
-	<form style="width: 1400px;">
-            <textarea name="editor1" id="editor1" rows="10" cols="80">
+	
+            <textarea name="content" id="editor1" rows="10" cols="80">
                 
             </textarea>
             <script>
@@ -120,12 +123,12 @@ function sendIt(){
            {
             toolbar : 'Basic',     
             filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
-           // width : '73.7%',       //---넓이값
+            width : '96%',       //---넓이값
             height : '500'        //---높이값
            }
           );
             </script>
-	</form>
+	
 
 <table style="font-size: 15px;" border="0"  cellspacing="0" >	
 	<tr style="width: 10px;">
@@ -135,9 +138,11 @@ function sendIt(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
-		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" onclick="">파일찾기	
+		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
+			onclick="javasctipt:location.href='<%=cp%>/board/">파일찾기	
 		
-		<img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;" onclick="">삭제
+		<img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;" 
+			onclick="">삭제
 		</td>	
 	</tr>
 	
@@ -177,9 +182,9 @@ function sendIt(){
 	<tr style="height: 33px;" align="right">
 		<td style="width: 1400px;">
 			<input type="button" value="올리기" class="btn2" style="background: #FFFFFF"
-				onclick="sendIt();">
+				onclick="sendIt();"/>
 			<input type="button" value="취소" class="btn2"  style="background: #FFFFFF"
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
+				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
 		</td>
 		<td width="5"></td>	
 	</tr>
@@ -191,7 +196,7 @@ function sendIt(){
 
 </table>
 
-
+</form>
 
 
 </body>
