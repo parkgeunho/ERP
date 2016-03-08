@@ -24,6 +24,9 @@ $(document).ready(function() {
 	
 	
 	
+	
+	
+	
 	$("#updated").click(function(){
 		
 		var myForm = $("#myForm").serialize();
@@ -78,14 +81,10 @@ $(document).ready(function() {
 
 
 function sendit(){
-	var url = "<%=cp%>/buseoUpdated";
-	var f=document.myForm;
-	
-	$.post(url,{list:f},function(args){
-		$("#buseoList").html(args);
-	});
-	
-	
+
+	window.opener.location.reload();
+	window.close();
+
 }
 
 function deleted(){
@@ -141,7 +140,11 @@ function created(){
 
 <tr>
 <td  width="250px;">
-<div id="updated" class="buseoManagement" style="margin-right: 75px; ">확인</div>
+
+<div class="buseoManagement" onclick="sendit()">&nbsp;완료</div>
+<div id="updated" class="buseoManagement" >수정</div>
+		
+
 </td>
 </tr>
 <tr>

@@ -2,11 +2,11 @@ package com.exe.member;
 
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.exe.insa.BuseoDTO;
+import com.exe.insa.InsaDAO;
 
 @Controller
 public class MemberController {
@@ -25,7 +26,9 @@ public class MemberController {
 	@Qualifier("memberDAO")
 	MemberDAO dao;
 	
-	
+	@Autowired
+	@Qualifier("insaDAO")
+	InsaDAO insaDAO;
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
@@ -38,6 +41,20 @@ public class MemberController {
 	public String joinView(HttpServletRequest request,HttpServletResponse response) {
 		
 		//이부분에서 부서명(depth1~5 셋어드리뷰트하기)
+		HttpSession session = request.getSession();
+		
+		int buseoNum = Integer.parseInt((String) session.getAttribute("buseoNum"));
+		BuseoDTO dto = insaDAO.readBuseo(buseoNum);
+		
+		if(dto.getDepth()!=4){
+			int parent = dto.getParent();
+			for(int i = dto.getDepth(); i<=0 ; i--){
+				
+				
+			}
+			
+		}
+		
 		
 		List<BuseoDTO> depth1 = dao.depth1();
 		List<BuseoDTO> depth2 = dao.depth2();
@@ -95,6 +112,12 @@ public class MemberController {
 			String newFileName = dto.getNum() + dto.getName() + fileExt;
 			String fullFileName = path + File.separator + newFileName;
 			
+			//사진형식 아닌 것들 제외하기
+			
+			if(fileExt!="")
+			
+			
+			
 			//폴더에 업로드
 			f = new File(fullFileName);
 			file.transferTo(f);
@@ -112,8 +135,62 @@ public class MemberController {
 		
 		return "redirect:/insa";
 	}
+	
+	@RequestMapping(value = "/compareID" , method = {RequestMethod.POST})
+	public String compareID(HttpServletRequest request,HttpServletResponse response)throws Exception{
+		
+		
+		String compID = request.getParameter("compID");
+		System.out.println(compID);
+		
+		String id = dao.idOk(compID);
+		
+		
+		
+		
+		if(id==null || id.equals("")){
+		String result = "ok";
+			
+		request.setAttribute("result", result);
+			
+			
+			return "member/compareID";
+		}
+		
+		
 
+		if (dao.idOk(compID).equals(compID)) {
 
+			String result = "no";
+
+			request.setAttribute("result", result);
+
+			return "member/compareID";
+		}
+		
+		return "member/compareID";
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

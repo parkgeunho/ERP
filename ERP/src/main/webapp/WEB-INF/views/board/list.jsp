@@ -10,7 +10,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
+
+<link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
 
 <script type="text/javascript">
 
@@ -18,7 +20,7 @@
 		
 		var f = document.searchForm;
 		
-		f.action = "<%=cp%>/list.action";
+		f.action = "<%=cp%>/board/list.action";
 		f.submit();
 		
 	}
@@ -26,7 +28,7 @@
 
 </script>
 
-
+</head>
 <body style="font-size: 13px; font-style: 나눔고딕체;">
 
 <table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
@@ -50,7 +52,7 @@
 <table border="0" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
 		<td style="width: 1380px" align="right" colspan="6">
-			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/created.action';">
+			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
 		</td>
 		<td style="width: 20px;">
@@ -58,7 +60,7 @@
 	</tr>
 	
 	<tr style="height: 30px; background-color: #E7E7E7">
-		<td style="width: 100px" align="center" class="boardnum">No</td>
+		<td style="width: 100px" align="center" class="boardNum">No</td>
 		<td style="width: 750px;" align="center" class="subject">제목
 		</td>
 		
@@ -72,24 +74,24 @@
 		</td>
 		
 		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
-		</td>
-	
-	</tr>
-	
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
+		</td>		
 	</tr>	
 	
+	
+			
 
 	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>
 	
-	
+
 </table>
 
 <table border="0" cellpadding="0" cellspacing="0" align="center">
 	<c:forEach var="dto" items="${lists }">
+	<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="7"></td>
+	</tr>
 		<tr>
 			<td class="boardNum">${dto.boardNum}</td>
 			<td class="subject">
@@ -99,6 +101,9 @@
 			<td class="created">${dto.created}</td>
 			<td class="hitCount">${dto.hitCount }</td>		
 		</tr>	
+		<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="7"></td>
+	</tr>
 	</c:forEach>
 		<tr style="height: 10px;">
 			<td style="width: 1400px;"></td>			

@@ -13,11 +13,17 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 <script>
    
    $(document).ready(function(){
+	  
+	   
+	   
+	   
+	   
+	   
 	   
 	num=0;
 
 
-	   
+	
 	 
 	   $(".content").mCustomScrollbar();
       
@@ -90,8 +96,14 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 		}  */
 	});  
    
+ 	
+ 	
+ 	
    
 </script>
+
+
+
 <form name="myForm" id="myForm" onsubmit="return false" >
 <div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
 
