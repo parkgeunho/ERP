@@ -94,7 +94,11 @@ public class MemberController {
 			String newFileName = dto.getNum() + dto.getName() + fileExt;
 			String fullFileName = path + File.separator + newFileName;
 			
-			//사진 파일 이름 형식 바꾸기
+			//사진형식 아닌 것들 제외하기
+			
+			if(fileExt!="")
+			
+			
 			
 			//폴더에 업로드
 			f = new File(fullFileName);
