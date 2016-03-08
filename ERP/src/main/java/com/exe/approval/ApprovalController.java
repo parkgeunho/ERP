@@ -97,9 +97,19 @@ public class ApprovalController {
 		request.setAttribute("restDiv",n);
 		request.setAttribute("lists", lists);
 	
-		return "approval/approvalLine.jsp";
+		return "approval/approvalLine";
 		
 	}		
+	
+	
+	@RequestMapping(value = "/approvalPop", method = RequestMethod.GET)
+	public String approvalPop(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		System.out.println("approvalPop.Controller");
+		
+		
+		return "approval/approvalPop";
+	}
 	
 	//HttpSession session = request.getSession();
 

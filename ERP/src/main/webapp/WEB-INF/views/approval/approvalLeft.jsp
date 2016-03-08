@@ -9,6 +9,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-왼쪽기모찌
+
+문서함<br/>
+결재양식함 <br/>
+임시보관함 <br/>
+<br/>
+진행중 <br/>
+<br/>
+결재한 문서<br/>
+진행중 문서<br/>
+반려된 문서<br/>
+<br/>
+완료<br/>
+<br/>
+상신함<br/>
+결재함<br/>
+
+
+
+
+
+
 </body>
 </html>

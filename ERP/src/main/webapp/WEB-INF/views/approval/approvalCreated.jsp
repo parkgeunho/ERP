@@ -43,7 +43,7 @@
 		
 		$("#approvalLineModal").click(function(){
 			
-			alert("으흐흐2222211112");
+			alert("으흐흐2222222222222");
 			
 			dialog = $("<body>").dialog({
 				
@@ -60,7 +60,8 @@
 				
 				buttons: {
 					"넘겨라3":function(){
-						test = hihi();	
+						self.close();
+						alert(test = hihi());	
 					  	dialog.dialog("close");					
 					},
 					"닫아라":function(){
@@ -69,10 +70,7 @@
 				}, 
 				
 				close: function(){	
-				
-					this.close();
-				
-					form[ 0 ].reset();
+					dialog.dialog("close");
 				} 
 			});
 		});		
@@ -270,7 +268,7 @@
 			toolbar : 'Basic',     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
-			height : '400'        //---높이값
+			height : '500'        //---높이값
 			}
 		);    
 	</script>          

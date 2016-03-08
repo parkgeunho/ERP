@@ -197,7 +197,9 @@ $(document).ready(function() {
 	function hihi(){
 		
 		var okok = document.getElementById('kkk').value;
-			
+		window.close();
+		self.close();
+		this.close();
 		return (okok);
 	}	
 				
@@ -222,7 +224,7 @@ $(document).ready(function() {
 <!-- 라인라인라인라인라인라인라인라인라인라인라인라인라인 -->
 <tr height="1"> 
 
-<td width="10"><input type="hidden" id="kkk" value="111111"/></td>
+<td width="10"><input type="hidden" id="kkk" value="3535353535"/></td>
 
 <td width="1" bgcolor="#8C8C8C"></td>
 <td width="4" bgcolor="#8C8C8C"></td>
