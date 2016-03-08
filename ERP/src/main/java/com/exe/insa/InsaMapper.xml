@@ -67,12 +67,19 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	
+	<update id="memberUpdate" >
+	
+	
+	</update>
+	
+	
 
 	<select id="memberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
 
 	select * from(
 	select rownum rnum,data.* from(
-	select userNum ,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb
+	select num,userNum ,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb
 	where depth1=#{buseoNum} or depth2=#{buseoNum} or depth3=#{buseoNum} or depth4=#{buseoNum} or depth5=#{buseoNum}
 	order by num desc) data)
 	

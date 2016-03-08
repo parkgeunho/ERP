@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +42,12 @@ public class InsaController {
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
 	
 		
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", "1");
+		
+		
+		
 		List<BuseoDTO> lists = insaDAO.buseoList();
 		
 		ListIterator<BuseoDTO> it = lists.listIterator();
@@ -61,7 +69,7 @@ public class InsaController {
 			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
-			System.out.println(vo.getReplyNum());
+			
 			
 			hMap.put("replyNum", vo.getReplyNum());
 			insaDAO.updateReply(hMap);
@@ -148,7 +156,7 @@ public class InsaController {
 	
 		
 		Integer buseoNum = Integer.parseInt(request.getParameter("num"));
-		System.out.println(buseoNum);
+		
 		if(buseoNum.equals(0) || buseoNum.equals(null)){
 			
 			
@@ -166,7 +174,7 @@ public class InsaController {
 				return "read-error";
 			}
 			dto = insaDAO.readData(buseoNum);
-			System.out.println(dto.getGroupNum());
+	
 			Map<String, Object> hMap = new HashMap<String, Object>();
 		      hMap.put("groupNum", dto.getGroupNum());
 		      hMap.put("orderNo", dto.getOrderNo());
@@ -226,21 +234,26 @@ public class InsaController {
 	}
 	
 	
+	//사원정보 아작스 리스트로 출력하기 위한것
 	@RequestMapping(value = "/memberList", method = {RequestMethod.GET,RequestMethod.POST})
 	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
 		
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
-		System.out.println("찍힘?!");
+		
 		if(num == null){
 			
 			num="1";
 		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", num);
+		
 		int buseoNum = Integer.parseInt(num);
 		int currentPage = 1;
-		System.out.println("찍힘?2!");
+		
 		int dataCount = insaDAO.dataCount(buseoNum);
-		System.out.println("찍힘?3!");
+		
 		int numPerPage = 15;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -258,23 +271,22 @@ public class InsaController {
 			BuseoDTO bDto = null;
 			if(mDto.getDepth1()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
-				System.out.println("얍"+mDto.getDepth1());
-				System.out.println("확인"+bDto.getBuseoName());
-				mDto.setDepth1(bDto.getBuseoName());
+			
+				mDto.setDepth1(bDto.getBuseoName()+" ▶ ");
 			}
 			if(mDto.getDepth2()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
-				mDto.setDepth2(bDto.getBuseoName());
+				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth3()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
-				mDto.setDepth3(bDto.getBuseoName());
+				mDto.setDepth3(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth4()!=null){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
-				mDto.setDepth4(bDto.getBuseoName());
+				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
 			}
 			if(mDto.getDepth5()!=null){
@@ -284,7 +296,7 @@ public class InsaController {
 			}	
 			
 		}
-		System.out.println("왜 안뜨니 ");
+		
 		
 		
 		
@@ -296,7 +308,7 @@ public class InsaController {
 		
 		int size = lists.size();
 		int max = 15;
-		System.out.println("사이즈 : "+size);
+		
 		
 		request.setAttribute("max", max);
 		request.setAttribute("lists", lists);

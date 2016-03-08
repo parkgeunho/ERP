@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
-
-
-//-------------- 게시판 -------------
-
 @Controller
 public class BoardController {
 	
@@ -84,7 +80,7 @@ public class BoardController {
 	      
 	      dao.insertData(dto);
 	      
-	      return "redirect:/list.action";
+	      return "redirect:/board/list.action";
 	   }
 	 
 	 
