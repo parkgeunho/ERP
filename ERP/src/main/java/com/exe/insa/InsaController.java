@@ -1,12 +1,12 @@
 package com.exe.insa;
 
-import java.io.UnsupportedEncodingException;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,20 +89,19 @@ public class InsaController {
 		
 		
 		
-		return "insa";
+		return "buseo";
 	}
 	
 	
 
 	
-	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
 		
 	
 
-		
-		
-		return "project/buseoManagement";
+	
+		return "buseo";
 	}	
 	
 	//리스트 아작스로출력
@@ -236,7 +235,7 @@ public class InsaController {
 	
 	//사원정보 아작스 리스트로 출력하기 위한것
 	@RequestMapping(value = "/memberList", method = {RequestMethod.GET,RequestMethod.POST})
-	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
+	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) throws UnsupportedEncodingException {
 		
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
@@ -252,8 +251,68 @@ public class InsaController {
 		int buseoNum = Integer.parseInt(num);
 		int currentPage = 1;
 		
-		int dataCount = insaDAO.dataCount(buseoNum);
+		String searchValue = request.getParameter("searchValue");
 		
+		System.out.println("에러확인");
+		dto = insaDAO.readBuseo(buseoNum);
+		
+		int depth = dto.getDepth();
+		
+		String depth1 = "";
+		String depth2 = "";
+		String depth3 = "";
+		String depth4 = "";
+		String depth5 = "";
+		
+		for(int i = depth; i>=0 ; i--){
+			
+			if(i==4){
+				
+				depth5 = Integer.toString(dto.getBuseoNum());
+			}
+			if(i==3){
+				
+				depth4 = Integer.toString(dto.getBuseoNum());
+			}
+			if(i==2){
+			
+				depth3 = Integer.toString(dto.getBuseoNum());
+			}
+			if(i==1){
+				
+				depth2 = Integer.toString(dto.getBuseoNum());
+			}
+			if(i==0){
+				
+				depth1 = Integer.toString(dto.getBuseoNum());
+			}
+			dto = insaDAO.readBuseo(dto.getParent());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		if(searchValue==null){
+			searchValue="";
+		}else{
+			if(request.getMethod().equalsIgnoreCase("GET"))
+		
+			searchValue = URLDecoder.decode(searchValue,"UTF-8");
+		}
+		
+		
+		
+		int dataCount = insaDAO.dataCount(depth1,depth2,depth3,depth4,depth5,searchValue);
+		
+		System.out.println("데이터 숫자 : "+dataCount);
 		int numPerPage = 15;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -264,36 +323,73 @@ public class InsaController {
 		int start = (currentPage-1)*numPerPage+1;
 		int end = currentPage*numPerPage;
 		
-		List<MemberDTO> lists = insaDAO.getMemberList(start,end,buseoNum);
+		List<MemberDTO> lists = insaDAO.getMemberList(start,end,depth1,depth2,depth3,depth4,depth5,searchValue);
 		ListIterator<MemberDTO> it = lists.listIterator();
 		while(it.hasNext()){
 			MemberDTO mDto = it.next();
 			BuseoDTO bDto = null;
-			if(mDto.getDepth1()!=null){
+
+			if(mDto.getDepth1()!="no" && !mDto.getDepth1().equals("no")){
+
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
 			
 				mDto.setDepth1(bDto.getBuseoName()+" ▶ ");
+			}else if(mDto.getDepth1().equals("no") || mDto.getDepth1()=="no"){
+
+				mDto.setDepth1("");
+
 			}
-			if(mDto.getDepth2()!=null){
+			
+			
+			
+			if(mDto.getDepth2()!="no" && !mDto.getDepth2().equals("no")){
+	
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
 				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth2().equals("no") || mDto.getDepth2()=="no"){
+	;
+				mDto.setDepth2("");
+
 			}
-			if(mDto.getDepth3()!=null){
+			
+			
+			if(mDto.getDepth3()!="no" && !mDto.getDepth3().equals("no") ){
+			
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
 				mDto.setDepth3(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth3().equals("no") || mDto.getDepth3()=="no"){
+
+				mDto.setDepth3("");
+		
 			}
-			if(mDto.getDepth4()!=null){
+			
+			
+			
+			if(mDto.getDepth4()!="no" && !mDto.getDepth4().equals("no")){
+				System.out.println("뎁스4");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
 				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth4().equals("no") || mDto.getDepth4()=="no"){
+
+				mDto.setDepth4("");
+		
 			}
-			if(mDto.getDepth5()!=null){
+			
+			
+			
+			if(mDto.getDepth5()!="no" && !mDto.getDepth5().equals("no")){
+				System.out.println("뎁스51");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
 				mDto.setDepth5(bDto.getBuseoName());
-				
-			}	
+				System.out.println("뎁스51나감");
+			}else if(mDto.getDepth5().equals("no") || mDto.getDepth5()=="no"){
+				System.out.println("뎁스5");
+				mDto.setDepth5("");
+				System.out.println("뎁스5나감");
+			}
 			
 		}
 		

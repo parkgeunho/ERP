@@ -55,7 +55,10 @@ public class MemberController {
 			
 			if(i==4){
 				
+			
+			
 				request.setAttribute("depth5", dto);
+				
 			}
 			if(i==3){
 				
@@ -70,6 +73,9 @@ public class MemberController {
 				request.setAttribute("depth2", dto);
 			}
 			if(i==0){
+				
+				
+				
 				
 				request.setAttribute("depth1", dto);
 			}
@@ -122,6 +128,23 @@ public class MemberController {
 			
 		
 		int maxNum = dao.maxNum();
+		System.out.println("depth3 화긴:"+dto.getDepth3());
+		
+		if(dto.getDepth1().equals("")){
+			dto.setDepth1("no");
+		}
+		if(dto.getDepth2().equals("")){
+			dto.setDepth2("no");
+		}
+		if(dto.getDepth3().equals("")){
+			dto.setDepth3("no");
+		}
+		if(dto.getDepth4().equals("")){
+			dto.setDepth4("no");
+		}
+		if(dto.getDepth5().equals("")){
+			dto.setDepth5("no");
+		}
 		
 		dto.setNum(maxNum+1);
 		
