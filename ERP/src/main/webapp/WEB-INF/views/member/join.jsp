@@ -127,6 +127,15 @@
         }
         f.grade.value = str;
         
+        str = f.secure.value;
+        str = str.trim();
+        if(str<1 || str>3){
+        	alert("등급은 1~3에서 선택 하세요.")
+        	f.grade.focus();
+        	return;
+        	}
+        
+        
         str = f.file.value;
     	str = str.trim();
         if(!str) {
@@ -193,8 +202,8 @@
 	<tr height="40">
 		<td width="100" class="color" align="center">주 소</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="addr" placeholder="ex) 서울시 강남구 역삼동 ... " style="height: 35px; font-size: 15pt; font-family: 고딕; width: 95%;"></td>
-		<td width="100" class="color" align="center">생 일</td>
-		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="birth" placeholder="ex) 12월 25일" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
+		<td width="100" class="color" align="center">보안등급</td>
+		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="secure" placeholder="ex) 1 ~ 3" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
 	</tr>
 	<tr height="40">
 		<td width="100" class="color" align="center">사내번호</td>

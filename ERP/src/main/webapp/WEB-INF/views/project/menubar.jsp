@@ -74,7 +74,7 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">관리자</a></li>
+		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
 	</ul>
 </div>
 
