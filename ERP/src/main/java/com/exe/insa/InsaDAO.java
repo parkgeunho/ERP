@@ -1,10 +1,13 @@
 package com.exe.insa;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.exe.member.MemberDTO;
 
 
 
@@ -17,97 +20,7 @@ public class InsaDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
-	
-	
-	
-	public List<BuseoDTO> getBuseo(){
 		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.buseolist");
-		
-		return lists;
-		
-	}
-	
-	public List<BuseoDTO> depth1(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth1");
-		
-		return lists;
-		
-	}
-	
-	public List<BuseoDTO> depth1etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth1etc");
-		
-		return lists;
-		
-	}
-	
-	public List<BuseoDTO> depth2(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth2");
-		
-		return lists;
-		
-	}
-	public List<BuseoDTO> depth2etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth2etc");
-		
-		return lists;
-		
-	}
-	public List<BuseoDTO> depth3(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth3");
-		
-		return lists;
-		
-	}
-	
-	public List<BuseoDTO> depth3etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth3etc");
-		
-		return lists;
-		
-	}
-	public List<BuseoDTO> depth4(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth4");
-		
-		return lists;
-		
-	}
-
-	public List<BuseoDTO> depth4etc(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth4etc");
-		
-		return lists;
-		
-	}
-	
-	
-	public List<BuseoDTO> depth5(){
-		
-		
-		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth5");
-		
-		return lists;
-		
-	}
-	
 	public int maxNum(){
 		
 		int result = sessionTemplate.selectOne("com.exe.insa.maxNum");
@@ -151,6 +64,73 @@ public class InsaDAO {
 		sessionTemplate.update("com.exe.insa.orderNoUpdate",hMap);
 		
 	}
+	
+	public List<BuseoDTO> getGroup(){
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.group");
+		return lists;
+	}
+	
+	public List<BuseoDTO> getDepth(){
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.depth");
+		return lists;
+		
+	}
+	
+	public void deleteBuseo(int buseoNum){
+		sessionTemplate.delete("com.exe.insa.buseoDelete", buseoNum);
+	}
+	
+	public void updateBuseo(BuseoDTO dto){
+		
+		sessionTemplate.update("com.exe.insa.buseoUpdate",dto);
+	}
+	
+	public BuseoDTO readBuseo(int buseoNum){
+		BuseoDTO dto =  sessionTemplate.selectOne("com.exe.insa.readBuseo", buseoNum);
+		return dto;
+		
+	}
+	
+	public List<MemberDTO> getMemberList(int start, int end,String depth1,String depth2,String depth3,String depth4,String depth5,String searchValue){
+		
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		params.put("start", start);
+		params.put("end", end);
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+		params.put("searchValue", searchValue);
+		
+		
+		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.insa.memberList",params);
+		return lists;
+	}
+	
+	public int dataCount(String depth1,String depth2,String depth3,String depth4,String depth5,String searchValue){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+		params.put("searchValue", searchValue);
+		
+		System.out.println("depth1 : "+depth1);
+		System.out.println("depth2 : "+depth2);
+		System.out.println("depth3 : "+depth3);
+		System.out.println("depth4 : "+depth4);
+		System.out.println("depth5 : "+depth5);
+		System.out.println("dao쪽 값확인합니다. 값은 : ? " + searchValue);
+		
+		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",params);
+		return result;
+	}
+
 
 
 }

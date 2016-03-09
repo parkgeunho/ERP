@@ -4,19 +4,26 @@
 
 	String cp = request.getContextPath();
 int restDiv = (Integer)request.getAttribute("restDiv");
+
 %>
 <script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/erp/resources/insa/jquery.session.js"></script>
 <link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script>
-   
+<script type="text/javascript">
+
    $(document).ready(function(){
+	  
 	   
-
-
-
 	   
+	   
+	   
+	   
+	   
+	num=0;
+
+
+	
 	 
 	   $(".content").mCustomScrollbar();
       
@@ -34,31 +41,38 @@ int restDiv = (Integer)request.getAttribute("restDiv");
       });
    });
 
-	var dds = $('[id^="edit-"]');
+	
 	
  	$('[id^="edit-"]').click(function(){
+ 	
  		
+ 	var dds = ${maxNum};
  		
- 		
- 		for(var i=1;i<dds.length+1;i++){
+ 		for(var i=1;i<dds+1;i++){
  			
  			
  			var v = "edit-"+i;
- 			if(v==this.id){
- 				
- 				document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
- 				
- 			}else{
- 				
- 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
- 			}
  			
+ 			
+ 		if($("#"+v).length>0){
+ 			
+	 			if(v==this.id){
+	 				
+	 				document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
+	 				
+	 			}else{
+	 				
+	 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
+	 			}
+ 			
+ 			}
  		}
- 		
  		
  		/* document.getElementById(this.id).style.backgroundColor = "#E8D9FF"; */
  		//클릭한 것을 세션에 넣어줌
-		num= $('.num'+this.id).val();		
+ 		
+		num= $('.num'+this.id).val();
+ 		
 	});
  	
  	
@@ -68,22 +82,35 @@ int restDiv = (Integer)request.getAttribute("restDiv");
  	//클릭을 했을 시 인풋 박스로 변경 시킨다.
 	$('[id^="edit-"]').dblclick(function(){
 		
- 		var v = $(":text").length;
+ 		var v = $(":text").id;
+		
+		var obj = $('.num'+ this.id).val();
+		 /* var a = obj.indexof("name=="); */
 		 
-		var obj = $('.'+ this.id).val();
-		  if(v==0){
+		 /*  if(v==0){ */
 			 var av = document.getElementById(this.id).innerText;
-			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name="+obj+ ">"; 
-		}else{
+		 var ck = av.length>0;
+		 if(ck==false){
+			 return;
+		 }
+			 
+			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name=buseo"+obj+ ">"; 
+		/* }else{
 			
 			alert("이미다른걸수정중이므로 수정을 완료해주세요");
 			return;
-		} 
+		}  */
 	});  
    
+ 	
+ 	
+ 	
    
 </script>
 
+
+
+<form name="myForm" id="myForm" onsubmit="return false" >
 <div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
 
 <c:forEach var="dto" items="${lists }">
@@ -105,16 +132,26 @@ int restDiv = (Integer)request.getAttribute("restDiv");
          <img id="fold-${dto.buseoNum}" src="/erp/resources/image/minus.png"/>
          </c:if>
         
-        <label id="edit-${dto.buseoNum}">${dto.buseoName }</label>
+       
+        <c:choose>
+        	<c:when test="${dto.checked=='a' }">
+        		<input type="text" value="${dto.buseoName }" name="buseo${dto.buseoNum}" id="edit-${dto.buseoNum}" >
+        	</c:when>
+        	
+        	<c:when test="${dto.checked!='a' }">
+        	 <label id="edit-${dto.buseoNum}">${dto.buseoName }</label>
+        	</c:when>
+        </c:choose>
+        
 		<input type="hidden" class="numedit-${dto.buseoNum}" value="${dto.buseoNum }" >
 </c:forEach>
    <% for(int i=0; i<restDiv; i++){ %>
    </div>
    <%} %>
-</div>
 	</div>
+</div>
 	
-
+</form>
 
 
 

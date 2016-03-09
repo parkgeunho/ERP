@@ -83,6 +83,7 @@ function deleted(){
 function created(){
 
 	var url = "<%=cp%>/buseocreated";
+	
 	$.post(url,{num:num},function(args){
 	$("#buseoList").html(args);
 	

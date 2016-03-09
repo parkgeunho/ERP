@@ -1,11 +1,14 @@
 package com.exe.board;
 
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +24,8 @@ public class BoardController {
 	@Autowired
 	@Qualifier("BoardDAO")
 	BoardDAO dao;
+	
+	
 	
 	@Autowired
 	MyUtil myUtil;
@@ -68,14 +73,16 @@ public class BoardController {
 	   }
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
-	      
+	     
 	      int maxNum = dao.getMaxNum();
 	      
-	      dto.setBoardNum(maxNum + 1);	      
+	     
+	      dto.setBoardNum(maxNum + 1);	  
+	      dto.setName("확ㅇ");  //이름값 
 	      
 	      dao.insertData(dto);
 	      
-	      return "redirect:/list.action";
+	      return "redirect:/board/list.action";
 	   }
 	 
 	 
@@ -105,7 +112,7 @@ public class BoardController {
 	      
 	      int dataCount = dao.getDataCount(searchKey, searchValue);
 	      
-	      int numPerPage = 10;
+	      int numPerPage = 20;
 	      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 	      
 	      if(currentPage>totalPage)
@@ -145,9 +152,9 @@ public class BoardController {
 	   }
 	
 	 @RequestMapping(value="/board/article.action",method={RequestMethod.GET,RequestMethod.POST})
-	   /*public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{*/
+	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
-	   public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		    
 	      
 	      String cp = request.getContextPath();
@@ -185,7 +192,7 @@ public class BoardController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      
-	      mav.setViewName("/boardboard/article");
+	      mav.setViewName("/board/article");
 	      
 	      mav.addObject("dto", dto);
 	      mav.addObject("param", param);
@@ -196,8 +203,8 @@ public class BoardController {
 	      
 	   }
 	 
-	 @RequestMapping(value="/board/updated.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String updated(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	 @RequestMapping(value="/board/update.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String cp = request.getContextPath();
 		  
@@ -215,19 +222,19 @@ public class BoardController {
 	      request.setAttribute("dto", dto);
 	      request.setAttribute("pageNum", pageNum);
 	      
-		  return "board/updated";
+		  return "board/update";
 	  
 	}
 	 
 	 
-	 @RequestMapping(value="/board/updated_ok.action",method={RequestMethod.GET,RequestMethod.POST})
+	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	  public String updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
 		  dto.setBoardNum(Integer.parseInt(request.getParameter("boardNum")));
 		  dto.setSubject(request.getParameter("subject"));
-		  dto.setName(request.getParameter("name"));		  
+		  dto.setName(request.getParameter("name"));
 		  dto.setContent(request.getParameter("content"));
 		  
 		  dao.updateData(dto);
@@ -236,8 +243,8 @@ public class BoardController {
 		  
 	  }
 	  
-	  @RequestMapping(value="/board/deleted.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String deleted(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  @RequestMapping(value="/board/delete.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		  String pageNum = request.getParameter("pageNum");
@@ -247,27 +254,15 @@ public class BoardController {
 		  return "redirect:/board/list.action?pageNum=" + pageNum;
 	 
 	  
+	  
+	 
+
+	 
+	
+	 
 	  }
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	  
 	 
 
 }

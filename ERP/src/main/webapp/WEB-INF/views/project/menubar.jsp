@@ -16,7 +16,16 @@
 $(document).ready(function(){
 	
     $("#b").click(function(){
+    	
+    	
+    	
         $("#a").slideToggle("slow");
+       
+        var a = ($(this).text()=='▽')?'△':'▽';
+        $(this).text(a);
+        
+        
+        
     });
  
 });
@@ -62,15 +71,29 @@ $(document).ready(function(){
 		<li style="line-height: 50px">|</li>
 		
 		<li><a href="#">메일</a></li>
+		
+		<li style="line-height: 50px">|</li>
+		
+		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
 	</ul>
 </div>
 
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
-	접기기능실험하기
+	
+	
+	
+	<div style="float: left;">
+	
 	</div>
 	
-	<div id="b" style="font-size: 8pt;border: 1px solid">눌러주세요</div>
+	</div>
+	
+	<div style="font-size: 8pt; border-bottom: 2px solid orange; height: 10px; background-color: white;">
+	<div  id="b" style="width: 50px; background-color: orange; float: right; margin-right: 10px;border-top-left-radius : 5px;
+	border-top-right-radius : 5px;" align="center">▽</div>
+	
+	</div>
 </div>
 </body>
 
