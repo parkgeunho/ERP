@@ -203,8 +203,8 @@ public class BoardController {
 	      
 	   }
 	 
-	 @RequestMapping(value="/board/updated.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String updated(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	 @RequestMapping(value="/board/update.action",method={RequestMethod.GET,RequestMethod.POST})
+	  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String cp = request.getContextPath();
 		  
@@ -222,19 +222,19 @@ public class BoardController {
 	      request.setAttribute("dto", dto);
 	      request.setAttribute("pageNum", pageNum);
 	      
-		  return "board/updated";
+		  return "board/update";
 	  
 	}
 	 
 	 
-	 @RequestMapping(value="/board/updated_ok.action",method={RequestMethod.GET,RequestMethod.POST})
+	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	  public String updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
 		  dto.setBoardNum(Integer.parseInt(request.getParameter("boardNum")));
 		  dto.setSubject(request.getParameter("subject"));
-		  dto.setName(request.getParameter("name"));		  
+		  dto.setName(request.getParameter("name"));
 		  dto.setContent(request.getParameter("content"));
 		  
 		  dao.updateData(dto);

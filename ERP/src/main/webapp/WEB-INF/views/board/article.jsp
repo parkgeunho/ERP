@@ -136,6 +136,10 @@
 			</select>
 			<input type="button" value="리스트" class="btn2" style="background: #FFFFFF" 
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
+				
+			<input type="button" value="수정" class="btn2" style="background: #FFFFFF"
+				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
+			
 			<input type="button" value="삭제" class="btn2" style="background: #FFFFFF" 
 				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
 		

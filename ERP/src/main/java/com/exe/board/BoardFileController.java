@@ -40,15 +40,6 @@ public class BoardFileController {
 		  */
 		  
 		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
 		 
 		 
 		  public class BoardFile extends HttpServlet{
