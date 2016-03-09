@@ -1,43 +1,34 @@
 package com.exe.approval;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.exe.insa.BuseoDTO;
-import com.exe.insa.InsaDAO;
-
+import com.exe.approval.ApprovalDAO;
 
 @Controller
 public class ApprovalController {
 
-	@Autowired
-	@Qualifier("insaDAO")
-	InsaDAO insaDAO;
 	
-	@RequestMapping(value = "/approval", method=RequestMethod.GET)
+	@RequestMapping(value = "/approval", method={RequestMethod.GET,RequestMethod.POST})
 	public String scheduleMain() {
 		
 		return "approvalTile";
 	}
 	
-	@RequestMapping(value = "/approvalArticle", method = RequestMethod.GET)
+	@RequestMapping(value = "/approvalArticle", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalArticle() {
 
 		return "approval/approvalArticle";
 	}
 
-	@RequestMapping(value = "/approvalCreated", method = RequestMethod.GET)
+	@RequestMapping(value = "/approvalCreated", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalCreated() {
 		
 		return "approval/approvalCreated";
@@ -50,7 +41,7 @@ public class ApprovalController {
 		
 	}
 
-	@RequestMapping(value = "/approvalTest", method = RequestMethod.GET)
+	@RequestMapping(value = "/approvalTest", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalTest(HttpServletRequest request) {
 		
 
@@ -59,10 +50,10 @@ public class ApprovalController {
 	}	
 	
 	//
-	@RequestMapping(value = "/approvalLine", method = RequestMethod.GET)
+	@RequestMapping(value = "/approvalLine", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalLine(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
-		List<BuseoDTO> lists = insaDAO.buseoList();
+		/*List<BuseoDTO> lists = insaDAO.buseoList();
 		
 		ListIterator<BuseoDTO> it = lists.listIterator();
 		
@@ -97,22 +88,24 @@ public class ApprovalController {
 		request.setAttribute("restDiv",n);
 		request.setAttribute("lists", lists);
 	
+		 */
+	
 		return "approval/approvalLine";
 		
 	}		
 	
-	
-	@RequestMapping(value = "/approvalPop", method = RequestMethod.GET)
+	@RequestMapping(value = "/approvalPop", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalPop(HttpServletRequest request , HttpServletResponse response) throws Exception{
-		
+			
 		System.out.println("approvalPop.Controller");
 		
+		/*int maxNum = approvalDAO.approvalFormMaxNum();
 		
+		System.out.println(maxNum);*/
+	
 		return "approval/approvalPop";
 	}
 	
 	//HttpSession session = request.getSession();
 
-	
-	
 }

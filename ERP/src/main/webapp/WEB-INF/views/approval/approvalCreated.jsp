@@ -43,7 +43,7 @@
 		
 		$("#approvalLineModal").click(function(){
 			
-			alert("으흐흐2222222222222");
+			alert("앙수민11띠");
 			
 			dialog = $("<body>").dialog({
 				
@@ -60,17 +60,19 @@
 				
 				buttons: {
 					"넘겨라3":function(){
-						self.close();
-						alert(test = hihi());	
-					  	dialog.dialog("close");					
+											
+						alert(hihi());
+						
+						dialog.dialog("close");					
 					},
 					"닫아라":function(){
+						
 						dialog.dialog("close");
 					}
 				}, 
 				
-				close: function(){	
-					dialog.dialog("close");
+				close: function(){
+					this.close();
 				} 
 			});
 		});		
@@ -85,7 +87,7 @@
 
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt">결재 - dto.type</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
+<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt">dto.type - dto.approvalFormName</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
 <input type="button" value="결재선 지정" id="approvalLineModal" />
@@ -93,7 +95,7 @@
 <input type="button" name="approvalClose" value="닫기"  />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">dto.type</font></td></tr> 
+<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">dto.approvalFormName</font></td></tr> 
 </table>
 
 

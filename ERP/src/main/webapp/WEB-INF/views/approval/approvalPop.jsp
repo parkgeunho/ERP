@@ -65,7 +65,7 @@
 <tr height="25" style="width: 100%">
 <td align="left" colspan="3"> 
 
-<a href="javascript:openWin(${i })">${i } 번 결재</a>
+<a href="javascript:openWin(${dto.name })"> {dto.name } (${i } 번 결재)</a>
 
 </td>
 <td></td><td></td>

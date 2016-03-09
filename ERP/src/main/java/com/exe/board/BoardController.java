@@ -25,8 +25,6 @@ public class BoardController {
 	@Qualifier("BoardDAO")
 	BoardDAO dao;
 	
-	
-	
 	@Autowired
 	MyUtil myUtil;
 	
