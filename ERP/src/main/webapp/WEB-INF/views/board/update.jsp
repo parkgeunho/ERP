@@ -48,11 +48,11 @@ function sendIt(){
 		alert("\n제목을 입력하세요.");
 		f.subject.focus();
 		return;
-	
 		
 	}
 	f.subject.value = str;
-	f.action = "<%=cp%>/board/created_ok.action";
+	
+	f.action = "<%=cp%>/board/update_ok.action";
 	f.submit();
 	
 	
@@ -67,7 +67,7 @@ function sendIt(){
 	}			
 	f.content.value = str;
 
-	 
+	
 
 }
 
@@ -95,7 +95,7 @@ function sendIt(){
 	<tr style="height: 30px; background: #80F5FF" >
 		<td style="width: 200px; height: 22px; font-style: " align="center">제&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">
-			<input type="text" name="subject" style="width:1000px; height: 22px;"/>	
+			<input type="text" name="subject" value="${dto.subject}" style="width:1000px; height: 22px;"/>	
 		</td>	
 	</tr>
 	
@@ -123,7 +123,7 @@ function sendIt(){
 	<tr>
 		<td style="width: 1400px;">
 	
-<textarea class="ckeditor" name="content" id="editor1" rows="10" cols="80" style="height: 800px;"></textarea>
+<textarea class="ckeditor" name="content" id="editor1" rows="10" cols="80" style="height: 800px;">${dto.content }</textarea>
 	    
 		</td>
 	</tr>    
@@ -184,10 +184,18 @@ function sendIt(){
 	
 	<tr style="height: 33px;" align="right">
 		<td style="width: 1400px;">
-			<input type="button" value="올리기" class="btn2" style="background: #FFFFFF"
+			
+			<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
+			<input type="hidden" name="pageNum" value="${pageNum}"/>
+			<input type="hidden" name="name" value="${dto.name }">
+		
+			<input type="button" value="수정하기" class="btn2" style="background: #FFFFFF"
 				onclick="sendIt();"/>
-			<input type="button" value="취소" class="btn2"  style="background: #FFFFFF"
+			<input type="button" value="수정취소" class="btn2"  style="background: #FFFFFF"
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
+			
+			
+			
 		</td>
 		<td width="5"></td>	
 	</tr>
