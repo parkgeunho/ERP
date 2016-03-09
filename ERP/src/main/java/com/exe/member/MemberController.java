@@ -4,6 +4,7 @@ package com.exe.member;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -101,14 +102,44 @@ public class MemberController {
 	@RequestMapping(value = "/insaView.action" , method = {RequestMethod.POST,RequestMethod.GET})
 	public String insaView(HttpServletRequest request,HttpServletResponse response) {
 		
+		String imagePath = request.getContextPath() + "/resources/memberImage";
+		
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		MemberDTO dto = dao.readOne(num);
 		
+	
+
+			BuseoDTO bDto = null;
+			if(dto.getDepth1()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth1()));
+			
+				dto.setDepth1(bDto.getBuseoName()+" ▶ ");
+			}
+			if(dto.getDepth2()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth2()));
+				dto.setDepth2(bDto.getBuseoName()+" ▶ ");
+				
+			}
+			if(dto.getDepth3()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth3()));
+				dto.setDepth3(bDto.getBuseoName()+" ▶ ");
+				
+			}
+			if(dto.getDepth4()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth4()));
+				dto.setDepth4(bDto.getBuseoName()+" ▶ ");
+				
+			}
+			if(dto.getDepth5()!=null){
+				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth5()));
+				dto.setDepth5(bDto.getBuseoName());
+				
+			}	
+		
+		
 		request.setAttribute("dto", dto);
-		
-		
-		
+		request.setAttribute("imagePath",imagePath);
 		
 		return "member/insaView";
 	}
@@ -116,14 +147,15 @@ public class MemberController {
 	@RequestMapping(value = "/created_ok.action" , method = {RequestMethod.POST,RequestMethod.GET})
 	public String upload(MultipartHttpServletRequest request,MemberDTO dto, HttpServletResponse response) throws Exception{
 		
-		String path = "D:\\ERPimage";
+		String path = request.getSession().getServletContext().getRealPath("/resources/memberImage");
+		
 		
 		MultipartFile file = request.getFile("file");
 		
 		//아이디 같으면 다시 돌아가라
-		/*String id = dao.idOk(dto.getId());
+	/*	String id = dao.idOk(dto.getId());
 		if(id==dto.getId() || id.equals(dto.getId()))
-			return "member/join";*/
+			return "member/join.action";*/
 		
 			
 		
