@@ -244,7 +244,7 @@ public class BoardController {
 	  }
 	  
 	  @RequestMapping(value="/board/delete.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String deleted(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		  String pageNum = request.getParameter("pageNum");

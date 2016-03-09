@@ -24,11 +24,11 @@
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
 	<tr style="height: 40px; background: #D4D4D4">
-		<td colspan="3" style="width: 1400px; letter-spacing: 5px;" align="center">&nbsp;&nbsp;&nbsp;&nbsp;공지사항		
+		<td colspan="3" style="width: 1400px; letter-spacing: 5px; font-size: 20px;" align="center">&nbsp;&nbsp;&nbsp;&nbsp;공지사항		
 		</td>	
 	</tr>
 	
-	<tr style="height: 5px;">
+	<tr style="height: 2px;">
 		<td colspan="3" style="width: 1400px;" align="right">
 			
 		</td>
@@ -41,8 +41,8 @@
 	</tr>
 	
 	<tr>
-		<td style="width: 200px; height: 22px;" align="center">등록정보</td>
-		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;이름,직급,소속,(날짜)</td>
+		<td style="width: 200px; height: 22px;" align="center">작성자</td>
+		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
 	</tr>
 	<tr style="height: 0.5px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="4"></td>
@@ -137,7 +137,7 @@
 			<input type="button" value="리스트" class="btn2" style="background: #FFFFFF" 
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
 			<input type="button" value="삭제" class="btn2" style="background: #FFFFFF" 
-				onclick="javascript:location.href='<%=cp%>/delete.action?BoardNum=${dto.BoardNum}&pageNum=${pageNum}'"/>
+				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
 		
 		</td>
 	
