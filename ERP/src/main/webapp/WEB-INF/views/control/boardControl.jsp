@@ -29,14 +29,14 @@ $(document).ready(function(){
 	
 	
 		    $.ajax({
-                    url:'memberList',
+                    url:'boardControlList',
                     type:'POST',
                     
                     error:function(args){
                         
                     },
                     success: function(args){
-                    	 $("#memberList").html(args);                           
+                    	 $("#boardList").html(args);                           
                     }
 	    });
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
 		                alert("에러");
 		            },
 		            success: function(args){
-		            	 $("#memberList").html(args);                           
+		            	 $("#boardList").html(args);                           
 		            }
 		});
 		
@@ -108,6 +108,14 @@ function sendIt() {
 	}).error(function(){alert("이미 최하 부서입니다.")});
 }
 	
+function created(){
+
+	var url = "<%=cp%>/boardListCreate";
+	$.post(url,{num:num},function(args){
+	$("#boardList").html(args);
+	
+	}).error(function(){alert("이미 최하 부서입니다.")});
+}
 
 
 
@@ -117,168 +125,41 @@ function sendIt() {
 
 
 </head>
-<body>
+<body onload="num=0">
 <div  style="width:1570px; height: 807px;">
-	
+	<div class="buseo" >게시판관리</div>
 	
 	<!-- 왼쪽 부서 관련  -->
-	<div style="width: 250px;float: left;">
-		<div class="buseo" >
-		부서
-		</div>
-		<div>
-			<c:forEach var="parent" items="${parent }">
-				<c:forEach var="depth0" items="${lists }">
-					<c:choose>
-					
-					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
-					<div>
-					<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
-					<label id="ch-${depth0.buseoNum}">${depth0.buseoName }</label>
-					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
-					</div>
-						<div class="fold-${depth0.buseoNum}">
-						
-						
-						<c:forEach var="depth1" items="${lists }">
-										
-							<c:choose>
-							
-							
-							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
-								<div style="margin-left: 20px;">
-								<img id="fold-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
-								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
-								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
-								</div>
-								<div class="fold-${depth1.buseoNum}">
-								
-								
-									<c:forEach var="depth2" items="${lists}">
-																		
-									<c:choose>
-									
-									
-										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
-											<div style="margin-left: 40px;">
-											<img id="fold-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
-											
-											<label id="ch-${depth2.buseoNum }">${depth2.buseoName }</label>
-											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
-											</div>
-											<div class="fold-${depth2.buseoNum}">
-											
-											
-												<c:forEach var="depth3" items="${lists }" >
-												
-													<c:choose>
-													
-													
-													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
-														<div style="margin-left: 60px;">
-														<img id="fold-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
-														<label id="ch-${depth3.buseoNum }">${depth3.buseoName }</label>
-														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
-														
-														</div>
-														<div class="fold-${depth3.buseoNum}">
-												
-														<c:forEach var="depth4" items="${lists }">
-														
-															<c:choose>
-															
-																<c:when test="${depth3.buseoNum==depth4.parent }">
-																	<div style="margin-left: 80px;">
-																	<label id="ch-${depth4.buseoNum }">${depth4.buseoName }</label>
-																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
-																	</div>
-																</c:when>
-															</c:choose>
-														
-														</c:forEach>
-														</div>
-													</c:when>
-													
-													
-													
-													
-													
-													
-													
-													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
-														<div style="margin-left: 60px;">
-														<label id="ch-${depth3.buseoNum }">${depth3.buseoName }</label>
-														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
-														</div>
-													</c:when>
-												
-													</c:choose>
-												</c:forEach>
-											</div>
-										</c:when>
-										
-										
-										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
-											<div style="margin-left: 40px;">
-											<label id="ch-${depth2.buseoNum }">${depth2.buseoName }</label>
-											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
-											</div>
-										</c:when>
-									</c:choose>
-								
-									</c:forEach>
-								</div>
-							</c:when>
-							
-							
-							
-							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
-								<div style="margin-left: 20px;">
-								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
-								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
-								</div>
-							</c:when>
-							
-							</c:choose>
-						</c:forEach>
-						</div>
-								
-					</c:when>
-					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
-					<div>
-					<label id="ch-${depth0.buseoNum }">${depth0.buseoName }</label>
-					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
-
-					</div>
-					</c:when>
-					</c:choose>
-				</c:forEach>
-			</c:forEach>
-		</div>
+	<div style="width: 240px;float: left; margin-top: 10px;">
+		
+			<div style="height: 30px;" >
+				<div class="boardManagement" onclick="deleted();"><img src="/erp/resources/image/minus-white.png" >&nbsp;삭제</div>
+				<div class="boardManagement" onclick="created();"><img src="/erp/resources/image/plus-white.png" >&nbsp;추가</div>
+			</div>		
+			<div id="boardList" style="background-color: #D4F4FA;padding-left: 10px; padding-top: 10px;">
+				
+			</div>
 	</div>
 
 	<div style="width: 1320px; height: 740px;float: left;">
 		
-		<div class="buseo">
-		사원정보
-		</div>
-		
-		
 		<div style=" height: 740px; width: 1320px;">
-			<div style="margin-top:50px; margin-left: 410px; height: 40px; float: left;">
-				<form action="javascript:sendIt();" name="myForm" method="post">
-					<input type="text" id="searchValue" name="searchValue" style="height: 16px; float: left;">
-				</form>
-				<span style="margin-left: 5px; float: left;">
-					<img align="middle" src="/erp/resources/image/find.png" onclick="sendIt();">
-				</span>
-				
-				<div style="float: left;height: 25px" class="button" onclick="javascript:buseoManagement();">부서관리</div>		
-				<div class="button" style="float: left;height: 25px;margin-left: 10px;" onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</div>			
-			</div>
-			
-			<div id="memberList" style="padding-top :130px;">
-				
+			<div style="width: 800px; height: 740px; margin-left: 260px;background-color: red">
+				<div style="width: 740px;margin-left: 30px; padding-top: 10px;">
+					<div >게시판설정</div>
+					<div >게시판에 대한 정보 및 수정을 할 수 있습니다.</div>
+					<div >공지게시판으로 사용하시려면 글쓰기 권한을 관리자 이상으로 지정하세요.</div>
+					<div style="border-bottom: 1px solid;height: 30px;"></div>
+					<div style="float: left; width: 200px; padding-top: 10px; ">
+					
+						<div style="height: 35px; border-bottom: 1px solid;" >게시판명</div>
+					
+					</div>
+					<div style="float: left; padding-top: 10px; width: 540px;">
+						<div style="height: 35px; border-bottom: 1px solid;"><input type="text"></div>
+					
+					</div>
+				</div>
 			</div>
 			
 		</div>

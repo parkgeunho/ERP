@@ -15,6 +15,21 @@
 
 
 
+.boardManagement{
+	
+	float: right; 
+	border: 1px solid;
+	background-color: #49B5F4;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	height: 28px;
+	width:70px;
+	line-height: 28px;
+}
+
+
+
 
 .buseo{
 	
@@ -50,7 +65,7 @@
 	
 }
 
-.data td{
+#data td{
 	
 	
 	border-bottom: 1px dashed ;
@@ -58,7 +73,7 @@
 	text-align: center;
 	
 }
-.op{
+#op{
 	
 	background-color: #49B5F4;
 	text-align: center;
@@ -68,7 +83,7 @@
 	
 }
 
-.op td{
+#op td{
 	
 	border-top-left-radius : 5px;
 	border-top-right-radius : 5px;

@@ -96,13 +96,24 @@ public class InsaController {
 
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test2(HttpServletRequest request,HttpServletResponse response) {
+	public String test(HttpServletRequest request,HttpServletResponse response) {
 		
 	
 
 	
 		return "buseo";
+	}
+	
+	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
+	public String test2(HttpServletRequest request,HttpServletResponse response) {
+		
+	
+
+		
+		
+		return "project/buseoManagement";
 	}	
+	
 	
 	//리스트 아작스로출력
 	@RequestMapping(value = "/buseoList", method = {RequestMethod.POST,RequestMethod.GET})
