@@ -77,7 +77,7 @@ function sendIt(){
 <body style="font-style: 나눔고딕코딩;">
 
 
-<form action="" name="myForm" method="post">
+<form action="created.action" name="myForm" method="post" enctype="multipart/form-data">
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 40px; background: #D4D4D4">
 		<td colspan="3" style="width: 1400px; letter-spacing: 5px; font-size: 20px; 
