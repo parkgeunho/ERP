@@ -36,7 +36,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
       <mapper resource="com/exe/board/BoardMapper.xml"/>
       <mapper resource="com/exe/insa/InsaMapper.xml"/>
       <mapper resource="com/exe/member/memberMapper.xml"/>
-
+      <mapper resource="com/exe/insa/ListMapper.xml"/>
 
    </mappers>
 

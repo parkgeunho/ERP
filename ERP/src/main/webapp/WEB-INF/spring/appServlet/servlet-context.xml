@@ -47,10 +47,15 @@
     
        
     
+   <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+    
     
     <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
+   
    <beans:bean id="memberDAO" class="com.exe.member.MemberDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>

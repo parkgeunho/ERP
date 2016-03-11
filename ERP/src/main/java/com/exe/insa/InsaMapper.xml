@@ -15,7 +15,6 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="buseoCreated" parameterType="com.exe.insa.BuseoDTO">
 	insert into buseo(buseoNum,groupNum,depth,orderNo,parent)
 	values (#{buseoNum},#{groupNum},#{depth},#{orderNo},#{parent})
-	
 	</insert>
 	
 	<!-- 리스트출력 -->

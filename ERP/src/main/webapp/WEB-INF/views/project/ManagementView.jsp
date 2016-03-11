@@ -12,19 +12,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="/erp/resources/insa/jquery.session.js"></script>
+
 <script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
-<script>
 
-</script>
 
 <script type="text/javascript">
 var num = 1;
 $(document).ready(function(){
-	/* $(".content").mCustomScrollbar(); */
+	
+	
+	
+	
 	
 	
 	
@@ -120,13 +121,11 @@ function sendIt() {
 <body>
 <div  style="width:1570px; height: 807px;">
 	
-	
+	<div class="buseo" >부서관리</div>
 	<!-- 왼쪽 부서 관련  -->
-	<div style="width: 250px;float: left;">
-		<div class="buseo" >
-		부서
-		</div>
-		<div>
+	<div style="width: 290px;float: left; margin-left: 30px;">
+	
+		<div style="margin-top: 10px; margin-left: 10px; height: 730px; border: 1px solid; width: 250px;">
 			<c:forEach var="parent" items="${parent }">
 				<c:forEach var="depth0" items="${lists }">
 					<c:choose>
@@ -189,7 +188,7 @@ function sendIt() {
 															
 																<c:when test="${depth3.buseoNum==depth4.parent }">
 																	<div style="margin-left: 80px;">
-																	<label id="ch-${depth4.buseoNum }"> ${depth4.buseoName }</label>
+																	<label id="ch-${depth4.buseoNum }">┖ ${depth4.buseoName }</label>
 																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
 																	</div>
 																</c:when>
@@ -207,7 +206,7 @@ function sendIt() {
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
 														<div style="margin-left: 60px;">
-														<label id="ch-${depth3.buseoNum }">ㄴ ${depth3.buseoName }</label>
+														<label id="ch-${depth3.buseoNum }">┖ ${depth3.buseoName }</label>
 														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														</div>
 													</c:when>
@@ -220,7 +219,7 @@ function sendIt() {
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
 											<div style="margin-left: 40px;">
-											<label id="ch-${depth2.buseoNum }">ㄴ ${depth2.buseoName }</label>
+											<label id="ch-${depth2.buseoNum }">┖ ${depth2.buseoName }</label>
 											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 										</c:when>
@@ -234,7 +233,7 @@ function sendIt() {
 							
 							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
 								<div style="margin-left: 20px;">
-								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
+								<label id="ch-${depth1.buseoNum }">┖${depth1.buseoName }</label>
 								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 							</c:when>
@@ -257,14 +256,12 @@ function sendIt() {
 		</div>
 	</div>
 
-	<div style="width: 1320px; height: 740px;float: left;">
+	<div style="width: 1250px; height: 740px;float: left;">
 		
-		<div class="buseo">
-		사원정보
-		</div>
+
 		
 		
-		<div style=" height: 740px; width: 1320px;">
+		<div style=" height: 740px; width: 1250px;">
 			<div style="margin-top:50px; margin-left: 410px; height: 40px; float: left;">
 				<form action="javascript:sendIt();" name="myForm" method="post">
 					<input type="text" id="searchValue" name="searchValue" style="height: 16px; float: left;">
