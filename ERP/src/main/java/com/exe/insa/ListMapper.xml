@@ -65,5 +65,14 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	<!-- 회원 리스트 출력 -->
+	<select id="memberList" resultType="com.exe.member.MemberDTO">
+	select num,userNum ,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb	
+	</select>
+	
+	<delete id="boardListDelete" parameterType="integer">
+		delete boardlist where listNum=#{listNum}
+				
+	</delete>
 
 </mapper>

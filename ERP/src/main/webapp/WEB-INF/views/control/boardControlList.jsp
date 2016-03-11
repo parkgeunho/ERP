@@ -34,11 +34,27 @@
          else
             obj.hide();
       });
-   });
+
+   
+   
+   $('[id^="buseo-"]').click(function(){
+       
+       var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+         $(this).attr('src',src);
+       
+       var obj = $('.'+ this.id);
+       
+       if(obj.css('display')=='none')
+          obj.show();
+       else
+          obj.hide();
+    });
+
+   
 
 	
 	
- 	$('[id^="edit-"]').click(function(){
+ 	$('[id^="ch-"]').click(function(){
  	
  		
  	var dds = ${maxNum};
@@ -46,7 +62,7 @@
  		for(var i=1;i<dds+1;i++){
  			
  			
- 			var v = "edit-"+i;
+ 			var v = "ch-"+i;
  			
  			
  		if($("#"+v).length>0){
@@ -57,7 +73,7 @@
 	 				
 	 			}else{
 	 				
-	 				document.getElementById(v).style.backgroundColor = "#FFFFFF";
+	 				document.getElementById(v).style.backgroundColor = "#D4F4FA";
 	 			}
  			
  			}
@@ -67,6 +83,8 @@
  		//클릭한 것을 세션에 넣어줌
  		
 		num= $('.num'+this.id).val();
+ 		
+ 		trim();
  		
 	});
  	
@@ -98,7 +116,7 @@
 	});  
    
  	
- 	
+   });	
  	
    
 </script>

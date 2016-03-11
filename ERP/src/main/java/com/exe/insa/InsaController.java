@@ -95,13 +95,14 @@ public class InsaController {
 	
 
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/extest", method = RequestMethod.GET)
 	public String test(HttpServletRequest request,HttpServletResponse response) {
 		
 	
+		
 
 	
-		return "buseo";
+		return "ex";
 	}
 	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)

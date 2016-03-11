@@ -55,7 +55,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="buseoDelete" parameterType="integer">
-		delete from buseo where buseoNum in
+		delete buseo where buseoNum in
 		(select buseoNum from buseo start with buseoNum=#{buseoNum}
 		connect by prior buseoNum=parent)
 				

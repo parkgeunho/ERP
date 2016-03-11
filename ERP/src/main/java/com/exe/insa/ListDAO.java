@@ -3,7 +3,11 @@ package com.exe.insa;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
+
 import org.mybatis.spring.SqlSessionTemplate;
+
+import com.exe.member.MemberDTO;
 
 public class ListDAO {
 	
@@ -69,6 +73,16 @@ public class ListDAO {
 		List<ListDTO> lists = sessionTemplate.selectList("com.exe.buseoControl.depth");
 		return lists;
 		
+	}
+	
+	public List<MemberDTO> memberList(){
+		
+		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.buseoControl.memberList");
+		return lists;
+	}
+	
+	public void boardListDelete(int listNum){
+		sessionTemplate.delete("com.exe.buseoControl.boardListDelete", listNum);
 	}
 	
 	

@@ -30,7 +30,7 @@ $(document).ready(function() {
 	$("#updated").click(function(){
 		
 		var myForm = $("#myForm").serialize();
-		
+			
 		  $.ajax({
              url:'buseoUpdated',
              type:'POST',
