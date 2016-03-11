@@ -32,6 +32,7 @@ public class MemberController {
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
 	
+	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
 		
@@ -246,6 +247,23 @@ public class MemberController {
 		
 		return "member/compareID";
 
+	}
+	
+	@RequestMapping(value = "/updated.action" , method = {RequestMethod.POST,RequestMethod.GET})
+	public String updated(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		
+		
+		
+		
+		request.setAttribute("dto", dto);
+		
+		
+		return "member/updated";
 	}
 	
 	
