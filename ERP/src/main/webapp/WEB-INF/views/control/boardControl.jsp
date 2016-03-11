@@ -136,7 +136,7 @@ function created(){
 				<div class="boardManagement" onclick="deleted();"><img src="/erp/resources/image/minus-white.png" >&nbsp;삭제</div>
 				<div class="boardManagement" onclick="created();"><img src="/erp/resources/image/plus-white.png" >&nbsp;추가</div>
 			</div>		
-			<div id="boardList" style="background-color: #D4F4FA;padding-left: 10px; padding-top: 10px;">
+			<div id="boardList" style="background-color: #D4F4FA;margin-left: 10px; padding-left:10px; padding-top: 10px;">
 				
 			</div>
 	</div>
