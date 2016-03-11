@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.buseoControl">
+
+	<!-- 최대값 구하기 -->
+	<select id="maxNum" resultType="integer">
+	select nvl(max(listNum),0) from boardlist	
+	</select>
+	
+	<!-- 생성 -->
+	<insert id="boardCreated" parameterType="com.exe.insa.ListDTO">
+	insert into boardlist(listNum,groupNum,depth,orderNo,parent)
+	values (#{listNum},#{groupNum},#{depth},#{orderNo},#{parent})
+	</insert>
+	
+	
+	<!-- 하위 개수 -->
+	<select id="replyNum" resultType="Integer" parameterType="map">
+	   select count(*) from boardlist where groupNum=#{groupNum} and depth=#{depth}+1 and parent=#{listNum}
+	</select>
+   
+	<!-- 하위갯수변경 -->
+	<update id="setReplyNum" parameterType="map">
+		update boardlist set replyNum=#{replyNum} where listNum=#{listNum}
+	</update>
+	
+	 <!-- 하위가 생길 경우 순서변경 -->
+	<update id="orderNoUpdate" parameterType="map">
+		update boardlist set orderNo=orderNo + 1
+		where groupNum=#{groupNum} and orderNo>#{orderNo}
+	</update>
+	
+	<!-- 삭제하면서 하위까지 삭제하기 -->
+	<delete id="boardDelete" parameterType="integer">
+		delete from boardlist where listNum in
+		(select listNum from boardlist start with listNum=#{listNum}
+		connect by prior listNum=parent)
+	</delete>
+	
+	
+	
+	<!-- 정보읽기 -->
+	<select id="ReadData" parameterType="integer" resultType="com.exe.insa.ListDTO">
+		select listNum,boardName,groupNum,depth,orderNo,parent,replyNum,checked from boardlist where listNum=#{listNum}
+	</select>
+	
+	<!-- 계층형 구조를 출력 하기 위한 필요정보 출력해오기 -->
+	<select id="group" resultType="com.exe.insa.ListDTO">
+		select groupNum,count(*) replyNum from boardlist group by groupNum order by groupNum desc
+	</select>	
+	
+	<select id="depth" resultType="com.exe.insa.ListDTO">
+		select parent,count(*) replyNum from boardlist group by parent having parent!='0' 
+	</select>
+	
+	
+	<!-- 리스트출력 -->
+	<select id="list" resultType="com.exe.insa.ListDTO">
+	
+	select listNum,boardName,groupNum,depth,orderNo,parent,checked from boardlist order by groupNum desc, orderNo asc
+	
+	</select>
+	
+
+</mapper>

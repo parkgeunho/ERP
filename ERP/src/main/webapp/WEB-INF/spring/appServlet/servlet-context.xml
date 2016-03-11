@@ -47,10 +47,15 @@
     
        
     
+   <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+    
     
     <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
+   
    <beans:bean id="memberDAO" class="com.exe.member.MemberDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
@@ -80,13 +85,11 @@
    <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 	destroy-method="close">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys" />
-
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
-	</beans:bean>
 
+	</beans:bean>
 
     
     <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>

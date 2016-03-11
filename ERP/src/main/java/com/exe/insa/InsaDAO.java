@@ -120,12 +120,7 @@ public class InsaDAO {
 		params.put("depth5", depth5);
 		params.put("searchValue", searchValue);
 		
-		System.out.println("depth1 : "+depth1);
-		System.out.println("depth2 : "+depth2);
-		System.out.println("depth3 : "+depth3);
-		System.out.println("depth4 : "+depth4);
-		System.out.println("depth5 : "+depth5);
-		System.out.println("dao쪽 값확인합니다. 값은 : ? " + searchValue);
+
 		
 		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",params);
 		return result;

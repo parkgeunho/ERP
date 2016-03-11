@@ -9,14 +9,10 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 	
 	<properties>
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
-
 		<property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys"/>
-
-		
-
-
 		<property name="username" value="SUZI"/>
 		<property name="password" value="A123"/>
+
 	</properties>
 
 
@@ -41,7 +37,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
       <mapper resource="com/exe/board/BoardMapper.xml"/>
       <mapper resource="com/exe/insa/InsaMapper.xml"/>
       <mapper resource="com/exe/member/memberMapper.xml"/>
-
+      <mapper resource="com/exe/insa/ListMapper.xml"/>
 
    </mappers>
 

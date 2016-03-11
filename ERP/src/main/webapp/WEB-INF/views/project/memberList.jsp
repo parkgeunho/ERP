@@ -5,12 +5,17 @@
 	String cp = request.getContextPath();
 
 %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<script src="/erp/resources/insa/jquery.mCustomScrollbar.concat.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 
-
-<table >
-	<Tr height="30px;" class="op">
+<div class="test" style="width: 1200px; overflow: auto;">
+<table style="width: 1310px;">
+	<Tr height="30px;" id="op" >
 		<td width="110px;">사원번호</td>
 		<td width="80px;">이름</td>
 		<td width="100px;">아이디</td>
@@ -24,7 +29,7 @@
 	</Tr>
 	
 	<c:forEach var="dto" items="${lists}">
-		<tr height="30px;" class="data" >
+		<tr height="30px;" id="data" >
 			<td width="110px;">${dto.usernum }</td>
 			<td width="80px;"><a href="<%=cp%>/insaView.action?num=${dto.num}">${dto.name }</a></td>
 			<td width="100px;">${dto.id }</td>
@@ -65,3 +70,4 @@
 	</tr>
 					
 </table>
+</div>

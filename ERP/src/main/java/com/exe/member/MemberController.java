@@ -32,6 +32,7 @@ public class MemberController {
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
 	
+	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
 		
@@ -111,30 +112,48 @@ public class MemberController {
 	
 
 			BuseoDTO bDto = null;
-			if(dto.getDepth1()!=null){
+			if(dto.getDepth1()!="no" && !dto.getDepth1().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth1()));
 			
 				dto.setDepth1(bDto.getBuseoName()+" ▶ ");
+			}else if(dto.getDepth1().equals("no")||dto.getDepth1()=="no"){
+				dto.setDepth1("");
 			}
-			if(dto.getDepth2()!=null){
+			
+			
+			if(dto.getDepth2()!="no"&& !dto.getDepth2().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth2()));
 				dto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(dto.getDepth2().equals("no")||dto.getDepth2()=="no"){
+				dto.setDepth2("");
 			}
-			if(dto.getDepth3()!=null){
+			
+			
+			if(dto.getDepth3()!="no" && !dto.getDepth3().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth3()));
 				dto.setDepth3(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(dto.getDepth3().equals("no")||dto.getDepth3()=="no"){
+				dto.setDepth3("");
 			}
-			if(dto.getDepth4()!=null){
+			
+			
+			if(dto.getDepth4()!="no" && !dto.getDepth4().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth4()));
 				dto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(dto.getDepth4().equals("no")||dto.getDepth4()=="no"){
+				dto.setDepth4("");
 			}
-			if(dto.getDepth5()!=null){
+			
+			
+			if(dto.getDepth5()!="no" &&  !dto.getDepth5().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth5()));
 				dto.setDepth5(bDto.getBuseoName());
 				
+			}else if(dto.getDepth5().equals("no")||dto.getDepth5()=="no"){
+				dto.setDepth5("");
 			}	
 		
 		
@@ -246,6 +265,23 @@ public class MemberController {
 		
 		return "member/compareID";
 
+	}
+	
+	@RequestMapping(value = "/updated.action" , method = {RequestMethod.POST,RequestMethod.GET})
+	public String updated(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		
+		
+		
+		
+		request.setAttribute("dto", dto);
+		
+		
+		return "member/updated";
 	}
 	
 	
