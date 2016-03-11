@@ -1,6 +1,8 @@
 /*package com.exe.board;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class FileUtil {
 	
 	@Component("fileUtils")
 	public class FileUtils {
-	    private static final String filePath = "C:\\dev\\file\\";
+	    private static final String filePath = "D:\\dev\\file\\";
 	     
 	    public List<Map<String,Object>> parseInsertFileInfo(Map<String,Object> map, HttpServletRequest request) throws Exception{
 	        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -28,7 +30,7 @@ public class FileUtil {
 	        String originalFileExtension = null;
 	        String storedFileName = null;
 	         
-	        List<Map<String,Object>> list = new ArrayList()<Map<String, Object>>();
+	        List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 	        Map<String, Object> listMap = null; 
 	         
 	        String boardIdx = (String)map.get("IDX");
@@ -49,10 +51,10 @@ public class FileUtil {
 	                multipartFile.transferTo(file);
 	                 
 	                listMap = new HashMap<String,Object>();
-	                listMap.put("BOARD_IDX", boardIdx);
-	                listMap.put("ORIGINAL_FILE_NAME", originalFileName);
-	                listMap.put("STORED_FILE_NAME", storedFileName);
-	                listMap.put("FILE_SIZE", multipartFile.getSize());
+	                listMap.put("boardNum", boardNum);
+	                listMap.put("originalFileName", originalFileName);
+	                listMap.put("saveFileName", saveFileName);
+	                listMap.put("FileSize", multipartFile.getSize());
 	                list.add(listMap);
 	            }
 	        }

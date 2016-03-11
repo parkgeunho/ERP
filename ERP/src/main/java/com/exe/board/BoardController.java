@@ -78,7 +78,7 @@ public class BoardController {
 	      
 	     
 	      dto.setBoardNum(maxNum + 1);	  
-	      dto.setName("확ㅇ");  //이름값 
+	   
 	      
 	      dao.insertData(dto);
 	      

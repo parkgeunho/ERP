@@ -39,8 +39,7 @@
 	top:1px;
 }
 
-.dap_text_box
-{ 
+.dap_text_box { 
 background:#FFFFFF;
 color:#000000;
 border:1px solid #FCFCFC;
@@ -51,6 +50,24 @@ padding-left: 10px ;
 box-shadow: 1px 4px 16px #D6D6D6; 
 -webkit-box-shadow: 1px 4px 16px #D6D6D6; 
 -moz-box-shadow: 1px 4px 16px #D6D6D6;
+}
+
+
+	
+::-webkit-input-placeholder {
+   color: #cccccc;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #cccccc; 
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #cccccc; 
+}
+
+:-ms-input-placeholder {  
+   color: #cccccc; 
 }
 
 

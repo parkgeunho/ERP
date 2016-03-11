@@ -86,17 +86,17 @@
 	<c:forEach var="dto" items="${lists }">
 	<tr style="height: 1px; background: #B2EBF4">		
 	</tr>
-		<tr style="height: 25px;">
-			<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
-			<td style="width: 750px;" class="subject">
+	<tr style="height: 25px;">
+		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
+		<td style="width: 750px;" class="subject">
 			<a href="${articleUrl}&boardNum=${dto.boardNum}">
 				${dto.subject }</a></td>
-			<td style="width: 150px;" class="name" align="center">${dto.name}</td>
-			<td style="width: 150px;" class="created" align="center">${dto.created}</td>
-			<td style="width: 150px;" align="center"></td>
-			<td style="width: 100px;" class="hitCount" align="center">${dto.hitCount }</td>		
-		</tr>	
-		<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
+		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
+		<td style="width: 150px;" align="center"></td>
+		<td style="width: 100px;" class="hitCount" align="center">${dto.hitCount }</td>		
+	</tr>	
+	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr> 
 	</c:forEach>				

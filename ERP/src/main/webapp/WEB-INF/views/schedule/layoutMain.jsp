@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/tiles.css">
 </head>
 <body style="margin: 0px;">
-<div style="width: 1920px; height: 982px;;">
+<div style="width: 1840px; height: 822px;;">
 	
 	<div style="float: left; width: 270px; height:822px;"><tiles:insertAttribute name="leftMain"/></div>
 	<div style="float: left; width: 1570px; height:822px; ">

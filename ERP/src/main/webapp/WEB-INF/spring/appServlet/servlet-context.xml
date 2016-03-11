@@ -67,22 +67,6 @@
    
    
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-
-   
    <beans:bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
       <beans:property name="dataSource" ref="dataSource"/>
       <beans:property name="configLocation" value="classpath:/mybatis-config.xml"/>   
@@ -96,7 +80,9 @@
    <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 	destroy-method="close">
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys" />
+
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
 	</beans:bean>
@@ -104,14 +90,6 @@
 
     
     <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
