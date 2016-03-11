@@ -40,15 +40,24 @@
 		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
 	</tr>
 	
-	<tr>
+	<tr style="height: 30px; background: #6EE3F7" >
 		<td style="width: 200px; height: 22px;" align="center">작성자</td>
 		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
 	</tr>
 	<tr style="height: 0.5px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="4"></td>
+		<td style="width: 1400px;" colspan="3"></td>
 	</tr>
-	<tr style="height: 3px;">	
+	
+	<tr>
+		<td style="height: 22px; width: 200px;" align="center">첨부파일</td>
+		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="download.action">파일 다운</a>
+			<img alt="" src="/erp/resources/boardimage/down002.png">&nbsp;&nbsp;  </td>
 	</tr>
+	
+	<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 1400px;" colspan="3"></td>
+	</tr>
+	
 </table>
 
 <table  border="0" align="center">
