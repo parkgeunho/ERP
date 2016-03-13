@@ -232,7 +232,7 @@ public class ListController {
 	
 	
 	@RequestMapping(value = "/boardListDelete", method = {RequestMethod.GET,RequestMethod.POST})
-	public String boardDeleted(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
+	public String boardDeleted(HttpServletRequest request,HttpServletResponse response,ListDTO dto) {
 		
 		int listNum = Integer.parseInt(request.getParameter("num"));
 		
@@ -241,6 +241,26 @@ public class ListController {
 		listDAO.boardListDelete(listNum);
 		
 		return boardList(request, response);
+	}
+	
+	@RequestMapping(value = "/boardUpdate", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardUpdate(HttpServletRequest request,HttpServletResponse response,ListDTO dto) {
+		
+		System.out.println("애당초 여긴옴?");
+		String listNum = request.getParameter("listNum");
+		
+		if(listNum==null || listNum.equals("")){
+			return "control/boardUpdate";
+		}
+		
+		int num = Integer.parseInt(listNum);
+		
+		dto = listDAO.readData(num);
+		System.out.println("값이 잘 왓는지 확인하빈다." +dto.getBoardName());
+		
+		request.setAttribute("boardData", dto);
+		
+		return "control/boardUpdate";
 	}
 	
 	
