@@ -1,7 +1,10 @@
 package com.exe.insa;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -293,6 +296,7 @@ public class ListController {
 				
 				int j = Integer.parseInt(i);
 				BuseoDTO bDto = insaDAO.readBuseo(j);
+				System.out.println("디티오확인" + bDto.getBuseoNum());
 				buseoRlist.add(bDto);
 				if(buseoRlist!=null)
 					request.setAttribute("buseoRlist", buseoRlist);
@@ -405,6 +409,116 @@ public class ListController {
 		
 		return boardUpdate(request, response,num);
 	}
+	
+	@RequestMapping(value = "/boardSideUpdate", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardSideUpdate(HttpServletRequest request,HttpServletResponse response) {
+		
+		String ckNum = request.getParameter("ckNum");
+		String num = request.getParameter("num");
+		String change = request.getParameter("change");
+		
+		String date = ckNum.substring(4); //숫자확인
+		String sort = ckNum.substring(0, 3); //어디껀지 확인하는용
+		
+		
+		int listNum = Integer.parseInt(num);
+		
+		ListDTO dto = listDAO.readData(listNum);
+		String buseoWs[] = dto.getBuseoW().split(",");
+		
+		if(sort.equals("Bus")){
+			
+			if(change.equals("write")){
+				
+				List<String> list = new ArrayList<String>();
+				Collections.addAll(list, buseoWs);
+				boolean isFind = list.contains(date);
+				if(isFind){
+					System.out.println("중복값있음");
+				}else{
+					System.out.println("중복값없어서 내려옴");
+				list.add(date);
+				Iterator<String> it = list.iterator();
+				String buseoW="";
+					while(it.hasNext()){
+						
+						buseoW += it.next()+",";
+						
+					}
+				dto.setBuseoW(buseoW);
+				}
+				
+			}
+			
+			if(change.equals("non")){
+				
+				List<String> list = new ArrayList<String>();
+				Collections.addAll(list, buseoWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String buseoW ="";
+				
+				while(it.hasNext()){
+					buseoW += it.next()+",";
+					
+					
+				}
+				dto.setBuseoW(buseoW);
+				
+			}
+				listDAO.boardBuseo(dto);
+				
+			
+			
+			
+			
+		}
+		
+		
+		return boardUpdate(request, response, num);
+	}
+	
+	
+	
+	@RequestMapping(value = "/boardSide", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardSide(HttpServletRequest request,HttpServletResponse response) {
+		
+		String ckNum = request.getParameter("ckNum");
+		String boardNum = request.getParameter("num");
+		
+		int listNum = Integer.parseInt(boardNum);
+		
+		String date = ckNum.substring(4); //숫자확인
+		String sort = ckNum.substring(0, 3); //어디껀지 확인하는용
+		String ck = null;
+		
+		ListDTO dto = listDAO.readData(listNum);
+		
+		if(sort.equals("Bus")){
+			
+			String buseoWs[] = dto.getBuseoW().split(",");
+			
+			for(String i : buseoWs){
+				System.out.println("I값확인"+i);
+				System.out.println("date확인" + date);
+				if(i.equals(date)){
+					ck ="ok";
+					System.out.println("먼데 ck값학인" + ck);
+				}	
+			}
+			
+		}
+		System.out.println("ck값 확인"+ ck);
+		request.setAttribute("ck", ck);
+		return "control/boardUpdateSide";
+	}
+	
+	
+	
+		
+		
+		
+		
 	
 	
 	

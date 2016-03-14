@@ -88,33 +88,12 @@
  		
 	});
  	
- 	
+
+ 		
 
  	
  	
- 	//클릭을 했을 시 인풋 박스로 변경 시킨다.
-	$('[id^="edit-"]').dblclick(function(){
-		
- 		var v = $(":text").id;
-		
-		var obj = $('.num'+ this.id).val();
-		 /* var a = obj.indexof("name=="); */
-		 
-		 /*  if(v==0){ */
-			 var av = document.getElementById(this.id).innerText;
-		 var ck = av.length>0;
-		 if(ck==false){
-			 return;
-		 }
-			 
-			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name=buseo"+obj+ ">"; 
-		/* }else{
-			
-			alert("이미다른걸수정중이므로 수정을 완료해주세요");
-			return;
-		}  */
-	});  
-   
+ 
  	
    });	
  	

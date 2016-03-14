@@ -6,7 +6,7 @@
 <form>
 
 	<select name="depth1" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;" >
-
+		
 		<c:forEach items="${lists}" var="dto">
 			<c:choose>
 
@@ -24,6 +24,7 @@
 
 	<c:if test="${buseoChange1!=null}">
 		<select name="depth2" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+		
 		<c:forEach items="${buseoChange1}" var="buseoChange1">
 			<c:choose>
 
@@ -42,6 +43,7 @@
 	
 	<c:if test="${buseoChange2!=null}">
 		<select name="depth3" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+		
 		<c:forEach items="${buseoChange2}" var="buseoChange2">
 			<c:choose>
 
@@ -60,6 +62,7 @@
 
 	<c:if test="${buseoChange3!=null}">
 		<select name="depth4" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+		
 		<c:forEach items="${buseoChange3}" var="buseoChange3">
 			<c:choose>
 
@@ -78,6 +81,7 @@
 
 	<c:if test="${buseoChange4!=null}">
 		<select name="depth5" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+		
 		<c:forEach items="${buseoChange4}" var="buseoChange4">
 			<c:choose>
 

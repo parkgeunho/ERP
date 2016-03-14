@@ -86,6 +86,9 @@ $(document).ready(function(){
 		alert(group);
 	
 	});
+
+
+	
 	
 	
 	$('[id^="Mem-"]').click(function(){
@@ -140,10 +143,13 @@ function deleted(){
 function trim(){
 	
 	var url = "<%=cp%>/boardUpdate";
+
+	
 	$.post(url,{listNum:num},function(args){
 	$("#boardUpdate").html(args);
 	
 	});
+	
 	
 	
 }

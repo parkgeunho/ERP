@@ -7,6 +7,23 @@
 %>
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
+<script>
+
+$('[id^="ckBus-"]').click(function(){
+	
+	
+	ck= "Bus-" + $('.num'+this.id).val();
+	alert(ck);
+	var url = "<%=cp%>/boardSide";
+	$.post(url,{num:num,ckNum:ck},function(args){
+	$("#boardSide").html(args);
+	
+	}).error(function(){alert("이미 최하 부서입니다.")});
+
+});
+	
+</script>
+
 
 <form name="boardUpdateForm" id="boardUpdateForm">
 <div style="width: 740px;margin-left: 30px; padding-top: 10px;">
@@ -35,16 +52,30 @@
 							</div>
 							<div>
 								<c:forEach var="dto" items="${buseoRlist }">
-									<div>
-									<label>${dto.buseoName }</label>
-									<input type="hidden" name="">
+								<div>
+									<div style="float: left;">
+									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
+									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
-								
+									<div style="widows: 20px;float: left;">
+										<c:forEach var="ck" items="${buseoWlist }">
+											<c:choose>
+												<c:when test="${ck.buseoNum!=dto.buseoNum }">
+												읽기
+												</c:when>
+												
+												<c:when test="${ck.buseoNum==dto.buseoNum }">
+												읽기/쓰기
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</div>
+								</div>
 								</c:forEach>
 							</div>
 						</div>
 						
-						<DIV style="float: left; background-color: aqua; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;">
+						<DIV style="float: left; background-color: aqua; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
 							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
 							수정
 							</div>
