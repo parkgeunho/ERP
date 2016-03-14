@@ -6,25 +6,55 @@
 <form>
 
 	<select name="depth1" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;" >
-    		
-    		<c:forEach items="${lists}" var="dto" >
-    		<option value="${dto.buseoNum }"  selected="selected">${dto.buseoName }</option>
-    		</c:forEach>
+
+		<c:forEach items="${lists}" var="dto">
+			<c:choose>
+
+				<c:when test="${dto.buseoNum==depth1 }">
+					<option value="${dto.buseoNum }" selected="selected">${dto.buseoName }</option>
+				</c:when>
+
+				<c:otherwise>
+					<option value="${dto.buseoNum }">${dto.buseoName }</option>
+				</c:otherwise>
+			</c:choose>
+
+		</c:forEach>
 	</select>
 
 	<c:if test="${buseoChange1!=null}">
 		<select name="depth2" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left;">
 		<c:forEach items="${buseoChange1}" var="buseoChange1">
-    		<option value="${buseoChange1.buseoNum }" selected="selected">${buseoChange1.buseoName }</option>
-    	</c:forEach>
+			<c:choose>
+
+				<c:when test="${buseoChange1.buseoNum==depth2 }">
+					<option value="${buseoChange1.buseoNum }" selected="selected">${buseoChange1.buseoName }</option>
+				</c:when>
+
+				<c:otherwise>
+					<option value="${buseoChange1.buseoNum }">${buseoChange1.buseoName }</option>
+				</c:otherwise>
+			</c:choose>
+
+		</c:forEach>
 		</select>
 	</c:if>
 	
 	<c:if test="${buseoChange2!=null}">
-		<select name="depth3" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+		<select name="depth3" class="dap_text_box" onchange="change1();" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
 		<c:forEach items="${buseoChange2}" var="buseoChange2">
-    		<option value="${buseoChange2.buseoNum }"  selected="selected">${buseoChange2.buseoName }</option>
-    	</c:forEach>
+			<c:choose>
+
+				<c:when test="${buseoChange2.buseoNum==depth3 }">
+					<option value="${buseoChange2.buseoNum }" selected="selected">${buseoChange2.buseoName }</option>
+				</c:when>
+
+				<c:otherwise>
+					<option value="${buseoChange2.buseoNum }">${buseoChange2.buseoName }</option>
+				</c:otherwise>
+			</c:choose>
+
+		</c:forEach>
 		</select>
 	</c:if>
 

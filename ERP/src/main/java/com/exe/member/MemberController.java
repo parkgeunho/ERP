@@ -257,6 +257,17 @@ public class MemberController {
 		
 		List<BuseoDTO> lists = dao.depth1();
 		
+		if(depth1S==null || depth1S.equals("")){
+			
+			depth1S = "1" ;
+			
+		}
+		
+		if(depth2S==null || depth2S.equals("")){
+			
+			depth2S = "1" ;
+			
+		}
 		
 		
 		
@@ -276,30 +287,34 @@ public class MemberController {
 			List<BuseoDTO> buseoChange1 = dao.buseo1(depth1);
 			
 			request.setAttribute("buseoChange1", buseoChange1);
-			
-			if(depth2S!=null && !depth2S.equals("")){
-				
-				
-				int depth2 = Integer.parseInt(depth2S);
-				
-				List<BuseoDTO> buseoChange2 = dao.buseo2(depth2);
-				
-				
-				request.setAttribute("buseoChange2", buseoChange2);
-				
-				if(depth3S!=null && !depth3S.equals("")){
-
-					int depth3 = Integer.parseInt(depth3S);
-
-					List<BuseoDTO> buseoChange3 = dao.buseo3(depth3);
-
-					request.setAttribute("buseoChange3", buseoChange3);
-
-				}
-
-			}
-
+			request.setAttribute("depth1", depth1);
 		}
+		
+
+		if(depth2S!=null && !depth2S.equals("")){
+			
+			
+			int depth2 = Integer.parseInt(depth2S);
+			
+			
+			List<BuseoDTO> buseoChange2 = dao.buseo1(depth2);
+			
+			
+			request.setAttribute("buseoChange2", buseoChange2);
+			request.setAttribute("depth2", depth2);
+			
+		}
+		
+		if(depth3S!=null && !depth3S.equals("")){
+
+			int depth3 = Integer.parseInt(depth3S);
+
+			List<BuseoDTO> buseoChange3 = dao.buseo2(depth3);
+
+			request.setAttribute("buseoChange3", buseoChange3);
+			request.setAttribute("depth3", depth3);
+		}
+
 		
 		
 		
