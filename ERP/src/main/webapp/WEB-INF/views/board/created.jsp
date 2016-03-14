@@ -52,21 +52,29 @@ function sendIt(){
 		
 	}
 	f.subject.value = str;
-	f.action = "<%=cp%>/board/created_ok.action";
-	f.submit();
 	
-	
+	str= f.name.value;
+	str = str.trim();
+	if(!str){
+		alert("\n이름을 입력하세요.");
+		f.name.focus();
+		return;
+			
+	}
+	f.name.value = str;
+		
  	str = CKEDITOR.instances.editor1.getData();
 	
 	str = str.trim();
 	
 	if(!str){
 		alert("\n내용을 입력하세요." );
-		f.content.focus();
+		CKEDITOR.instances.editor1.focus();
 		return;
 	}			
 	f.content.value = str;
-
+	f.action = "<%=cp%>/board/created_ok.action";
+	f.submit();
 	 
 
 }

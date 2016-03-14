@@ -1,8 +1,13 @@
 package com.exe.board;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.File;
 
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,49 +16,62 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exe.board.DownloadView;
 
+@Controller
 public class BoardFileController {
-
+	
+	@Autowired
+	@Qualifier("fileDAO")
+	BoardFileDAO filedao;
+	
+	@Autowired
+	@Qualifier("boadDAO")
+	BoardDAO dao;
+	
+	
 	//(File Upload)
-		@RequestMapping(value="/upload.action",method={RequestMethod.POST,RequestMethod.GET})
-		public String upload(MultipartHttpServletRequest req, 
-				String str) throws Exception{
+		@RequestMapping(value="/created_ok.action",method={RequestMethod.POST,RequestMethod.GET})
+		public String upload(MultipartHttpServletRequest request,BoardFileDTO filedto, HttpServletResponse response) throws Exception{
 			
 			String path = 
-					req.getSession().getServletContext().getRealPath("/WEB-INF/files");
+					request.getSession().getServletContext().getRealPath("/WEB-INF/files");
 			
-			MultipartFile file = req.getFile("upload");
+			MultipartFile file = request.getFile("file");
 			
+			//폴더 생성
+			File f = new File(path);
+			if(!f.exists())
+				f.mkdir();
 			if(file!=null && file.getSize()>0){
 				
-				try {
-					
-					FileOutputStream ostream = 
-							new FileOutputStream(path + "/" + 
-									file.getOriginalFilename());
-					
-					InputStream istream = file.getInputStream();
-					
-					byte[] buffer = new byte[512];
-					
-					while(true){
-						
-						int data = 
-								istream.read(buffer,0,buffer.length);
-						
-						if(data==-1){						
-							break;						
-						}
-						ostream.write(buffer,0,data);
-					}
-					istream.close();
-					ostream.close();				
-					
-				} catch (Exception e) {
-					System.out.println(e.toString());
-				}			
-			}		
-			return "uploadResult";				
+			
+			
+			
+			//save 파일 이름 만들어주는 부분
+			String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+			String saveFileName = filedto.getBoardNum() + filedto.getSaveFileName() + fileExt;
+			String originalFileName = path + File.separator + saveFileName;
+			
+			//폴더에 업로드			
+			f = new File(originalFileName);
+			file.transferTo(f);
+			
+			//filedto.setUpload(saveFileName);
+			
+		
+			
+			
 		}
+			
+		//DB 저장
+		
+		
+		//dao.insertData(filedto);
+		
+		
+		return "redirect:/board";
+		
+		}	
+			
 		
 		//DownLoad
 		
@@ -69,7 +87,7 @@ public class BoardFileController {
 		}
 		
 	  
-	
+		
 	
 	
 
