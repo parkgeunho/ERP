@@ -21,151 +21,75 @@
 <script type="text/javascript" src="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 
 <!-- //javascript:openpage_small('/form01?openform&form=GV28'); -->
+
 <script type="text/javascript">
 
-/* $(document).ready(function() {
-	
-	
-}); */
+	function sendIt(){
 
+		var f = document.approvalFormCreatedFORM
+			
+		str = f.approvalFormType.value;
+		str = str.trim();
+		if(!str){
+			alert("결재타입을 입력하십시오.");
+			f.approvalFormType.focus();
+			return;	
+		}
+		f.approvalFormType.value = str;
+		
+		str = f.approvalFormName.value;
+		str = str.trim();
+		if(!str){
+			alert("결재제목을 입력하십시오.");
+			f.approvalFormName.focus();
+			return;	
+		}
+		f.approvalFormName.value = str;
+		
+		str = f.approvalFormContent.value;
+		str = str.trim();
+		if(!str){
+			alert("양식내용을 입력하십시오.");
+			f.approvalFormContent.focus();
+			return;	
+		}
+		f.approvalFormContent.value = str;
+		
+		
+		
+		f.action = "approvalForm_ok" 
+		f.submit();
+		
+		alert("결재양식 생성 완료!");
+		window.close();
+		
+	}
+	
+</script>
 
+<script type="text/javascript">
+	function closeSelf(){
+		window.open('about:blank', '_self').close();
+	}
 </script>
 
 
 
-<script type="text/javascript">
-
-	$(function(){
-		
-		var dialog;
-		
-		var test;
-		
-		$("#approvalLineModal").click(function(){
-						
-			dialog = $("<body>").dialog({
-				
-				modal:true,				
-				open:function(){									
-					$(this).load("approvalLine.action");
-				},
-				                       
-				height:600,
-				width:900,
-				title:"결재선 지정" ,
-				
-				buttons: {
-					"넘겨라":function(){
-											
-						alert(hihi());
-						this.close();
-						dialog.dialog("close");					
-					},
-					"닫아라":function(){
-						
-						this.close();
-					}
-				},				
-				close: function(){
-					dialog = null;
-				}  
-			});
-		});		
-	});
-
-</script>
-
-<title>결재 상신</title>
+<title>결재 양식 생성</title>
 </head>
 <body>
 
-<form action="" method="post" name="myForm">
+<form action="" method="post" name="approvalFormCreatedFORM">
 
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
+<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> 결재 양식 작성 </font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
-<input type="button" value="결재선 지정" id="approvalLineModal" />
-<input type="button" name="approvalSave" value="저장" />
-<input type="button" name="approvalClose" value="닫기"  />
+<button type="button" name="approvalClose" onclick="closeSelf()" >닫기</button>
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
-</table>
-
-
-<c:set var="result" value="3"/>
-
-
-<table border="1" cellspacing="0" align="right"> 
-
-<c:forEach var="i" begin="1" end="4">
-	<tr>
-		<c:choose>
-		
-			<c:when test="${i==1}">			
-				<c:forEach var="j" begin="1" end="${result}">
-					
-					<c:if test="${j==1}">
-					<tr>
-					<td>결</td>
-					<td>기안자</td>
-					</c:if>
-					
-					<c:if test="${j!=1}">
-					<td>결재자</td>
-					</c:if>
-					
-				</c:forEach>						
-			</c:when>
-				
-			<c:when test="${i==2}">			
-				<c:forEach var="j" begin="1" end="${result}">
-					<c:if test="${j==1}">
-					<tr>
-					<td>재</td>
-					<td>기안자이름</td>
-					</c:if>
-					
-					<c:if test="${j!=1}">
-					<td>결재자</td>
-					</c:if>
-				</c:forEach>						
-			</c:when>	
-				
-			<c:when test="${i==3}">			
-				<c:forEach var="j" begin="1" end="${result}">
-					<c:if test="${j==1}">
-					<tr>
-					<td>라</td>
-					<td>기안자서명</td>
-					</c:if>
-					
-					<c:if test="${j!=1}">
-					<td>결재자서명</td>
-					</c:if>
-				</c:forEach>						
-			</c:when>	
-						
-			<c:when test="${i==4}">
-				<c:forEach var="j" begin="1" end="${result}">
-					<c:if test="${j==1}">
-					<tr>
-					<td>인</td>
-					<td>기안일</td>
-					</c:if>
-					
-					<c:if test="${j!=1}">
-					<td>결재일</td>
-					</c:if>
-				</c:forEach>						
-			</c:when>	
-						
-		</c:choose>
-	</tr>
-</c:forEach>
-
 </table>
 
 <table align="center" width="100%" cellpadding="0" cellspacing="0">
@@ -175,23 +99,28 @@
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 
 <tr>
-<td width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; font-style: 나눔고딕코딩;font-weight: bolder;">제목</font></td>
+<td width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; font-style: 나눔고딕코딩;font-weight: bolder;">결재 타입</font></td>
 <td width="1" bgcolor="#8C8C8C"></td>
-<td height="30" bgcolor="#E4F7BA" align="center"><input type="text" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
+<td height="30" bgcolor="#E4F7BA" align="center"><input type="text" name="approvalFormType" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr> 
+
+<tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
+
+<tr>
+<td width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; font-style: 나눔고딕코딩;font-weight: bolder;">결재 제목</font></td>
+<td width="1" bgcolor="#8C8C8C"></td>
+<td height="30" bgcolor="#E4F7BA" align="center"><input type="text" name="approvalFormName" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr> 
+
 
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 
 <tr><td colspan="3">
             
             
-    <textarea name="contentArea" id="editor1" rows="10" cols="80">
-    
-    	${dto.approvalFormContent}
-    
-    
-		<!-- <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width: 520pt">
+    <textarea name="approvalFormContent" id="editor1" rows="10" cols="80">
+       
+		<table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width: 520pt">
 			<tbody>
 				<tr>
 					<td colspan="4" style="width: 520pt; height: 38.25pt;">
@@ -258,7 +187,7 @@
 					</td>
 				</tr>
 			</tbody>
-		</table> -->
+		</table>
 
 	</textarea>        
             
@@ -276,11 +205,12 @@
           
 </td></tr>
 
-
-<tr height="60"><td colspan="4" align="center"><input type="button" name="approvalUp" value="결재상신" onclick="window.open('http://localhost:8080/erp/approvalCreated_ok')"/></td></tr>
+<tr height="60"><td colspan="4" align="center">
+<button type="button" name="approvalUpload" onclick="sendIt();">결재상신</button></td></tr>
 
 </table>
 
 </form>
+
 </body>
 </html>

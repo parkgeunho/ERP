@@ -196,11 +196,27 @@ $(document).ready(function() {
 	
 	function hihi(){
 		
-		var okok = document.getElementById('kkk').value;
-			
+		var okok = document.getElementById('k222').value;
+	
 		return (okok);
+	}
+	
+	function k1(){      
+		
+		var k1 = document.getElementById('k111').value;
+			
+		this.close();
+		
+		return (k1);
 	}	
-				
+	
+	function k2(){
+		
+		var k2 = document.getElementById('k222').value;
+			
+		return (k2);
+	}	
+	
 </script>
 
 
@@ -222,9 +238,9 @@ $(document).ready(function() {
 <!-- 라인라인라인라인라인라인라인라인라인라인라인라인라인 -->
 <tr height="1"> 
 
-<td width="10"><input type="hidden" id="kkk" value="111111"/></td>
+<td width="10"><input type="hidden" id="k111" value="k1111111111111111"/></td>
 
-<td width="1" bgcolor="#8C8C8C"></td>
+<td width="1" bgcolor="#8C8C8C"><input type="hidden" id="k222" value="k22222222222222"/></td>
 <td width="4" bgcolor="#8C8C8C"></td>
 <td width="100" bgcolor="#8C8C8C"></td>
 <td width="100" bgcolor="#8C8C8C"></td>
