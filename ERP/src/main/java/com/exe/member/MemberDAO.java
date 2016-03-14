@@ -85,6 +85,36 @@ public class MemberDAO {
 		
 	}
 	
+	public MemberDTO readOne(int num){
+		
+		
+		MemberDTO dto = sessionTemplate.selectOne("com.exe.member.readOne",num);
+		
+		return dto;
+		
+	}
+	
+	public List<BuseoDTO> buseo1(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo1",num);
+		
+		return lists;
+	}
+	
+	public List<BuseoDTO> buseo2(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo2",num);
+		
+		return lists;
+	}
+	
+	public List<BuseoDTO> buseo3(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo3",num);
+		
+		return lists;
+	}
+	
 	
 	
 	

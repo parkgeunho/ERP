@@ -30,7 +30,7 @@ $(document).ready(function() {
 	$("#updated").click(function(){
 		
 		var myForm = $("#myForm").serialize();
-		
+			
 		  $.ajax({
              url:'buseoUpdated',
              type:'POST',
@@ -113,9 +113,6 @@ function created(){
 	}).error(function(){alert("이미 최하 부서입니다.")});
 }
 
-
-
-
 </script>
 
 </head>
@@ -131,7 +128,6 @@ function created(){
 		<div style="height: 30px;">
 			<div class="buseoManagement" onclick="deleted();"><img src="/erp/resources/image/minus-white.png" >&nbsp;부서삭제</div>
 			<div class="buseoManagement" onclick="created();"><img src="/erp/resources/image/plus-white.png" >&nbsp;부서추가</div>
-		
 		</div>
 	<div id="buseoList"></div>
 	</div>

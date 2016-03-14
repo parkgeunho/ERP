@@ -20,10 +20,33 @@
 		<put-attribute name="main"	value="/WEB-INF/views/member/join.jsp" />
 	</definition>      
  
-                                     
+     
+                                    
     <definition name="scheTile" extends="temp">
 		<put-attribute name="main" value="scheduleMain" />
 	</definition>
+	
+	<definition name="buseo" extends="temp">
+		<put-attribute name="main" value="Buseocontrol" />
+	</definition>
+	
+	<definition name="Buseocontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
+		<put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
+		<put-attribute name="rightMain" value="/WEB-INF/views/project/ManagementView.jsp" />
+	</definition>
+	
+	
+	<definition name="boardtest" extends="temp">
+		<put-attribute name="main" value="Boardcontrol" />
+	</definition>
+	
+	<definition name="Boardcontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
+		<put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
+		<put-attribute name="rightMain" value="/WEB-INF/views/control/boardControl.jsp" />
+	</definition>
+	
+	
+	
 	
 	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
@@ -55,17 +78,6 @@
 		</put-attribute>
 	</definition>
 
-	<!-- <definition name="scheTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="title"		value="타일즈테스트" />
-		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
-		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
-		<put-attribute name="leftMain"	value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
-		<put-attribute name="rightMain"	value="/WEB-INF/views/schedule/scheduleRight.jsp" />
-	</definition>
-	
-	<definition name="scheduleMain" extends="scheTile">
-		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
-	</definition> -->
 
 	<definition name="insa" extends="temp">
 		<put-attribute name="main"	value="/WEB-INF/views/project/ManagementView.jsp" />

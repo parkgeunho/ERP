@@ -45,11 +45,17 @@
    <beans:property name="defaultEncoding" value="UTF-8"/>
    </beans:bean>
     
+       
+    
+   <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+    
     
    <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
-      
+
    <beans:bean id="memberDAO" class="com.exe.member.MemberDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
@@ -58,10 +64,15 @@
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
    
+
    <beans:bean id="approvalDAO" class="com.exe.approval.ApprovalDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
-   
+
+   <!-- <beans:bean id="BoardFileDAO" class="com.exe.board.BoardFileDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
+   </beans:bean> -->
+
   
 
    <beans:bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -73,9 +84,10 @@
       <beans:constructor-arg ref="sessionFactory"/>
    </beans:bean>
    
-   <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-      
-      <beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+
+   <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	destroy-method="close">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 
       <beans:property name="url" value="jdbc:oracle:thin:@192.168.10.128:1521:orcl" />
 
@@ -84,7 +96,13 @@
       
    </beans:bean>
 
-   <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
+    <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
     
- 
+    
+    
+    
+    
+    
+    
+
 </beans:beans>

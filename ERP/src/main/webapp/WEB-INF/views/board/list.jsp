@@ -29,11 +29,11 @@
 </script>
 
 </head>
-<body style="font-size: 13px; font-style: 나눔고딕체;">
+<body style="font-size: 15px; font-style: 나눔고딕코딩;">
 
-<table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
 	<tr style="height: 40px; background-color: #D5D5D5">
-		<td style="width: 900px;" align="left">&nbsp;&nbsp;&nbsp;게시판 명</td>
+		<td style="width: 900px; letter-spacing: 5px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;게시판명</td>
 		<td style="width: 500px;" align="right">
 			<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
@@ -52,7 +52,7 @@
 <table border="0" align="center" cellpadding="0" cellspacing="0">			
 	<tr style="height: 30px">
 		<td style="width: 1380px" align="right" colspan="6">
-			<img alt="" src="/erp/resources/image/book002.png" onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
+			<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
 		</td>
 		<td style="width: 20px;">
@@ -76,41 +76,33 @@
 		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
 		</td>		
 	</tr>	
-	
-	
-			
-
 	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
 	</tr>
-	
-
 </table>
+
 
 <table border="0" cellpadding="0" cellspacing="0" align="center">
 	<c:forEach var="dto" items="${lists }">
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
+	<tr style="height: 1px; background: #B2EBF4">		
 	</tr>
-		<tr>
-			<td class="boardNum">${dto.boardNum}</td>
-			<td class="subject">
+	<tr style="height: 25px;">
+		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
+		<td style="width: 750px;" class="subject">
 			<a href="${articleUrl}&boardNum=${dto.boardNum}">
 				${dto.subject }</a></td>
-			<td class="name">${dto.name}</td>
-			<td class="created">${dto.created}</td>
-			<td class="hitCount">${dto.hitCount }</td>		
-		</tr>	
-		<tr style="height: 1px; background: #B2EBF4">
+		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
+		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
+		<td style="width: 150px;" align="center"></td>
+		<td style="width: 100px;" class="hitCount" align="center">${dto.hitCount }</td>		
+	</tr>	
+	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="7"></td>
-	</tr>
-	</c:forEach>
-		<tr style="height: 10px;">
-			<td style="width: 1400px;"></td>			
-		</tr>		
+	</tr> 
+	</c:forEach>				
 </table>
 
-<table border="1" cellpadding="0" cellspacing="0" align="center">
+<table border="0" cellpadding="0" cellspacing="0" align="center">
 	<tr style="height: 1px; ">
 		<td style="width: 1400px; background: #B2EBF4"></td>
 	</tr>

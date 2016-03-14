@@ -15,7 +15,6 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="buseoCreated" parameterType="com.exe.insa.BuseoDTO">
 	insert into buseo(buseoNum,groupNum,depth,orderNo,parent)
 	values (#{buseoNum},#{groupNum},#{depth},#{orderNo},#{parent})
-	
 	</insert>
 	
 	<!-- 리스트출력 -->
@@ -56,7 +55,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="buseoDelete" parameterType="integer">
-		delete from buseo where buseoNum in
+		delete buseo where buseoNum in
 		(select buseoNum from buseo start with buseoNum=#{buseoNum}
 		connect by prior buseoNum=parent)
 				
@@ -68,10 +67,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<update id="memberUpdate" >
-	
-	
-	</update>
+
 	
 	
 
@@ -80,7 +76,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	select * from(
 	select rownum rnum,data.* from(
 	select num,userNum ,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb
-	where depth1=#{buseoNum} or depth2=#{buseoNum} or depth3=#{buseoNum} or depth4=#{buseoNum} or depth5=#{buseoNum}
+	where Name like '%'||#{searchValue}||'%' and
+	
+	depth1 like '%'||#{depth1}||'%' and depth2 like '%'||#{depth2}||'%' and depth3 like '%'||#{depth3}||'%' and depth4 like '%'||#{depth4}||'%' and depth5 like '%'||#{depth5}||'%'
+	
 	order by num desc) data)
 	
 <![CDATA[
@@ -101,9 +100,11 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<select id="getDataCount" parameterType="int" resultType="int">
+	<select id="getDataCount" parameterType="HashMap" resultType="int">
 	select nvl(count(*),0) from insadb
-	where depth1=#{buseoNum} or depth2=#{buseoNum} or depth3=#{buseoNum} or depth4=#{buseoNum} or depth5=#{buseoNum}	
+	where Name like '%'||#{searchValue}||'%' and	
+	depth1 like '%'||#{depth1}||'%' and depth2 like '%'||#{depth2}||'%' and depth3 like '%'||#{depth3}||'%' and depth4 like '%'||#{depth4}||'%' and depth5 like '%'||#{depth5}||'%'
+	
 	</select>
 	
 	
