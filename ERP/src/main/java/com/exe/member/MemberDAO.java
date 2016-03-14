@@ -94,6 +94,34 @@ public class MemberDAO {
 		
 	}
 	
+	public List<BuseoDTO> buseo2(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo2",num);
+		
+		return lists;
+	}
+	
+	public List<BuseoDTO> buseo3(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo3",num);
+		
+		return lists;
+	}
+	
+	public List<BuseoDTO> buseo4(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo4",num);
+		
+		return lists;
+	}
+	
+	public List<BuseoDTO> buseo5(int num){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo5",num);
+		
+		return lists;
+	}
+	
 	
 	
 	

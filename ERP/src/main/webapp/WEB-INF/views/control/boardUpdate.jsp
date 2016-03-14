@@ -1,9 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%        
 	
 	String cp = request.getContextPath();
 
 %>
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
+
+
+<form name="boardUpdateForm" id="boardUpdateForm">
 <div style="width: 740px;margin-left: 30px; padding-top: 10px;">
 					<div >게시판설정<br>
 					게시판에 대한 정보 및 수정을 할 수 있습니다.<br>
@@ -18,8 +23,8 @@
 					
 					
 					<div style="float: left; padding-top: 10px; width: 540px;">
-						<div style="height: 35px; border-bottom: 1px solid;"><input type="text" id="boardName" value="${boardData.boardName }">
-						<input type="hidden" name="listNum" value="${boardData.listNum }">
+						<div style="height: 35px; border-bottom: 1px solid;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
+						<input type="hidden" name="num" value="${boardData.listNum }">
 						</div>
 					
 					</div>
@@ -29,7 +34,13 @@
 							권한
 							</div>
 							<div>
-							권한받은사람들 출력
+								<c:forEach var="dto" items="${buseoRlist }">
+									<div>
+									<label>${dto.buseoName }</label>
+									<input type="hidden" name="">
+									</div>
+								
+								</c:forEach>
 							</div>
 						</div>
 						
@@ -38,9 +49,16 @@
 							수정
 							</div>
 							<div>
-							권한 수정 하는
+							<input type="radio" onclick="trim()" value="앙">
 							</div> 
 						</div>
+						
+						
+						
+							<div style="float: left; height: 30px;margin-top: 30px;" class="boardManagement" onclick="boardUpdate();" >저장</div > <div style="float: left;">취소</div>
+					
 					
 					
 				</div>
+				
+</form>

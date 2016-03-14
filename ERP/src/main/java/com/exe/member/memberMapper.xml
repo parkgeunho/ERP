@@ -50,6 +50,22 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		 select buseoName,buseoNum,replyNum,parent from buseo where depth=4
 	</select>
 	
+	<select id="buseo2" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=1
+	</select>
+	
+	<select id="buseo3" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=2
+	</select>
+	
+	<select id="buseo4" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=3
+	</select>
+	
+	<select id="buseo5" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=3
+	</select>
+	
 	
 </mapper>
 

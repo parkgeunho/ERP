@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 var num = 1;
-
+var group = 0;
 
 /* var time = 3000
 
@@ -79,11 +79,11 @@ $(document).ready(function(){
 	
 
 	
-	$('[id^="ch-"]').click(function(){
+	$('[id^="bus-"]').click(function(){
 		
 		
-		
-		alert(num);
+		group= "Bus-" + $('.num'+this.id).val();
+		alert(group);
 	
 	});
 	
@@ -91,8 +91,8 @@ $(document).ready(function(){
 	$('[id^="Mem-"]').click(function(){
 		
 		
-		num= "Mem-" + $('.num'+this.id).val();
-		alert(num);
+		group= "Mem-" + $('.num'+this.id).val();
+		alert(group);
 	
 	});
 	
@@ -139,8 +139,6 @@ function deleted(){
 
 function trim(){
 	
-	alert("안와 ?");
-	
 	var url = "<%=cp%>/boardUpdate";
 	$.post(url,{listNum:num},function(args){
 	$("#boardUpdate").html(args);
@@ -149,6 +147,30 @@ function trim(){
 	
 	
 }
+
+function boardUpdate(){
+	
+	var myForm = $("#boardUpdateForm").serialize();
+	alert(myForm);
+<%-- 	var url = "<%=cp%>/boardUp";
+	
+	
+
+	$.post(url,myForm,function(args){
+		$("#boardUpdate").html(args);
+	}); --%>
+}
+
+function Add(){
+	
+	var url = "<%=cp%>/boardAdd";
+	$.post(url,{group:group,num:num},function(args){
+		$("#boardUpdate").html(args);	
+	}).error(function(){alert("이미 권한이 있습니다.")});
+	
+	
+}
+
 
 
 
@@ -173,7 +195,7 @@ function trim(){
 				
 			</div>
 	</div>
-
+	<div style="height: 30px;" class="boardManagement" onclick="Add()">실험</div>
 	<div style="width: 1320px; height: 740px;float: left;">
 		
 		<div style=" height: 740px; width: 1320px;">
@@ -185,8 +207,8 @@ function trim(){
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 					<div>
 					<img id="buseo-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
-					<label id="bu-${depth0.buseoNum}">${depth0.buseoName }</label>
-					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
+					<label id="bus-${depth0.buseoNum}">${depth0.buseoName }</label>
+					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
 					</div>
 						<div class="buseo-${depth0.buseoNum}">
 					
@@ -209,8 +231,8 @@ function trim(){
 							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
 								<img id="buseo-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
-								<label id="bu-${depth1.buseoNum }">${depth1.buseoName }</label>
-								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
+								<label id="bus-${depth1.buseoNum }">${depth1.buseoName }</label>
+								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 								<div class="buseo-${depth1.buseoNum}">
 								
@@ -224,8 +246,8 @@ function trim(){
 											<div style="margin-left: 40px;">
 											<img id="buseo-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
 											
-											<label id="bu-${depth2.buseoNum }"> ${depth2.buseoName }</label>
-											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
+											<label id="bus-${depth2.buseoNum }"> ${depth2.buseoName }</label>
+											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 											<div class="buseo-${depth2.buseoNum}">
 											
@@ -238,8 +260,8 @@ function trim(){
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
 														<div style="margin-left: 60px;">
 														<img id="buseo-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
-														<label id="bu-${depth3.buseoNum }"> ${depth3.buseoName }</label>
-														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
+														<label id="bus-${depth3.buseoNum }"> ${depth3.buseoName }</label>
+														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														
 														</div>
 														<div class="buseo-${depth3.buseoNum}">
@@ -250,8 +272,8 @@ function trim(){
 															
 																<c:when test="${depth3.buseoNum==depth4.parent }">
 																	<div style="margin-left: 80px;">
-																	<label id="bu-${depth4.buseoNum }">┖ ${depth4.buseoName }</label>
-																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
+																	<label id="bus-${depth4.buseoNum }">┖ ${depth4.buseoName }</label>
+																	<input type="hidden" class="numbus-${depth4.buseoNum }" value="${depth4.buseoNum }">
 																	</div>
 																</c:when>
 															</c:choose>
@@ -268,8 +290,8 @@ function trim(){
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
 														<div style="margin-left: 60px;">
-														<label id="bu-${depth3.buseoNum }">┖ ${depth3.buseoName }</label>
-														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
+														<label id="bus-${depth3.buseoNum }">┖ ${depth3.buseoName }</label>
+														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														</div>
 													</c:when>
 												
@@ -281,8 +303,8 @@ function trim(){
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
 											<div style="margin-left: 40px;">
-											<label id="bu-${depth2.buseoNum }">┖ ${depth2.buseoName }</label>
-											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
+											<label id="bus-${depth2.buseoNum }">┖ ${depth2.buseoName }</label>
+											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 										</c:when>
 									</c:choose>
@@ -295,8 +317,8 @@ function trim(){
 							
 							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
 								<div style="margin-left: 20px;">
-								<label id="bu-${depth1.buseoNum }">┖${depth1.buseoName }</label>
-								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
+								<label id="bus-${depth1.buseoNum }">┖${depth1.buseoName }</label>
+								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 							</c:when>
 							
@@ -307,8 +329,8 @@ function trim(){
 					</c:when>
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
 					<div>
-					<label id="bu-${depth0.buseoNum }">${depth0.buseoName }</label>
-					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
+					<label id="bus-${depth0.buseoNum }">${depth0.buseoName }</label>
+					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
 
 					</div>
 					</c:when>
