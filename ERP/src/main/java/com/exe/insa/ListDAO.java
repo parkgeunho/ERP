@@ -86,5 +86,16 @@ public class ListDAO {
 	}
 	
 	
+	public void boardMember(ListDTO dto){
+		
+		sessionTemplate.update("com.exe.buseoControl.boardMember", dto);
+		
+	}
+	
+	public void boardBuseo(ListDTO dto){
+		sessionTemplate.update("com.exe.buseoControl.boardBuseo",dto);
+		
+	}
+	
 
 }

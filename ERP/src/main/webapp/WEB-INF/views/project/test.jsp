@@ -34,6 +34,9 @@ $(document).ready(function() {
 <body>
 <input type="button" id="dd" value="눌러">
 
+<select>
+
+</select>
 
 
 </body>
