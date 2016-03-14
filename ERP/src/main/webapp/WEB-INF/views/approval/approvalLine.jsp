@@ -196,10 +196,8 @@ $(document).ready(function() {
 	
 	function hihi(){
 		
-		var okok = document.getElementById('k111').value;
-		
-		this.close();
-		
+		var okok = document.getElementById('k222').value;
+	
 		return (okok);
 	}
 	

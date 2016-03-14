@@ -1,20 +1,23 @@
 package com.exe.approval;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.exe.approval.ApprovalDAO;
 
 @Controller
 public class ApprovalController {
 
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
 	
 	@RequestMapping(value = "/approval", method={RequestMethod.GET,RequestMethod.POST})
 	public String scheduleMain() {
@@ -29,7 +32,17 @@ public class ApprovalController {
 	}
 
 	@RequestMapping(value = "/approvalCreated", method={RequestMethod.GET,RequestMethod.POST})
-	public String approvalCreated() {
+	public String approvalCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		System.out.println("approvalCreated.Controller");
+				
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		System.out.println(num);
+		
+		ApprovalFormDTO dto = approvalDAO.getApprovalForm(num);
+				
+		request.setAttribute("dto", dto);
 		
 		return "approval/approvalCreated";
 	}	
@@ -50,8 +63,10 @@ public class ApprovalController {
 	}	
 	
 	//
-	@RequestMapping(value = "/approvalLine", method={RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/approvalLine.action", method=RequestMethod.GET)
 	public String approvalLine(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		System.out.println("approvalLine.Controller");
 		
 		/*List<BuseoDTO> lists = insaDAO.buseoList();
 		
@@ -98,13 +113,51 @@ public class ApprovalController {
 	public String approvalPop(HttpServletRequest request , HttpServletResponse response) throws Exception{
 			
 		System.out.println("approvalPop.Controller");
-		
-		/*int maxNum = approvalDAO.approvalFormMaxNum();
-		
-		System.out.println(maxNum);*/
-	
+				
+		List<ApprovalFormDTO> lists = approvalDAO.approvalFormList();
+				
+		request.setAttribute("lists", lists);
+						
 		return "approval/approvalPop";
 	}
+	
+	@RequestMapping(value = "/approvalFormCreated", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalFormCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		return "approval/approvalFormCreated";
+	}
+	
+	
+	
+	@RequestMapping(value = "/approvalForm_ok", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalForm_ok(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		int approvalMaxnum = approvalDAO.approvalFormMaxNum(); 
+		
+		approvalMaxnum++;
+		
+		String message = "";
+		String content,name,type;
+				
+		ApprovalFormDTO dto = new ApprovalFormDTO(); 
+				
+		name = request.getParameter("approvalFormName");
+		content = request.getParameter("approvalFormContent");
+		type = request.getParameter("approvalFormType");
+			
+		dto.setApprovalFormContent(content);
+		dto.setApprovalFormName(name);
+		dto.setApprovalFormNum(approvalMaxnum);
+		dto.setApprovalFormType(type);
+		
+		approvalDAO.approvalFormInsert(dto);
+	
+		request.setAttribute("message", message);
+		
+		return "close"; 
+		
+	}
+	
+	
 	
 	//HttpSession session = request.getSession();
 

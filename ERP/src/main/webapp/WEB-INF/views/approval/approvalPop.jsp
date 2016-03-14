@@ -13,7 +13,7 @@
     window.open('./approvalCreated?num='+i, '', 'width=1100, height=1200,scroll=yes');
     window.close();
    }
-  </script>
+</script>
 
 <title>결재 양식함</title>
 </head>
@@ -52,7 +52,7 @@
 </tr>
 
 <tr height="35" bgcolor="#EAEAEA" style="width: 100%">
-<td align="center" colspan="3"><font style="font-size: 10pt; color: #8C8C8C;" >양식명</font></td>
+<td align="center" colspan="3"><font style="font-size: 12pt; color: #8C8C8C;" >양식명</font></td>
 <td></td><td></td>
 </tr>
 
@@ -60,12 +60,13 @@
 <td></td><td></td><td></td>
 </tr>
 
-<c:forEach var="i" begin="1" end="4">
+<c:forEach var="dto" items="${lists }">
 
-<tr height="25" style="width: 100%">
+<tr height="28" style="width: 100%">
 <td align="left" colspan="3"> 
 
-<a href="javascript:openWin(${dto.name })"> {dto.name } (${i } 번 결재)</a>
+<a href="javascript:openWin(${dto.approvalFormNum })" style="text-decoration: none; color: black;"> 
+${dto.approvalFormName }</a>
 
 </td>
 <td></td><td></td>
