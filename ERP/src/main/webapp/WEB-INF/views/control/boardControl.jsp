@@ -166,7 +166,7 @@ function Add(){
 	var url = "<%=cp%>/boardAdd";
 	$.post(url,{group:group,num:num},function(args){
 		$("#boardUpdate").html(args);	
-	})
+	}).error(function(){alert("이미 권한이 있습니다.")});
 	
 	
 }

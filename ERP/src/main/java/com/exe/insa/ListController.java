@@ -1,5 +1,6 @@
 package com.exe.insa;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exe.member.MemberDTO;
+
+import oracle.security.o5logon.b;
 
 @Controller
 public class ListController {
@@ -244,20 +247,59 @@ public class ListController {
 		return boardList(request, response);
 	}
 	
-	@RequestMapping(value = "/boardAdd", method = {RequestMethod.GET,RequestMethod.POST})
-	public String boardAdd(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/boardUpdate", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardUpdate(HttpServletRequest request,HttpServletResponse response,String ck) {
 		
-		System.out.println("애당초 여긴옴?");
+		List<ListDTO> lists = new ArrayList<ListDTO>();
+		List<BuseoDTO> buseoWlist = new ArrayList<BuseoDTO>();
+		List<BuseoDTO> buseoRlist = new ArrayList<BuseoDTO>();
 		String listNum = request.getParameter("listNum");
-		
+		System.out.println("ck확인 " + ck);
 		if(listNum==null || listNum.equals("")){
-			return "control/boardUpdate";
+			
+			if(ck!=null){
+				listNum=ck;
+			}
+			else{
+				return "control/boardUpdate";
+			}
+			
+		}
+
+		
+		System.out.println("listNum확인"+ listNum);
+		int listNumber = Integer.parseInt(listNum);
+		
+		ListDTO dto = listDAO.readData(listNumber);
+		if(dto.getBuseoW()!=null){
+			String buseoWs[] = dto.getBuseoW().split(",");
+		
+		
+			for(String i : buseoWs){
+				
+				int j = Integer.parseInt(i);
+				BuseoDTO bDTO = insaDAO.readBuseo(j);
+				buseoWlist.add(bDTO);
+				if(buseoWlist!=null)
+					request.setAttribute("buseoWlist", buseoWlist);
+				
+			}
 		}
 		
-		int num = Integer.parseInt(listNum);
+		if(dto.getBuseoR()!=null){
+			String buseoRs[] = dto.getBuseoR().split(",");
+			
+			for(String i : buseoRs){
+				
+				int j = Integer.parseInt(i);
+				BuseoDTO bDto = insaDAO.readBuseo(j);
+				buseoRlist.add(bDto);
+				if(buseoRlist!=null)
+					request.setAttribute("buseoRlist", buseoRlist);
+				
+			}
+		}
 		
-		ListDTO dto = listDAO.readData(num);
-		System.out.println("값이 잘 왓는지 확인하빈다." +dto.getBoardName());
 		
 		request.setAttribute("boardData", dto);
 		
@@ -265,16 +307,22 @@ public class ListController {
 	}
 	
 	
-	
-	@RequestMapping(value = "/boardDTD", method = {RequestMethod.GET,RequestMethod.POST})
-	public String boardDTD(HttpServletRequest request,HttpServletResponse response) {
+	//왼쪽에 있는 리스트 에서 권한 추가할때 사용하는 메소드
+	@RequestMapping(value = "/boardAdd", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardAdd(HttpServletRequest request,HttpServletResponse response) {
 		
 		String group = request.getParameter("group");
 		String num = request.getParameter("num");
 		
+		System.out.println("group 확인"  + group);
+		System.out.println("num" + num);
 		String date = group.substring(4);
 		String sort = group.substring(0, 3);
 		
+		System.out.println("date 확인 " +  date);
+		System.out.println("sort확인" + sort);
+		String arrayW = "";
+		String arrayR = "";
 		if(sort.equals("Bus")){
 			int listNum = Integer.parseInt(num);
 			
@@ -287,18 +335,41 @@ public class ListController {
 			String BuseoR = dto.getBuseoR() ;
 			
 			if(BuseoR==null||BuseoR.equals("")){
-				BuseoR = date+",";
+				arrayR = date+",";
 			}else{
-				BuseoR = BuseoR + date + ",";
+				String BuseoRs[] = BuseoR.split(",");
+				
+				for(String i : BuseoRs){
+					if(i.equals(date)){
+						return "read-error";
+						
+					}
+					System.out.println("i확인" 
+							+ i);
+					arrayR += i +",";
+					
+					
+				}
+				arrayR += date + ",";
+				
 			}
 			if(BuseoW==null || BuseoW.equals("")){
-				BuseoW = date+",";
+				arrayW = date+",";
 			}else{
-				BuseoW = BuseoW + date + ",";
+				String BuseoWs[] = BuseoW.split(",");
+				
+				for(String i :BuseoWs){
+					
+					if(i.equals(date)){
+						return "read-error";
+					}
+					arrayW += i + ",";
+				}
+				arrayW += date + ",";
 			}
 			
-			dto.setBuseoR(BuseoR);
-			dto.setBuseoW(BuseoW);
+			dto.setBuseoR(arrayR);
+			dto.setBuseoW(arrayW);
 			
 			listDAO.boardBuseo(dto);
 			
@@ -332,7 +403,7 @@ public class ListController {
 		}
 		
 		
-		return boardAdd(request, response);
+		return boardUpdate(request, response,num);
 	}
 	
 	

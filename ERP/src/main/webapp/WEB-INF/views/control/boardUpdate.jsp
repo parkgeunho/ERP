@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%        
 	
 	String cp = request.getContextPath();
@@ -33,7 +34,13 @@
 							권한
 							</div>
 							<div>
-							권한받은사람들 출력
+								<c:forEach var="dto" items="${buseoRlist }">
+									<div>
+									<label>${dto.buseoName }</label>
+									<input type="hidden" name="">
+									</div>
+								
+								</c:forEach>
 							</div>
 						</div>
 						
