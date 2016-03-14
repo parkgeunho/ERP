@@ -27,8 +27,8 @@
 		<c:forEach items="${buseoChange1}" var="buseoChange1">
 			<c:choose>
 
-				<c:when test="${buseoChange1.buseoNum==depth2 }">
-					<option value="${buseoChange1.buseoNum }" selected="selected">${buseoChange1.buseoName }</option>
+				<c:when test="${buseoChange1.buseoNum==depth2}">
+					<option value="${buseoChange1.buseoNum }" selected="selected">${buseoChange1.buseoName}</option>
 				</c:when>
 
 				<c:otherwise>
@@ -41,7 +41,7 @@
 	</c:if>
 	
 	<c:if test="${buseoChange2!=null}">
-		<select name="depth3" class="dap_text_box" onchange="change1();" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
+		<select name="depth3" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 20%;float: left;">
 		<c:forEach items="${buseoChange2}" var="buseoChange2">
 			<c:choose>
 
@@ -58,15 +58,40 @@
 		</select>
 	</c:if>
 
-		<%-- <select name="depth4" class="dap_text_box" onchange="change3();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-			<c:forEach items="${buseoChange2}" var="buseoChange3">
-    		<option value="${buseoChange3.buseoNum }"  selected="selected">${buseoChange3.buseoName }</option>
-    		</c:forEach>
-		</select> --%>
+	<c:if test="${buseoChange3!=null}">
+		<select name="depth4" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+		<c:forEach items="${buseoChange3}" var="buseoChange3">
+			<c:choose>
 
-		<%-- <select name="depth5" class="dap_text_box" onchange="change();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-    		<option value="${depth5.buseoNum }" selected="selected">${depth5.buseoName }</option>
+				<c:when test="${buseoChange3.buseoNum==depth4 }">
+					<option value="${buseoChange3.buseoNum }" selected="selected">${buseoChange3.buseoName }</option>
+				</c:when>
 
-		</select> --%>
+				<c:otherwise>
+					<option value="${buseoChange3.buseoNum }">${buseoChange3.buseoName }</option>
+				</c:otherwise>
+			</c:choose>
+
+		</c:forEach>
+		</select>
+	</c:if>
+
+	<c:if test="${buseoChange4!=null}">
+		<select name="depth5" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
+		<c:forEach items="${buseoChange4}" var="buseoChange4">
+			<c:choose>
+
+				<c:when test="${buseoChange4.buseoNum==depth5 }">
+					<option value="${buseoChange4.buseoNum }" selected="selected">${buseoChange4.buseoName }</option>
+				</c:when>
+
+				<c:otherwise>
+					<option value="${buseoChange4.buseoNum }">${buseoChange4.buseoName }</option>
+				</c:otherwise>
+			</c:choose>
+
+		</c:forEach>
+		</select>
+	</c:if>
 		
 </form>

@@ -31,7 +31,6 @@ public class MemberDTO {
 	private String depth5;
 	private String upload;
 	
-	private MultipartFile file;
 
 	public int getNum() {
 		return num;
@@ -137,9 +136,6 @@ public class MemberDTO {
 		return upload;
 	}
 
-	public MultipartFile getFile() {
-		return file;
-	}
 
 	public void setNum(int num) {
 		this.num = num;
@@ -244,11 +240,6 @@ public class MemberDTO {
 	public void setUpload(String upload) {
 		this.upload = upload;
 	}
-
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
-	
 	
 	
 	

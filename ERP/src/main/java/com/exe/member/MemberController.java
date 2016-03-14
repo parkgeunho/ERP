@@ -254,8 +254,7 @@ public class MemberController {
 		String depth2S = request.getParameter("depth2");
 		String depth3S = request.getParameter("depth3");
 		String depth4S = request.getParameter("depth4");
-		
-		List<BuseoDTO> lists = dao.depth1();
+		String depth5S = request.getParameter("depth5");
 		
 		if(depth1S==null || depth1S.equals("")){
 			
@@ -263,12 +262,23 @@ public class MemberController {
 			
 		}
 		
-		if(depth2S==null || depth2S.equals("")){
-			
-			depth2S = "1" ;
-			
-		}
+		int depth1 = Integer.parseInt(depth1S);
 		
+		List<BuseoDTO> lists = dao.depth1();
+		
+		request.setAttribute("depth1", depth1);
+		
+		if(depth1S!=null && !depth1S.equals("")){
+		
+		
+		
+		List<BuseoDTO> buseoChange1 = dao.buseo2(depth1);
+		
+		
+		request.setAttribute("buseoChange1", buseoChange1);
+		request.setAttribute("depth2", depth2S);
+		
+		}
 		
 		
 		
@@ -276,19 +286,10 @@ public class MemberController {
 		System.out.println("뎁스2 : " + depth2S);
 		System.out.println("뎁스3 : " + depth3S);
 		System.out.println("뎁스4 : " + depth4S);
+		System.out.println("뎁스5 : " + depth5S);
 		
 		
-		if(depth1S!=null && !depth1S.equals("")){
-			
-			
-			int depth1 = Integer.parseInt(depth1S);
-			
-			
-			List<BuseoDTO> buseoChange1 = dao.buseo1(depth1);
-			
-			request.setAttribute("buseoChange1", buseoChange1);
-			request.setAttribute("depth1", depth1);
-		}
+		
 		
 
 		if(depth2S!=null && !depth2S.equals("")){
@@ -297,11 +298,11 @@ public class MemberController {
 			int depth2 = Integer.parseInt(depth2S);
 			
 			
-			List<BuseoDTO> buseoChange2 = dao.buseo1(depth2);
+			List<BuseoDTO> buseoChange2 = dao.buseo3(depth2);
 			
 			
 			request.setAttribute("buseoChange2", buseoChange2);
-			request.setAttribute("depth2", depth2);
+			request.setAttribute("depth3", depth3S);
 			
 		}
 		
@@ -309,10 +310,22 @@ public class MemberController {
 
 			int depth3 = Integer.parseInt(depth3S);
 
-			List<BuseoDTO> buseoChange3 = dao.buseo2(depth3);
+			List<BuseoDTO> buseoChange3 = dao.buseo4(depth3);
 
 			request.setAttribute("buseoChange3", buseoChange3);
-			request.setAttribute("depth3", depth3);
+			request.setAttribute("depth4", depth4S);
+
+		}
+		
+		if(depth4S!=null && !depth4S.equals("")){
+
+			int depth4 = Integer.parseInt(depth3S);
+
+			List<BuseoDTO> buseoChange4 = dao.buseo5(depth4);
+
+			request.setAttribute("buseoChange4", buseoChange4);
+			request.setAttribute("depth5", depth5S);
+
 		}
 
 		
@@ -320,9 +333,9 @@ public class MemberController {
 		
 		
 	
+		
+		
 		request.setAttribute("lists", lists);
-		
-		
 		
 		return "member/buseoChange";
 	}
