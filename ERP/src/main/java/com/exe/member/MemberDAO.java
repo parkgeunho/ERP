@@ -94,6 +94,16 @@ public class MemberDAO {
 		
 	}
 	
+	public MemberDTO login(MemberDTO dto){
+		
+		MemberDTO result = sessionTemplate.selectOne("com.exe.member.login",dto);
+		
+		return result;
+		
+		
+	}
+	
+	
 	public List<BuseoDTO> buseo2(int num){
 		
 		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.member.buseo2",num);

@@ -25,6 +25,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select * from insadb where num=#{num}
 	</select>
 	
+	<select id="login" parameterType="com.exe.member.MemberDTO" resultType="com.exe.member.MemberDTO">
+		select * from insadb where id=#{id} and pwd=#{pwd}
+	</select>
+	
 	
 	
 	
