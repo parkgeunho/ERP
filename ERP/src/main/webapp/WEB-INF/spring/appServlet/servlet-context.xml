@@ -45,7 +45,10 @@
    <beans:property name="defaultEncoding" value="UTF-8"/>
    </beans:bean>
    
-   <!-- <interceptors>
+
+
+<!--    <interceptors>
+
 		<interceptor>
 			<mapping path="/main" />
 			<beans:bean class="com.exe.member.LoginInterceptor"></beans:bean>
