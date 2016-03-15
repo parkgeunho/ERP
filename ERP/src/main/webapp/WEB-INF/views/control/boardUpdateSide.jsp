@@ -14,7 +14,9 @@ $("input[name=writeck]").click(function(){
 	alert(dtd);
 	
 	var url = "<%=cp%>/boardSideUpdate";
-	$.post(url,{num:num,ckNum:ck,change:dtd});
+	$.post(url,{num:num,ckNum:ck,change:dtd},function(args){
+		trim()
+	});
 	
 
 });
