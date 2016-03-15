@@ -52,23 +52,24 @@ $('[id^="ckBus-"]').click(function(){
 							</div>
 							<div>
 								<c:forEach var="dto" items="${buseoRlist }">
-								<div>
+									<c:set var="check" value="no"/>
+										<c:forEach var="ck" items="${buseoWlist }">
+											<c:if test="${dto.buseoNum==ck.buseoNum }">
+												<c:set var="check" value="ok" />
+											</c:if>
+										</c:forEach>
+								<div style="height: 30px;">
 									<div style="float: left;">
 									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
 									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
 									<div style="widows: 20px;float: left;">
-										<c:forEach var="ck" items="${buseoWlist }">
-											<c:choose>
-												<c:when test="${ck.buseoNum!=dto.buseoNum }">
-												읽기
-												</c:when>
-												
-												<c:when test="${ck.buseoNum==dto.buseoNum }">
-												읽기/쓰기
-												</c:when>
-											</c:choose>
-										</c:forEach>
+										<c:if test="${check=='ok' }">
+											읽기/쓰기
+										</c:if>
+										<c:if test="${check=='no' }">
+											읽기
+										</c:if>
 									</div>
 								</div>
 								</c:forEach>

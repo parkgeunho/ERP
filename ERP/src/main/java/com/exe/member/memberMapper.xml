@@ -63,7 +63,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="buseo5" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
-		select * from buseo where parent=#{parent} and depth=3
+		select * from buseo where parent=#{parent} and depth=4
 	</select>
 	
 	

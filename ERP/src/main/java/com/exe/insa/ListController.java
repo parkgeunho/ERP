@@ -424,12 +424,16 @@ public class ListController {
 		int listNum = Integer.parseInt(num);
 		
 		ListDTO dto = listDAO.readData(listNum);
-		String buseoWs[] = dto.getBuseoW().split(",");
+		
 		
 		if(sort.equals("Bus")){
 			
 			if(change.equals("write")){
 				
+				if(dto.getBuseoW()==null){
+					dto.setBuseoW(date+",");
+				}
+				String buseoWs[] = dto.getBuseoW().split(",");
 				List<String> list = new ArrayList<String>();
 				Collections.addAll(list, buseoWs);
 				boolean isFind = list.contains(date);
@@ -452,7 +456,13 @@ public class ListController {
 			
 			if(change.equals("non")){
 				
+				if(dto.getBuseoW()==null){
+					
+					return boardUpdate(request, response, num);
+				}
+				
 				List<String> list = new ArrayList<String>();
+				String buseoWs[] = dto.getBuseoW().split(",");
 				Collections.addAll(list, buseoWs);
 				list.remove(date);
 				Iterator<String> it = list.iterator();
@@ -495,18 +505,18 @@ public class ListController {
 		ListDTO dto = listDAO.readData(listNum);
 		
 		if(sort.equals("Bus")){
-			
+			if(dto.getBuseoW()!=null){
 			String buseoWs[] = dto.getBuseoW().split(",");
 			
-			for(String i : buseoWs){
-				System.out.println("I값확인"+i);
-				System.out.println("date확인" + date);
-				if(i.equals(date)){
-					ck ="ok";
-					System.out.println("먼데 ck값학인" + ck);
-				}	
+				for(String i : buseoWs){
+					System.out.println("I값확인"+i);
+					System.out.println("date확인" + date);
+					if(i.equals(date)){
+						ck ="ok";
+						System.out.println("먼데 ck값학인" + ck);
+					}	
+				}
 			}
-			
 		}
 		System.out.println("ck값 확인"+ ck);
 		request.setAttribute("ck", ck);

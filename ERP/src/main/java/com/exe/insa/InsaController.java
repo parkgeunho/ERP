@@ -252,6 +252,9 @@ public class InsaController {
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
 		
+		
+		int max = 15;
+		
 		if(num == null){
 			
 			num="1";
@@ -267,6 +270,16 @@ public class InsaController {
 		
 		System.out.println("에러확인");
 		dto = insaDAO.readBuseo(buseoNum);
+		
+		if(dto==null){
+
+			request.setAttribute("max", max);
+			return "project/memberList";
+			
+			
+			
+			
+		}
 		
 		int depth = dto.getDepth();
 		
@@ -415,7 +428,6 @@ public class InsaController {
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
 		int size = lists.size();
-		int max = 15;
 		
 		
 		request.setAttribute("max", max);
