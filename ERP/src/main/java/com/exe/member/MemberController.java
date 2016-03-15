@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,6 +41,48 @@ public class MemberController {
 		return "member/login";
 		
 	}
+	
+	@RequestMapping(value = "/login_ok.action")
+	public String login_ok(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		String id= request.getParameter("userId");
+		String pwd= request.getParameter("userPwd");
+		
+		System.out.println(id);
+		System.out.println(pwd);
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setId(id);
+		dto.setPwd(pwd);
+		
+		dto = dao.login(dto);
+		
+		if(dto.getId()==id && dto.getPwd()==pwd){
+			
+			session.setAttribute("dto", dto);
+			return "redirect:/main";
+			
+		}else{
+			return "member/login";
+		}
+	
+			
+			
+				
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	
 	@RequestMapping(value = "/join.action")
 	public String joinView(HttpServletRequest request,HttpServletResponse response) {
