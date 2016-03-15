@@ -47,13 +47,7 @@
    
 
 
-<!--    <interceptors>
 
-		<interceptor>
-			<mapping path="/main" />
-			<beans:bean class="com.exe.member.LoginInterceptor"></beans:bean>
-		</interceptor>
-   </interceptors> -->
    
    
    
@@ -104,7 +98,7 @@
 
 
 
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.15:1521:TestDB" />
+		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
 
