@@ -96,6 +96,11 @@ public class ListDAO {
 		sessionTemplate.update("com.exe.buseoControl.boardBuseo",dto);
 		
 	}
+	public void boardUpdate(ListDTO dto){
+		sessionTemplate.update("com.exe.buseoControl.boardUpdate",dto);
+		
+	}
+	
 	
 
 }

@@ -122,6 +122,7 @@
 							<c:when test="${depth1.parent==depth0.listNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
 								<img id="fold-${depth1.listNum}" src="/erp/resources/image/minus.png"/>
+								
 								<label id="ch-${depth1.listNum }">${depth1.boardName }</label>
 								<input type="hidden" class="numch-${depth1.listNum }" value="${depth1.listNum }">
 								</div>
@@ -220,6 +221,9 @@
 					</c:when>
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
 					<div>
+					
+				
+					
 					<label id="ch-${depth0.listNum }">${depth0.boardName }</label>
 					<input type="hidden" class="numch-${depth0.listNum }" value="${depth0.listNum }">
 

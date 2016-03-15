@@ -83,6 +83,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		update boardlist set buseoW=#{buseoW},buseoR=#{buseoR} where listNum=#{listNum}
 	</update>
 	
+	<update id="boardUpdate" parameterType="com.exe.insa.ListDTO">
+		update boardlist set boardName=#{boardName} where listNum=#{listNum}
+	</update>
+	
 	
 
 </mapper>
