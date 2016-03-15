@@ -218,7 +218,15 @@
 		<select name="depth1" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;" >
    			
    			
-    		<option value="${depth1.buseoNum }"  selected="selected">${depth1.buseoName }</option>
+    		<option value="${depth1.bcreate table boardlist
+(listNum number(10),
+boardName varchar2(40) default '이름을적어주세요',
+groupNum number(10),
+depth number(10),
+orderNo number(10),
+parent number(10),
+replyNum number(10),
+checked varchar2(2) default 'a');useoNum }"  selected="selected">${depth1.buseoName }</option>
     		
 
 		</select>

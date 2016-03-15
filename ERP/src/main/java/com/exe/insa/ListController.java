@@ -32,6 +32,7 @@ public class ListController {
 		
 		System.out.println("리스트컨트롤옴?옵니까");
 		List<ListDTO> lists = listDAO.boardList();
+		System.out.println("어디에러임 ㅅㅂ");
 		
 		ListIterator<ListDTO> it = lists.listIterator();
 		
@@ -243,8 +244,8 @@ public class ListController {
 		return boardList(request, response);
 	}
 	
-	@RequestMapping(value = "/boardUpdate", method = {RequestMethod.GET,RequestMethod.POST})
-	public String boardUpdate(HttpServletRequest request,HttpServletResponse response,ListDTO dto) {
+	@RequestMapping(value = "/boardAdd", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardAdd(HttpServletRequest request,HttpServletResponse response) {
 		
 		System.out.println("애당초 여긴옴?");
 		String listNum = request.getParameter("listNum");
@@ -255,12 +256,83 @@ public class ListController {
 		
 		int num = Integer.parseInt(listNum);
 		
-		dto = listDAO.readData(num);
+		ListDTO dto = listDAO.readData(num);
 		System.out.println("값이 잘 왓는지 확인하빈다." +dto.getBoardName());
 		
 		request.setAttribute("boardData", dto);
 		
 		return "control/boardUpdate";
+	}
+	
+	
+	
+	@RequestMapping(value = "/boardDTD", method = {RequestMethod.GET,RequestMethod.POST})
+	public String boardDTD(HttpServletRequest request,HttpServletResponse response) {
+		
+		String group = request.getParameter("group");
+		String num = request.getParameter("num");
+		
+		String date = group.substring(4);
+		String sort = group.substring(0, 3);
+		
+		if(sort.equals("Bus")){
+			int listNum = Integer.parseInt(num);
+			
+			ListDTO dto = listDAO.readData(listNum);
+			dto.setListNum(listNum);
+			
+			
+			
+			String BuseoW = dto.getBuseoW() ;
+			String BuseoR = dto.getBuseoR() ;
+			
+			if(BuseoR==null||BuseoR.equals("")){
+				BuseoR = date+",";
+			}else{
+				BuseoR = BuseoR + date + ",";
+			}
+			if(BuseoW==null || BuseoW.equals("")){
+				BuseoW = date+",";
+			}else{
+				BuseoW = BuseoW + date + ",";
+			}
+			
+			dto.setBuseoR(BuseoR);
+			dto.setBuseoW(BuseoW);
+			
+			listDAO.boardBuseo(dto);
+			
+		}
+		
+		if(sort.equals("Mem")){
+
+			int listNum = Integer.parseInt(num);
+			ListDTO dto = listDAO.readData(listNum);
+			String MemberW = dto.getMemberW() ;
+			String MemberR = dto.getMemberR() ;
+			
+			
+			if(MemberR.equals("")||MemberR==null){
+				MemberR = date + ",";
+			}else{
+				MemberR = MemberR + date+",";
+			}
+			
+			if(MemberW==null || MemberW.equals("")){
+				MemberW = date + ",";
+			}else{
+				MemberW = MemberW + date+",";
+			}
+			
+			dto.setListNum(listNum);
+			dto.setMemberR(MemberR);
+			dto.setMemberW(MemberW);
+			listDAO.boardBuseo(dto);
+			
+		}
+		
+		
+		return boardAdd(request, response);
 	}
 	
 	

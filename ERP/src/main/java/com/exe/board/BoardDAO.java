@@ -6,7 +6,6 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 
-
 public class BoardDAO {
 	
 	 private SqlSessionTemplate sessionTemplate;

@@ -42,9 +42,7 @@ public class BoardFileController {
 			if(!f.exists())
 				f.mkdir();
 			if(file!=null && file.getSize()>0){
-				
-			
-			
+							
 			
 			//save 파일 이름 만들어주는 부분
 			String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));

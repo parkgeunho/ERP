@@ -11,8 +11,10 @@ public class ListDTO {
 	private int replyNum;
 	private int depthGap;
 	private String checked;
-	
-	
+	private String buseoR;
+	private String buseoW;
+	private String memberR;
+	private String memberW;
 	public int getListNum() {
 		return listNum;
 	}
@@ -67,6 +69,34 @@ public class ListDTO {
 	public void setChecked(String checked) {
 		this.checked = checked;
 	}
+	public String getBuseoR() {
+		return buseoR;
+	}
+	public void setBuseoR(String buseoR) {
+		this.buseoR = buseoR;
+	}
+	public String getBuseoW() {
+		return buseoW;
+	}
+	public void setBuseoW(String buseoW) {
+		this.buseoW = buseoW;
+	}
+	public String getMemberR() {
+		return memberR;
+	}
+	public void setMemberR(String memberR) {
+		this.memberR = memberR;
+	}
+	public String getMemberW() {
+		return memberW;
+	}
+	public void setMemberW(String memberW) {
+		this.memberW = memberW;
+	}
+	
+	
+	
+	
 	
 	
 	
