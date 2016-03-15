@@ -34,7 +34,7 @@ function login(){
 		return;
 	}
 	
-	f.action = "<%=cp%>/login.action";
+	f.action = "<%=cp%>/login_ok.action";
 	f.submit();
 	
 	
