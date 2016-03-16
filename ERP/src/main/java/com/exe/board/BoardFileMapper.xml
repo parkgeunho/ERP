@@ -6,7 +6,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.exe.board.BoardFileMapper">
 	
-	
+	<insert id="insertData" parameterType="com.exe.board.BoardFileDTO">
+		insert into erpboardfile (boardnum,saveFileName,originalFileName)
+			values (#{boardnum},#{saveFileName},#{originalFileName})	
+	</insert>
 	
 	
 </mapper>

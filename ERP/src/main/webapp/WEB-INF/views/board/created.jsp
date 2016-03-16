@@ -157,7 +157,7 @@ function sendIt(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
-		<input type="file" name="upload">
+		<input type="file" name="upload" id="file">
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		

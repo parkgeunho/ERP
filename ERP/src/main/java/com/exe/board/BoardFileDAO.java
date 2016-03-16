@@ -9,15 +9,16 @@ public class BoardFileDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
-	public int maxNum(){
+	
+	public void insertData(BoardFileDTO filedto){
+		
+		sessionTemplate.insert("com.exe.board.insertData", filedto);
+		
+	}
+	public int boardNum(){
 		
 		int result = sessionTemplate.selectOne("com.exe.board.boardNum");
 		return result;
-		
-	}
-	public void boardCreated(BoardFileDTO filedto){
-		
-		sessionTemplate.insert("com.exe.board.boardCreated", filedto);
 		
 	}
 

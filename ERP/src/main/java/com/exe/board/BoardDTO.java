@@ -9,7 +9,16 @@ public class BoardDTO {
 	private String content;
 	private String created;
 	private int hitCount;
+	private int lessNum;
 	
+	
+	
+	public int getLessNum() {
+		return lessNum;
+	}
+	public void setLessNum(int lessNum) {
+		this.lessNum = lessNum;
+	}
 	public int getBoardNum() {
 		return boardNum;
 	}

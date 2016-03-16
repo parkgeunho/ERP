@@ -92,8 +92,8 @@ function sendIt(){
 	</tr>
 
 
-	<tr style="height: 30px; background: #80F5FF" >
-		<td style="width: 200px; height: 22px; font-style: " align="center">제&nbsp;&nbsp;목</td>
+	<tr style="height: 30px; background: #00D8FF" >
+		<td style="width: 200px; height: 22px; color: white; font-size: 25px; " align="center">제&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">
 			<input type="text" name="subject" value="${dto.subject}" style="width:1000px; height: 22px;"/>	
 		</td>	
@@ -191,9 +191,9 @@ function sendIt(){
 			<input type="hidden" name="pageNum" value="${pageNum}"/>
 			<input type="hidden" name="name" value="${dto.name }">
 		
-			<input type="button" value="수정하기" class="btn2" style="background: #FFFFFF"
+			<input type="button" value="수정하기" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="sendIt();"/>
-			<input type="button" value="수정취소" class="btn2"  style="background: #FFFFFF"
+			<input type="button" value="수정취소" class="btn2"  style="background: #00D8FF; color: white;"
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
 			
 			

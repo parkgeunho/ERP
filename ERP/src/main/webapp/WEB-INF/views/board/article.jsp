@@ -25,25 +25,25 @@
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
 	<tr style="height: 40px; background: #D4D4D4">
-		<td colspan="3" style="width: 1400px; letter-spacing: 5px; font-size: 20px;" align="center">&nbsp;&nbsp;&nbsp;&nbsp;공지사항		
+		<td colspan="3" style="width: 1400px; font-size: 20px;" align="center">&nbsp;&nbsp;&nbsp;&nbsp;공지사항		
 		</td>	
 	</tr>
 	
-	<tr style="height: 2px;">
+	<tr style="height: 1px;">
 		<td colspan="3" style="width: 1400px;" align="right">
 			
 		</td>
 	</tr>
 
 
-	<tr style="height: 30px; background: #6EE3F7" >
-		<td style="width: 200px; height: 22px;" align="center">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
+	<tr style="height: 30px; background: #00D8FF" >
+		<td style="width: 200px; height: 22px; color: white; font-size: 25px;" align="center">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+		<td style="width: 1200px; color: white; font-size: 25px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
 	</tr>
 	
-	<tr style="height: 30px; background: #6EE3F7" >
-		<td style="width: 200px; height: 22px;" align="center">작&nbsp;성&nbsp;자</td>
-		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
+	<tr style="height: 30px; background: #00D8FF" >
+		<td style="width: 200px; height: 22px; color: white; font-size: 25px;" align="center">작&nbsp;성&nbsp;자</td>
+		<td style="width: 1200px; color: white; font-size: 25px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
 	</tr>
 	<tr style="height: 0.5px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="3"></td>
@@ -150,13 +150,13 @@
 	
 	<tr style="height: 30px;">
 		<td style="width: 1400px;" align="right">			
-			<input type="button" value="리스트" class="btn2" style="background: #FFFFFF" 
+			<input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
 				
-			<input type="button" value="수정" class="btn2" style="background: #FFFFFF"
+			<input type="button" value="수정" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
 			
-			<input type="button" value="삭제" class="btn2" style="background: #FFFFFF" 
+			<input type="button" value="삭제" class="btn2" style="background: #00D8FF; color: white;" 
 				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
 		
 		</td>

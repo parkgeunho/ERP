@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+ 
 import com.exe.board.DownloadView;
 
 @Controller
@@ -22,9 +22,7 @@ public class BoardFileController {
 	@Qualifier("BoardFileDAO")
 	BoardFileDAO filedao;
 	
-	@Autowired
-	@Qualifier("boardDAO")
-	BoardDAO dao;	
+		
 	
 	//(File Upload)
 		@RequestMapping(value="/board/created_ok.action",method={RequestMethod.POST,RequestMethod.GET})
@@ -47,11 +45,12 @@ public class BoardFileController {
 			String saveFileName = filedto.getBoardNum() + filedto.getSaveFileName() + fileExt;
 			String originalFileName = path + File.separator + saveFileName;
 			
+			
 			//폴더에 업로드			
 			f = new File(originalFileName);
 			file.transferTo(f);
 			
-			//filedto.setUpload(saveFileName);			
+			filedto.setUpload(saveFileName);			
 			
 		}
 			

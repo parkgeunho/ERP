@@ -31,9 +31,9 @@
 </head>
 <body style="font-size: 15px; font-style: 나눔고딕코딩;">
 
-<table border="1" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
 	<tr style="height: 40px; background-color: #D5D5D5">
-		<td style="width: 900px;" align="center" >&nbsp;&nbsp;&nbsp;&nbsp;공&nbsp;지&nbsp;사&nbsp;항</td>
+		<td style="width: 900px;" align="center" class="">&nbsp;&nbsp;&nbsp;&nbsp;공&nbsp;지&nbsp;사&nbsp;항</td>
 		<td style="width: 500px;" align="right">
 			<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
