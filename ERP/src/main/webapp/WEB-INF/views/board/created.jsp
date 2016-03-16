@@ -98,8 +98,8 @@ function sendIt(){
 			
 		</td>
 	</tr>
-	<tr style="height: 30px; background: #80F5FF" >
-		<td style="width: 200px; height: 22px; font-style: " align="center">제&nbsp;&nbsp;목</td>
+	<tr style="height: 30px; background: #00D8FF" >
+		<td style="width: 200px; height: 22px; color: white; font-size: 25px;" align="center" >제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">
 			<input type="text" name="subject" style="width:1000px; height: 22px;"/>	
 		</td>	
@@ -108,8 +108,8 @@ function sendIt(){
 		<td colspan="2"></td>
 	</tr>
 
-	<tr style="height: 30px; background: #80F5FF">
-		<td style="width: 200px; height: 22px; font-style: " align="center">작&nbsp;성&nbsp;자</td>
+	<tr style="height: 30px; background: #00D8FF">
+		<td style="width: 200px; height: 22px; color: white; font-size: 25px;" align="center">작&nbsp;성&nbsp;자</td>
 		<td style="width: 1200px;">
 			<input type="text" name="name" style="width:1000px; height: 22px;"/>	
 		</td>	
@@ -157,12 +157,12 @@ function sendIt(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
-		<input type="file" name="myForm">
+		<input type="file" name="upload">
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		
 		<img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;" 
-			onclick="">삭제
+			onclick="">삭제 
 		</td>	
 	</tr>
 	
@@ -173,24 +173,21 @@ function sendIt(){
 		<td style="width: 200px;" align="right">크기</td>
 		<td style="width: 200px;" align="center">첨부방식</td>		
 		<td style="width: 200px;" align="center">유효기간</td>
-		<td style="width: 122px;"></td>
+		<td style="width: 122px;" align="center"></td>
 	</tr>
 	
 	 <tr style="height: 15px; " >			
-		<td style="width: 300px;" align="left"></td>
-		
-		<td style="width: 100px;" align="right"></td>
-		<td style="width: 100px;" align="center"></td>		
-		<td style="width: 150px;" align="center"></td>
+		<td style="width: 400px;" align="left"></td>		
+		<td style="width: 200px;" align="right"></td>
+		<td style="width: 200px;" align="center"></td>		
+		<td style="width: 200px;" align="center"></td>
+		<td style="width: 122px;" align="center">
+			<!-- <img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;">  -->
+				</td>
 	</tr>
+
 	
-	<tr style="height: 15px; ">	
-		<td style="width: 300px;" align="left"></td>
-		
-		<td style="width: 100px;" align="right"></td>
-		<td style="width: 100px;" align="center"></td>		
-		<td style="width: 150px;" align="center"></td>
-	</tr> 
+	
 </table>
 
 <table border="0" align="center">
@@ -201,9 +198,9 @@ function sendIt(){
 	
 	<tr style="height: 33px;" align="right">
 		<td style="width: 1400px;">
-			<input type="button" value="올리기" class="btn2" style="background: #FFFFFF"
+			<input type="button" value="올리기" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="sendIt();"/>
-			<input type="button" value="취소" class="btn2"  style="background: #FFFFFF"
+			<input type="button" value="취소" class="btn2"  style="background: #00D8FF; color: #FFFFFF;"
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
 		</td>
 		<td width="5"></td>	

@@ -1,7 +1,6 @@
-package com.exe.board;
+/*package com.exe.board;
 
 import java.io.File;
-
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,16 +19,15 @@ import com.exe.board.DownloadView;
 public class BoardFileController {
 	
 	@Autowired
-	@Qualifier("fileDAO")
+	@Qualifier("BoardFileDAO")
 	BoardFileDAO filedao;
 	
 	@Autowired
-	@Qualifier("boadDAO")
-	BoardDAO dao;
-	
+	@Qualifier("boardDAO")
+	BoardDAO dao;	
 	
 	//(File Upload)
-		@RequestMapping(value="/created_ok.action",method={RequestMethod.POST,RequestMethod.GET})
+		@RequestMapping(value="/board/created_ok.action",method={RequestMethod.POST,RequestMethod.GET})
 		public String upload(MultipartHttpServletRequest request,BoardFileDTO filedto, HttpServletResponse response) throws Exception{
 			
 			String path = 
@@ -53,23 +51,22 @@ public class BoardFileController {
 			f = new File(originalFileName);
 			file.transferTo(f);
 			
-			//filedto.setUpload(saveFileName);
-			
-		
-			
+			//filedto.setUpload(saveFileName);			
 			
 		}
 			
+			
+			
 		//DB 저장
-		
-		
+				
 		//dao.insertData(filedto);
-		
 		
 		return "redirect:/board";
 		
-		}	
-			
+		}			
+		
+		
+		
 		
 		//DownLoad
 		
@@ -83,10 +80,6 @@ public class BoardFileController {
 			return mav;
 			
 		}
-		
-	  
-		
-	
-	
 
 }
+*/

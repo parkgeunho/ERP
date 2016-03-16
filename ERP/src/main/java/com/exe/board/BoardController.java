@@ -44,11 +44,9 @@ public class BoardController {
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	     
 	      int maxNum = dao.getMaxNum();
-	      
-	     
+	      	     
 	      dto.setBoardNum(maxNum + 1);	  
-	   
-	      
+	   	      
 	      dao.insertData(dto);
 	      
 	      return "redirect:/board/list.action";
@@ -221,34 +219,11 @@ public class BoardController {
 		  dao.deleteData(boardNum);
 	  
 		  return "redirect:/board/list.action?pageNum=" + pageNum;
-	 
-	  
-	  
-	 
-
-	 
-	
+		  
 	 
 	  }
-	 
-	  
-	 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

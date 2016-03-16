@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%		
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -36,23 +37,35 @@
 
 
 	<tr style="height: 30px; background: #6EE3F7" >
-		<td style="width: 200px; height: 22px; letter-spacing: 5px;" align="center">제목</td>
+		<td style="width: 200px; height: 22px;" align="center">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
 	</tr>
 	
 	<tr style="height: 30px; background: #6EE3F7" >
-		<td style="width: 200px; height: 22px;" align="center">작성자</td>
+		<td style="width: 200px; height: 22px;" align="center">작&nbsp;성&nbsp;자</td>
 		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
 	</tr>
 	<tr style="height: 0.5px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="3"></td>
 	</tr>
+</table>
+	
+<table align="center" border="0" cellpadding="0" cellspacing="0">
 	
 	<tr>
 		<td style="height: 22px; width: 200px;" align="center">첨부파일</td>
-		<td style="width: 1200px;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="download.action">파일 다운</a>
-			<img alt="" src="/erp/resources/boardimage/down002.png">&nbsp;&nbsp;  </td>
+		<td style="width: 300px;"></td>
+		<td style="width: 900px;">&nbsp;<a href="download.action">
+			<img alt="" src="/erp/resources/boardimage/down002.png"></a>&nbsp;&nbsp;  </td>
 	</tr>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<tr style="height: 1px; background: #B2EBF4">
 		<td style="width: 1400px;" colspan="3"></td>
@@ -136,13 +149,7 @@
 	</tr>
 	
 	<tr style="height: 30px;">
-		<td style="width: 1400px;" align="right">
-			<select>
-				<option>보내기</option>
-				<option>목적에</option>
-				<option>맞는</option>
-				<option>게시판</option>
-			</select>
+		<td style="width: 1400px;" align="right">			
 			<input type="button" value="리스트" class="btn2" style="background: #FFFFFF" 
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
 				
@@ -153,12 +160,7 @@
 				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
 		
 		</td>
-	
-	
-	
 	</tr>
-
-
 </table>
 
 

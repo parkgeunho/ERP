@@ -52,8 +52,6 @@ function sendIt(){
 	}
 	f.subject.value = str;
 	
-	f.action = "<%=cp%>/board/update_ok.action";
-	f.submit();
 	
 	
  	str = CKEDITOR.instances.editor1.getData();
@@ -62,11 +60,13 @@ function sendIt(){
 	
 	if(!str){
 		alert("\n내용을 입력하세요." );
-		f.content.focus();
+		CKEDITOR.instances.editor1.focus();
 		return;
 	}			
 	f.content.value = str;
-
+	f.action = "<%=cp%>/board/update_ok.action";
+	f.submit();
+	
 	
 
 }
@@ -141,6 +141,7 @@ function sendIt(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
+		<input type="file" name="upload">
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		
@@ -165,15 +166,16 @@ function sendIt(){
 		<td style="width: 100px;" align="right"></td>
 		<td style="width: 100px;" align="center"></td>		
 		<td style="width: 150px;" align="center"></td>
+		
 	</tr>
 	
-	<tr style="height: 15px; ">	
+	<!-- <tr style="height: 15px; ">	
 		<td style="width: 300px;" align="left"></td>
 		
 		<td style="width: 100px;" align="right"></td>
 		<td style="width: 100px;" align="center"></td>		
 		<td style="width: 150px;" align="center"></td>
-	</tr> 
+	</tr>  -->
 </table>
 
 <table border="0" align="center">
