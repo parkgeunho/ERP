@@ -103,7 +103,7 @@ public class ListController {
 	        buseoN++;
 	        buseoMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 	        buseoMap.put("depth", Integer.toString(vo.getDepth()));
-	        buseoMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+	        buseoMap.put("buseoNum",vo.getBuseoNum());
 			
 			vo.setReplyNum(insaDAO.replyNum(buseoMap));
 			
@@ -125,7 +125,8 @@ public class ListController {
 
 
 		List<MemberDTO> memberList = listDAO.memberList();
-		
+		int memberMaxNum = memberDAO.maxNum();
+		request.setAttribute("memberMaxNum", memberMaxNum);
 		request.setAttribute("memberList", memberList);
 		
 		

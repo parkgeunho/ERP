@@ -66,7 +66,7 @@ public class InsaController {
 			n++;
 			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
-			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+			hMap.put("buseoNum",(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
 			
@@ -139,7 +139,7 @@ public class InsaController {
 			n++;
 			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
-			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+			hMap.put("buseoNum",(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
 			
@@ -172,9 +172,9 @@ public class InsaController {
 			
 			
 			
-			int maxNum = insaDAO.maxNum();
-			dto.setBuseoNum(maxNum+1);
-			dto.setGroupNum(dto.getBuseoNum());
+			int maxNum = insaDAO.maxNum()+1;
+			dto.setBuseoNum(Integer.toString(maxNum));
+			dto.setGroupNum(Integer.parseInt(dto.getBuseoNum()));
 			dto.setDepth(0);
 			dto.setOrderNo(0);
 			dto.setParent(0);
@@ -191,9 +191,9 @@ public class InsaController {
 		      hMap.put("orderNo", dto.getOrderNo());
 		      insaDAO.updateOrder(hMap);
 		      
-		      dto.setParent(dto.getBuseoNum());
-		      int maxNum = insaDAO.maxNum();
-		      dto.setBuseoNum(maxNum+1);
+		      dto.setParent(Integer.parseInt(dto.getBuseoNum()));
+		      int maxNum = insaDAO.maxNum()+1;
+		      dto.setBuseoNum(Integer.toString(maxNum));
 		      dto.setBuseoName("수정해주세요");
 		      dto.setDepth(dto.getDepth()+1);
 		      dto.setOrderNo(dto.getOrderNo()+1);
@@ -235,7 +235,7 @@ public class InsaController {
 			if(buseoName!=null){
 				int buseoNum = i;
 				dto.setBuseoName(buseoName);
-				dto.setBuseoNum(buseoNum);
+				dto.setBuseoNum(Integer.toString(buseoNum));
 				dto.setChecked("ok");
 				insaDAO.updateBuseo(dto);
 			}
@@ -293,23 +293,23 @@ public class InsaController {
 			
 			if(i==4){
 				
-				depth5 = Integer.toString(dto.getBuseoNum());
+				depth5 = dto.getBuseoNum();
 			}
 			if(i==3){
 				
-				depth4 = Integer.toString(dto.getBuseoNum());
+				depth4 = dto.getBuseoNum();
 			}
 			if(i==2){
 			
-				depth3 = Integer.toString(dto.getBuseoNum());
+				depth3 = dto.getBuseoNum();
 			}
 			if(i==1){
 				
-				depth2 = Integer.toString(dto.getBuseoNum());
+				depth2 = dto.getBuseoNum();
 			}
 			if(i==0){
 				
-				depth1 = Integer.toString(dto.getBuseoNum());
+				depth1 = dto.getBuseoNum();
 			}
 			dto = insaDAO.readBuseo(dto.getParent());
 		}
