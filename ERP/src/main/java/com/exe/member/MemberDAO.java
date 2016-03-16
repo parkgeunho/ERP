@@ -132,6 +132,12 @@ public class MemberDAO {
 		return lists;
 	}
 	
+	public void updatedData(MemberDTO dto) {
+		
+		sessionTemplate.selectList("com.exe.member.updatedData",dto);
+		
+	}
+	
 	
 	
 	

@@ -191,18 +191,32 @@
         	f.grade.focus();
         	return;
         	}
+       
+        
+        str = f.depth1.value;
+        str = str.trim();
+        if(str=='no'){
+        	alert("부서를 필수로 선택하세요")
+        	return;
+        	}
         
         
         str = f.file.value;
     	str = str.trim();
         if(!str) {
-            alert("\사진을 업로드 하세요. ");
+            alert("사진을 업로드 하세요. ");
             f.file.focus();
             return;
         }
         f.file.value = str;
         
+        var check = $("#check").text();
+	
 		
+		if(check=="사용불가 아이디"){
+			alert("사용 불가능한 아이디 입니다.")
+			return;
+		}
 
 		f.action = "<%=cp%>/created_ok.action";
 		f.submit();

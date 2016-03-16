@@ -24,20 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response,
 			Object object, ModelAndView mav) throws Exception {
-		/*HttpSession session = request.getSession();
-		
-		System.out.println("1");
-		
-		//id라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동
-		if(session.getAttribute("dto")==null){
-			response.sendRedirect("/erp/login.action");
-			
-			return;
-		}
-		
-		response.sendRedirect("/erp/main");
-
-		return;*/
+	
 		
 	}
 
@@ -46,7 +33,6 @@ public class LoginInterceptor implements HandlerInterceptor{
 			Object object) throws Exception {
 HttpSession session = request.getSession();
 		
-		System.out.println("2");
 		
 		//id라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동
 		if(session.getAttribute("dto")==null){
