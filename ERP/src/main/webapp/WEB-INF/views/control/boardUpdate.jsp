@@ -21,6 +21,25 @@ $('[id^="ckBus-"]').click(function(){
 	}).error(function(){alert("이미 최하 부서입니다.")});
 
 });
+
+
+$('[id^="ckMem-"]').click(function(){
+	
+	
+	ck= "Mem-" + $('.num'+this.id).val();
+	alert(ck);
+	var url = "<%=cp%>/boardSide";
+	$.post(url,{num:num,ckNum:ck},function(args){
+	$("#boardSide").html(args);
+	
+	}).error(function(){alert("이미 최하 부서입니다.")});
+
+});
+
+
+
+
+
 	
 </script>
 
@@ -30,6 +49,7 @@ $('[id^="ckBus-"]').click(function(){
 					<div >게시판설정<br>
 					게시판에 대한 정보 및 수정을 할 수 있습니다.<br>
 					공지게시판으로 사용하시려면 글쓰기 권한을 관리자 이상으로 지정하세요.<br>
+					읽기/쓰기 권한은 바로 적용이 됩니다.
 					</div>
 					<div style="border-bottom: 1px solid;height: 30px;"></div>
 					<div style="float: left; width: 200px; padding-top: 10px; ">
@@ -46,32 +66,60 @@ $('[id^="ckBus-"]').click(function(){
 					
 					</div>
 					
-						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px;">
-							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
+						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
 							권한
 							</div>
 							<div>
 								<c:forEach var="dto" items="${buseoRlist }">
-								<div>
-									<div style="float: left;">
+									<c:set var="check" value="no"/>
+										<c:forEach var="ck" items="${buseoWlist }">
+											<c:if test="${dto.buseoNum==ck.buseoNum }">
+												<c:set var="check" value="ok" />
+											</c:if>
+										</c:forEach>
+								<div style="height: 30px;">
+									<div style="float: left; width: 250px; background-color: aqua;">
 									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
 									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
-									<div style="widows: 20px;float: left;">
-										<c:forEach var="ck" items="${buseoWlist }">
-											<c:choose>
-												<c:when test="${ck.buseoNum!=dto.buseoNum }">
-												읽기
-												</c:when>
-												
-												<c:when test="${ck.buseoNum==dto.buseoNum }">
-												읽기/쓰기
-												</c:when>
-											</c:choose>
-										</c:forEach>
+									<div style="float: left; width: 70px;">
+										<c:if test="${check=='ok' }">
+											읽기/쓰기
+										</c:if>
+										<c:if test="${check=='no' }">
+											읽기
+										</c:if>
 									</div>
 								</div>
 								</c:forEach>
+								
+								<c:forEach var="dto" items="${memberRlist }">
+									<c:set var="checkMember" value="no"/>
+										<c:forEach var="ck" items="${memberWlist }">
+											<c:if test="${dto.num==ck.num }">
+												<c:set var="checkMember"  value="ok"/>
+											</c:if>
+										</c:forEach>
+								<div style="height: 30px;">
+									<div id="ckMem-${dto.num }" style="float: left; width :250px;">
+									<label >${dto.name }</label>
+									<input type="hidden" name="listNum" value="${dto.num }" class="numckMem-${dto.num }">
+									</div>
+									<div style="widows: 20px;float: left; width:70px;">
+										<c:if test="${checkMember=='ok' }">
+											읽기/쓰기
+										</c:if>
+										<c:if test="${checkMember=='no' }">
+											읽기
+										</c:if>
+									</div>
+								</div>
+								
+								
+								
+								</c:forEach>
+								
 							</div>
 						</div>
 						

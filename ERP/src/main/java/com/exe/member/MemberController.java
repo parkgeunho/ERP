@@ -3,10 +3,7 @@ package com.exe.member;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,6 +37,75 @@ public class MemberController {
 		return "member/login";
 		
 	}
+	
+	@RequestMapping(value = "/login_ok.action")
+	public String login_ok(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		response.setCharacterEncoding("UTF-8");
+		
+		String id= request.getParameter("userId");
+		String pwd= request.getParameter("userPwd");
+		
+		System.out.println(id);
+		System.out.println(pwd);
+		
+		MemberDTO dto = new MemberDTO();
+		
+		
+		
+		dto.setId(id);
+		dto.setPwd(pwd);
+		
+		dto = dao.login(dto);
+		
+		if(dto==null){
+			
+			try {
+				
+				PrintWriter writer = response.getWriter();
+
+				writer.println("<script type='text/javascript'>");
+
+				writer.println("alert('아이디와 비밀번호를 정확히 입력하세요');");
+
+				writer.println("history.back();");
+
+				writer.println("</script>");
+
+				writer.flush();
+				
+				return "member/login";
+				
+			} catch (Exception e) {
+			
+			}
+			
+		}
+		
+		
+		if(dto.getId().equals(id) && dto.getPwd().equals(pwd)){
+			
+			session.setAttribute("dto", dto);
+			System.out.println("여기 들어와서 dto 올렷음");
+			return "redirect:/main";
+			
+		}
+	
+			
+			
+				
+		
+		
+		
+		
+		
+		return "member/login";
+		
+		
+	}
+	
+	
 	
 	@RequestMapping(value = "/join.action")
 	public String joinView(HttpServletRequest request,HttpServletResponse response) {
@@ -142,6 +208,7 @@ public class MemberController {
 		
 		int maxNum = dao.maxNum();
 		System.out.println("depth3 화긴:"+dto.getDepth3());
+		System.out.println("dpehth2 확인:"+dto.getDepth2());
 		
 		if(dto.getDepth1().equals("")){
 			dto.setDepth1("no");
@@ -256,77 +323,178 @@ public class MemberController {
 		String depth4S = request.getParameter("depth4");
 		String depth5S = request.getParameter("depth5");
 		
-		if(depth1S==null || depth1S.equals("")){
-			
-			depth1S = "1" ;
-			
-		}
 		
-		int depth1 = Integer.parseInt(depth1S);
+	
 		
+		
+	
 		List<BuseoDTO> lists = dao.depth1();
 		
-		request.setAttribute("depth1", depth1);
+		
+		request.setAttribute("lists", lists);
+		
 		
 		if(depth1S!=null && !depth1S.equals("")){
+			
+			if(depth1S!="no" && !depth1S.equals("no")){
+			
+			
+			int depth1 = Integer.parseInt(depth1S);
+			request.setAttribute("depth1", depth1);
 		
+			List<BuseoDTO> buseoChange1 = dao.buseo2(depth1);
+			request.setAttribute("buseoChange1", buseoChange1);
+			
+			request.setAttribute("depth1Size", buseoChange1.size());
+			System.out.println("뎁스1 : " + depth1S);
 		
+			
+			
+			String preDepth1 = request.getParameter("preDepth1");
+			
+			if(!preDepth1.equals("")&& preDepth1!=null){
+				
+				if(!preDepth1.equals(depth1S)){
+					
+					depth2S="no";
+					depth3S="no";
+					depth4S="no";
+					depth5S="no";
+				}
+				
+				
+			}
+			
+			
+			
+			
+	
+	
 		
-		List<BuseoDTO> buseoChange1 = dao.buseo2(depth1);
+			if(depth2S!=null && !depth2S.equals("")){
+				
+				if(depth2S!="no" && !depth2S.equals("no")){
+					
+					int depth2 = Integer.parseInt(depth2S);
+					request.setAttribute("depth2", depth2);
+					List<BuseoDTO> buseoChange2 = dao.buseo3(depth2);
+					request.setAttribute("buseoChange2", buseoChange2);
+					request.setAttribute("depth2Size", buseoChange2.size());
+					
+					
+					String preDepth2 = request.getParameter("preDepth2");
+					
+					if(!preDepth2.equals("")&& preDepth2!=null){
+						
+						if(!preDepth2.equals(depth2S)){
+							
+							
+							depth3S="no";
+							depth4S="no";
+							depth5S="no";
+						}
+						
+						
+					}
+					
+					
+					
+					
+					if(depth3S!=null && !depth3S.equals("")){
+						if(depth3S!="no" && !depth3S.equals("no")){
+				
+							int depth3 = Integer.parseInt(depth3S);
+				
+							List<BuseoDTO> buseoChange3 = dao.buseo4(depth3);
+				
+							request.setAttribute("buseoChange3", buseoChange3);
+							request.setAttribute("depth3", depth3);
+							request.setAttribute("depth3Size", buseoChange3.size());
+							
+							String preDepth3 = request.getParameter("preDepth3");
+							
+							if(!preDepth3.equals("")&& preDepth3!=null){
+								
+								if(!preDepth3.equals(depth3S)){
+									
+									
+									
+									depth4S="no";
+									depth5S="no";
+								}
+								
+								
+							}
+							
+	
+							
+							
+							if(depth4S!=null && !depth4S.equals("")){
+								if(depth4S!="no" && !depth4S.equals("no")){
+						
+									
+									int depth4 = Integer.parseInt(depth4S);
+									List<BuseoDTO> buseoChange4 = dao.buseo5(depth4);
+						
+									request.setAttribute("buseoChange4", buseoChange4);
+									request.setAttribute("depth4", depth4);
+									request.setAttribute("depth4Size", buseoChange4.size());
+									
+
+									String preDepth4 = request.getParameter("preDepth4");
+									
+									if(!preDepth4.equals("")&& preDepth4!=null){
+										
+										if(!preDepth4.equals(depth4S)){
+											
+											
+											
+										
+											depth5S="no";
+										}
+										
+										
+									}
+									
+									
+									
+									if(depth5S!=null && !depth5S.equals("")){
+										if(depth5S!="no" && !depth5S.equals("no")){
+									
+												int depth5= Integer.parseInt(depth5S);
+												request.setAttribute("depth5", depth5);
+									
+										}
+									}
+									
+									
+						
+								}
+							}
+							
+							
+							
+							
+						}
+					}
+					
+				}
+			}
 		
-		
-		request.setAttribute("buseoChange1", buseoChange1);
-		request.setAttribute("depth2", depth2S);
+			}
 		
 		}
 		
 		
 		
-		System.out.println("뎁스1 : " + depth1S);
-		System.out.println("뎁스2 : " + depth2S);
-		System.out.println("뎁스3 : " + depth3S);
-		System.out.println("뎁스4 : " + depth4S);
-		System.out.println("뎁스5 : " + depth5S);
 		
 		
 		
 		
-
-		if(depth2S!=null && !depth2S.equals("")){
-			
-			
-			int depth2 = Integer.parseInt(depth2S);
-			
-			
-			List<BuseoDTO> buseoChange2 = dao.buseo3(depth2);
-			
-			
-			request.setAttribute("buseoChange2", buseoChange2);
-			request.setAttribute("depth3", depth3S);
-			
-		}
 		
-		if(depth3S!=null && !depth3S.equals("")){
-
-			int depth3 = Integer.parseInt(depth3S);
-
-			List<BuseoDTO> buseoChange3 = dao.buseo4(depth3);
-
-			request.setAttribute("buseoChange3", buseoChange3);
-			request.setAttribute("depth4", depth4S);
-
-		}
+	
 		
-		if(depth4S!=null && !depth4S.equals("")){
-
-			int depth4 = Integer.parseInt(depth3S);
-
-			List<BuseoDTO> buseoChange4 = dao.buseo5(depth4);
-
-			request.setAttribute("buseoChange4", buseoChange4);
-			request.setAttribute("depth5", depth5S);
-
-		}
+	
 
 		
 		
@@ -335,7 +503,7 @@ public class MemberController {
 	
 		
 		
-		request.setAttribute("lists", lists);
+		
 		
 		return "member/buseoChange";
 	}

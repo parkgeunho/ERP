@@ -1,5 +1,6 @@
 package com.exe.insa;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
 import oracle.security.o5logon.b;
@@ -32,6 +34,11 @@ public class ListController {
 	@Autowired
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
+	
+	@Autowired
+	@Qualifier("memberDAO")
+	MemberDAO memberDAO;
+	
 	
 	@RequestMapping(value = "/con", method = {RequestMethod.GET,RequestMethod.POST})
 	public String controlMain(HttpServletRequest request,HttpServletResponse response) {
@@ -96,7 +103,7 @@ public class ListController {
 	        buseoN++;
 	        buseoMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 	        buseoMap.put("depth", Integer.toString(vo.getDepth()));
-	        buseoMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+	        buseoMap.put("buseoNum",vo.getBuseoNum());
 			
 			vo.setReplyNum(insaDAO.replyNum(buseoMap));
 			
@@ -118,7 +125,8 @@ public class ListController {
 
 
 		List<MemberDTO> memberList = listDAO.memberList();
-		
+		int memberMaxNum = memberDAO.maxNum();
+		request.setAttribute("memberMaxNum", memberMaxNum);
 		request.setAttribute("memberList", memberList);
 		
 		
@@ -253,9 +261,11 @@ public class ListController {
 	@RequestMapping(value = "/boardUpdate", method = {RequestMethod.GET,RequestMethod.POST})
 	public String boardUpdate(HttpServletRequest request,HttpServletResponse response,String ck) {
 		
-		List<ListDTO> lists = new ArrayList<ListDTO>();
+		
 		List<BuseoDTO> buseoWlist = new ArrayList<BuseoDTO>();
 		List<BuseoDTO> buseoRlist = new ArrayList<BuseoDTO>();
+		List<MemberDTO> memberRlist = new ArrayList<MemberDTO>();
+		List<MemberDTO> memberWlist = new ArrayList<MemberDTO>();
 		String listNum = request.getParameter("listNum");
 		System.out.println("ck확인 " + ck);
 		if(listNum==null || listNum.equals("")){
@@ -304,6 +314,33 @@ public class ListController {
 			}
 		}
 		
+		if(dto.getMemberR()!=null){
+			String memberRs[] =  dto.getMemberR().split(",");
+			
+			for(String i : memberRs){
+				int j = Integer.parseInt(i);
+				MemberDTO mDTO = memberDAO.readOne(j);
+				memberRlist.add(mDTO);
+				if(memberRlist!=null)
+					request.setAttribute("memberRlist", memberRlist);
+			}
+			
+		}
+		
+		if(dto.getMemberW()!=null){
+			String memberWs[] = dto.getMemberW().split(",");
+			
+			for(String i : memberWs){
+				int j = Integer.parseInt(i);
+				MemberDTO mDTO = memberDAO.readOne(j);
+				memberWlist.add(mDTO);
+				if(memberWlist!=null)
+					request.setAttribute("memberWlist", memberWlist);
+			}
+			
+		}
+		
+		
 		
 		request.setAttribute("boardData", dto);
 		
@@ -311,7 +348,7 @@ public class ListController {
 	}
 	
 	
-	//왼쪽에 있는 리스트 에서 권한 추가할때 사용하는 메소드
+	//왼쪽에 있는 리스트 에서 권한 추가할때 사용하는 메소드 읽기 쓰기 에 모두 추가
 	@RequestMapping(value = "/boardAdd", method = {RequestMethod.GET,RequestMethod.POST})
 	public String boardAdd(HttpServletRequest request,HttpServletResponse response) {
 		
@@ -333,8 +370,6 @@ public class ListController {
 			ListDTO dto = listDAO.readData(listNum);
 			dto.setListNum(listNum);
 			
-			
-			
 			String BuseoW = dto.getBuseoW() ;
 			String BuseoR = dto.getBuseoR() ;
 			
@@ -346,13 +381,10 @@ public class ListController {
 				for(String i : BuseoRs){
 					if(i.equals(date)){
 						return "read-error";
-						
 					}
 					System.out.println("i확인" 
 							+ i);
 					arrayR += i +",";
-					
-					
 				}
 				arrayR += date + ",";
 				
@@ -387,22 +419,49 @@ public class ListController {
 			String MemberR = dto.getMemberR() ;
 			
 			
-			if(MemberR.equals("")||MemberR==null){
-				MemberR = date + ",";
+			if(MemberR==null || MemberR.equals("")){
+				arrayR = date+",";
 			}else{
-				MemberR = MemberR + date+",";
+				
+				
+				String memberRs[] = MemberR.split(",");
+				
+				for(String i : memberRs){
+					if(i.equals(date)){
+						return "read-error";
+					}
+					System.out.println("i확인" 
+							+ i);
+					arrayR += i +",";
+				}
+				arrayR += date + ",";
+				
+				
+				
+				
 			}
 			
 			if(MemberW==null || MemberW.equals("")){
-				MemberW = date + ",";
+				arrayW = date+",";
 			}else{
-				MemberW = MemberW + date+",";
+				String memberWs[] = MemberW.split(",");
+				
+				for(String i :memberWs){
+					
+					if(i.equals(date)){
+						return "read-error";
+					}
+					arrayW += i + ",";
+				}
+				arrayW += date + ",";
+				
+				
 			}
 			
-			dto.setListNum(listNum);
-			dto.setMemberR(MemberR);
-			dto.setMemberW(MemberW);
-			listDAO.boardBuseo(dto);
+			
+			dto.setMemberR(arrayR);
+			dto.setMemberW(arrayW);
+			listDAO.boardMember(dto);
 			
 		}
 		
@@ -424,12 +483,16 @@ public class ListController {
 		int listNum = Integer.parseInt(num);
 		
 		ListDTO dto = listDAO.readData(listNum);
-		String buseoWs[] = dto.getBuseoW().split(",");
+		System.out.println("분류값 확인"+sort);
 		
 		if(sort.equals("Bus")){
 			
 			if(change.equals("write")){
 				
+				if(dto.getBuseoW()==null){
+					dto.setBuseoW(date+",");
+				}
+				String buseoWs[] = dto.getBuseoW().split(",");
 				List<String> list = new ArrayList<String>();
 				Collections.addAll(list, buseoWs);
 				boolean isFind = list.contains(date);
@@ -452,7 +515,13 @@ public class ListController {
 			
 			if(change.equals("non")){
 				
+				if(dto.getBuseoW()==null){
+					
+					return boardUpdate(request, response, num);
+				}
+				
 				List<String> list = new ArrayList<String>();
+				String buseoWs[] = dto.getBuseoW().split(",");
 				Collections.addAll(list, buseoWs);
 				list.remove(date);
 				Iterator<String> it = list.iterator();
@@ -467,12 +536,76 @@ public class ListController {
 				
 			}
 				listDAO.boardBuseo(dto);
-				
-			
-			
-			
 			
 		}
+		if(sort.equals("Mem")){
+			
+			if(change.equals("write")){
+				
+				if(dto.getMemberW()==null){
+					dto.setMemberW(date+",");
+				}
+					String MemberWs[] = dto.getMemberW().split(",");
+					List<String> list = new ArrayList<String>();
+					Collections.addAll(list, MemberWs);
+					boolean isFind = list.contains(date);
+					if(isFind){
+						System.out.println("중복값있음");
+					}else{
+						System.out.println("중복값없어서 내려옴");
+					list.add(date);
+					Iterator<String> it = list.iterator();
+					String memberW="";
+						while(it.hasNext()){
+							
+							memberW += it.next()+",";
+							
+						}
+					dto.setMemberW(memberW);
+					}
+				
+			}
+			
+			if(change.equals("non")){
+				
+				if(dto.getMemberW()==null){
+					
+					return boardUpdate(request, response, num);
+				}
+				
+				List<String> list = new ArrayList<String>();
+				String memberWs[] = dto.getMemberW().split(",");
+				Collections.addAll(list, memberWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String memberW ="";
+				
+				while(it.hasNext()){
+					memberW += it.next()+",";
+					
+					
+				}
+				dto.setMemberW(memberW);
+				
+			}
+				listDAO.boardMember(dto);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		return boardUpdate(request, response, num);
@@ -495,22 +628,53 @@ public class ListController {
 		ListDTO dto = listDAO.readData(listNum);
 		
 		if(sort.equals("Bus")){
-			
+			if(dto.getBuseoW()!=null){
 			String buseoWs[] = dto.getBuseoW().split(",");
 			
-			for(String i : buseoWs){
-				System.out.println("I값확인"+i);
-				System.out.println("date확인" + date);
-				if(i.equals(date)){
-					ck ="ok";
-					System.out.println("먼데 ck값학인" + ck);
-				}	
+				for(String i : buseoWs){
+					System.out.println("I값확인"+i);
+					System.out.println("date확인" + date);
+					if(i.equals(date)){
+						ck ="ok";
+						System.out.println("먼데 ck값학인" + ck);
+					}	
+				}
+			}
+		}
+		
+		if(sort.equals("Mem")){
+			if(dto.getMemberW()!=null){
+				String memberWs[] = dto.getMemberW().split(",");
+				
+				for(String i:memberWs){
+					
+					if(i.equals(date))
+						ck ="ok";
+					
+				}
 			}
 			
 		}
+		
+			
+		
 		System.out.println("ck값 확인"+ ck);
 		request.setAttribute("ck", ck);
 		return "control/boardUpdateSide";
+	}
+	//게시판 이름 바꾸기 
+	@RequestMapping(value = "/boardChange", method = {RequestMethod.GET,RequestMethod.POST})
+	public void boardChange(HttpServletRequest request,HttpServletResponse response) {
+		
+		String boardName = request.getParameter("boardName");
+		int listNum = Integer.parseInt(request.getParameter("num"));
+		
+		ListDTO dto = listDAO.readData(listNum);
+		dto.setBoardName(boardName);
+		
+		listDAO.boardUpdate(dto);
+		
+	
 	}
 	
 	

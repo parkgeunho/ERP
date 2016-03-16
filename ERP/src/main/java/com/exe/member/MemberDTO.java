@@ -31,6 +31,8 @@ public class MemberDTO {
 	private String depth5;
 	private String upload;
 	
+	
+	
 
 	public int getNum() {
 		return num;

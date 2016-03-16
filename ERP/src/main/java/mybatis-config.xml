@@ -7,6 +7,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 <configuration>
 
 	
+	
 	<properties>
 
 
@@ -14,6 +15,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 		<property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys"/>			
 		<property name="username" value="SUZI"/>
 		<property name="password" value="A123"/>
+
 
 	</properties>
 
