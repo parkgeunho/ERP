@@ -29,35 +29,6 @@ public class BoardController {
 	MyUtil myUtil;
 	
 	
-	/*@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public String list() {
-		
-		return "board/list";
-		
-	}
-	
-	@RequestMapping(value = "/board/created", method = RequestMethod.GET)
-	public String created() {
-		
-		return "board/created";
-		
-	}
-	
-	@RequestMapping(value = "/board/article", method = RequestMethod.GET)
-	public String article() {
-		
-		return "board/article";
-		
-	}
-	
-	
-	@RequestMapping(value = "/board/test", method = RequestMethod.GET)
-	public String test() {
-		
-		return "board/test";
-		
-	}
-	*/
 	
 	
 	
@@ -73,11 +44,9 @@ public class BoardController {
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	     
 	      int maxNum = dao.getMaxNum();
-	      
-	     
+	      	     
 	      dto.setBoardNum(maxNum + 1);	  
-	   
-	      
+	   	      
 	      dao.insertData(dto);
 	      
 	      return "redirect:/board/list.action";
@@ -250,34 +219,11 @@ public class BoardController {
 		  dao.deleteData(boardNum);
 	  
 		  return "redirect:/board/list.action?pageNum=" + pageNum;
-	 
-	  
-	  
-	 
-
-	 
-	
+		  
 	 
 	  }
-	 
-	  
-	 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
