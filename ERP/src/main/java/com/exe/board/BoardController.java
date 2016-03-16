@@ -1,6 +1,7 @@
 package com.exe.board;
 
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exe.insa.ListDAO;
+import com.exe.insa.ListDTO;
+
 
 @Controller
 public class BoardController {
@@ -28,6 +32,9 @@ public class BoardController {
 	@Autowired
 	MyUtil myUtil;
 	
+	@Autowired
+	@Qualifier("ListDAO")
+	ListDAO listDAO;
 	
 	
 	
@@ -222,6 +229,103 @@ public class BoardController {
 		  
 	 
 	  }
+	  
+	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
+		public String boardMain(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+		  
+			List<ListDTO> boardlist = listDAO.boardList();
+			List<ListDTO> parent = listDAO.getGroup();
+			List<ListDTO> depths = listDAO.getDepth();
+			int maxNum = listDAO.maxNum();
+  
+			request.setAttribute("maxNum", maxNum);
+			request.setAttribute("depths", depths);
+			request.setAttribute("parent", parent);
+			request.setAttribute("boardlist", boardlist);
+			  
+			 
+			
+			
+			
+			 
+		      String cp = request.getContextPath();
+		      
+		      String pageNum = request.getParameter("pageNum");
+		      int currentPage = 1;
+		      
+		      if(pageNum != null)
+		         currentPage = Integer.parseInt(pageNum);
+		      
+		      String searchKey = request.getParameter("searchKey");
+		      String searchValue = request.getParameter("searchValue");
+		      
+		      if(searchKey==null){
+		         
+		         searchKey = "subject";
+		         searchValue = "";
+		      }else {
+		         
+		         if(request.getMethod().equalsIgnoreCase("GET"))
+		            searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		      }
+		      
+		      int dataCount = dao.getDataCount(searchKey, searchValue);
+		      
+		      int numPerPage = 20;
+		      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		      
+		      if(currentPage>totalPage)
+		         currentPage = totalPage;
+		      
+		      int start = (currentPage-1)*numPerPage;
+		      int end = currentPage*numPerPage;
+		      
+		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, 1);
+		      
+		      String param = "";
+		      
+		      if(!searchValue.equals("")){
+		         
+		         param = "searchKey=" + searchKey;
+		         param += "&searchValue=" + URLEncoder.encode(searchValue, "UTF-8");
+		      }
+		      
+		      String listUrl = cp + "/board/list.action";
+		      
+		      if(!param.equals(""))
+		         listUrl = listUrl + "?" + param;
+		      
+		      String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		      
+		      String articleUrl = cp + "/board/article.action?pageNum=" + currentPage;
+		      
+		      if(!param.equals(""))
+		         articleUrl = articleUrl + "&" + param;
+		      
+		      request.setAttribute("lists", lists);
+		      request.setAttribute("pageIndexList", pageIndexList);
+		      request.setAttribute("dataCount", dataCount);
+		      request.setAttribute("articleUrl", articleUrl);
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		  
+		  
+		  return "boardMain";
+	  }
+	  
+	  
+	  
 
 }
 

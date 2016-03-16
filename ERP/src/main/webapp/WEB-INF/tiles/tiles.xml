@@ -48,6 +48,25 @@
 	
 	
 	
+	<definition name="boardMain" extends="temp">
+		<put-attribute name="main" value="BoardTile" />
+	</definition>
+	
+	
+	
+	
+	
+	
+	<definition name="BoardTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
+		<put-attribute name="leftMain" value="/WEB-INF/views/board/boardSide.jsp" />
+		<put-attribute name="rightMain" value="/WEB-INF/views/board/list.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	
 	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
 		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight.jsp" />

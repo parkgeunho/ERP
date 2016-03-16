@@ -20,8 +20,8 @@
 	게시판 목록
 	</div>
 	<div>
-	<c:forEach var="dto" items="${boardList }">
-	
+	<c:forEach var="dto" items="${boardlist }">
+		<div>${dto.boardName }</div>
 	</c:forEach>
 	</div>
 	
