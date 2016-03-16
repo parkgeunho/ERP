@@ -3,11 +3,7 @@ package com.exe.member;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -82,7 +78,7 @@ public class MemberController {
 				return "member/login";
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+			
 			}
 			
 		}
