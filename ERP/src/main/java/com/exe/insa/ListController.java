@@ -1,8 +1,8 @@
 package com.exe.insa;
 
-import java.lang.reflect.Member;
+
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
-import oracle.security.o5logon.b;
+
 
 @Controller
 public class ListController {
@@ -675,6 +675,96 @@ public class ListController {
 		listDAO.boardUpdate(dto);
 		
 	
+	}
+	@RequestMapping(value = "/boardDeleteControl", method = {RequestMethod.GET,RequestMethod.POST})
+	public void boardControlDelete(HttpServletRequest request,HttpServletResponse response) {
+		
+		
+		String ckNum = request.getParameter("ckNum");
+		String num = request.getParameter("num");
+		
+		
+		String date = ckNum.substring(4); //숫자확인
+		String sort = ckNum.substring(0, 3); //어디껀지 확인하는용
+		
+		
+		int listNum = Integer.parseInt(num);
+		
+		ListDTO dto = listDAO.readData(listNum);
+		System.out.println("분류값 확인"+sort);
+		
+		
+		if(sort.equals("Bus")){
+			
+				
+				List<String> list = new ArrayList<String>();
+				String buseoWs[] = dto.getBuseoW().split(",");
+				Collections.addAll(list, buseoWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String buseoW ="";
+				
+				while(it.hasNext()){
+					buseoW += it.next()+",";
+					
+				}				
+				
+				List<String> Rlist = new ArrayList<String>();
+				String buseoRs[] = dto.getBuseoR().split(",");
+				Collections.addAll(Rlist, buseoRs);
+				Rlist.remove(date);
+				Iterator<String> itR = Rlist.iterator();
+				String buseoR="";
+				while(itR.hasNext()){
+					buseoR += itR.next()+",";
+				}
+
+				dto.setBuseoR(buseoR);
+				dto.setBuseoW(buseoW);
+				listDAO.boardBuseo(dto);
+				
+		}
+				
+			
+		
+		if(sort.equals("Mem")){
+
+			
+				List<String> list = new ArrayList<String>();
+				String memberWs[] = dto.getMemberW().split(",");
+				Collections.addAll(list, memberWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String memberW ="";
+				
+				while(it.hasNext()){
+					memberW += it.next()+",";
+					
+					
+			}
+				
+				List<String> Rlist = new ArrayList<String>();
+				String memberRs[] = dto.getMemberR().split(",");
+				System.out.println("읽기 사람확인"+dto.getMemberR());
+				Collections.addAll(Rlist, memberRs);
+				Rlist.remove(date);
+				Iterator<String> itR = Rlist.iterator();
+				String memberR ="";
+				
+				while(itR.hasNext()){
+					memberR += itR.next()+",";
+					
+					
+			}
+				
+				
+				dto.setMemberR(memberR);
+				dto.setMemberW(memberW);
+				listDAO.boardMember(dto);
+		}
+				
+			
+
 	}
 	
 	

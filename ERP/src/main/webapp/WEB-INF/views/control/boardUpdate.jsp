@@ -8,6 +8,32 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 <script>
+$('[id^="delBus-"]').click(function(){
+	
+	ck= "Bus-" + $('.num'+this.id).val();
+	var url ="<%=cp%>/boardDeleteControl";
+	alert(ck);
+	$.post(url,{num:num,ckNum:ck},function(args){
+		trim();
+	});
+	
+	
+});
+
+
+$('[id^="delMem-"]').click(function(){
+	
+	ck= "Mem-" + $('.num'+this.id).val();
+	var url ="<%=cp%>/boardDeleteControl";
+	alert(ck);
+	$.post(url,{num:num,ckNum:ck},function(args){
+		trim();
+	});
+	
+	
+});
+
+
 
 $('[id^="ckBus-"]').click(function(){
 	
@@ -79,11 +105,13 @@ $('[id^="ckMem-"]').click(function(){
 											</c:if>
 										</c:forEach>
 								<div style="height: 30px;">
-									<div style="float: left; width: 250px; background-color: aqua;">
+									<div style="float: left; width: 230px; background-color: aqua;">
 									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
 									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
-									<div style="float: left; width: 70px;">
+									<div style="float: left; width: 100px;">
+										<img src="/erp/resources/image/xmark.png" id="delBus-${dto.buseoNum }">
+										<input type="hidden" class="numdelBus-${dto.buseoNum }" value="${dto.buseoNum }">
 										<c:if test="${check=='ok' }">
 											읽기/쓰기
 										</c:if>
@@ -102,11 +130,13 @@ $('[id^="ckMem-"]').click(function(){
 											</c:if>
 										</c:forEach>
 								<div style="height: 30px;">
-									<div id="ckMem-${dto.num }" style="float: left; width :250px;">
+									<div id="ckMem-${dto.num }" style="float: left; width :230px;">
 									<label >${dto.name }</label>
 									<input type="hidden" name="listNum" value="${dto.num }" class="numckMem-${dto.num }">
 									</div>
-									<div style="widows: 20px;float: left; width:70px;">
+									<div style="widows: 20px;float: left; width:100px;">
+										<img src="/erp/resources/image/xmark.png" id="delMem-${dto.num }">
+										<input type="hidden" class="numdelMem-${dto.num }" value="${dto.num }">
 										<c:if test="${checkMember=='ok' }">
 											읽기/쓰기
 										</c:if>
