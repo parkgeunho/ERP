@@ -40,17 +40,7 @@ function login(){
 	
 }
 
-function pass(){
-	
-	var pass = "${pass}";
-	if(pass!="")
-		alert("${pass}");
-	
-	var nopass = "${message}";
-	if(nopass!="")
-		alert("${message}");
 
-}
 
 
 </script>
@@ -105,8 +95,8 @@ function pass(){
 
 
 <tr height="30">
-	<td colspan="2" align="center">
-	<button type="button" style="width: 515px; height: 50px; margin-left: 5px; font-size: 15pt; font-family: 고딕;" class="btn btn-default" onclick="javascript:location.href='<%=cp%>/login.action';">Forget</button>
+	<td colspan="2" align="left">
+	&nbsp;<font style="font-family: 고딕; font-size: 13pt; font-weight: bold;">※아이디 또는 비밀번호 분실시 관리자에게 간식을 가져다주세요.</font>
 	</td>
 </tr>	
 <tr height="5"><td colspan="2" bgcolor="#ffffff"></td></tr>

@@ -46,6 +46,7 @@ public class MemberController {
 	public String login_ok(HttpServletRequest request,HttpServletResponse response) {
 		
 		HttpSession session = request.getSession();
+		response.setCharacterEncoding("UTF-8");
 		
 		String id= request.getParameter("userId");
 		String pwd= request.getParameter("userPwd");
@@ -55,18 +56,44 @@ public class MemberController {
 		
 		MemberDTO dto = new MemberDTO();
 		
+		
+		
 		dto.setId(id);
 		dto.setPwd(pwd);
 		
 		dto = dao.login(dto);
 		
-		if(dto.getId()==id && dto.getPwd()==pwd){
+		if(dto==null){
+			
+			try {
+				
+				PrintWriter writer = response.getWriter();
+
+				writer.println("<script type='text/javascript'>");
+
+				writer.println("alert('아이디와 비밀번호를 정확히 입력하세요');");
+
+				writer.println("history.back();");
+
+				writer.println("</script>");
+
+				writer.flush();
+				
+				return "member/login";
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+		
+		
+		if(dto.getId().equals(id) && dto.getPwd().equals(pwd)){
 			
 			session.setAttribute("dto", dto);
+			System.out.println("여기 들어와서 dto 올렷음");
 			return "redirect:/main";
 			
-		}else{
-			return "member/login";
 		}
 	
 			
@@ -77,7 +104,7 @@ public class MemberController {
 		
 		
 		
-		
+		return "member/login";
 		
 		
 	}
