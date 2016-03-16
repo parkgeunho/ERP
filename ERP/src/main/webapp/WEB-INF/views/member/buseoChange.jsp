@@ -96,19 +96,19 @@
 	
 	
 	
-	<c:if test="${buseoChange4==null }">
+	<c:if test="${buseoChange4==null || depth4Size=='0' }">
 		<input type="hidden" name="depth5" value="no">
 	</c:if>
 
-	<c:if test="${buseoChange3==null }">
+	<c:if test="${buseoChange3==null || depth3Size=='0' }">
 		<input type="hidden" name="depth4" value="no">
 	</c:if>
 	
-	<c:if test="${buseoChange2==null }">
+	<c:if test="${buseoChange2==null || depth2Size=='0' }">
 		<input type="hidden" name="depth3" value="no">
 	</c:if>
 	
-	<c:if test="${buseoChange1==null }">
+	<c:if test="${buseoChange1==null || depth1Size=='0' }">
 		<input type="hidden" name="depth2" value="no">
 	</c:if>
 	

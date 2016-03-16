@@ -103,3 +103,19 @@
 	font-weight: bold;
 
 }
+
+.buttonsq{
+	
+	
+	border: 1px solid;
+	background-color: #49B5F4;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	height: 28px;
+	width:100px;
+	line-height: 28px;
+	
+	
+}
+

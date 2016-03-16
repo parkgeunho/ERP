@@ -66,8 +66,8 @@ $('[id^="ckMem-"]').click(function(){
 					
 					</div>
 					
-						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px;">
-							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
+						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
 							권한
 							</div>
 							<div>
@@ -79,11 +79,11 @@ $('[id^="ckMem-"]').click(function(){
 											</c:if>
 										</c:forEach>
 								<div style="height: 30px;">
-									<div style="float: left;">
+									<div style="float: left; width: 250px; background-color: aqua;">
 									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
 									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
-									<div style="widows: 20px;float: left;">
+									<div style="float: left; width: 70px;">
 										<c:if test="${check=='ok' }">
 											읽기/쓰기
 										</c:if>
@@ -102,11 +102,11 @@ $('[id^="ckMem-"]').click(function(){
 											</c:if>
 										</c:forEach>
 								<div style="height: 30px;">
-									<div style="float: left;">
-									<label id="ckMem-${dto.num }">${dto.name }</label>
+									<div id="ckMem-${dto.num }" style="float: left; width :250px;">
+									<label >${dto.name }</label>
 									<input type="hidden" name="listNum" value="${dto.num }" class="numckMem-${dto.num }">
 									</div>
-									<div style="widows: 20px;float: left;">
+									<div style="widows: 20px;float: left; width:70px;">
 										<c:if test="${checkMember=='ok' }">
 											읽기/쓰기
 										</c:if>

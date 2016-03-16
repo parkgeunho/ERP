@@ -185,6 +185,7 @@ public class MemberController {
 		
 		int maxNum = dao.maxNum();
 		System.out.println("depth3 화긴:"+dto.getDepth3());
+		System.out.println("dpehth2 확인:"+dto.getDepth2());
 		
 		if(dto.getDepth1().equals("")){
 			dto.setDepth1("no");
