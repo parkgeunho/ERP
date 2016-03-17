@@ -48,9 +48,14 @@ ${LDTO.boardName}
 			
 		</td>
 		<td style="width: 72px;" align="center">
-		<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action?listNum=${listNum }';">
-			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
-		</td>	
+		<a href="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" target="_blank">
+
+		  <img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px;" 
+		  	>
+			 
+	   </a> 
+		<!-- onclick="javasctipt:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
+		</td>
 		
 	</tr>
 	

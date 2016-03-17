@@ -389,9 +389,14 @@ public class BoardController {
 		            searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		      }
 		      
+
 		     
 		      
 		      
+
+		 
+		      	      
+
 		      
 		      
 		      int dataCount = dao.getDataCountTest(searchKey, searchValue, listNum);
@@ -434,7 +439,9 @@ public class BoardController {
 		         articleUrl = articleUrl + "&" + param;
 		      
 		      request.setAttribute("listNum", listNum);
+
 /*		      request.setAttribute("LDTO", lDTO);*/
+
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
