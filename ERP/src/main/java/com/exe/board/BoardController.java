@@ -4,7 +4,7 @@ package com.exe.board;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -233,10 +233,14 @@ public class BoardController {
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
 		public String boardMain(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		  
+		  
+		  	
 			List<ListDTO> boardlist = listDAO.boardList();
 			List<ListDTO> parent = listDAO.getGroup();
 			List<ListDTO> depths = listDAO.getDepth();
 			int maxNum = listDAO.maxNum();
+			
+			
   
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
@@ -244,14 +248,15 @@ public class BoardController {
 			request.setAttribute("boardlist", boardlist);
 			  
 			 
-			
-			
-			
-			 
-		      String cp = request.getContextPath();
+			String cp = request.getContextPath();
 		      
 		      String pageNum = request.getParameter("pageNum");
 		      int currentPage = 1;
+		      
+		      String num = request.getParameter("listNum");
+			  	
+			  	System.out.println("num을 확인합니다" + num);
+		      
 		      
 		      if(pageNum != null)
 		         currentPage = Integer.parseInt(pageNum);
@@ -269,8 +274,16 @@ public class BoardController {
 		            searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		      }
 		      
-		      int dataCount = dao.getDataCount(searchKey, searchValue);
+		      int listNum = 1;
+		      if(num!=null){
+		    	  listNum = Integer.parseInt(num);  
+		      }
 		      
+		      
+		      
+		      
+		      int dataCount = dao.getDataCountTest(searchKey, searchValue, listNum);
+		      System.out.println("카운트 수" + dataCount);
 		      int numPerPage = 20;
 		      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		      
@@ -279,8 +292,19 @@ public class BoardController {
 		      
 		      int start = (currentPage-1)*numPerPage;
 		      int end = currentPage*numPerPage;
+		     
 		      
-		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, 1);
+		      
+		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, listNum);
+		      
+		      Iterator<BoardDTO> test = lists.iterator();
+		      
+		      while(test.hasNext()){
+		    	  BoardDTO testdto = test.next();
+		    	  System.out.println("번호확인" + testdto.getName());
+		    	  
+		      }
+		      
 		      
 		      String param = "";
 		      
@@ -307,10 +331,11 @@ public class BoardController {
 		      request.setAttribute("dataCount", dataCount);
 		      request.setAttribute("articleUrl", articleUrl);
 			
-			
-		  
+
 		  return "boardMain";
 	  }
+	  
+
 	  
 	  
 	  
