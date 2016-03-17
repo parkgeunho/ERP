@@ -1,6 +1,7 @@
 package com.exe.insa;
 
 
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -212,9 +213,45 @@ public class InsaController {
 	@RequestMapping(value = "/buseodeleted", method = {RequestMethod.GET,RequestMethod.POST})
 	public String buseoDeleted(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
 		
-		int buseoNum = Integer.parseInt(request.getParameter("num"));
+		
+		String num = request.getParameter("num");
+		int buseoNum = Integer.parseInt(num);
+		response.setCharacterEncoding("UTF-8");
+		
 		
 		//원래 여기에 조건을 줘서 인사쪽을 확인하고 나서 있냐 없냐 여부 확인 후 없으면 삭제를 진행
+		String depth1 = num;
+		String depth2 = num;
+		String depth3 = num;
+		String depth4 = num;
+		String depth5 = num;
+		
+		
+		int count = insaDAO.deletecheck(depth1, depth2, depth3, depth4, depth5);
+		if(count>0){
+			try {
+	            
+				
+	            PrintWriter writer = response.getWriter();
+
+	            writer.println("<script type='text/javascript'>");
+
+	            writer.println("alert('부서에 사원이 존재합니다.');");
+
+	            writer.println("history.back();");
+
+	            writer.println("</script>");
+
+	            writer.flush();
+	            
+	            return buseolist(request, response);
+	            
+	         } catch (Exception e) {
+	         
+	         }
+		}
+		
+		
 		//아니면 에러 처리를 실행해서 삭제가 안되게 해야됨
 		insaDAO.deleteBuseo(buseoNum);
 		
@@ -268,7 +305,6 @@ public class InsaController {
 		
 		String searchValue = request.getParameter("searchValue");
 		
-		System.out.println("에러확인");
 		dto = insaDAO.readBuseo(buseoNum);
 		
 		if(dto==null){
@@ -337,7 +373,6 @@ public class InsaController {
 		
 		int dataCount = insaDAO.dataCount(depth1,depth2,depth3,depth4,depth5,searchValue);
 		
-		System.out.println("데이터 숫자 : "+dataCount);
 		int numPerPage = 15;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -393,7 +428,6 @@ public class InsaController {
 			
 			
 			if(mDto.getDepth4()!="no" && !mDto.getDepth4().equals("no")){
-				System.out.println("뎁스4");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
 				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
@@ -406,14 +440,10 @@ public class InsaController {
 			
 			
 			if(mDto.getDepth5()!="no" && !mDto.getDepth5().equals("no")){
-				System.out.println("뎁스51");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
 				mDto.setDepth5(bDto.getBuseoName());
-				System.out.println("뎁스51나감");
 			}else if(mDto.getDepth5().equals("no") || mDto.getDepth5()=="no"){
-				System.out.println("뎁스5");
 				mDto.setDepth5("");
-				System.out.println("뎁스5나감");
 			}
 			
 		}

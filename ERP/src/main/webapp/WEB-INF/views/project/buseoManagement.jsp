@@ -98,7 +98,7 @@ function deleted(){
 	if(del==true){
 		$.post(url,{num:num},function(args){
 		$("#buseoList").html(args);
-		});
+		}).error(function(){alert("부서에 사람이 존재합니다.")});
 	}else{
 		return;
 	}

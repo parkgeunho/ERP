@@ -21,6 +21,8 @@
 	</div>
 	<div>
 	<c:forEach var="dto" items="${boardlist }">
+		
+		
 		<div>${dto.boardName }</div>
 	</c:forEach>
 	</div>
