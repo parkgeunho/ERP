@@ -59,7 +59,7 @@
 		</td>
 		<td style="width: 72px;" align="center">
 		<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
-			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
+			<a href=""></a>
 		</td>	
 		
 	</tr>
