@@ -198,11 +198,28 @@ function created(){
 
 function deleted(){
 
-	var url = "<%=cp%>/boardListDelete";
-	$.post(url,{num:num},function(args){
-	$("#boardList").html(args);
+
 	
-	});
+	var del;
+					del=confirm("모든 게시물이 삭제됩니다. 진행하시겠습니까?");
+	
+	if(del==true){
+		var url = "<%=cp%>/boardListDelete";
+		$.post(url,{num:num},function(args){
+		$("#boardList").html(args);
+		
+		});
+		
+		
+	}else{
+		return;
+	}
+	
+	
+	
+	
+	
+	
 }
 
 function trim(){
