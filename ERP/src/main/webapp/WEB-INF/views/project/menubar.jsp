@@ -62,7 +62,7 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">게시판</a></li>
+		<li><a href="boardMain">게시판</a></li>
 		
 		<li style="line-height: 50px">|</li>
 		
