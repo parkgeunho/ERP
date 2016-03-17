@@ -33,6 +33,9 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		update insadb set name=#{name},jumin=#{jumin},addr=#{addr},id=#{id},pwd=#{pwd},oPhone=#{oPhone},mPhone=#{mPhone},email=#{email},blood=#{blood},reli=#{reli},hobby=#{hobby},memo=#{memo},grade=#{grade},duty=#{duty},
 		dal=#{dal},depth1=#{depth1},depth2=#{depth2},depth3=#{depth3},depth4=#{depth4},depth5=#{depth5},upload=#{upload},secure=#{secure} where num=#{num}
 	</update>
+	<delete id="deleteData" parameterType="Integer">
+		delete insadb where num=#{num}
+	</delete>
 	
 	
 	
