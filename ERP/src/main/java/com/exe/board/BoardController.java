@@ -40,20 +40,21 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/board/created.action")
-	   public ModelAndView created(){
+	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
-	      ModelAndView mav = new ModelAndView();
-	      mav.setViewName("board/created");
+		int listNum= Integer.parseInt(request.getParameter("listNum"));
 	      
-	      return mav;
+		request.setAttribute("listNum", listNum);
+	      return "board/created";
 	   }
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	     
+		 int listNum = Integer.parseInt(request.getParameter("listNum"));
 	      int maxNum = dao.getMaxNum();
 	      	     
 	      dto.setBoardNum(maxNum + 1);	  
-	   	      
+	   	  dto.setListNum(listNum);
 	      dao.insertData(dto);
 	      
 	      return "redirect:/board/list.action";

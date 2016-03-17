@@ -11,8 +11,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    </select>
 
    <insert id="insertData" parameterType="com.exe.board.BoardDTO">
-      insert into erpboard (boardNum,name,subject,content,hitCount,created) 
-      values (#{boardNum},#{name},#{subject},#{content},0,sysdate)
+      insert into erpboard (boardNum,name,subject,content,hitCount,created,listNum) 
+      values (#{boardNum},#{name},#{subject},#{content},0,sysdate,#{listNum})
    </insert>
    
    <select id="getDataCount" parameterType="hashMap" resultType="int">
