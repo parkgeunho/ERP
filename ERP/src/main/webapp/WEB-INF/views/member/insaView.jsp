@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>인사기록카드</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/insaview.css">
-<
+
 
 </head>
 <body >
