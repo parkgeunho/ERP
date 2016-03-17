@@ -40,20 +40,21 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/board/created.action")
-	   public ModelAndView created(){
+	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
-	      ModelAndView mav = new ModelAndView();
-	      mav.setViewName("board/created");
+		int listNum= Integer.parseInt(request.getParameter("listNum"));
 	      
-	      return mav;
+		request.setAttribute("listNum", listNum);
+	      return "board/created";
 	   }
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	     
+		 int listNum = Integer.parseInt(request.getParameter("listNum"));
 	      int maxNum = dao.getMaxNum();
 	      	     
 	      dto.setBoardNum(maxNum + 1);	  
-	   	      
+	   	  dto.setListNum(listNum);
 	      dao.insertData(dto);
 	      
 	      return "redirect:/board/list.action";
@@ -247,7 +248,15 @@ public class BoardController {
 			request.setAttribute("parent", parent);
 			request.setAttribute("boardlist", boardlist);
 			  
-			 
+			
+			
+
+		  return "boardMain";
+	  }
+	  @RequestMapping(value = "/ajaxBoardList", method = {RequestMethod.GET,RequestMethod.POST})
+		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+		  
+		  
 			String cp = request.getContextPath();
 		      
 		      String pageNum = request.getParameter("pageNum");
@@ -255,7 +264,7 @@ public class BoardController {
 		      
 		      String num = request.getParameter("listNum");
 			  	
-			  	System.out.println("num을 확인합니다" + num);
+			  
 		      
 		      
 		      if(pageNum != null)
@@ -278,8 +287,7 @@ public class BoardController {
 		      if(num!=null){
 		    	  listNum = Integer.parseInt(num);  
 		      }
-		      
-		      
+		      	      
 		      
 		      
 		      int dataCount = dao.getDataCountTest(searchKey, searchValue, listNum);
@@ -297,14 +305,9 @@ public class BoardController {
 		      
 		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, listNum);
 		      
-		      Iterator<BoardDTO> test = lists.iterator();
-		      
-		      while(test.hasNext()){
-		    	  BoardDTO testdto = test.next();
-		    	  System.out.println("번호확인" + testdto.getName());
-		    	  
-		      }
-		      
+		
+		      ListDTO lDTO = listDAO.readData(listNum);
+		     
 		      
 		      String param = "";
 		      
@@ -326,14 +329,21 @@ public class BoardController {
 		      if(!param.equals(""))
 		         articleUrl = articleUrl + "&" + param;
 		      
+		      request.setAttribute("listNum", listNum);
+		      request.setAttribute("LDTO", lDTO);
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
 		      request.setAttribute("articleUrl", articleUrl);
-			
-
-		  return "boardMain";
+		      
+		      return "board/list";
+		  
 	  }
+		  
+		  
+	  
+	  
+	  
 	  
 
 	  

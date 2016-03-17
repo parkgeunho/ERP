@@ -36,8 +36,8 @@ $(document).ready(function(){
 </head>
 <body>
 
-<div style="height: 90px; background-color: blue;">
-
+<div style="height: 90px; background-color: #cccccc;">
+여기다
 </div>
 <div class="menubar">
 	<ul>

@@ -4,12 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-	
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+
 
 <link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
 <link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
@@ -28,15 +23,10 @@
 
 </script>
 
-</head>
-<body style="font-size: ; font-style: 나눔고딕코딩;">
 
-<table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 1572px;">
-	<tr style="height: 80px; background-color: #D5D5D5">
-		<td  align="center" class="">공&nbsp;지&nbsp;사&nbsp;항</td>
-		
-	</tr>
-</table>		
+<DIV class="buseo">
+${LDTO.boardName}
+</DIV>		
 		
 <table border="0" align="center" cellpadding="0" cellspacing="0">		
 	
@@ -58,9 +48,14 @@
 			
 		</td>
 		<td style="width: 72px;" align="center">
-		<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
-			<a href=""></a>
-		</td>	
+		<a href="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" target="_blank">
+
+		  <img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px;" 
+		  	>
+			 
+	   </a> 
+		<!-- onclick="javasctipt:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
+		</td>
 		
 	</tr>
 	
@@ -87,7 +82,8 @@
 </table>
 
 
-<table border="0" cellpadding="0" cellspacing="0" align="center">
+
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 1550px;">
 	<c:forEach var="dto" items="${lists }">
 	<tr style="height: 1px; background: #B2EBF4">		
 	</tr>
@@ -132,12 +128,3 @@
 	</tr>
 
 </table>
-
-
-
-
-
-
-
-</body>
-</html>

@@ -225,7 +225,7 @@ function sendIt(){
 
 
 </table>
-
+<input type="hidden" name="listNum" value="${listNum }">
 </form>
 
 
