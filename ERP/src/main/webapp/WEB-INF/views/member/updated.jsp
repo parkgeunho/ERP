@@ -11,34 +11,85 @@
 
 <script type="text/javascript" src="/erp/resources/member/util.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
 <script type="text/javascript">
 
+$(document).ready(function(){
 	
 
+	$.ajax({
+
+		url : "buseoChange",
+		type : 'POST',
+
+		success : function(args) {
+			$("#buseo1").html(args);
+		},
+		error : function(e) {
+			alert(e.responseText);
+
+		}
+
+	});
 
 
+
+
+
+});
+
+
+
+
+//아이디 중복검사 ajax
+function compareId(){
+
+$.ajax({
 	
-	//아이디 중복검사 ajax
-	function compareId(){
-		
-		$.ajax({
+			url:"compareID",
+			type:'POST',
+			data : {compID : document.myForm.id.value},
 			
-					url:"compareID",
-					type:'POST',
-					data : {compID : document.myForm.id.value},
-					
-					success: function(args){
-						$("#result").html(args);
-					},
-					error:function(e){
-		  				alert(e.responseText);
+			success: function(args){
+				$("#result").html(args);
+			},
+			error:function(e){
+  				alert(e.responseText);
+
+			}
+
+});
+
+}
+
+function change1(){
+
+
+var myForm = $('form').serialize();
+	
+ 
+	$.ajax({
+			
+		url:"buseoChange",
+		type:'POST',
+		data: myForm,
 		
-					}
+		success: function(args){
+			$("#buseo1").html(args);
+		},
+		error:function(e){
+				alert(e.responseText);
 
-		});
-
-	}
+		}
+		
+		
+	});
+	
+	
+}
 </script>
 
 <script type="text/javascript">
@@ -47,111 +98,120 @@
 
 	function sendIt(){
 		
-		f = document.myForm;
-
-
-		thumbext = document.getElementById("file").value;
 		
+		
+	f = document.myForm;
 
-		thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+	
+	str =f.file.value;
+	str = str.trim();
+		if (str==null) {
+			
+			
+			thumbext = document.getElementById("file").value;
 
-		if(thumbext != "jpg" && thumbext != "png" &&  thumbext != "gif" &&  thumbext != "bmp" && thumbext != "jpeg"){ //확장자를 확인합니다.
+			thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
 
-			alert('썸네일은 이미지 파일(jpg, jpeg, png, gif, bmp)만 등록 가능합니다.');
+			
+			if (thumbext != "jpg" && thumbext != "png" && thumbext != "gif"
+					&& thumbext != "bmp" && thumbext != "jpeg") { //확장자를 확인합니다.
 
-			return;
 
+				alert('썸네일은 이미지 파일(jpg, jpeg, png, gif, bmp)만 등록 가능합니다.');
+
+				return;
+
+			}
 		}
-		
-			
-			
-		str = f.name.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n이름을 입력하세요. ");
-            f.name.focus();
-            return;
-        }
-        f.name.value = str;
-        
-        
-        if(!isValidJumin(f.jumin.value)) {
-            alert("\n정상적인 주민등록번호를 입력하세요. ");
-            f.jumin.focus();
-            return;
-        }
-        
-        
-        str = f.mPhone.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n휴대전화를 입력하세요. ");
-            f.mPhone.focus();
-            return;
-        }
-        f.mPhone.value = str;
-        
-        
-        if(f.email.value) {
-	    	if(!isValidEmail(f.email.value)) {
-                alert("\n정상적인 E-Mail을 입력하세요. ");
-                f.email.focus();
-                return;
-	    	}
-        }
-        
-        str = f.id.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n아이디를 입력하세요. ");
-            f.id.focus();
-            return;
-        }
-        f.id.value = str;
-        
-        str = f.pwd.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\비밀번호를 입력하세요. ");
-            f.pwd.focus();
-            return;
-        }
-        f.pwd.value = str;
-        
-        str = f.grade.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\직급을 선택 하세요. ");
-            f.grade.focus();
-            return;
-        }
-        f.grade.value = str;
-        
-        str = f.secure.value;
-        str = str.trim();
-        if(str<1 || str>3){
-        	alert("등급은 1~3에서 선택 하세요.")
-        	f.grade.focus();
-        	return;
-        	}
-        
-        
-        str = f.file.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\사진을 업로드 하세요. ");
-            f.file.focus();
-            return;
-        }
-        f.file.value = str;
-        
-		
 
-		f.action = "<%=cp%>/created_ok.action";
+		str = f.name.value;
+		str = str.trim();
+		if (!str) {
+			alert("\n이름을 입력하세요. ");
+			f.name.focus();
+			return;
+		}
+		f.name.value = str;
+
+		if (!isValidJumin(f.jumin.value)) {
+			alert("\n정상적인 주민등록번호를 입력하세요. ");
+			f.jumin.focus();
+			return;
+		}
+
+		str = f.mPhone.value;
+		str = str.trim();
+		if (!str) {
+			alert("\n휴대전화를 입력하세요. ");
+			f.mPhone.focus();
+			return;
+		}
+		f.mPhone.value = str;
+
+		if (f.email.value) {
+			if (!isValidEmail(f.email.value)) {
+				alert("\n정상적인 E-Mail을 입력하세요. ");
+				f.email.focus();
+				return;
+			}
+		}
+
+		str = f.id.value;
+		str = str.trim();
+		if (!str) {
+			alert("\n아이디를 입력하세요. ");
+			f.id.focus();
+			return;
+		}
+		f.id.value = str;
+
+		str = f.pwd.value;
+		str = str.trim();
+		if (!str) {
+			alert("\비밀번호를 입력하세요. ");
+			f.pwd.focus();
+			return;
+		}
+		f.pwd.value = str;
+
+		str = f.grade.value;
+		str = str.trim();
+		if (!str) {
+			alert("\직급을 선택 하세요. ");
+			f.grade.focus();
+			return;
+		}
+		f.grade.value = str;
+
+		str = f.secure.value;
+		str = str.trim();
+		if (str<1 || str>3) {
+			alert("등급은 1~3에서 선택 하세요.")
+			f.grade.focus();
+			return;
+		}
+
+		str = f.depth1.value;
+		str = str.trim();
+		if (str == 'no') {
+			alert("부서를 필수로 선택하세요")
+			return;
+		}
+
+		f.file.value = str;
+
+		var check = $("#check").text();
+		if (check == "사용불가 아이디") {
+			alert("사용 불가능한 아이디 입니다.")
+			return;
+		}
+
+		f.action = "<%=cp%>/updated_ok.action";
 		f.submit();
 		
 		
 	}
+	
 
 
 
@@ -189,7 +249,7 @@
 
 <table border="0" width="1000" style="margin: 0px;">
 	<tr>
-	<td height="40" style=""><div id="result">${compID}</div></td>
+	<td height="40" style=""><div id="result"></div></td>
 	</tr>
 </table>
 <table border="0" align="center" style="margin:0px ; border-radius : 10px;" cellpadding="0">
@@ -215,49 +275,9 @@
 		<td width="100" class="color" align="center">부 서</td>
 		<td width="400" colspan="3" align="center">
 
-		<select name="depth1" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;" >
-   			
-   			
-    		<option value="${depth1.buseoNum }"  selected="selected">${depth1.buseoName }</option>
-    		
-
-		</select>
+		<div id="buseo1"></div>
 		
-
-		<select name="depth2" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
-   			
-   			
-    		<option value="${depth2.buseoNum }"  selected="selected">${depth2.buseoName }</option>
-    		
-
-		</select>
 		
-
-		<select name="depth3" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
-   			
-   			
-    		<option value="${depth3.buseoNum }"  selected="selected">${depth3.buseoName }</option>
-    		
-
-		</select>
-		
-
-		<select name="depth4" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-   			
-   			
-    		<option value="${depth4.buseoNum }"  selected="selected">${depth4.buseoName }</option>
-    		
-
-		</select>
-		
-
-		<select name="depth5" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-   		
-   			
-    		<option value="${depth5.buseoNum }" selected="selected">${depth5.buseoName }</option>
-    		
-
-		</select>
 		</td>
 		<td width="100" class="color" align="center">E-Mail</td>
 		<td width="400" colspan="3" align="center"><input type="text" value="${dto.email }" class="dap_text_box" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
@@ -309,6 +329,8 @@
 	
 	
 </table>
+
+<input type="hidden" value="${dto.num}" name="num"/>
 
 
 

@@ -125,6 +125,34 @@ public class InsaDAO {
 		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",params);
 		return result;
 	}
+	
+	public int deletecheck(String depth1,String depth2,String depth3,String depth4,String depth5){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+	
+		
+
+		
+		int result = sessionTemplate.selectOne("com.exe.insa.deletecheck",params);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

@@ -3,7 +3,7 @@ package com.exe.insa;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
+
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -83,6 +83,22 @@ public class ListDAO {
 	
 	public void boardListDelete(int listNum){
 		sessionTemplate.delete("com.exe.buseoControl.boardListDelete", listNum);
+	}
+	
+	
+	public void boardMember(ListDTO dto){
+		
+		sessionTemplate.update("com.exe.buseoControl.boardMember", dto);
+		
+	}
+	
+	public void boardBuseo(ListDTO dto){
+		sessionTemplate.update("com.exe.buseoControl.boardBuseo",dto);
+		
+	}
+	public void boardUpdate(ListDTO dto){
+		sessionTemplate.update("com.exe.buseoControl.boardUpdate",dto);
+		
 	}
 	
 	

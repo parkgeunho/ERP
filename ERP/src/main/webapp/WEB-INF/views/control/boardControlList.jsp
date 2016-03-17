@@ -88,33 +88,12 @@
  		
 	});
  	
- 	
+
+ 		
 
  	
  	
- 	//클릭을 했을 시 인풋 박스로 변경 시킨다.
-	$('[id^="edit-"]').dblclick(function(){
-		
- 		var v = $(":text").id;
-		
-		var obj = $('.num'+ this.id).val();
-		 /* var a = obj.indexof("name=="); */
-		 
-		 /*  if(v==0){ */
-			 var av = document.getElementById(this.id).innerText;
-		 var ck = av.length>0;
-		 if(ck==false){
-			 return;
-		 }
-			 
-			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name=buseo"+obj+ ">"; 
-		/* }else{
-			
-			alert("이미다른걸수정중이므로 수정을 완료해주세요");
-			return;
-		}  */
-	});  
-   
+ 
  	
    });	
  	
@@ -143,6 +122,7 @@
 							<c:when test="${depth1.parent==depth0.listNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
 								<img id="fold-${depth1.listNum}" src="/erp/resources/image/minus.png"/>
+								
 								<label id="ch-${depth1.listNum }">${depth1.boardName }</label>
 								<input type="hidden" class="numch-${depth1.listNum }" value="${depth1.listNum }">
 								</div>
@@ -241,6 +221,9 @@
 					</c:when>
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
 					<div>
+					
+				
+					
 					<label id="ch-${depth0.listNum }">${depth0.boardName }</label>
 					<input type="hidden" class="numch-${depth0.listNum }" value="${depth0.listNum }">
 

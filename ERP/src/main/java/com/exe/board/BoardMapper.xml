@@ -11,8 +11,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    </select>
 
    <insert id="insertData" parameterType="com.exe.board.BoardDTO">
-      insert into erpboard (boardNum,name,subject,content,hitCount,created) 
-      values (#{boardNum},#{name},#{subject},#{content},0,sysdate)
+      insert into erpboard (boardNum,name,subject,content,hitCount,created,listNum) 
+      values (#{boardNum},#{name},#{subject},#{content},0,sysdate,#{listNum})
    </insert>
    
    <select id="getDataCount" parameterType="hashMap" resultType="int">
@@ -23,7 +23,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
       select * from (
       select rownum rnum, data.* from (
       select boardNum,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created
-      from erpboard where ${searchKey} like '%' || #{searchValue} || '%'
+      from erpboard where ${searchKey} like '%' || #{searchValue} || '%' 
       order by boardNum desc) data)
    <![CDATA[
       where rnum>=#{start} and rnum<=#{end}
@@ -45,6 +45,28 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    <delete id="deleteData" parameterType="int">
       delete erpboard where boardNum=#{boardNum}
    </delete>
+
+
+	 <select id="getListsTest" parameterType="hashMap" resultType="com.exe.board.BoardDTO">
+      select * from (
+      select rownum rnum, data.* from (
+      select boardNum,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created
+      from erpboard where ${searchKey} like '%' || #{searchValue} || '%' and listNum=#{listNum}
+      order by boardNum desc) data)
+   <![CDATA[
+      where rnum>=#{start} and rnum<=#{end} 
+   ]]>
+   
+   </select>
+
+
+	<select id="getDataCountTest" parameterType="hashMap" resultType="int">
+      select nvl(count(*),0) from erpboard where ${searchKey} like '%' || #{searchValue} || '%' and listNum=#{listNum}
+   </select>
+
+
+
+
 
 </mapper>
 

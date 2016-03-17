@@ -44,6 +44,100 @@
    <beans:property name="maxInMemorySize" value="10240000"/>
    <beans:property name="defaultEncoding" value="UTF-8"/>
    </beans:bean>
+   
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/main"/>
+			<mapping path="/insaView.*"/>
+			<mapping path="/con"/>
+			<beans:bean class="com.exe.member.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
+
+   
+   
+   
+ 
+       
+    
+   <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+    
+    
+   <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+
+   <beans:bean id="memberDAO" class="com.exe.member.MemberDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
+
+   <beans:bean id="BoardDAO" class="com.exe.board.BoardDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
+   </beans:bean>
+   
+
+   <beans:bean id="approvalDAO" class="com.exe.approval.ApprovalDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
+   </beans:bean>
+
+ 	<beans:bean id="BoardFileDAO" class="com.exe.board.BoardFileDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
+   </beans:bean>
+ 	
+  
+
+   <beans:bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+      <beans:property name="dataSource" ref="dataSource"/>
+      <beans:property name="configLocation" value="classpath:/mybatis-config.xml"/>   
+   </beans:bean>
+      
+   <beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+      <beans:constructor-arg ref="sessionFactory"/>
+   </beans:bean>
+   
+
+  <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	destroy-method="close">
+
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.15:1521:TestDB" />
+		<beans:property name="username" value="SUZI"/>
+		<beans:property name="password" value="A123"/>	
+
+	</beans:bean>
+
+   <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="prefix" value="/WEB-INF/views/" />
+      <beans:property name="suffix" value=".jsp" />
+      <beans:property name="order" value="1"/>
+   </beans:bean>
+   
+   <context:component-scan base-package="*" />
+   
+   <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+        <beans:property name="order" value="0"/>
+    </beans:bean>
+
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <beans:property name="definitions">
+            <beans:list>
+                 <beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+    
+    <beans:bean id="multipartResolver"
+   class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   
+   <beans:property name="maxUploadSize" value="10240000"/>
+   <beans:property name="maxInMemorySize" value="10240000"/>
+   <beans:property name="defaultEncoding" value="UTF-8"/>
+   </beans:bean>
     
        
     
@@ -97,9 +191,15 @@
     
     
     
-    
-    
-    
-    
    
+
+
+
+    <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
+    
+ 
+    
+    
+
+
 </beans:beans>

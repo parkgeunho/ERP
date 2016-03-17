@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.board.BoardFileMapper">
+	
+	<insert id="insertData" parameterType="com.exe.board.BoardFileDTO">
+		insert into erpboardfile (boardnum,saveFileName,originalFileName)
+			values (#{boardnum},#{saveFileName},#{originalFileName})	
+	</insert>
+	
+	
+</mapper>
+

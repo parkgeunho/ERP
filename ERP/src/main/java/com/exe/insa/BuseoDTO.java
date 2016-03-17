@@ -2,7 +2,7 @@ package com.exe.insa;
 
 public class BuseoDTO {
 	
-	private int buseoNum;
+	private String buseoNum;
 	private String buseoName;
 	private int groupNum;
 	private int depth;
@@ -14,30 +14,10 @@ public class BuseoDTO {
 	
 	
 	
-	
-	
-	public String getChecked() {
-		return checked;
-	}
-	public void setChecked(String checked) {
-		this.checked = checked;
-	}
-	public int getReplyNum() {
-		return replyNum;
-	}
-	public void setReplyNum(int replyNum) {
-		this.replyNum = replyNum;
-	}
-	public int getDepthGap() {
-		return depthGap;
-	}
-	public void setDepthGap(int depthGap) {
-		this.depthGap = depthGap;
-	}
-	public int getBuseoNum() {
+	public String getBuseoNum() {
 		return buseoNum;
 	}
-	public void setBuseoNum(int buseoNum) {
+	public void setBuseoNum(String buseoNum) {
 		this.buseoNum = buseoNum;
 	}
 	public String getBuseoName() {
@@ -70,10 +50,30 @@ public class BuseoDTO {
 	public void setParent(int parent) {
 		this.parent = parent;
 	}
+	public int getReplyNum() {
+		return replyNum;
+	}
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
+	}
+	public int getDepthGap() {
+		return depthGap;
+	}
+	public void setDepthGap(int depthGap) {
+		this.depthGap = depthGap;
+	}
+	public String getChecked() {
+		return checked;
+	}
+	public void setChecked(String checked) {
+		this.checked = checked;
+	}
 	
 	
 	
 	
+	
+
 	
 	
 	

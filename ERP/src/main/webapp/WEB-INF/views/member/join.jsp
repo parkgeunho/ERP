@@ -10,11 +10,33 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/join.css">
 
 <script type="text/javascript" src="/erp/resources/member/util.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 <script type="text/javascript">
 
-	
+	$(document).ready(function(){
+		
+
+			$.ajax({
+
+				url : "buseoChange",
+				type : 'POST',
+
+				success : function(args) {
+					$("#buseo1").html(args);
+				},
+				error : function(e) {
+					alert(e.responseText);
+
+				}
+
+			});
+
+		
+		
+		
+		
+	});
 
 
 
@@ -39,6 +61,40 @@
 		});
 
 	}
+	
+	function change1(){
+		
+		
+		var myForm = $('form').serialize();
+			
+		 
+			$.ajax({
+					
+				url:"buseoChange",
+				type:'POST',
+				data: myForm,
+				
+				success: function(args){
+					$("#buseo1").html(args);
+				},
+				error:function(e){
+	  				alert(e.responseText);
+
+				}
+				
+				
+			});
+			
+			
+		}
+	
+	
+	
+	
+
+
+
+	
 </script>
 
 <script type="text/javascript">
@@ -134,24 +190,41 @@
         	f.grade.focus();
         	return;
         	}
+       
+        
+        str = f.depth1.value;
+        str = str.trim();
+        if(str=='no'){
+        	alert("부서를 필수로 선택하세요")
+        	return;
+        	}
         
         
         str = f.file.value;
     	str = str.trim();
         if(!str) {
-            alert("\사진을 업로드 하세요. ");
+            alert("사진을 업로드 하세요. ");
             f.file.focus();
             return;
         }
         f.file.value = str;
         
+        var check = $("#check").text();
+	
 		
+		if(check=="사용불가 아이디"){
+			alert("사용 불가능한 아이디 입니다.")
+			return;
+		}
 
 		f.action = "<%=cp%>/created_ok.action";
 		f.submit();
 		
 		
 	}
+	
+	
+
 
 
 
@@ -189,7 +262,7 @@
 
 <table border="0" width="1000" style="margin: 0px;">
 	<tr>
-	<td height="40" style=""><div id="result">${compID}</div></td>
+	<td height="40" style=""><div id="result"></div></td>
 	</tr>
 </table>
 <table border="0" align="center" style="margin:0px ; border-radius : 10px;" cellpadding="0">
@@ -215,49 +288,9 @@
 		<td width="100" class="color" align="center">부 서</td>
 		<td width="400" colspan="3" align="center">
 
-		<select name="depth1" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left; margin-left: 4px;" >
-   			
-   			
-    		<option value="${depth1.buseoNum }"  selected="selected">${depth1.buseoName }</option>
-    		
-
-		</select>
 		
-
-		<select name="depth2" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
-   			
-   			
-    		<option value="${depth2.buseoNum }"  selected="selected">${depth2.buseoName }</option>
-    		
-
-		</select>
+		<div id="buseo1"></div>
 		
-
-		<select name="depth3" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 20%;float: left;">
-   			
-   			
-    		<option value="${depth3.buseoNum }"  selected="selected">${depth3.buseoName }</option>
-    		
-
-		</select>
-		
-
-		<select name="depth4" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-   			
-   			
-    		<option value="${depth4.buseoNum }"  selected="selected">${depth4.buseoName }</option>
-    		
-
-		</select>
-		
-
-		<select name="depth5" class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-   		
-   			
-    		<option value="${depth5.buseoNum }" selected="selected">${depth5.buseoName }</option>
-    		
-
-		</select>
 		</td>
 		<td width="100" class="color" align="center">E-Mail</td>
 		<td width="400" colspan="3" align="center"><input type="text" class="dap_text_box" id="usr" name="email" value="babonim@punch.com" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 400px;"></td>
@@ -309,7 +342,6 @@
 	
 	
 </table>
-
 
 
 

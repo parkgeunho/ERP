@@ -45,7 +45,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 정보읽기 -->
 	<select id="ReadData" parameterType="integer" resultType="com.exe.insa.ListDTO">
-		select listNum,boardName,groupNum,depth,orderNo,parent,replyNum,checked from boardlist where listNum=#{listNum}
+		select listNum,boardName,groupNum,depth,orderNo,parent,replyNum,checked,buseoR,buseoW,memberR,memberW from boardlist where listNum=#{listNum}
 	</select>
 	
 	<!-- 계층형 구조를 출력 하기 위한 필요정보 출력해오기 -->
@@ -74,5 +74,19 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		delete boardlist where listNum=#{listNum}
 				
 	</delete>
+	
+	<update id="boardMember" parameterType="com.exe.insa.ListDTO">
+		update boardlist set memberW=#{memberW},memberR=#{memberR} where listNum=#{listNum}
+	</update>
+	
+	<update id="boardBuseo" parameterType="com.exe.insa.ListDTO">
+		update boardlist set buseoW=#{buseoW},buseoR=#{buseoR} where listNum=#{listNum}
+	</update>
+	
+	<update id="boardUpdate" parameterType="com.exe.insa.ListDTO">
+		update boardlist set boardName=#{boardName} where listNum=#{listNum}
+	</update>
+	
+	
 
 </mapper>

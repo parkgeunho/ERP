@@ -42,52 +42,48 @@
 		var test;
 		
 		$("#approvalLineModal").click(function(){
-			
-			alert("으흐흐2222211112");
-			
+						
 			dialog = $("<body>").dialog({
 				
 				modal:true,				
-				open:function(){
-					
-					//$(this).load("approvalLine.jsp");
-					$(this).load("approvalLine");
+				open:function(){									
+					$(this).load("approvalLine.action");
 				},
-				
+				                       
 				height:600,
 				width:900,
-				title:"결재선 지정",
+				title:"결재선 지정" ,
 				
 				buttons: {
-					"넘겨라3":function(){
-						test = hihi();	
-					  	dialog.dialog("close");					
+					"넘겨라":function(){
+											
+						alert(hihi());
+						this.close();
+						dialog.dialog("close");					
 					},
 					"닫아라":function(){
-						dialog.dialog("close");
+						
+						this.close();
 					}
-				}, 
-				
-				close: function(){	
-				
-					this.close();
-				
-					form[ 0 ].reset();
-				} 
+				},				
+				close: function(){
+					dialog = null;
+				}  
 			});
 		});		
 	});
 
 </script>
 
-
 <title>결재 상신</title>
 </head>
 <body>
 
+<form action="" method="post" name="myForm">
+
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt">결재 - dto.type</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
+<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
 <input type="button" value="결재선 지정" id="approvalLineModal" />
@@ -95,7 +91,7 @@
 <input type="button" name="approvalClose" value="닫기"  />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">dto.type</font></td></tr> 
+<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
 </table>
 
 
@@ -192,7 +188,10 @@
             
     <textarea name="contentArea" id="editor1" rows="10" cols="80">
     
-		<table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width: 520pt">
+    	${dto.approvalFormContent}
+    
+    
+		<!-- <table align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse; width: 520pt">
 			<tbody>
 				<tr>
 					<td colspan="4" style="width: 520pt; height: 38.25pt;">
@@ -220,7 +219,7 @@
 					<td style="border-color: gray; text-align: center; vertical-align: middle;">&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="border-color: gray; height: 32.1pt; text-align: center; vertical-align: middle; background-color: rgb(217, 225, 242);">연락처</td>
+					<td style="border-color: gray; heig	ht: 32.1pt; text-align: center; vertical-align: middle; background-color: rgb(217, 225, 242);">연락처</td>
 					<td style="border-color: gray; text-align: center; vertical-align: middle;">&nbsp;</td>
 					<td style="border-color: gray; text-align: center; vertical-align: middle; background-color: rgb(217, 225, 242);">외부 e-mail</td>
 					<td style="border-color: gray; text-align: center; vertical-align: middle;">&nbsp;</td>
@@ -259,7 +258,7 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 
 	</textarea>        
             
@@ -270,7 +269,7 @@
 			toolbar : 'Basic',     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
-			height : '400'        //---높이값
+			height : '500'        //---높이값
 			}
 		);    
 	</script>          
@@ -282,6 +281,6 @@
 
 </table>
 
-
+</form>
 </body>
 </html>
