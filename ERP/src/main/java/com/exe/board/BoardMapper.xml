@@ -59,7 +59,9 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    </select>
 
 
-
+	<select id="getDataCountTest" parameterType="hashMap" resultType="int">
+      select nvl(count(*),0) from erpboard where ${searchKey} like '%' || #{searchValue} || '%' and listNum=#{listNum}
+   </select>
 
 
 
