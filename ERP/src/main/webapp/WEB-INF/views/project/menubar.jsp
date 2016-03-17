@@ -42,7 +42,8 @@ $(document).ready(function(){
 		<td align="right">로 그 아 웃</td>
 	</tr>
 </table>
-
+</div>
+<div style="height: 90px; background-color: #cccccc;">
 </div>
 <div class="menubar">
 	<ul>
