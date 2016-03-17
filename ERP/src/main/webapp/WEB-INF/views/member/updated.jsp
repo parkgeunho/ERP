@@ -69,7 +69,6 @@ function change1(){
 
 
 var myForm = $('form').serialize();
-alert(myForm);
 	
  
 	$.ajax({
@@ -99,125 +98,120 @@ alert(myForm);
 
 	function sendIt(){
 		
-		f = document.myForm;
-
-
-		thumbext = document.getElementById("file").value;
 		
+		
+	f = document.myForm;
 
-		thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
+	
+	str =f.file.value;
+	str = str.trim();
+		if (str==null) {
+			
+			
+			thumbext = document.getElementById("file").value;
 
-		if(thumbext != "jpg" && thumbext != "png" &&  thumbext != "gif" &&  thumbext != "bmp" && thumbext != "jpeg"){ //확장자를 확인합니다.
+			thumbext = thumbext.slice(thumbext.indexOf(".") + 1).toLowerCase(); //파일 확장자를 잘라내고, 비교를 위해 소문자로 만듭니다.
 
-			alert('썸네일은 이미지 파일(jpg, jpeg, png, gif, bmp)만 등록 가능합니다.');
+			
+			if (thumbext != "jpg" && thumbext != "png" && thumbext != "gif"
+					&& thumbext != "bmp" && thumbext != "jpeg") { //확장자를 확인합니다.
 
-			return;
 
+				alert('썸네일은 이미지 파일(jpg, jpeg, png, gif, bmp)만 등록 가능합니다.');
+
+				return;
+
+			}
 		}
-		
-			
-			
+
 		str = f.name.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n이름을 입력하세요. ");
-            f.name.focus();
-            return;
-        }
-        f.name.value = str;
-        
-        
-        if(!isValidJumin(f.jumin.value)) {
-            alert("\n정상적인 주민등록번호를 입력하세요. ");
-            f.jumin.focus();
-            return;
-        }
-        
-        
-        str = f.mPhone.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n휴대전화를 입력하세요. ");
-            f.mPhone.focus();
-            return;
-        }
-        f.mPhone.value = str;
-        
-        
-        if(f.email.value) {
-	    	if(!isValidEmail(f.email.value)) {
-                alert("\n정상적인 E-Mail을 입력하세요. ");
-                f.email.focus();
-                return;
-	    	}
-        }
-        
-        str = f.id.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\n아이디를 입력하세요. ");
-            f.id.focus();
-            return;
-        }
-        f.id.value = str;
-        
-        str = f.pwd.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\비밀번호를 입력하세요. ");
-            f.pwd.focus();
-            return;
-        }
-        f.pwd.value = str;
-        
-        str = f.grade.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\직급을 선택 하세요. ");
-            f.grade.focus();
-            return;
-        }
-        f.grade.value = str;
-        
-        str = f.secure.value;
-        str = str.trim();
-        if(str<1 || str>3){
-        	alert("등급은 1~3에서 선택 하세요.")
-        	f.grade.focus();
-        	return;
-        	}
-        
-        str = f.depth1.value;
-        str = str.trim();
-        if(str=='no'){
-        	alert("부서를 필수로 선택하세요")
-        	return;
-        	}
-        
-        
-        str = f.file.value;
-    	str = str.trim();
-        if(!str) {
-            alert("\사진을 업로드 하세요. ");
-            f.file.focus();
-            return;
-        }
-        f.file.value = str;
-        
+		str = str.trim();
+		if (!str) {
+			alert("\n이름을 입력하세요. ");
+			f.name.focus();
+			return;
+		}
+		f.name.value = str;
+
+		if (!isValidJumin(f.jumin.value)) {
+			alert("\n정상적인 주민등록번호를 입력하세요. ");
+			f.jumin.focus();
+			return;
+		}
+
+		str = f.mPhone.value;
+		str = str.trim();
+		if (!str) {
+			alert("\n휴대전화를 입력하세요. ");
+			f.mPhone.focus();
+			return;
+		}
+		f.mPhone.value = str;
+
+		if (f.email.value) {
+			if (!isValidEmail(f.email.value)) {
+				alert("\n정상적인 E-Mail을 입력하세요. ");
+				f.email.focus();
+				return;
+			}
+		}
+
+		str = f.id.value;
+		str = str.trim();
+		if (!str) {
+			alert("\n아이디를 입력하세요. ");
+			f.id.focus();
+			return;
+		}
+		f.id.value = str;
+
+		str = f.pwd.value;
+		str = str.trim();
+		if (!str) {
+			alert("\비밀번호를 입력하세요. ");
+			f.pwd.focus();
+			return;
+		}
+		f.pwd.value = str;
+
+		str = f.grade.value;
+		str = str.trim();
+		if (!str) {
+			alert("\직급을 선택 하세요. ");
+			f.grade.focus();
+			return;
+		}
+		f.grade.value = str;
+
+		str = f.secure.value;
+		str = str.trim();
+		if (str<1 || str>3) {
+			alert("등급은 1~3에서 선택 하세요.")
+			f.grade.focus();
+			return;
+		}
+
+		str = f.depth1.value;
+		str = str.trim();
+		if (str == 'no') {
+			alert("부서를 필수로 선택하세요")
+			return;
+		}
+
+		f.file.value = str;
+
 		var check = $("#check").text();
-		if(check=="사용불가 아이디"){
+		if (check == "사용불가 아이디") {
 			alert("사용 불가능한 아이디 입니다.")
 			return;
 		}
-        
-        
-		
 
 		f.action = "<%=cp%>/updated_ok.action";
 		f.submit();
 		
 		
 	}
+	
 
 
 
