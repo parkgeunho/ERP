@@ -47,7 +47,7 @@ public class InsaController {
 		HttpSession session = request.getSession();
 		session.setAttribute("buseoNum", "1");
 		
-		
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
 		List<BuseoDTO> lists = insaDAO.buseoList();
 		
@@ -81,6 +81,8 @@ public class InsaController {
 		List<BuseoDTO> parent = insaDAO.getGroup();
 		List<BuseoDTO> depths = insaDAO.getDepth();
 		
+		
+		request.setAttribute("LoginDTO", LoginDTO);
 		request.setAttribute("depths", depths);
 		request.setAttribute("parent", parent);
 		request.setAttribute("restDiv",n);

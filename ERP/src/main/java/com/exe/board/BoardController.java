@@ -1,15 +1,19 @@
 package com.exe.board;
 
 
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Member;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.exe.insa.ListDAO;
 import com.exe.insa.ListDTO;
+import com.exe.member.MemberDAO;
+import com.exe.member.MemberDTO;
 
 
 @Controller
@@ -36,6 +42,9 @@ public class BoardController {
 	@Qualifier("ListDAO")
 	ListDAO listDAO;
 	
+	@Autowired
+	@Qualifier("memberDAO")
+	MemberDAO memberDAO;
 	
 	
 	
@@ -233,7 +242,10 @@ public class BoardController {
 	  
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
 		public String boardMain(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
-		  
+		  	
+		  	HttpSession session = request.getSession();
+			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+			request.setAttribute("LoginDTO", LoginDTO);
 		  
 		  	
 			List<ListDTO> boardlist = listDAO.boardList();
@@ -257,16 +269,110 @@ public class BoardController {
 		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
 		  
 		  
-			String cp = request.getContextPath();
+		  		String cp = request.getContextPath();
 		      
 		      String pageNum = request.getParameter("pageNum");
 		      int currentPage = 1;
 		      
 		      String num = request.getParameter("listNum");
-			  	
+			  String LoginNum = request.getParameter("LoginNum");
 			  
-		      
-		      
+			  int listNum = 1;
+		      if(num!=null){
+		    	  listNum = Integer.parseInt(num);  
+		      }
+			  
+		/*	  ListDTO lDTO = listDAO.readData(listNum);
+		      System.out.println("번호확인" +LoginNum);
+		  	HttpSession session = request.getSession();
+		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+			  
+			  String read[] = null;
+			  List<String> Rlist = new ArrayList<String>();
+			  String check = lDTO.getBuseoR();
+			  boolean buseoCheck = false;
+			  boolean memberCheck = false;
+			  
+			  if(null!=check){
+				  read = lDTO.getBuseoR().split(",");
+					
+				  Collections.addAll(Rlist, read);
+				  
+				  buseoCheck = Rlist.contains(mDTO.getDepth1());
+				  
+				  if(!buseoCheck){
+					  
+					  buseoCheck = Rlist.contains(mDTO.getDepth2());
+					  
+					  if(!buseoCheck){
+						  buseoCheck = Rlist.contains(mDTO.getDepth3());
+						  
+						  if(!buseoCheck){
+							  buseoCheck = Rlist.contains(mDTO.getDepth4());
+							  
+							  if(buseoCheck){
+								  
+								  buseoCheck = Rlist.contains(mDTO.getDepth4());
+							  }
+						  }
+					  }
+				  }
+				  
+			  }
+			  
+		
+			  
+			  read = lDTO.getMemberR().split(",");
+			  Collections.addAll(Rlist, read);
+			  memberCheck = Rlist.contains(LoginNum);
+			  
+			  if(!buseoCheck && !memberCheck){
+				  try {
+			            
+			            PrintWriter writer = response.getWriter();
+
+			            writer.println("<script type='text/javascript'>");
+
+			            writer.println("alert('읽기권한이없습니다.');");
+
+			            writer.println("</script>");
+
+			            writer.flush();
+			            
+			            return ajaxBoardList(request, response);
+			            
+			         } catch (Exception e) {
+			         
+			         }
+			  }
+			  
+			  
+			  
+			  
+			*/
+				
+			
+						
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
 		      if(pageNum != null)
 		         currentPage = Integer.parseInt(pageNum);
 		      
@@ -283,10 +389,7 @@ public class BoardController {
 		            searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		      }
 		      
-		      int listNum = 1;
-		      if(num!=null){
-		    	  listNum = Integer.parseInt(num);  
-		      }
+		     
 		      
 		      
 		      
@@ -307,7 +410,7 @@ public class BoardController {
 		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, listNum);
 		      
 		
-		      ListDTO lDTO = listDAO.readData(listNum);
+		      
 		     
 		      
 		      String param = "";
@@ -330,7 +433,8 @@ public class BoardController {
 		      if(!param.equals(""))
 		         articleUrl = articleUrl + "&" + param;
 		      
-		      request.setAttribute("LDTO", lDTO);
+		      request.setAttribute("listNum", listNum);
+/*		      request.setAttribute("LDTO", lDTO);*/
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
