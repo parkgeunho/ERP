@@ -71,7 +71,7 @@ function deleted(){
 					del=confirm("정말 삭제하시겠습니까?");
 	
 	if(del==true){
-		f.action = "<%=cp%>/buseodelete";
+		f.action = "<%=cp%>/buseodeleted";
 	    f.submit();
 		
 		
@@ -79,6 +79,7 @@ function deleted(){
 		return;
 	}
 }
+
 
 function created(){
 

@@ -322,7 +322,7 @@ public class MemberController {
 		String depth4S = request.getParameter("depth4");
 		String depth5S = request.getParameter("depth5");
 
-		List<BuseoDTO> lists = dao.depth1();
+		List<BuseoDTO> lists = dao.depth1(); //뎁스1
 
 		request.setAttribute("lists", lists);
 
@@ -334,7 +334,7 @@ public class MemberController {
 				request.setAttribute("depth1", depth1);
 
 				List<BuseoDTO> buseoChange1 = dao.buseo2(depth1);
-				request.setAttribute("buseoChange1", buseoChange1);
+				request.setAttribute("buseoChange1", buseoChange1); //뎁스2
 
 				request.setAttribute("depth1Size", buseoChange1.size());
 				System.out.println("뎁스1 : " + depth1S);
@@ -361,7 +361,7 @@ public class MemberController {
 						request.setAttribute("depth2", depth2);
 						List<BuseoDTO> buseoChange2 = dao.buseo3(depth2);
 						request.setAttribute("buseoChange2", buseoChange2);
-						request.setAttribute("depth2Size", buseoChange2.size());
+						request.setAttribute("depth2Size", buseoChange2.size());//뎁스3
 
 						String preDepth2 = request.getParameter("preDepth2");
 
@@ -386,7 +386,7 @@ public class MemberController {
 
 								request.setAttribute("buseoChange3",
 										buseoChange3);
-								request.setAttribute("depth3", depth3);
+								request.setAttribute("depth3", depth3);//뎁스4
 								request.setAttribute("depth3Size",
 										buseoChange3.size());
 
@@ -414,7 +414,7 @@ public class MemberController {
 
 										request.setAttribute("buseoChange4",
 												buseoChange4);
-										request.setAttribute("depth4", depth4);
+										request.setAttribute("depth4", depth4);//뎁스5
 										request.setAttribute("depth4Size",
 												buseoChange4.size());
 
@@ -440,6 +440,7 @@ public class MemberController {
 														.parseInt(depth5S);
 												request.setAttribute("depth5",
 														depth5);
+												
 
 											}
 										}
@@ -469,7 +470,19 @@ public class MemberController {
 		int num = Integer.parseInt( request.getParameter("num"));
 		
 		
+		MemberDTO dto2 = dao.readOne(num);
+		
+		
 		MultipartFile file = request.getFile("file");
+		
+		System.out.println("파일확인 : " + file);
+		
+		if(file.getName().equals("") || file==null || file.getSize()==0){
+			
+			dto.setUpload(dto2.getUpload());
+			
+		}
+		
 		
 		
 		if(dto.getDepth1().equals("")){
@@ -507,8 +520,7 @@ public class MemberController {
 			
 			if(dto1.getUpload().equals(fullFileName) || dto1.getUpload()==fullFileName){
 				
-				File d = new File(path);
-				d = new File(fullFileName);
+				File d = new File(path + "/" + fullFileName);
 				d.delete();
 				
 			}
@@ -537,6 +549,35 @@ public class MemberController {
 		
 		
 		return "redirect:/insaView.action?num=" + dto.getNum();
+	}
+	
+	@RequestMapping(value = "/deleted_ok.action", method = {RequestMethod.GET})
+	public String deleted_ok(HttpServletRequest request,
+			HttpServletResponse response,MemberDTO dto) throws Exception {
+		
+		String path = request.getSession().getServletContext().getRealPath("/resources/memberImage/");
+		
+		String upload = request.getParameter("upload");
+		int num =Integer.parseInt(request.getParameter("num"));
+		
+		//파일삭제
+		
+		
+		File d = new File(path + "/" + upload);
+		System.out.println("이게뭔지1:" + d);
+		
+		if(d.exists()){
+		 d.delete();
+		}
+		
+		
+		
+		//db삭제
+		
+		dao.deleteData(num);
+		
+		
+		return "redirect:/insa";
 	}
 	
 	

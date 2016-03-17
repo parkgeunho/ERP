@@ -66,7 +66,6 @@
 		
 		
 		var myForm = $('form').serialize();
-		alert(myForm);
 			
 		 
 			$.ajax({

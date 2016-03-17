@@ -103,6 +103,22 @@ public class BoardDAO {
 		      return lists;
 		   }
 	   
+	   
+	   public int getDataCountTest(String searchKey,String searchValue,int listNum){
+		      
+		      int result = 0;
+		      
+		      HashMap<String, Object> params = new HashMap<String, Object>();
+		      
+		      params.put("searchKey", searchKey);
+		      params.put("searchValue", searchValue);
+		      params.put("listNum", listNum);
+		      result = sessionTemplate.selectOne("com.exe.board.BoardMapper.getDataCountTest",params);
+		      
+		      return result;
+		      
+		   }
+	   
 	
 	
 	

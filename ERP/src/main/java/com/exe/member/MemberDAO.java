@@ -134,8 +134,13 @@ public class MemberDAO {
 	
 	public void updatedData(MemberDTO dto) {
 		
-		sessionTemplate.selectList("com.exe.member.updatedData",dto);
+		sessionTemplate.selectOne("com.exe.member.updatedData",dto);
 		
+	}
+	
+	public void deleteData(int num){
+		
+		sessionTemplate.delete("com.exe.member.deleteData", num);
 	}
 	
 	

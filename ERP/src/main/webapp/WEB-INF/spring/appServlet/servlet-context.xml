@@ -49,6 +49,8 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/main"/>
+			<mapping path="/insaView.*"/>
+			<mapping path="/con"/>
 			<beans:bean class="com.exe.member.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
@@ -99,16 +101,17 @@
 
   <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 	destroy-method="close">
+
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
-   </beans:bean>
 
+	</beans:bean>
 
-
-
-
+   
+    
+   
 
 
 
@@ -117,5 +120,6 @@
  
     
     
+
 
 </beans:beans>
