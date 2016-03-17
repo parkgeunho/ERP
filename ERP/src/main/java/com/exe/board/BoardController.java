@@ -326,6 +326,7 @@ public class BoardController {
 		      if(!param.equals(""))
 		         articleUrl = articleUrl + "&" + param;
 		      
+		      request.setAttribute("listNum", listNum);
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
