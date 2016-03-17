@@ -92,7 +92,7 @@ public class BoardController {
 	      if(currentPage>totalPage)
 	         currentPage = totalPage;
 	      
-	      int start = (currentPage-1)*numPerPage;
+	      int start = (currentPage-1)*numPerPage +1;
 	      int end = currentPage*numPerPage;
 	      
 	      List<BoardDTO> lists = dao.getList(start, end, searchKey, searchValue);
@@ -308,18 +308,6 @@ public class BoardController {
 		      request.setAttribute("articleUrl", articleUrl);
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		  
 		  
 		  return "boardMain";
 	  }

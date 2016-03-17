@@ -29,39 +29,44 @@
 </script>
 
 </head>
-<body style="font-size: 15px; font-style: 나눔고딕코딩;">
+<body style="font-size: ; font-style: 나눔고딕코딩;">
 
-<table border="0" align="center" cellpadding="0" cellspacing="0" style="font-size: 20px;">
-	<tr style="height: 40px; background-color: #D5D5D5">
-		<td style="width: 900px;" align="center" class="">&nbsp;&nbsp;&nbsp;&nbsp;공&nbsp;지&nbsp;사&nbsp;항</td>
-		<td style="width: 500px;" align="right">
-			<form action="" name="searchForm" method="post">
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 1572px;">
+	<tr style="height: 80px; background-color: #D5D5D5">
+		<td  align="center" class="">공&nbsp;지&nbsp;사&nbsp;항</td>
+		
+	</tr>
+</table>		
+		
+<table border="0" align="center" cellpadding="0" cellspacing="0">		
+	
+	<tr style="height: 30px">
+	
+			
+			
+		<td style="width: 1500px" align="left" colspan="6">
+		<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
 					<option value="subject">제목</option>
 					<option value="name">작성자</option>
 					<option value="content">내용</option>
 				</select>	
 						<input type="text" name="searchValue" class="textField" style="width: 150px; height: 20px;">
-						<img alt="" src="/erp/resources/image/search001.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img alt="" src="/erp/resources/image/find.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <input type="button" value="상세"  onclick="" >	 -->
 			</form>	
-		</td>	
-	</tr>
-</table>		
-		
-<table border="0" align="center" cellpadding="0" cellspacing="0">			
-	<tr style="height: 30px">
-		<td style="width: 1380px" align="right" colspan="6">
-			<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
+			
+		</td>
+		<td style="width: 72px;" align="center">
+		<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action';">
 			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
-		</td>
-		<td style="width: 20px;">
-		</td>
+		</td>	
+		
 	</tr>
 	
 	<tr style="height: 30px; background-color: #E7E7E7">
 		<td style="width: 100px" align="center" class="boardNum">No</td>
-		<td style="width: 750px;" align="center" class="subject">제목
+		<td style="width: 922px;" align="center" class="subject">제목
 		</td>
 		
 		<td style="width: 150px;" align="center" class="name">작성자
@@ -77,7 +82,7 @@
 		</td>		
 	</tr>	
 	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
+		<td style="width: 1572px;" colspan="7"></td>
 	</tr>
 </table>
 
@@ -88,7 +93,7 @@
 	</tr>
 	<tr style="height: 25px;">
 		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
-		<td style="width: 750px;" class="subject">
+		<td style="width: 922px;" class="subject">
 			<a href="${articleUrl}&boardNum=${dto.boardNum}">
 				${dto.subject }</a></td>
 		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
@@ -97,14 +102,14 @@
 		<td style="width: 100px;" class="hitCount" align="center">${dto.hitCount }</td>		
 	</tr>	
 	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1400px;" colspan="7"></td>
+		<td style="width: 1572px;" colspan="7"></td>
 	</tr> 
 	</c:forEach>				
 </table>
 
 <table border="0" cellpadding="0" cellspacing="0" align="center">
 	<tr style="height: 1px; ">
-		<td style="width: 1400px; background: #B2EBF4"></td>
+		<td style="width: 1572px; background: #B2EBF4"></td>
 	</tr>
 	
 	<tr style="height: 10px;">
@@ -112,7 +117,7 @@
 	</tr>
 	
 	<tr style="height: 55px;">
-		<td style="width: 1400px;" align="center">
+		<td style="width: 1572px;" align="center">
 	<p>
 		<c:if test="${dataCount!=0 }">
 			${pageIndexList }
