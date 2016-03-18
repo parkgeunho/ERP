@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%        
 	
 	String cp = request.getContextPath();
@@ -43,19 +44,13 @@ $(document).ready(function(){
 	</tr>
 </table>
 </div>
-<div style="height: 90px; background-color: #cccccc;">
-</div>
+
 <div class="menubar">
 	<ul>
 		<li style="width: 80px;">&nbsp;</li>
 		<li style="line-height: 50px;margin: 0px;padding: 0px">|</li>
-		<li><a href="#" id="current">홈</a>
-			<ul>
-			    <li><a href="test">테스트</a></li>
-			    <li><a href="#">테스트1</a></li>
-			    <li><a href="#">테스트2</a></li>
-			    <li><a href="#">Extensions</a></li>
-		    </ul>
+		<li><a href="main" id="current">홈</a>
+			   
  		</li>
  		
 		<li style="line-height: 50px">|</li>
@@ -79,8 +74,9 @@ $(document).ready(function(){
 		<li><a href="#">메일</a></li>
 		
 		<li style="line-height: 50px">|</li>
-		
+		<c:if test="${LoginDTO.secure==1 }">
 		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
+		</c:if>
 	</ul>
 </div>
 
