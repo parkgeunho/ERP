@@ -36,8 +36,6 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
    
    <mappers>
 
-
-
 		
       <mapper resource="com/exe/board/BoardMapper.xml"/>
 

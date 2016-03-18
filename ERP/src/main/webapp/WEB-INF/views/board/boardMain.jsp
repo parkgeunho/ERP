@@ -15,7 +15,7 @@
 <script>
 $(document).ready(function(){
 	
-	
+	 
 	
 	    $.ajax({
 	        url:'ajaxBoardList',
@@ -53,11 +53,6 @@ $(document).ready(function(){
 	
 	
 	
-	
-	
-	
-	
-
 
 });
 

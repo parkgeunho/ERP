@@ -103,7 +103,7 @@
 	destroy-method="close">
 
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.15:1521:TestDB" />
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.163.128:1521:orcl" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
 
@@ -118,85 +118,15 @@
    
    <context:component-scan base-package="*" />
    
-   <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
-        <beans:property name="order" value="0"/>
-    </beans:bean>
-
-    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-        <beans:property name="definitions">
-            <beans:list>
-                 <beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
-            </beans:list>
-        </beans:property>
-    </beans:bean>
-    
-    <beans:bean id="multipartResolver"
-   class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    
-   <beans:property name="maxUploadSize" value="10240000"/>
-   <beans:property name="maxInMemorySize" value="10240000"/>
-   <beans:property name="defaultEncoding" value="UTF-8"/>
-   </beans:bean>
-    
-       
-    
-   <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
-      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
-   </beans:bean>
-    
-    
-    <beans:bean id="insaDAO" class="com.exe.insa.InsaDAO">
-      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
-   </beans:bean>
-   
-   <beans:bean id="memberDAO" class="com.exe.member.MemberDAO">
-      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
-   </beans:bean>
-   
-
-   <beans:bean id="BoardDAO" class="com.exe.board.BoardDAO">
-      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
-   </beans:bean>
-   
-   <!-- <beans:bean id="BoardFileDAO" class="com.exe.board.BoardFileDAO">
-      <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
-   </beans:bean> -->
-   
-   
-   
-   
-   <beans:bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-      <beans:property name="dataSource" ref="dataSource"/>
-      <beans:property name="configLocation" value="classpath:/mybatis-config.xml"/>   
-   </beans:bean>
-   
-   
-   <beans:bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-      <beans:constructor-arg ref="sessionFactory"/>
-   </beans:bean>
-   
-   <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-	destroy-method="close">
-		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.163.128:1521:orcl" />
-		<beans:property name="username" value="SUZI"/>
-		<beans:property name="password" value="A123"/>	
-
-	</beans:bean>
+ 
 
     
     <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
     
     
-    
-   
 
-
-
-    <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
-    
+     
  
     
     
