@@ -9,7 +9,15 @@
 <link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
 <link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
 
+
 <script type="text/javascript">
+
+function openNewWindow(window) { 
+	open (window,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500"); 
+	}
+
+
+
 
 	function sendIt(){
 		
@@ -48,13 +56,12 @@ ${LDTO.boardName}
 			
 		</td>
 		<td style="width: 72px;" align="center">
-		<a href="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" target="_blank">
+		<a href="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" target="_blank" title="글쓰기">
 
-		  <img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px;" 
-		  	>
+		  <img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px;">
 			 
 	   </a> 
-		<!-- onclick="javasctipt:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
+		<!-- onclick="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
 		</td>
 		
 	</tr>
