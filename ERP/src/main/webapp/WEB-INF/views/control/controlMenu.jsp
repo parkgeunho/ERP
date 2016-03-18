@@ -12,12 +12,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <script type="text/javascript">
-	function te() {
-		alert("뜸?");
+
+
+
+
+	function buseoManagement(){
+		
+		window.open("buseoManagement","","width=300px,height=580px");
+		
 	}
-
+	
+	
+	
+	
 </script>
-
+ 
 
 </head>
 <body>
@@ -27,6 +36,7 @@
 	관리항목
 	</div>
 	<div>
+
 	<label onclick="javascript:location.href='<%=cp%>/insa'">부서관리</label>
 	</div>
 	<div>
@@ -36,7 +46,7 @@
 	<label onclick="javascript:location.href='<%=cp%>/con'">게시판관리</label>
 	</div>
 	<div>
-	
+
 	</div>
 
 </div>

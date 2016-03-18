@@ -198,11 +198,28 @@ function created(){
 
 function deleted(){
 
-	var url = "<%=cp%>/boardListDelete";
-	$.post(url,{num:num},function(args){
-	$("#boardList").html(args);
+
 	
-	});
+	var del;
+					del=confirm("모든 게시물이 삭제됩니다. 진행하시겠습니까?");
+	
+	if(del==true){
+		var url = "<%=cp%>/boardListDelete";
+		$.post(url,{num:num},function(args){
+		$("#boardList").html(args);
+		
+		});
+		
+		
+	}else{
+		return;
+	}
+	
+	
+	
+	
+	
+	
 }
 
 function trim(){
@@ -407,7 +424,7 @@ function Add(){
 																	
 																	
 																				<c:forEach var="member5" items="${memberList }">
-																				<c:if test="${member5.depth4==depth4.buseoNum }">
+																				<c:if test="${member5.depth5==depth4.buseoNum }">
 																					<div  style="margin-left: 30px; font-size: 20px; color: #6B9900" >
 																					<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 																					<label id="Mem-${member5.num }">${member5.name }</label>

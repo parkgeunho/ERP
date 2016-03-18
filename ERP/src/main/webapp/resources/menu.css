@@ -92,7 +92,7 @@ padding:0px 25px;
 text-align:center;
 text-decoration:none;
 }
-/*  í•˜ìœ„ ë©”ë‰´ì— ë§ˆìš°ìŠ¤ ì˜¤ë²„ë¥¼ í•œ ìƒíƒœì—ì„œë„ ìƒìœ„ë©”ë‰´ ìƒ‰ ë³€ê²½í•˜ê¸° */
+/*  ÇÏÀ§ ¸Ş´º¿¡ ¸¶¿ì½º ¿À¹ö¸¦ ÇÑ »óÅÂ¿¡¼­µµ »óÀ§¸Ş´º »ö º¯°æÇÏ±â */
 .menubar li a:hover, .menubar ul li:hover a{
 background: rgb(71,71,71);
 color:#FFFFFF;
@@ -101,7 +101,7 @@ text-decoration:none;
 
 .menubar li ul{
 background: rgb(109,109,109);
-display:none; /* í‰ìƒì‹œì—ëŠ” ë“œëë©”ë‰´ê°€ ì•ˆë³´ì´ê²Œ í•˜ê¸° */
+display:none; /* Æò»ó½Ã¿¡´Â µå¶ø¸Ş´º°¡ ¾Èº¸ÀÌ°Ô ÇÏ±â */
 height:auto;
 padding:0px;
 margin:0px;
@@ -114,7 +114,7 @@ z-index:200;
 }
 
 .menubar li:hover ul{
-display:block; /* ë§ˆìš°ìŠ¤ ì»¤ì„œ ì˜¬ë¦¬ë©´ ë“œëë©”ë‰´ ë³´ì´ê²Œ í•˜ê¸° */
+display:block; /* ¸¶¿ì½º Ä¿¼­ ¿Ã¸®¸é µå¶ø¸Ş´º º¸ÀÌ°Ô ÇÏ±â */
 }
 
 .menubar li li {

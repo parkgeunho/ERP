@@ -49,6 +49,8 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/main"/>
+			<mapping path="/insaView.*"/>
+			<mapping path="/con"/>
 			<beans:bean class="com.exe.member.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
@@ -72,7 +74,7 @@
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
 
-   <beans:bean id="BoardDAO" class="com.exe.board.BoardDAO">
+   <beans:bean id="boardDAO" class="com.exe.board.BoardDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
    
@@ -81,7 +83,7 @@
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
 
- 	<beans:bean id="BoardFileDAO" class="com.exe.board.BoardFileDAO">
+ 	<beans:bean id="boardFileDAO" class="com.exe.board.BoardFileDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
    </beans:bean>
  	
@@ -103,19 +105,19 @@
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.10.128:1521:orcl" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
-   </beans:bean>
 
 
+	</beans:bean>
 
 
+ 
+   
+   
+ 
 
-
-
-
+    
     <beans:bean id="myUtil" class="com.exe.board.MyUtil"/>
     
- 
-    
-    
+
 
 </beans:beans>

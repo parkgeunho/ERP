@@ -7,7 +7,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>인사기록카드</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/insaview.css">
-<
+
+<script type="text/javascript">
+	
+	function deleted(){
+	
+	var url = "<%=cp%>/deleted_ok.action?num=${dto.num}&upload=${dto.upload}";
+	
+	var del = confirm("정말 삭제 하시겠습니까?");
+	
+	if(del==true){
+		location.href = url;
+	}else{
+		
+		return;
+	}
+	
+	
+	
+}
+
+
+</script>
+
+
 
 </head>
 <body >
@@ -30,8 +53,9 @@
 <table border="0" align="center" width="1000px" style="margin-top: 20px;" cellpadding="1" cellspacing="1">
 	<tr>
 		<td width="630">
-		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="javascript:location.href='<%=cp%>/insa.action';">돌아가기</button>
 		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="javascript:location.href='<%=cp%>/updated.action?num=${dto.num}';">수정하기</button>
+		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="javascript:deleted();">삭제하기</button>
+		<button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="javascript:location.href='<%=cp%>/insa.action';">돌아가기</button>
 		</td>
 		<td class="line1" align="center">보 안 등 급</td>
 		<td style="width: 250px; border-left: none;background-color: #eeeeee" align="center">${dto.secure}</td>

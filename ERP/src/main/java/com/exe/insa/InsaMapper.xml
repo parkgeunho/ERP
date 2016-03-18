@@ -108,5 +108,13 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<select id="deletecheck" parameterType="HashMap" resultType="int">
+	select nvl(count(*),0) from insadb
+	where depth1=#{depth1} or depth2=#{depth2} or depth3=#{depth3} or depth4=#{depth4} or depth5 =#{depth5}
+	
+	</select>
+	
+	
+	
 </mapper>
 

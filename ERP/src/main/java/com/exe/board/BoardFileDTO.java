@@ -5,8 +5,16 @@ public class BoardFileDTO {
 	private int boardNum;
 	private String saveFileName;
 	private String originalFileName;
+	private String upload;
 	
 	
+	
+	public String getUpload() {
+		return upload;
+	}
+	public void setUpload(String upload) {
+		this.upload = upload;
+	}
 	public int getBoardNum() {
 		return boardNum;
 	}

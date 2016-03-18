@@ -8,7 +8,9 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 
 	
 	
+
 	<properties>
+
 
 
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
@@ -36,14 +38,22 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
    </environments>
    
    <mappers>
+
+		<mapper resource="com/exe/board/BoardMapper.xml"/>
 		
-   <mapper resource="com/exe/board/BoardMapper.xml"/>
-   <mapper resource="com/exe/insa/InsaMapper.xml"/>
-   <mapper resource="com/exe/member/memberMapper.xml"/>
-   <mapper resource="com/exe/insa/ListMapper.xml"/>
-   <mapper resource="com/exe/board/BoardFileMapper.xml"/> 
-   	<mapper resource="com/exe/approval/ApprovalMapper.xml"/> 
-   <mapper resource="com/exe/board/BoardMapper.xml"/>
+		<mapper resource="com/exe/member/memberMapper.xml"/>
+		
+		<mapper resource="com/exe/insa/InsaMapper.xml"/>   
+		   
+		<mapper resource="com/exe/insa/ListMapper.xml"/>
+		
+		<mapper resource="com/exe/board/BoardFileMapper.xml"/> 
+
+		<mapper resource="com/exe/approval/ApprovalMapper.xml"/> 
+
+
+
+
 
    </mappers>
 

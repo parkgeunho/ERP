@@ -3,6 +3,7 @@ package com.exe.member;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
 import com.exe.insa.BuseoDTO;
 
@@ -134,8 +135,13 @@ public class MemberDAO {
 	
 	public void updatedData(MemberDTO dto) {
 		
-		sessionTemplate.selectList("com.exe.member.updatedData",dto);
+		sessionTemplate.selectOne("com.exe.member.updatedData",dto);
 		
+	}
+	
+	public void deleteData(int num){
+		
+		sessionTemplate.delete("com.exe.member.deleteData", num);
 	}
 	
 	

@@ -1,8 +1,8 @@
 package com.exe.insa;
 
-import java.lang.reflect.Member;
+
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
-import oracle.security.o5logon.b;
+
 
 @Controller
 public class ListController {
@@ -43,9 +43,7 @@ public class ListController {
 	@RequestMapping(value = "/con", method = {RequestMethod.GET,RequestMethod.POST})
 	public String controlMain(HttpServletRequest request,HttpServletResponse response) {
 		
-		System.out.println("리스트컨트롤옴?옵니까");
 		List<ListDTO> lists = listDAO.boardList();
-		System.out.println("어디에러임 ㅅㅂ");
 		
 		ListIterator<ListDTO> it = lists.listIterator();
 		
@@ -155,13 +153,11 @@ public class ListController {
 	public String boardCreate(HttpServletRequest request,HttpServletResponse response,ListDTO dto) {
 		
 		Integer listNum = Integer.parseInt(request.getParameter("num"));
-		System.out.println("확인합니다" + listNum);
 		if(listNum.equals(0) || listNum.equals(null)){
 			
 			
 			
 			int maxNum = listDAO.maxNum();
-			System.out.println("맥스넘확인" + maxNum);
 			dto.setListNum(maxNum+1);
 			dto.setGroupNum(dto.getListNum());
 			dto.setDepth(0);
@@ -198,7 +194,6 @@ public class ListController {
 	@RequestMapping(value = "/boardControlList", method = {RequestMethod.GET,RequestMethod.POST})
 	public String boardList(HttpServletRequest request,HttpServletResponse response) {
 		
-		System.out.println("옵니까");
 		List<ListDTO> lists = listDAO.boardList();
 		
 		ListIterator<ListDTO> it = lists.listIterator();
@@ -267,7 +262,6 @@ public class ListController {
 		List<MemberDTO> memberRlist = new ArrayList<MemberDTO>();
 		List<MemberDTO> memberWlist = new ArrayList<MemberDTO>();
 		String listNum = request.getParameter("listNum");
-		System.out.println("ck확인 " + ck);
 		if(listNum==null || listNum.equals("")){
 			
 			if(ck!=null){
@@ -280,7 +274,6 @@ public class ListController {
 		}
 
 		
-		System.out.println("listNum확인"+ listNum);
 		int listNumber = Integer.parseInt(listNum);
 		
 		ListDTO dto = listDAO.readData(listNumber);
@@ -306,7 +299,6 @@ public class ListController {
 				
 				int j = Integer.parseInt(i);
 				BuseoDTO bDto = insaDAO.readBuseo(j);
-				System.out.println("디티오확인" + bDto.getBuseoNum());
 				buseoRlist.add(bDto);
 				if(buseoRlist!=null)
 					request.setAttribute("buseoRlist", buseoRlist);
@@ -355,13 +347,9 @@ public class ListController {
 		String group = request.getParameter("group");
 		String num = request.getParameter("num");
 		
-		System.out.println("group 확인"  + group);
-		System.out.println("num" + num);
 		String date = group.substring(4);
 		String sort = group.substring(0, 3);
 		
-		System.out.println("date 확인 " +  date);
-		System.out.println("sort확인" + sort);
 		String arrayW = "";
 		String arrayR = "";
 		if(sort.equals("Bus")){
@@ -382,8 +370,7 @@ public class ListController {
 					if(i.equals(date)){
 						return "read-error";
 					}
-					System.out.println("i확인" 
-							+ i);
+				
 					arrayR += i +",";
 				}
 				arrayR += date + ",";
@@ -430,8 +417,7 @@ public class ListController {
 					if(i.equals(date)){
 						return "read-error";
 					}
-					System.out.println("i확인" 
-							+ i);
+					
 					arrayR += i +",";
 				}
 				arrayR += date + ",";
@@ -483,7 +469,6 @@ public class ListController {
 		int listNum = Integer.parseInt(num);
 		
 		ListDTO dto = listDAO.readData(listNum);
-		System.out.println("분류값 확인"+sort);
 		
 		if(sort.equals("Bus")){
 			
@@ -632,11 +617,8 @@ public class ListController {
 			String buseoWs[] = dto.getBuseoW().split(",");
 			
 				for(String i : buseoWs){
-					System.out.println("I값확인"+i);
-					System.out.println("date확인" + date);
 					if(i.equals(date)){
 						ck ="ok";
-						System.out.println("먼데 ck값학인" + ck);
 					}	
 				}
 			}
@@ -658,7 +640,6 @@ public class ListController {
 		
 			
 		
-		System.out.println("ck값 확인"+ ck);
 		request.setAttribute("ck", ck);
 		return "control/boardUpdateSide";
 	}
@@ -675,6 +656,94 @@ public class ListController {
 		listDAO.boardUpdate(dto);
 		
 	
+	}
+	@RequestMapping(value = "/boardDeleteControl", method = {RequestMethod.GET,RequestMethod.POST})
+	public void boardControlDelete(HttpServletRequest request,HttpServletResponse response) {
+		
+		
+		String ckNum = request.getParameter("ckNum");
+		String num = request.getParameter("num");
+		
+		
+		String date = ckNum.substring(4); //숫자확인
+		String sort = ckNum.substring(0, 3); //어디껀지 확인하는용
+		
+		
+		int listNum = Integer.parseInt(num);
+		
+		ListDTO dto = listDAO.readData(listNum);
+		
+		
+		if(sort.equals("Bus")){
+			
+				
+				List<String> list = new ArrayList<String>();
+				String buseoWs[] = dto.getBuseoW().split(",");
+				Collections.addAll(list, buseoWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String buseoW ="";
+				
+				while(it.hasNext()){
+					buseoW += it.next()+",";
+					
+				}				
+				
+				List<String> Rlist = new ArrayList<String>();
+				String buseoRs[] = dto.getBuseoR().split(",");
+				Collections.addAll(Rlist, buseoRs);
+				Rlist.remove(date);
+				Iterator<String> itR = Rlist.iterator();
+				String buseoR="";
+				while(itR.hasNext()){
+					buseoR += itR.next()+",";
+				}
+
+				dto.setBuseoR(buseoR);
+				dto.setBuseoW(buseoW);
+				listDAO.boardBuseo(dto);
+				
+		}
+				
+			
+		
+		if(sort.equals("Mem")){
+
+			
+				List<String> list = new ArrayList<String>();
+				String memberWs[] = dto.getMemberW().split(",");
+				Collections.addAll(list, memberWs);
+				list.remove(date);
+				Iterator<String> it = list.iterator();
+				String memberW ="";
+				
+				while(it.hasNext()){
+					memberW += it.next()+",";
+					
+					
+			}
+				
+				List<String> Rlist = new ArrayList<String>();
+				String memberRs[] = dto.getMemberR().split(",");
+				Collections.addAll(Rlist, memberRs);
+				Rlist.remove(date);
+				Iterator<String> itR = Rlist.iterator();
+				String memberR ="";
+				
+				while(itR.hasNext()){
+					memberR += itR.next()+",";
+					
+					
+			}
+				
+				
+				dto.setMemberR(memberR);
+				dto.setMemberW(memberW);
+				listDAO.boardMember(dto);
+		}
+				
+			
+
 	}
 	
 	

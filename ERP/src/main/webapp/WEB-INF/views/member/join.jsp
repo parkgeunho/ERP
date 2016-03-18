@@ -66,7 +66,6 @@
 		
 		
 		var myForm = $('form').serialize();
-		alert(myForm);
 			
 		 
 			$.ajax({
@@ -217,6 +216,8 @@
 			alert("사용 불가능한 아이디 입니다.")
 			return;
 		}
+		
+		alert("정상적으로 등록이 완료되었습니다.");
 
 		f.action = "<%=cp%>/created_ok.action";
 		f.submit();

@@ -87,6 +87,38 @@ public class BoardDAO {
 	      sessionTemplate.update("com.exe.board.BoardMapper.updateData",dto);
 	   }
 	   
+	   //test
+	   public List<BoardDTO> getListTest(int start, int end,String searchKey, String searchValue,int listNum){
+		      
+		      HashMap<String, Object> params = new HashMap<String, Object>();
+		      
+		      params.put("start", start);
+		      params.put("end", end);
+		      params.put("searchKey", searchKey);
+		      params.put("searchValue", searchValue);
+		      params.put("listNum", listNum);
+		      
+		      List<BoardDTO> lists = sessionTemplate.selectList("com.exe.board.BoardMapper.getListsTest",params);
+		      
+		      return lists;
+		   }
+	   
+	   
+	   public int getDataCountTest(String searchKey,String searchValue,int listNum){
+		      
+		      int result = 0;
+		      
+		      HashMap<String, Object> params = new HashMap<String, Object>();
+		      
+		      params.put("searchKey", searchKey);
+		      params.put("searchValue", searchValue);
+		      params.put("listNum", listNum);
+		      result = sessionTemplate.selectOne("com.exe.board.BoardMapper.getDataCountTest",params);
+		      
+		      return result;
+		      
+		   }
+	   
 	
 	
 	

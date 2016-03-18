@@ -81,15 +81,18 @@
 
 	<c:if test="${depth4Size!='0' &&buseoChange4!=null}">
 		<select name="depth5" class="dap_text_box" onchange="change1();"  style="height: 35px; font-family: 고딕; width: 19%;float: left;">
-		
+		<option value="no" selected="selected">선택해주세요</option>
 		<c:forEach items="${buseoChange4}" var="buseoChange4">
-		
+			<c:choose>
+			
+				<c:when test="${buseoChange4.buseoNum==depth5 }">
+					<option value="${buseoChange4.buseoNum }" selected="selected">${buseoChange4.buseoName }</option>
+				</c:when>
 
-
-
+				<c:otherwise>
 					<option value="${buseoChange4.buseoNum }">${buseoChange4.buseoName }</option>
-		
-
+				</c:otherwise>
+			</c:choose>
 		</c:forEach>
 		</select>
 	</c:if>
