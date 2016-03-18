@@ -580,6 +580,19 @@ public class MemberController {
 		return "redirect:/insa";
 	}
 	
+	@RequestMapping(value = "/logout.action", method = {RequestMethod.GET})
+	public String logout(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		
+		
+		return "redirect:/main";
+	}
+	
 	
 	
 	

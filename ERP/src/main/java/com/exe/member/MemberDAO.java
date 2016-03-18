@@ -3,6 +3,7 @@ package com.exe.member;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Component;
 
 import com.exe.insa.BuseoDTO;
 

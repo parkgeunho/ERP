@@ -39,11 +39,9 @@ $(document).ready(function(){
 <div style="height: 90px; background-color: #dddddd; border: 1px solid;">
 <table width="90%" height="100%" border="1" align="center">
 	<tr>
-		<td align="right">로 그 아 웃</td>
+		
 	</tr>
 </table>
-</div>
-<div style="height: 90px; background-color: #cccccc;">
 </div>
 <div class="menubar">
 	<ul>

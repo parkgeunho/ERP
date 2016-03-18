@@ -10,6 +10,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/sidemenu.css">
+
+<script type="text/javascript">
+
+	function logout(){
+		
+		var url = '<%=cp%>/logout.action';
+		
+		var del = confirm("로그아웃 하시겠습니까?")
+		
+		if(del==true){
+			location.href = url;
+		}else{
+			
+			return;
+		}
+		
+		
+		
+	}
+
+
+</script>
+
+
 </head>
 <body>
 <div>
@@ -41,6 +65,13 @@
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/option.png"><br/>
 	환경설정
 	</div>
+	
+	<a href="javascript:logout();">
+	<div class="Smenu"><img style="margin-top: 10px; width: 32px; height: 32px;" src="/erp/resources/image/out2.jpg"><br/>
+	로그아웃
+	</div>
+	</a>
+	
 </div>
 </body>
 </html>
