@@ -83,7 +83,7 @@ $(document).ready(function(){
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 40%;float: left; margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>

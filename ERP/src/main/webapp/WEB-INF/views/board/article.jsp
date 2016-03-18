@@ -15,6 +15,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 
 </head>
@@ -25,7 +26,8 @@
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
-		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center">공&nbsp;지&nbsp;사&nbsp;항	
+		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center" >
+		${listDTO.boardName }	
 		</td>	
 	</tr>
 	
