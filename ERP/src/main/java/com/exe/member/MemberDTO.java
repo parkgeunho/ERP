@@ -1,6 +1,6 @@
 package com.exe.member;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 public class MemberDTO {
 	

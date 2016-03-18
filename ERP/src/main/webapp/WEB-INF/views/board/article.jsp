@@ -142,10 +142,10 @@
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
 				
 			<input type="button" value="수정" class="btn2" style="background: #00D8FF; color: white;"
-				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
+				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">	
 			
 			<input type="button" value="삭제" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
+				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">
 		
 		</td>
 	</tr>

@@ -12,10 +12,19 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <script type="text/javascript">
-	function te() {
-		alert("뜸?");
-	}
 
+
+
+
+	function buseoManagement(){
+		
+		window.open("buseoManagement","","width=300px,height=580px");
+		
+	}
+	
+	
+	
+	
 </script>
 
 
@@ -27,15 +36,26 @@
 	관리항목
 	</div>
 	<div>
-	<label onclick="javascript:location.href='<%=cp%>/insa'">부서관리</label>
-	</div>
-	<div>
-	양식추가
-	</div>
-	<div>
-	<label onclick="javascript:location.href='<%=cp%>/con'">게시판관리</label>
-	</div>
-	<div>
+		<ul>
+			<li><label onclick="javascript:location.href='<%=cp%>/insa'">부서관리</label>
+		
+				<ul>
+					<li>
+					<label onclick="javascript:buseoManagement()">부서 생성/삭제</label></li>
+					
+					<li>
+					<label onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</label></li>	
+				</ul>
+
+			</li>
+			
+			<li>양식추가</li>
+			<li>
+			<label onclick="javascript:location.href='<%=cp%>/con'">게시판관리</label>
+			
+			</li>
+		
+		</ul>
 	
 	</div>
 
