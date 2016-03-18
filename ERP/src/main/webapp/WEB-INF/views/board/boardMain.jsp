@@ -38,10 +38,10 @@ $(document).ready(function(){
 			 $.ajax({
 			        url:'ajaxBoardList',
 			        type:'POST',
-			        data : {listNum:num,LoginNum:LoginNum},
+			        data : {listNum:num},
 			          
 			        error:function(args){
-			               alert('최대 하위 부서 입니다.');
+			               alert('권한이없습니다.');
 			        },
 			        success: function(args){
 			        	 $("#boardList").html(args);                           

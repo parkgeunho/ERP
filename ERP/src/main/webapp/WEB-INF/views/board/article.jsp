@@ -138,8 +138,8 @@
 	
 	<tr style="height: 30px;">
 		<td style="width: 1572px;" align="right">			
-			<input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
+			<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
+				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
 				
 			<input type="button" value="수정" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
