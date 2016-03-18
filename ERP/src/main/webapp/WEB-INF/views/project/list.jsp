@@ -10,14 +10,20 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 <script src="/erp/resources/insa/jquery.session.js"></script>
 <link rel="stylesheet" type="text/css" href="/erp/resources/jquery.mCustomScrollbar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script>
-   
+<script type="text/javascript">
+
    $(document).ready(function(){
+	  
+	   
+	   
+	   
+	   
+	   
 	   
 	num=0;
 
 
-	   
+	
 	 
 	   $(".content").mCustomScrollbar();
       
@@ -77,11 +83,17 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 	$('[id^="edit-"]').dblclick(function(){
 		
  		var v = $(":text").id;
-	
+		
 		var obj = $('.num'+ this.id).val();
-	
+		 /* var a = obj.indexof("name=="); */
+		 
 		 /*  if(v==0){ */
 			 var av = document.getElementById(this.id).innerText;
+		 var ck = av.length>0;
+		 if(ck==false){
+			 return;
+		 }
+			 
 			 document.getElementById(this.id).innerHTML= "<input type='text' value="+av+" name=buseo"+obj+ ">"; 
 		/* }else{
 			
@@ -90,8 +102,14 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 		}  */
 	});  
    
+ 	
+ 	
+ 	
    
 </script>
+
+
+
 <form name="myForm" id="myForm" onsubmit="return false" >
 <div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
 

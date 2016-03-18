@@ -91,26 +91,68 @@ public class InsaDAO {
 		
 	}
 	
-	public List<MemberDTO> getMemberList(int start, int end,int buseoNum){
+	public List<MemberDTO> getMemberList(int start, int end,String depth1,String depth2,String depth3,String depth4,String depth5,String searchValue){
 		
 		
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		
 		params.put("start", start);
 		params.put("end", end);
-		params.put("buseoNum", buseoNum);
-		
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+		params.put("searchValue", searchValue);
 		
 		
 		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.insa.memberList",params);
 		return lists;
 	}
 	
-	public int dataCount(int buseoNum){
+	public int dataCount(String depth1,String depth2,String depth3,String depth4,String depth5,String searchValue){
 		
-		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",buseoNum);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+		params.put("searchValue", searchValue);
+		
+
+		
+		int result = sessionTemplate.selectOne("com.exe.insa.getDataCount",params);
 		return result;
 	}
+	
+	public int deletecheck(String depth1,String depth2,String depth3,String depth4,String depth5){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("depth1", depth1);
+		params.put("depth2", depth2);
+		params.put("depth3", depth3);
+		params.put("depth4", depth4);
+		params.put("depth5", depth5);
+	
+		
+
+		
+		int result = sessionTemplate.selectOne("com.exe.insa.deletecheck",params);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

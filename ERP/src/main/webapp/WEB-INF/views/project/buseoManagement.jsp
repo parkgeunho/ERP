@@ -24,10 +24,13 @@ $(document).ready(function() {
 	
 	
 	
+	
+	
+	
 	$("#updated").click(function(){
 		
 		var myForm = $("#myForm").serialize();
-		
+			
 		  $.ajax({
              url:'buseoUpdated',
              type:'POST',
@@ -78,14 +81,10 @@ $(document).ready(function() {
 
 
 function sendit(){
-	var url = "<%=cp%>/buseoUpdated";
-	var f=document.myForm;
-	
-	$.post(url,{list:f},function(args){
-		$("#buseoList").html(args);
-	});
-	
-	
+
+	window.opener.location.reload();
+	window.close();
+
 }
 
 function deleted(){
@@ -99,7 +98,7 @@ function deleted(){
 	if(del==true){
 		$.post(url,{num:num},function(args){
 		$("#buseoList").html(args);
-		});
+		}).error(function(){alert("부서에 사람이 존재합니다.")});
 	}else{
 		return;
 	}
@@ -113,9 +112,6 @@ function created(){
 	
 	}).error(function(){alert("이미 최하 부서입니다.")});
 }
-
-
-
 
 </script>
 
@@ -132,7 +128,6 @@ function created(){
 		<div style="height: 30px;">
 			<div class="buseoManagement" onclick="deleted();"><img src="/erp/resources/image/minus-white.png" >&nbsp;부서삭제</div>
 			<div class="buseoManagement" onclick="created();"><img src="/erp/resources/image/plus-white.png" >&nbsp;부서추가</div>
-		
 		</div>
 	<div id="buseoList"></div>
 	</div>
@@ -141,7 +136,11 @@ function created(){
 
 <tr>
 <td  width="250px;">
-<div id="updated" class="buseoManagement" style="margin-right: 75px; ">확인</div>
+
+<div class="buseoManagement" onclick="sendit()">&nbsp;완료</div>
+<div id="updated" class="buseoManagement" >수정</div>
+		
+
 </td>
 </tr>
 <tr>

@@ -12,14 +12,31 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<insert id="insertData" parameterType="com.exe.member.MemberDTO">
-		insert into insadb (num,userNum,birth,name,jumin,addr,id,pwd,oPhone,mPhone,email,blood,reli,hobby,memo,grade,duty,
-		dal,depth1,depth2,depth3,depth4,depth5,upload) values (#{num},TO_CHAR(sysdate,'yymmddhhmiss'),#{birth},#{name},#{jumin},#{addr},#{id},#{pwd},#{oPhone},#{mPhone},#{email},
-		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth1},#{depth2},#{depth3},#{depth4},#{depth5},#{upload})
+		insert into insadb (num,userNum,name,jumin,addr,id,pwd,oPhone,mPhone,email,blood,reli,hobby,memo,grade,duty,
+		dal,depth1,depth2,depth3,depth4,depth5,upload,secure) values (#{num},TO_CHAR(sysdate,'yymmddhhmiss'),#{name},#{jumin},#{addr},#{id},#{pwd},#{oPhone},#{mPhone},#{email},
+		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth1},#{depth2},#{depth3},#{depth4},#{depth5},#{upload},#{secure})
 	</insert>
 	
 	<select id="idOK" parameterType="String" resultType="String">
 		select id from insadb where id=#{id}
 	</select>
+	
+	<select id="readOne" parameterType="integer" resultType="com.exe.member.MemberDTO">
+		select * from insadb where num=#{num}
+	</select>
+	
+	<select id="login" parameterType="com.exe.member.MemberDTO" resultType="com.exe.member.MemberDTO">
+		select * from insadb where id=#{id} and pwd=#{pwd}
+	</select>
+	
+	<update id="updatedData" parameterType="com.exe.member.MemberDTO">
+		update insadb set name=#{name},jumin=#{jumin},addr=#{addr},id=#{id},pwd=#{pwd},oPhone=#{oPhone},mPhone=#{mPhone},email=#{email},blood=#{blood},reli=#{reli},hobby=#{hobby},memo=#{memo},grade=#{grade},duty=#{duty},
+		dal=#{dal},depth1=#{depth1},depth2=#{depth2},depth3=#{depth3},depth4=#{depth4},depth5=#{depth5},upload=#{upload},secure=#{secure} where num=#{num}
+	</update>
+	<delete id="deleteData" parameterType="Integer">
+		delete insadb where num=#{num}
+	</delete>
+	
 	
 	
 	
@@ -27,23 +44,39 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="depth0" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=0
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=0
 	</select>
 	
 	<select id="depth1" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=1
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=1
 	</select>
 	
 	<select id="depth2" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=2
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=2
 	</select>
 	
 	<select id="depth3" resultType="com.exe.insa.BuseoDTO">
-		select buseoName,buseoNum from buseo where depth=3
+		select buseoName,buseoNum,replyNum,parent from buseo where depth=3
 	</select>
 		
 	<select id="depth4" resultType="com.exe.insa.BuseoDTO">
-		 select buseoName,buseoNum from buseo where depth=4
+		 select buseoName,buseoNum,replyNum,parent from buseo where depth=4
+	</select>
+	
+	<select id="buseo2" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=1
+	</select>
+	
+	<select id="buseo3" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=2
+	</select>
+	
+	<select id="buseo4" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=3
+	</select>
+	
+	<select id="buseo5" resultType="com.exe.insa.BuseoDTO" parameterType="Integer">
+		select * from buseo where parent=#{parent} and depth=4
 	</select>
 	
 	

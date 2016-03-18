@@ -10,6 +10,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/sidemenu.css">
+
+<script type="text/javascript">
+
+	function logout(){
+		
+		var url = '<%=cp%>/logout.action';
+		
+		var del = confirm("로그아웃 하시겠습니까?")
+		
+		if(del==true){
+			location.href = url;
+		}else{
+			
+			return;
+		}
+		
+		
+		
+	}
+
+
+</script>
+
+
 </head>
 <body>
 <div>
@@ -21,13 +45,18 @@
 	메일 쓰기
 	</div>
 	
-	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
-	결제 작성
+	
+	<a href="#" onClick="window.open('http://localhost:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;">
+	<div class="Smenu" ><img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
+	결재 작성
 	</div>
+	</a>
+	
 	
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
 	직원 검색
 	</div>
+	
 
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>
 	도움말
@@ -36,6 +65,13 @@
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/option.png"><br/>
 	환경설정
 	</div>
+	
+	<a href="javascript:logout();">
+	<div class="Smenu"><img style="margin-top: 10px; width: 32px; height: 32px;" src="/erp/resources/image/out2.jpg"><br/>
+	로그아웃
+	</div>
+	</a>
+	
 </div>
 </body>
 </html>

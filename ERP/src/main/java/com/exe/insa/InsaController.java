@@ -1,7 +1,9 @@
 package com.exe.insa;
 
-import java.io.UnsupportedEncodingException;
 
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -9,6 +11,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +43,12 @@ public class InsaController {
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
 	
 		
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", "1");
+		
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
 		List<BuseoDTO> lists = insaDAO.buseoList();
 		
 		ListIterator<BuseoDTO> it = lists.listIterator();
@@ -58,10 +67,10 @@ public class InsaController {
 			n++;
 			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
-			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+			hMap.put("buseoNum",(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
-			System.out.println(vo.getReplyNum());
+			
 			
 			hMap.put("replyNum", vo.getReplyNum());
 			insaDAO.updateReply(hMap);
@@ -72,6 +81,8 @@ public class InsaController {
 		List<BuseoDTO> parent = insaDAO.getGroup();
 		List<BuseoDTO> depths = insaDAO.getDepth();
 		
+		
+		request.setAttribute("LoginDTO", LoginDTO);
 		request.setAttribute("depths", depths);
 		request.setAttribute("parent", parent);
 		request.setAttribute("restDiv",n);
@@ -81,11 +92,21 @@ public class InsaController {
 		
 		
 		
-		return "insa";
+		return "buseo";
 	}
 	
 	
 
+	
+	@RequestMapping(value = "/extest", method = RequestMethod.GET)
+	public String test(HttpServletRequest request,HttpServletResponse response) {
+		
+	
+		
+
+	
+		return "ex";
+	}
 	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
 	public String test2(HttpServletRequest request,HttpServletResponse response) {
@@ -96,6 +117,7 @@ public class InsaController {
 		
 		return "project/buseoManagement";
 	}	
+	
 	
 	//리스트 아작스로출력
 	@RequestMapping(value = "/buseoList", method = {RequestMethod.POST,RequestMethod.GET})
@@ -120,7 +142,7 @@ public class InsaController {
 			n++;
 			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
-			hMap.put("buseoNum",Integer.toString(vo.getBuseoNum()));
+			hMap.put("buseoNum",(vo.getBuseoNum()));
 			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
 			
@@ -148,14 +170,14 @@ public class InsaController {
 	
 		
 		Integer buseoNum = Integer.parseInt(request.getParameter("num"));
-		System.out.println(buseoNum);
+		
 		if(buseoNum.equals(0) || buseoNum.equals(null)){
 			
 			
 			
-			int maxNum = insaDAO.maxNum();
-			dto.setBuseoNum(maxNum+1);
-			dto.setGroupNum(dto.getBuseoNum());
+			int maxNum = insaDAO.maxNum()+1;
+			dto.setBuseoNum(Integer.toString(maxNum));
+			dto.setGroupNum(Integer.parseInt(dto.getBuseoNum()));
 			dto.setDepth(0);
 			dto.setOrderNo(0);
 			dto.setParent(0);
@@ -166,15 +188,15 @@ public class InsaController {
 				return "read-error";
 			}
 			dto = insaDAO.readData(buseoNum);
-			System.out.println(dto.getGroupNum());
+	
 			Map<String, Object> hMap = new HashMap<String, Object>();
 		      hMap.put("groupNum", dto.getGroupNum());
 		      hMap.put("orderNo", dto.getOrderNo());
 		      insaDAO.updateOrder(hMap);
 		      
-		      dto.setParent(dto.getBuseoNum());
-		      int maxNum = insaDAO.maxNum();
-		      dto.setBuseoNum(maxNum+1);
+		      dto.setParent(Integer.parseInt(dto.getBuseoNum()));
+		      int maxNum = insaDAO.maxNum()+1;
+		      dto.setBuseoNum(Integer.toString(maxNum));
 		      dto.setBuseoName("수정해주세요");
 		      dto.setDepth(dto.getDepth()+1);
 		      dto.setOrderNo(dto.getOrderNo()+1);
@@ -193,9 +215,45 @@ public class InsaController {
 	@RequestMapping(value = "/buseodeleted", method = {RequestMethod.GET,RequestMethod.POST})
 	public String buseoDeleted(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
 		
-		int buseoNum = Integer.parseInt(request.getParameter("num"));
+		
+		String num = request.getParameter("num");
+		int buseoNum = Integer.parseInt(num);
+		response.setCharacterEncoding("UTF-8");
+		
 		
 		//원래 여기에 조건을 줘서 인사쪽을 확인하고 나서 있냐 없냐 여부 확인 후 없으면 삭제를 진행
+		String depth1 = num;
+		String depth2 = num;
+		String depth3 = num;
+		String depth4 = num;
+		String depth5 = num;
+		
+		
+		int count = insaDAO.deletecheck(depth1, depth2, depth3, depth4, depth5);
+		if(count>0){
+			try {
+	            
+				
+	            PrintWriter writer = response.getWriter();
+
+	            writer.println("<script type='text/javascript'>");
+
+	            writer.println("alert('부서에 사원이 존재합니다.');");
+
+	            writer.println("history.back();");
+
+	            writer.println("</script>");
+
+	            writer.flush();
+	            
+	            return buseolist(request, response);
+	            
+	         } catch (Exception e) {
+	         
+	         }
+		}
+		
+		
 		//아니면 에러 처리를 실행해서 삭제가 안되게 해야됨
 		insaDAO.deleteBuseo(buseoNum);
 		
@@ -216,7 +274,7 @@ public class InsaController {
 			if(buseoName!=null){
 				int buseoNum = i;
 				dto.setBuseoName(buseoName);
-				dto.setBuseoNum(buseoNum);
+				dto.setBuseoNum(Integer.toString(buseoNum));
 				dto.setChecked("ok");
 				insaDAO.updateBuseo(dto);
 			}
@@ -226,21 +284,97 @@ public class InsaController {
 	}
 	
 	
+	//사원정보 아작스 리스트로 출력하기 위한것
 	@RequestMapping(value = "/memberList", method = {RequestMethod.GET,RequestMethod.POST})
-	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) {
+	public String memberList(HttpServletRequest request,HttpServletResponse response,BuseoDTO dto) throws UnsupportedEncodingException {
 		
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
-		System.out.println("찍힘?!");
+		
+		
+		int max = 15;
+		
 		if(num == null){
 			
 			num="1";
 		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("buseoNum", num);
+		
 		int buseoNum = Integer.parseInt(num);
 		int currentPage = 1;
-		System.out.println("찍힘?2!");
-		int dataCount = insaDAO.dataCount(buseoNum);
-		System.out.println("찍힘?3!");
+		
+		String searchValue = request.getParameter("searchValue");
+		
+		dto = insaDAO.readBuseo(buseoNum);
+		
+		if(dto==null){
+
+			request.setAttribute("max", max);
+			return "project/memberList";
+			
+			
+			
+			
+		}
+		
+		int depth = dto.getDepth();
+		
+		String depth1 = "";
+		String depth2 = "";
+		String depth3 = "";
+		String depth4 = "";
+		String depth5 = "";
+		
+		for(int i = depth; i>=0 ; i--){
+			
+			if(i==4){
+				
+				depth5 = dto.getBuseoNum();
+			}
+			if(i==3){
+				
+				depth4 = dto.getBuseoNum();
+			}
+			if(i==2){
+			
+				depth3 = dto.getBuseoNum();
+			}
+			if(i==1){
+				
+				depth2 = dto.getBuseoNum();
+			}
+			if(i==0){
+				
+				depth1 = dto.getBuseoNum();
+			}
+			dto = insaDAO.readBuseo(dto.getParent());
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+		if(searchValue==null){
+			searchValue="";
+		}else{
+			if(request.getMethod().equalsIgnoreCase("GET"))
+		
+			searchValue = URLDecoder.decode(searchValue,"UTF-8");
+		}
+		
+		
+		
+		int dataCount = insaDAO.dataCount(depth1,depth2,depth3,depth4,depth5,searchValue);
+		
 		int numPerPage = 15;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -251,40 +385,71 @@ public class InsaController {
 		int start = (currentPage-1)*numPerPage+1;
 		int end = currentPage*numPerPage;
 		
-		List<MemberDTO> lists = insaDAO.getMemberList(start,end,buseoNum);
+		List<MemberDTO> lists = insaDAO.getMemberList(start,end,depth1,depth2,depth3,depth4,depth5,searchValue);
 		ListIterator<MemberDTO> it = lists.listIterator();
 		while(it.hasNext()){
 			MemberDTO mDto = it.next();
 			BuseoDTO bDto = null;
-			if(mDto.getDepth1()!=null){
+
+			if(mDto.getDepth1()!="no" && !mDto.getDepth1().equals("no")){
+
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
-				System.out.println("얍"+mDto.getDepth1());
-				System.out.println("확인"+bDto.getBuseoName());
-				mDto.setDepth1(bDto.getBuseoName());
+			
+				mDto.setDepth1(bDto.getBuseoName()+" ▶ ");
+			}else if(mDto.getDepth1().equals("no") || mDto.getDepth1()=="no"){
+
+				mDto.setDepth1("");
+
 			}
-			if(mDto.getDepth2()!=null){
+			
+			
+			
+			if(mDto.getDepth2()!="no" && !mDto.getDepth2().equals("no")){
+	
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
-				mDto.setDepth2(bDto.getBuseoName());
+				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth2().equals("no") || mDto.getDepth2()=="no"){
+	;
+				mDto.setDepth2("");
+
 			}
-			if(mDto.getDepth3()!=null){
+			
+			
+			if(mDto.getDepth3()!="no" && !mDto.getDepth3().equals("no") ){
+			
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
-				mDto.setDepth3(bDto.getBuseoName());
+				mDto.setDepth3(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth3().equals("no") || mDto.getDepth3()=="no"){
+
+				mDto.setDepth3("");
+		
 			}
-			if(mDto.getDepth4()!=null){
+			
+			
+			
+			if(mDto.getDepth4()!="no" && !mDto.getDepth4().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
-				mDto.setDepth4(bDto.getBuseoName());
+				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
+			}else if(mDto.getDepth4().equals("no") || mDto.getDepth4()=="no"){
+
+				mDto.setDepth4("");
+		
 			}
-			if(mDto.getDepth5()!=null){
+			
+			
+			
+			if(mDto.getDepth5()!="no" && !mDto.getDepth5().equals("no")){
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
 				mDto.setDepth5(bDto.getBuseoName());
-				
-			}	
+			}else if(mDto.getDepth5().equals("no") || mDto.getDepth5()=="no"){
+				mDto.setDepth5("");
+			}
 			
 		}
-		System.out.println("왜 안뜨니 ");
+		
 		
 		
 		
@@ -295,8 +460,7 @@ public class InsaController {
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
 		int size = lists.size();
-		int max = 15;
-		System.out.println("사이즈 : "+size);
+		
 		
 		request.setAttribute("max", max);
 		request.setAttribute("lists", lists);

@@ -9,7 +9,15 @@ public class BoardDTO {
 	private String content;
 	private String created;
 	private int hitCount;
+	private int listNum;
 	
+	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getBoardNum() {
 		return boardNum;
 	}

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%        
 	
 	String cp = request.getContextPath();
@@ -36,20 +37,20 @@ $(document).ready(function(){
 </head>
 <body>
 
-<div style="height: 90px; background-color: blue;">
-
+<div style="height: 90px; background-color: #dddddd; border: 1px solid;">
+<table width="90%" height="100%" border="1" align="center">
+	<tr>
+		
+	</tr>
+</table>
 </div>
+
 <div class="menubar">
 	<ul>
 		<li style="width: 80px;">&nbsp;</li>
 		<li style="line-height: 50px;margin: 0px;padding: 0px">|</li>
-		<li><a href="#" id="current">홈</a>
-			<ul>
-			    <li><a href="test">테스트</a></li>
-			    <li><a href="#">테스트1</a></li>
-			    <li><a href="#">테스트2</a></li>
-			    <li><a href="#">Extensions</a></li>
-		    </ul>
+		<li><a href="main" id="current">홈</a>
+			   
  		</li>
  		
 		<li style="line-height: 50px">|</li>
@@ -62,7 +63,7 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">게시판</a></li>
+		<li><a href="boardMain">게시판</a></li>
 		
 		<li style="line-height: 50px">|</li>
 		
@@ -73,16 +74,20 @@ $(document).ready(function(){
 		<li><a href="#">메일</a></li>
 		
 		<li style="line-height: 50px">|</li>
-		
-		<li><a href="#">관리자</a></li>
+		<c:if test="${LoginDTO.secure==1 }">
+		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
+		</c:if>
 	</ul>
 </div>
 
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-	
-	
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 40%;float: left; margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		
 	<div style="float: left;">
 	
 	</div>
@@ -90,6 +95,7 @@ $(document).ready(function(){
 	</div>
 	
 	<div style="font-size: 8pt; border-bottom: 2px solid orange; height: 10px; background-color: white;">
+	
 	<div  id="b" style="width: 50px; background-color: orange; float: right; margin-right: 10px;border-top-left-radius : 5px;
 	border-top-right-radius : 5px;" align="center">▽</div>
 	

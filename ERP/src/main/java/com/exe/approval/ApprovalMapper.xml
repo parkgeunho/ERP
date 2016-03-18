@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.exe.approval">
+
+	<!-- <insert id="insert" parameterType="com.exe.approval.ApprovalCommentDTO">
+		insert into approval (approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
+		values (#{int},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
+	</insert>
+		
+	<select id="list" resultType="com.exe.springmybatis.CustomDTO" parameterType="String">
+		
+	</select>
+	
+	<select id="listOne" resultType="com.exe.springmybatis.CustomDTO" parameterType="int">
+		
+	</select>
+	
+	<update id="update" parameterType="com.exe.springmybatis.CustomDTO">
+		
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		
+	</delete>
+
+	<select id="todayNum" resultType="int" parameterType="int">
+	</select> -->
+	
+	
+	<!-- ApprovalForm -->
+	
+<!-- 	<insert id="approvalForminsert" parameterType="com.exe.approval.ApprovalFormDTO">
+		insert into approvalForm (approvalNum,approvalName,approvalType,approvalContent)
+		values (#{approvalNum},#{approvalName},#{approvalType},#{approvalContent})
+	</insert> -->
+	
+	<select id="approvalFormMaxNum" resultType="integer">
+		select nvl(max(approvalFormNum),0) from approvalForm
+	</select>
+	
+<!-- 	<select id="approvalFormData" parameterType="String" resultType="com.exe.approval.ApprovalFormDTO">
+		select * from approvalForm where approvalName = #{approvalName}
+	</select>
+-->
+	<select id="approvalFormList" resultType="com.exe.approval.ApprovalFormDTO">
+		select * from approvalForm
+	</select> 
+	
+	<select id="getApprovalForm" parameterType="integer" resultType="com.exe.approval.ApprovalFormDTO">
+		select * from approvalForm where approvalFormNum = #{num}
+	</select> 
+	
+	<insert id="insertApprovalForm" parameterType="com.exe.approval.ApprovalFormDTO" >
+		insert into approvalForm(approvalFormNum,approvalFormName,approvalFormType,approvalFormContent)
+		values (#{approvalFormNum},#{approvalFormName},#{approvalFormType},#{approvalFormContent:CLOB}) 
+	</insert> 
+
+
+</mapper>
