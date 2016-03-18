@@ -34,7 +34,7 @@ import com.exe.member.MemberDTO;
 public class BoardController {
 	
 	@Autowired
-	@Qualifier("BoardDAO")
+	@Qualifier("boardDAO")
 	BoardDAO dao;
 	
 	@Autowired
@@ -48,9 +48,9 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
-	@Autowired
+/*	@Autowired
 	@Qualifier("BoardFileDAO")
-	BoardFileDAO boardfileDAO;
+	BoardFileDAO boardfileDAO;*/
 	
 	@RequestMapping(value="/board/created.action")
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
