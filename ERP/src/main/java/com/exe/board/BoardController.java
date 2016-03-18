@@ -331,8 +331,40 @@ public class BoardController {
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		/*  String pageNum = request.getParameter("pageNum");*/
+		  
+			  
+		  
 	  
 		  dao.deleteData(boardNum);
+		  
+		  
+		  
+		   try {
+	
+	          PrintWriter writer = response.getWriter();
+	
+	          writer.println("<script type='text/javascript'>");
+	
+	         
+	     
+	          writer.println("window.opener.location.reload();");
+	          writer.println("	window.close();");
+	          writer.println("</script>");
+	
+	          writer.flush();
+	
+	       } catch (Exception e) {
+	       
+	       }
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 	  
 		/*  return "redirect:/board/list.action?pageNum=" + pageNum;*/
 		  
