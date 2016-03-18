@@ -14,35 +14,21 @@
 
 function openNewWindow(window) { 
 	open (window,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500"); 
+	
+	window.open("buseoManagement","","width=300px,height=580px");
 	}
 
 
 
 
-	var memberCheck = ${memberCheck};
+/* 	var memberCheck = ${memberCheck};
 	var buseoCheck = ${buseoCheck};
 	if(memberCheck!=true && buseoCheck!=true){
 		
-		alert("읽기권한이없습니다.");
-		 $.ajax({
-		        url:'ajaxBoardList',
-		        type:'POST',
-		        data : {listNum:num},
-		          
-		        error:function(args){
-		               alert('최대 하위 부서 입니다.');
-		        },
-		        success: function(args){
-		        	 $("#boardList").html(args);                           
-		        }
-	});
-		
-		
-		
-		
+		test();
 		
 	}
-
+ */
 
 
 
@@ -64,7 +50,13 @@ function openNewWindow(window) {
 <DIV class="buseo">
 ${LDTO.boardName}
 </DIV>		
-		
+
+
+
+
+
+
+
 <table border="0" align="center" cellpadding="0" cellspacing="0">		
 	
 	<tr style="height: 30px">

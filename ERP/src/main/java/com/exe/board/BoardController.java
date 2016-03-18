@@ -53,6 +53,102 @@ public class BoardController {
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
+		
+		
+		
+		ListDTO lDTO = listDAO.readData(listNum);
+	      
+	  	HttpSession session = request.getSession();
+	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+		  
+		  String read[] = null;
+		  List<String> Rlist = new ArrayList<String>();
+		  String check = lDTO.getBuseoW();
+		  boolean buseoCheck = false;
+		 
+		  
+		  if(null!=check){
+			  read = lDTO.getBuseoR().split(",");
+				
+			  Collections.addAll(Rlist, read);
+			  
+			  buseoCheck = Rlist.contains(mDTO.getDepth1());
+			  
+			  if(!buseoCheck){
+				  
+				  buseoCheck = Rlist.contains(mDTO.getDepth2());
+				  
+				  if(!buseoCheck){
+					  buseoCheck = Rlist.contains(mDTO.getDepth3());
+					  
+					  if(!buseoCheck){
+						  buseoCheck = Rlist.contains(mDTO.getDepth4());
+						  
+						  if(buseoCheck){
+							  
+							  buseoCheck = Rlist.contains(mDTO.getDepth5());
+						  }
+					  }
+				  }
+			  }
+			  
+		  }
+		  	
+		  Rlist.removeAll(Rlist);
+		  read = lDTO.getMemberW().split(",");
+		  Collections.addAll(Rlist, read);
+		  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
+		  
+
+		 
+		  System.out.println("쓰기권한확인 사람" + memberCheck);
+	      System.out.println("쓰기권한 부서" + buseoCheck);
+		 
+		 
+		 
+		 
+		  if(!buseoCheck && !memberCheck){
+			  
+			 return "read-error";
+			 /* try {
+
+		            PrintWriter writer = response.getWriter();
+
+		            writer.println("<script type='text/javascript'>");
+
+		            writer.println("alert('권한없단다~');");
+
+		            writer.println("history.go()");
+
+		            writer.println("</script>");
+
+		            writer.flush();
+
+		         } catch (Exception e) {
+		         
+		         }*/
+			  
+			  
+		  }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	      
 		request.setAttribute("listNum", listNum);
 	      return "board/created";
@@ -274,7 +370,7 @@ public class BoardController {
 		  
 		  
 		  		String cp = request.getContextPath();
-		      
+		  		response.setCharacterEncoding("UTF-8");
 		      String pageNum = request.getParameter("pageNum");
 		      int currentPage = 1;
 		      
@@ -286,7 +382,7 @@ public class BoardController {
 		    	  listNum = Integer.parseInt(num);  
 		      }
 			  
-			  ListDTO lDTO = listDAO.readData(listNum);
+			ListDTO lDTO = listDAO.readData(listNum);
 		      
 		  	HttpSession session = request.getSession();
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
@@ -295,7 +391,7 @@ public class BoardController {
 			  List<String> Rlist = new ArrayList<String>();
 			  String check = lDTO.getBuseoR();
 			  boolean buseoCheck = false;
-			  System.out.println("rlist크기" + Rlist.size());
+			 
 			  
 			  if(null!=check){
 				  read = lDTO.getBuseoR().split(",");
@@ -339,14 +435,40 @@ public class BoardController {
 			 
 			 
 			 
-			 
+			  System.out.println("memberCheck" + memberCheck);
+		      System.out.println("buseoCheck" + buseoCheck);
 			 
 			 
 			 
 			 
 			  if(!buseoCheck && !memberCheck){
 				  
-				  return boardMain(request, response,"no");
+				 return "read-error";
+				 /* try {
+			            
+			            PrintWriter writer = response.getWriter();
+
+			            writer.println("<script type='text/javascript'>");
+
+			            writer.println("alert('권한없단다~');");
+
+			            writer.println("history.go()");
+
+			            writer.println("</script>");
+
+			            writer.flush();
+			            
+			            
+			            
+			         } catch (Exception e) {
+			         
+			         }*/
+				  
+				  
+				  
+				  
+				  
+				  
 			  }
 			  	  
 			  
@@ -423,6 +545,8 @@ public class BoardController {
 		      
 		      request.setAttribute("buseoCheck", buseoCheck);
 		      request.setAttribute("memberCheck", memberCheck);
+		      
+		    
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
