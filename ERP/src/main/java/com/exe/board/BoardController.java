@@ -150,8 +150,8 @@ public class BoardController {
 	
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public void created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
-	     
-		 int listNum = Integer.parseInt(request.getParameter("listNum"));
+		 String ckNum = request.getParameter("listNum");
+		 int listNum = Integer.parseInt(ckNum);
 	      int maxNum = dao.getMaxNum();
 	      	     
 	      dto.setBoardNum(maxNum + 1);	  
@@ -159,6 +159,9 @@ public class BoardController {
 	      dao.insertData(dto);
 	      
 	      
+	      
+	      HttpSession session = request.getSession();
+	      session.setAttribute("cklistNum", ckNum);
 	      
 	      
 	      
@@ -237,7 +240,7 @@ public class BoardController {
 	 @RequestMapping(value="/board/article.action",method={RequestMethod.GET,RequestMethod.POST})
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
-	  public ModelAndView article(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		    
 	      
 	      String cp = request.getContextPath();
@@ -276,11 +279,14 @@ public class BoardController {
 	      ModelAndView mav = new ModelAndView();
 	      
 	      String listNum = request.getParameter("listNum");
+	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
 	      
-	    
+	      HttpSession session = request.getSession();
+	      session.setAttribute("cklistNum", listNum);
 	      
 	      mav.setViewName("/board/article");
+	      mav.addObject("listDTO",listDTO);
 	      mav.addObject("listNum",listNum);
 	      mav.addObject("dto", dto);
 	      mav.addObject("param", param);
@@ -398,23 +404,28 @@ public class BoardController {
 	  @RequestMapping(value = "/ajaxBoardList", method = {RequestMethod.GET,RequestMethod.POST})
 		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		  
-		  
+		  HttpSession session = request.getSession();
 		  		String cp = request.getContextPath();
 		  		response.setCharacterEncoding("UTF-8");
 		      String pageNum = request.getParameter("pageNum");
 		      int currentPage = 1;
 		      
 		      String num = request.getParameter("listNum");
-			  
+			  String cklistNum = (String) session.getAttribute("cklistNum");
 			  
 			  int listNum = 1;
 		      if(num!=null){
 		    	  listNum = Integer.parseInt(num);  
 		      }
+		      if(cklistNum!=null){
+		    	  listNum = Integer.parseInt(cklistNum);
+		      }
 			  
+		      
+		      session.removeAttribute("cklistNum");
 			ListDTO lDTO = listDAO.readData(listNum);
 		      
-		  	HttpSession session = request.getSession();
+		  	
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
 			  
 			  String read[] = null;
