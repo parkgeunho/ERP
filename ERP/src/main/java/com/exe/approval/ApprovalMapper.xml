@@ -59,5 +59,16 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		values (#{approvalFormNum},#{approvalFormName},#{approvalFormType},#{approvalFormContent:CLOB}) 
 	</insert> 
 
+	<select id="getApprovalFormType" resultType="com.exe.approval.ApprovalFormDTO">
+		select approvalformtype from approvalForm group by approvalformtype
+	</select>
+	
+	<select id="getApprovalMemberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
 
+		select name,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where depth1 like '%'||#{depth1}||'%' and depth2 like '%'||#{depth2}||'%' and depth3 like '%'||#{depth3}||'%' and depth4 like '%'||#{depth4}||'%' and depth5 like '%'||#{depth5}||'%'
+
+	</select>
+	
+	
+	
 </mapper>

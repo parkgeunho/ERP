@@ -26,34 +26,7 @@
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   </style>
-  
-  
-  
-  
-  
-  
-  
-<!--   <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-describedby="dialog-form" aria-labelledby="ui-id-1" style="position: absolute; height: auto; width: 387.6px; top: 228.5px; left: 275px; display: block; z-index: 101;"><div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix ui-draggable-handle"><span id="ui-id-1" class="ui-dialog-title">Create new user</span><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span><span class="ui-button-text">Close</span></button></div><div id="dialog-form" class="ui-dialog-content ui-widget-content" style="width: 366px; min-height: 0px; max-height: none; height: 202px;">
-  <p class="validateTips">All form fields are required.</p>
- 
-  <form>
-    <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
- 
-      Allow form submission with keyboard without duplicating the dialog button
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-    </fieldset>
-  </form>
-</div><div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix"><div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Create an account</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Cancel</span></button></div></div><div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div><div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div></div> -->
-  
-  
-  
-  
+
   
   
   <script>
@@ -94,15 +67,7 @@
         return true;
       }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
  
     function checkRegexp( o, regexp, n ) {
       if ( !( regexp.test( o.val() ) ) ) {
@@ -167,85 +132,35 @@
     
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 300,
-      width: 350,
+      height:600,
+	  width:850,
       modal: true,
-      
-      
       buttons: {
       	"Create an account": addUser,
-      	Cancel: function() {
+      	취소: function() {
           dialog.dialog( "close" );
         }
-      },
-      
-      
+      },     
       close: function() {
-        form[ 0 ].reset();
+        /* form[ 0 ].reset(); */
         allFields.removeClass( "ui-state-error" );        
       }
       
     });
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 	   
     form = dialog.find( "form" ).on( "submit", function( event ) {
       event.preventDefault();
       addUser();
     });
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
     $( "#create-user" ).button().on( "click", function() {
 		dialog.dialog( "open" );
-    	/* $("<html>").dialog({
-			
-			modal:true,
-			open:function(){
-				$(this).load("approvalLine");
-			},
-			height:600,
-			width:900,
-			title:"결재선 지정",
-			close:function(){
-				alert('이히히히');
-			}
-		}); */
-    });
+
+    });   
     
-    
-    
-    
-    
-    
-  });
+  });    
   
-  
-  
-  
-  
-  
-  
-  
-  
-  </script>
+</script>
   
   
   
@@ -260,7 +175,7 @@
 </head>
 <body>
  
-<div id="dialog-form" title="Create new user">
+ <div id="dialog-form" title="Create new user">
   
   <p class="validateTips">All form fields are required.</p>
  
@@ -273,12 +188,12 @@
       <label for="password">Password</label>
       <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
  
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      Allow form submission with keyboard without duplicating the dialog button
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
   </form>
   
-</div>
+</div> 
  
  
 <div id="users-contain" class="ui-widget">
@@ -286,6 +201,7 @@
   <table id="users" class="ui-widget ui-widget-content">
     <thead>
       <tr class="ui-widget-header ">
+        <th>Check</th>
         <th>Name</th>
         <th>Email</th>
         <th>Password</th>
@@ -293,6 +209,7 @@
     </thead>
     <tbody>
       <tr>
+      	<td align="center"></td>
         <td>John Doe</td>
         <td>john.doe@example.com</td>
         <td>johndoe1</td>
@@ -301,6 +218,9 @@
   </table>
 </div>
 <button id="create-user">Create new user</button>
+ 
+ 
+ 
  
  
 </body>
