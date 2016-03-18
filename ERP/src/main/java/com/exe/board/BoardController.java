@@ -53,6 +53,7 @@ public class BoardController {
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
+
 		
 		
 		
@@ -106,30 +107,30 @@ public class BoardController {
 		 
 		 
 		 
-		 
-		  if(!buseoCheck && !memberCheck){
+	      if(!buseoCheck && !memberCheck){
 			  
-			 return "read-error";
-			 /* try {
+				 return "read-error";
+				 /* try {
 
-		            PrintWriter writer = response.getWriter();
+			            PrintWriter writer = response.getWriter();
 
-		            writer.println("<script type='text/javascript'>");
+			            writer.println("<script type='text/javascript'>");
 
-		            writer.println("alert('권한없단다~');");
+			            writer.println("alert('권한없단다~');");
 
-		            writer.println("history.go()");
+			            writer.println("history.go()");
 
-		            writer.println("</script>");
+			            writer.println("</script>");
 
-		            writer.flush();
+			            writer.flush();
 
-		         } catch (Exception e) {
-		         
-		         }*/
-			  
-			  
-		  }
+			         } catch (Exception e) {
+			         
+			         }*/
+				  
+				  
+			  }
+		  
 		
 		
 		
@@ -150,11 +151,12 @@ public class BoardController {
 		
 		
 	      
+
 		request.setAttribute("listNum", listNum);
 	      return "board/created";
 	   }
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	   public void created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	     
 		 int listNum = Integer.parseInt(request.getParameter("listNum"));
 	      int maxNum = dao.getMaxNum();
@@ -163,7 +165,7 @@ public class BoardController {
 	   	  dto.setListNum(listNum);
 	      dao.insertData(dto);
 	      
-	      return "redirect:/board/list.action";
+	     /* return "redirect:/board/list.action";*/
 	   }
 	 
 	 
@@ -325,43 +327,34 @@ public class BoardController {
 	  }
 	  
 	  @RequestMapping(value="/board/delete.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-		  String pageNum = request.getParameter("pageNum");
+		/*  String pageNum = request.getParameter("pageNum");*/
 	  
 		  dao.deleteData(boardNum);
 	  
-		  return "redirect:/board/list.action?pageNum=" + pageNum;
+		/*  return "redirect:/board/list.action?pageNum=" + pageNum;*/
 		  
 	 
 	  }
 	  
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
 		public String boardMain(HttpServletRequest request,HttpServletResponse response,String ckpoint) throws IOException {
-		  	
-		  
-		  
-		  
+		  			  
 		  	HttpSession session = request.getSession();
 			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-			request.setAttribute("LoginDTO", LoginDTO);
-		  
+			request.setAttribute("LoginDTO", LoginDTO);		  
 		  	
 			List<ListDTO> boardlist = listDAO.boardList();
 			List<ListDTO> parent = listDAO.getGroup();
 			List<ListDTO> depths = listDAO.getDepth();
-			int maxNum = listDAO.maxNum();
-			
-			
+			int maxNum = listDAO.maxNum();			
   
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
-			request.setAttribute("boardlist", boardlist);
-			  
-			
-			
+			request.setAttribute("boardlist", boardlist);			
 
 		  return "boardMain";
 	  }

@@ -12,26 +12,16 @@
 
 <script type="text/javascript">
 
-function openNewWindow(window) { 
-	open (window,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500"); 
+
+function openNewWindow(listNum) { 
+	open ("board/created.action?listNum="+listNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
+
+	}
+function article(listNum,boardNum) { 
 	
-	window.open("buseoManagement","","width=300px,height=580px");
+	
+	open ("board/article.action?listNum="+listNum+"&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
 	}
-
-
-
-
-/* 	var memberCheck = ${memberCheck};
-	var buseoCheck = ${buseoCheck};
-	if(memberCheck!=true && buseoCheck!=true){
-		
-		test();
-		
-	}
- */
-
-
-
 
 
 	function sendIt(){
@@ -77,9 +67,9 @@ ${LDTO.boardName}
 			
 		</td>
 		<td style="width: 72px;" align="center">
-		<a href="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" target="_blank" title="글쓰기">
+		<a target="_blank" title="글쓰기">
 
-		  <img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px;">
+		  <img alt="" src="/erp/resources/boardimage/pencils002.png" onclick="javascript:openNewWindow(${listNum});" style="width: 20px;">
 			 
 	   </a> 
 		<!-- onclick="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
@@ -118,7 +108,7 @@ ${LDTO.boardName}
 	<tr style="height: 25px;">
 		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
 		<td style="width: 922px;" class="subject">
-			<a href="${articleUrl}&boardNum=${dto.boardNum}">
+			<a href="#" onclick="article(${listNum},${dto.boardNum })">
 				${dto.subject }</a></td>
 		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
 		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
