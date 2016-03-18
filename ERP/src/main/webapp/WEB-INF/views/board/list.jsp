@@ -12,8 +12,10 @@
 
 <script type="text/javascript">
 
+
 function openNewWindow(listNum) { 
 	open ("board/created.action?listNum="+listNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
+
 	}
 function article(listNum,boardNum) { 
 	
@@ -21,26 +23,7 @@ function article(listNum,boardNum) {
 	open ("board/article.action?listNum="+listNum+"&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
 	}
 
-	var memberCheck = ${memberCheck};
-	var buseoCheck = ${buseoCheck};
-	if(memberCheck!=true && buseoCheck!=true){
-		
-		alert("읽기권한이없습니다.");
-		 $.ajax({
-		        url:'ajaxBoardList',
-		        type:'POST',
-		        data : {listNum:num},
-		          
-		        error:function(args){
-		               alert('최대 하위 부서 입니다.');
-		        },
-		        success: function(args){
-		        	 $("#boardList").html(args);                           
-		        }
-	});
-		
-		
-	}
+
 	function sendIt(){
 		
 		var f = document.searchForm;
@@ -57,7 +40,13 @@ function article(listNum,boardNum) {
 <DIV class="buseo">
 ${LDTO.boardName}
 </DIV>		
-		
+
+
+
+
+
+
+
 <table border="0" align="center" cellpadding="0" cellspacing="0">		
 	
 	<tr style="height: 30px">

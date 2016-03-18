@@ -66,14 +66,14 @@ function sendIt(){
 	f.content.value = str;
 	f.action = "<%=cp%>/board/update_ok.action";
 	f.submit();
-	
+	window.opener.location.reload();
+	window.close();
 	
 
 }
 
-function redirect(){
+function redirect(){	
 	
-	window.opener.location.reload();
 	window.close();
 	
 	
