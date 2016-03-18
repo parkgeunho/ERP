@@ -11,6 +11,35 @@
 
 <script type="text/javascript">
 
+	var memberCheck = ${memberCheck};
+	var buseoCheck = ${buseoCheck};
+	if(memberCheck!=true && buseoCheck!=true){
+		
+		alert("읽기권한이없습니다.");
+		 $.ajax({
+		        url:'ajaxBoardList',
+		        type:'POST',
+		        data : {listNum:num},
+		          
+		        error:function(args){
+		               alert('최대 하위 부서 입니다.');
+		        },
+		        success: function(args){
+		        	 $("#boardList").html(args);                           
+		        }
+	});
+		
+		
+		
+		
+		
+	}
+
+
+
+
+
+
 	function sendIt(){
 		
 		var f = document.searchForm;

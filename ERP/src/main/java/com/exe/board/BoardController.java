@@ -1,6 +1,7 @@
 package com.exe.board;
 
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Member;
@@ -241,8 +242,11 @@ public class BoardController {
 	  }
 	  
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
-		public String boardMain(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+		public String boardMain(HttpServletRequest request,HttpServletResponse response,String ckpoint) throws IOException {
 		  	
+		  
+		  
+		  
 		  	HttpSession session = request.getSession();
 			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 			request.setAttribute("LoginDTO", LoginDTO);
@@ -266,7 +270,7 @@ public class BoardController {
 		  return "boardMain";
 	  }
 	  @RequestMapping(value = "/ajaxBoardList", method = {RequestMethod.GET,RequestMethod.POST})
-		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		  
 		  
 		  		String cp = request.getContextPath();
@@ -275,15 +279,15 @@ public class BoardController {
 		      int currentPage = 1;
 		      
 		      String num = request.getParameter("listNum");
-			  String LoginNum = request.getParameter("LoginNum");
+			  
 			  
 			  int listNum = 1;
 		      if(num!=null){
 		    	  listNum = Integer.parseInt(num);  
 		      }
 			  
-		/*	  ListDTO lDTO = listDAO.readData(listNum);
-		      System.out.println("번호확인" +LoginNum);
+			  ListDTO lDTO = listDAO.readData(listNum);
+		      
 		  	HttpSession session = request.getSession();
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
 			  
@@ -291,7 +295,7 @@ public class BoardController {
 			  List<String> Rlist = new ArrayList<String>();
 			  String check = lDTO.getBuseoR();
 			  boolean buseoCheck = false;
-			  boolean memberCheck = false;
+			  System.out.println("rlist크기" + Rlist.size());
 			  
 			  if(null!=check){
 				  read = lDTO.getBuseoR().split(",");
@@ -312,7 +316,7 @@ public class BoardController {
 							  
 							  if(buseoCheck){
 								  
-								  buseoCheck = Rlist.contains(mDTO.getDepth4());
+								  buseoCheck = Rlist.contains(mDTO.getDepth5());
 							  }
 						  }
 					  }
@@ -321,56 +325,30 @@ public class BoardController {
 			  }
 			  
 		
-			  
+			  Rlist.removeAll(Rlist);
 			  read = lDTO.getMemberR().split(",");
 			  Collections.addAll(Rlist, read);
-			  memberCheck = Rlist.contains(LoginNum);
+			  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
 			  
+			  
+		
+			  
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 			  if(!buseoCheck && !memberCheck){
-				  try {
-			            
-			            PrintWriter writer = response.getWriter();
-
-			            writer.println("<script type='text/javascript'>");
-
-			            writer.println("alert('읽기권한이없습니다.');");
-
-			            writer.println("</script>");
-
-			            writer.flush();
-			            
-			            return ajaxBoardList(request, response);
-			            
-			         } catch (Exception e) {
-			         
-			         }
+				  
+				  return boardMain(request, response,"no");
 			  }
-			  
-			  
-			  
-			  
-			*/
-				
-			
-						
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
+			  	  
 			  
 			  
 		      if(pageNum != null)
@@ -400,7 +378,7 @@ public class BoardController {
 		      
 		      
 		      int dataCount = dao.getDataCountTest(searchKey, searchValue, listNum);
-		      System.out.println("카운트 수" + dataCount);
+		      
 		      int numPerPage = 20;
 		      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		      
@@ -440,8 +418,11 @@ public class BoardController {
 		      
 		      request.setAttribute("listNum", listNum);
 
-/*		      request.setAttribute("LDTO", lDTO);*/
-
+		      request.setAttribute("LDTO", lDTO);
+		      
+		      
+		      request.setAttribute("buseoCheck", buseoCheck);
+		      request.setAttribute("memberCheck", memberCheck);
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);

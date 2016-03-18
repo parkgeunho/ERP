@@ -34,11 +34,11 @@ $(document).ready(function(){
 			
 			
 			var num= $('.num'+this.id).val();
-			var LoginNum = ${LoginDTO.num};
+		
 			 $.ajax({
 			        url:'ajaxBoardList',
 			        type:'POST',
-			        data : {listNum:num,LoginNum:LoginNum},
+			        data : {listNum:num},
 			          
 			        error:function(args){
 			               alert('최대 하위 부서 입니다.');
