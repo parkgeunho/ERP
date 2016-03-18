@@ -31,7 +31,7 @@
 <title>Insert title here</title>
 
 <script>
-$(document).ready(function() {
+
 	//스크롤바 변경
 	  $(".content").mCustomScrollbar();
 	
@@ -90,16 +90,12 @@ $(document).ready(function() {
 	
 	});
 
-});
+
 </script>
 
 
 <script language="JavaScript" type="text/javascript">
  
-	var count1 = 0;
-	var count2 = 0;
-	var count3 = 0;
-
 	//선택된 옵션을 삭제한다.
 
 	function removeOptionSelected(){
@@ -128,8 +124,7 @@ $(document).ready(function() {
 			elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
 		}catch(ex) {
 			elSel.add(elOptNew); // IE only
-		}
-	  
+		}	  
 	}
  
  
@@ -144,12 +139,6 @@ $(document).ready(function() {
 		var opt = obj.options[obj.selectedIndex];
 	
 		switch (mode) {
-			case 'first':
-			obj.insertBefore(opt, obj.options[0]);
-			break;
-			case 'last':
-			obj.appendChild(opt);
-			break;
 			case 'up':
 			if (idx > 0) 
 				obj.insertBefore(opt, obj.options[idx-1]);
@@ -157,9 +146,6 @@ $(document).ready(function() {
 			case 'down':
 			if (idx < obj.options.length-1) 
 				obj.insertBefore(obj.options[idx+1], opt);
-			break;
-			case 'move':
-				
 			break;
 		}
 	}
@@ -179,8 +165,6 @@ $(document).ready(function() {
 		elOptNew.text = 'Append' + num;
 		elOptNew.value = 'append' + num;
 		  
-		var elSel = document.getElementById('select2');
-	    
 		try {
 			elSel.add(elOptNew, null); // standards compliant; doesn't work in IE
 		}catch(ex) {
@@ -191,40 +175,13 @@ $(document).ready(function() {
 	
 </script>
 
-<!-- 모달팝업 관련 -->
-<script type="text/javascript">
-	
-	function hihi(){
-		
-		var okok = document.getElementById('k222').value;
-	
-		return (okok);
-	}
-	
-	function k1(){      
-		
-		var k1 = document.getElementById('k111').value;
-			
-		this.close();
-		
-		return (k1);
-	}	
-	
-	function k2(){
-		
-		var k2 = document.getElementById('k222').value;
-			
-		return (k2);
-	}	
-	
-</script>
 
 
 
 </head>
 <body>
 
-
+<form>
 
 <table cellpadding="0" cellspacing="0" border="0">
 
@@ -601,7 +558,7 @@ $(document).ready(function() {
 </table>
       
 
-
+</form>
 
 
 

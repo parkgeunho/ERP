@@ -206,7 +206,7 @@
 </td></tr>
 
 <tr height="60"><td colspan="4" align="center">
-<button type="button" name="approvalUpload" onclick="sendIt();">결재상신</button></td></tr>
+<button type="button" name="approvalUpload" onclick="sendIt();">양식 생성</button></td></tr>
 
 </table>
 
