@@ -75,9 +75,20 @@ function sendIt(){
 	f.content.value = str;
 	f.action = "<%=cp%>/board/created_ok.action";
 	f.submit();
+	window.opener.location.reload();
+	window.close();
 	 
 
 }
+
+function redirect(){
+	
+	window.opener.location.reload();
+	window.close();
+	
+	
+}
+
 
 </script>
 
@@ -89,7 +100,7 @@ function sendIt(){
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
 		<td colspan="3" style="width: 1572px; letter-spacing: 5px; font-size: 20px; 
-			right: 100px;" align="center">공지사항	
+			right: 100px;" align="center">
 		</td>	
 	</tr>
 	
@@ -214,7 +225,7 @@ function sendIt(){
 			<input type="button" value="올리기" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="sendIt();"/>
 			<input type="button" value="취소" class="btn2"  style="background: #00D8FF; color: #FFFFFF;"
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
+				onclick="redirect();"/>
 		</td>
 		<td width="5"></td>	
 	</tr>
