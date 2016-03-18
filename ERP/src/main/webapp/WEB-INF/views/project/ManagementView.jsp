@@ -90,12 +90,6 @@ $(document).ready(function(){
 
 
 
-function buseoManagement(){
-	
-	window.open("buseoManagement","","width=300px,height=580px");
-	
-}
-
 function sendIt() {
 	
 	var url = "<%=cp%>/memberList";
@@ -270,8 +264,7 @@ function sendIt() {
 					<img align="middle" src="/erp/resources/image/find.png" onclick="sendIt();">
 				</span>
 				
-				<div style="float: left;height: 25px" class="button" onclick="javascript:buseoManagement();">부서관리</div>		
-				<div class="button" style="float: left;height: 25px;margin-left: 10px;" onclick="javascript:location.href='<%=cp%>/join.action';">사원등록</div>			
+		
 			</div>
 			
 			<div id="memberList" style="padding-top :130px;">

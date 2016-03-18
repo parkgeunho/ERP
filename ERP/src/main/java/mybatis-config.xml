@@ -10,10 +10,16 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 	
 
 	<properties>
+
+
+
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
-		<property name="url" value="jdbc:oracle:thin:@192.168.220.128:1521:orcl"/>
-		<property name="username" value="KBL"/>
-		<property name="password" value="K123"/>
+
+
+		<property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys"/>		
+
+		<property name="username" value="SUZI"/>
+		<property name="password" value="A123"/>
 	</properties>
 
 
@@ -34,14 +40,17 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
    
    <mappers>
 
-
-
 		
       <mapper resource="com/exe/board/BoardMapper.xml"/>
+
+      <mapper resource="com/exe/insa/InsaMapper.xml"/>      <mapper resource="com/exe/member/memberMapper.xml"/>
+      <mapper resource="com/exe/insa/ListMapper.xml"/>
+
       <mapper resource="com/exe/insa/InsaMapper.xml"/>
       <mapper resource="com/exe/member/memberMapper.xml"/>
       <mapper resource="com/exe/insa/ListMapper.xml"/>
       <mapper resource="com/exe/board/BoardFileMapper.xml"/> 
+
 
 
 

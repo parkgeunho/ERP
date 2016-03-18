@@ -25,7 +25,7 @@
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
-		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center">공&nbsp;지&nbsp;사&nbsp;항		
+		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center">공&nbsp;지&nbsp;사&nbsp;항	
 		</td>	
 	</tr>
 	
@@ -138,14 +138,14 @@
 	
 	<tr style="height: 30px;">
 		<td style="width: 1572px;" align="right">			
-			<input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';">
+			<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
+				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
 				
 			<input type="button" value="수정" class="btn2" style="background: #00D8FF; color: white;"
-				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
+				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">	
 			
 			<input type="button" value="삭제" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
+				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">
 		
 		</td>
 	</tr>

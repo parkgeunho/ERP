@@ -44,7 +44,7 @@ public class BoardFileController {
 			String fileExt = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 			String saveFileName = filedto.getBoardNum() + filedto.getSaveFileName() + fileExt;
 			String originalFileName = path + File.separator + saveFileName;
-			
+			String fullFileName = saveFileName + fileExt;
 			
 			//폴더에 업로드			
 			f = new File(originalFileName);

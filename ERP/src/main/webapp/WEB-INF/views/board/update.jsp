@@ -66,9 +66,17 @@ function sendIt(){
 	f.content.value = str;
 	f.action = "<%=cp%>/board/update_ok.action";
 	f.submit();
-	
+	window.opener.location.reload();
+	window.close();
 	
 
+}
+
+function redirect(){	
+	
+	window.close();
+	
+	
 }
 
 </script>
@@ -215,7 +223,7 @@ function sendIt(){
 			<input type="button" value="수정하기" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="sendIt();"/>
 			<input type="button" value="수정취소" class="btn2"  style="background: #00D8FF; color: white;"
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
+				onclick="redirect()"/>
 			
 			
 			

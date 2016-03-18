@@ -9,7 +9,20 @@
 <link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
 <link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
 
+
 <script type="text/javascript">
+
+
+function openNewWindow(listNum) { 
+	open ("board/created.action?listNum="+listNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
+
+	}
+function article(listNum,boardNum) { 
+	
+	
+	open ("board/article.action?listNum="+listNum+"&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
+	}
+
 
 	function sendIt(){
 		
@@ -27,7 +40,13 @@
 <DIV class="buseo">
 ${LDTO.boardName}
 </DIV>		
-		
+
+
+
+
+
+
+
 <table border="0" align="center" cellpadding="0" cellspacing="0">		
 	
 	<tr style="height: 30px">
@@ -48,9 +67,13 @@ ${LDTO.boardName}
 			
 		</td>
 		<td style="width: 72px;" align="center">
-		<img alt="" src="/erp/resources/boardimage/pencils002.png" style="width: 20px; height: " onclick="javasctipt:location.href='<%=cp%>/board/created.action?listNum=${listNum }';">
-			<!-- <input type="button" value="작성" class="btn2" onclick=""> -->
-		</td>	
+		<a target="_blank" title="글쓰기">
+
+		  <img alt="" src="/erp/resources/boardimage/pencils002.png" onclick="javascript:openNewWindow(${listNum});" style="width: 20px;">
+			 
+	   </a> 
+		<!-- onclick="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
+		</td>
 		
 	</tr>
 	
@@ -85,7 +108,7 @@ ${LDTO.boardName}
 	<tr style="height: 25px;">
 		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
 		<td style="width: 922px;" class="subject">
-			<a href="${articleUrl}&boardNum=${dto.boardNum}">
+			<a href="#" onclick="article(${listNum},${dto.boardNum })">
 				${dto.subject }</a></td>
 		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
 		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
