@@ -59,7 +59,7 @@ $(document).ready(function(){
 </head>
 <body>
 
-<div style="width:1840px; height: 807px;">
+<div style="width:100%; height: 807px;">
 
 
 <!-- 왼쪽 첫번재 div -->
