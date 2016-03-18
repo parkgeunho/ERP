@@ -82,7 +82,7 @@ public class ListDAO {
 	}
 	
 	public void boardListDelete(int listNum){
-		sessionTemplate.delete("com.exe.buseoControl.boardListDelete", listNum);
+		sessionTemplate.delete("com.exe.buseoControl.boardDelete", listNum);
 	}
 	
 	

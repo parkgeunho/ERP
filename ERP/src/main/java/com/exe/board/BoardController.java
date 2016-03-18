@@ -3,13 +3,13 @@ package com.exe.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Member;
+
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +54,7 @@ public class BoardController {
 	      
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
 
-		
+		response.setCharacterEncoding("UTF-8");
 		
 		
 		ListDTO lDTO = listDAO.readData(listNum);
@@ -69,7 +69,7 @@ public class BoardController {
 		 
 		  
 		  if(null!=check){
-			  read = lDTO.getBuseoR().split(",");
+			  read = lDTO.getBuseoW().split(",");
 				
 			  Collections.addAll(Rlist, read);
 			  
@@ -109,24 +109,24 @@ public class BoardController {
 		 
 	      if(!buseoCheck && !memberCheck){
 			  
-				 return "read-error";
-				 /* try {
+				 
+				  try {
 
 			            PrintWriter writer = response.getWriter();
 
 			            writer.println("<script type='text/javascript'>");
 
-			            writer.println("alert('권한없단다~');");
-
-			            writer.println("history.go()");
-
+			            writer.println("alert('쓰기권한이없습니다.');");
+			            writer.println("window.close();");
 			            writer.println("</script>");
 
 			            writer.flush();
+			            
+			            
 
 			         } catch (Exception e) {
 			         
-			         }*/
+			         }
 				  
 				  
 			  }
@@ -275,8 +275,13 @@ public class BoardController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      
-	      mav.setViewName("/board/article");
+	      String listNum = request.getParameter("listNum");
 	      
+	      
+	    
+	      
+	      mav.setViewName("/board/article");
+	      mav.addObject("listNum",listNum);
 	      mav.addObject("dto", dto);
 	      mav.addObject("param", param);
 	      mav.addObject("lineSu", lineSu);
@@ -348,7 +353,7 @@ public class BoardController {
 	         
 	     
 	          writer.println("window.opener.location.reload();");
-	          writer.println("	window.close();");
+	          writer.println("window.close();");
 	          writer.println("</script>");
 	
 	          writer.flush();

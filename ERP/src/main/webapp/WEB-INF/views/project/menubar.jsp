@@ -83,8 +83,11 @@ $(document).ready(function(){
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-	
-	
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 40%;float: left; margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+		
 	<div style="float: left;">
 	
 	</div>
@@ -92,6 +95,7 @@ $(document).ready(function(){
 	</div>
 	
 	<div style="font-size: 8pt; border-bottom: 2px solid orange; height: 10px; background-color: white;">
+	
 	<div  id="b" style="width: 50px; background-color: orange; float: right; margin-right: 10px;border-top-left-radius : 5px;
 	border-top-right-radius : 5px;" align="center">▽</div>
 	
