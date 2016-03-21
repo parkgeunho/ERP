@@ -80,25 +80,25 @@ $('[id^="ckMem-"]').click(function(){
 					<div style="border-bottom: 1px solid;height: 30px;"></div>
 					<div style="float: left; width: 200px; padding-top: 10px; ">
 					
-						<div style="height: 35px; border-bottom: 1px solid;" >게시판명</div>
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;" >게시판명</div>
 					
 					</div>
 					
 					
 					<div style="float: left; padding-top: 10px; width: 540px;">
-						<div style="height: 35px; border-bottom: 1px solid;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
 						<input type="hidden" name="num" value="${boardData.listNum }">
 						</div>
 					
 					</div>
 					
 						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
-							<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid; line-height: 50px;" align="center">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; solid; line-height: 50px;" align="center">
 							
 								<div style="width: 229px;float: left;"> 
 								<label style="font: bolder; font-size: 20px;">리스트</label> 	
 								</div>
-								<div style="width: 120px; float: left; border-left: 1px solid;" align="center">
+								<div style="width: 120px; float: left; border-left: 1px solid #BDBDBD;" align="center">
 									<label style="font: bolder; font-size: 20px;">권한&삭제</label>
 								</div>
 							</div>
@@ -163,7 +163,7 @@ $('[id^="ckMem-"]').click(function(){
 						
 						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
 							<div>
-								<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; line-height: 50px;" align="center">
+								<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
 									<label style="font: bolder; font-size: 20px;">정 보</label> 	
 								</div>
 								<div style="height: 210px; width: 350px;">
@@ -178,9 +178,9 @@ $('[id^="ckMem-"]').click(function(){
 								<br/>
 								</div>
 								
-								<div style="height: 210px; width: 350px; border-top: 1px solid;" align="left">
+								<div style="height: 210px; width: 350px; border-top: 1px solid #BDBDBD;" align="left">
 									
-									<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; line-height: 50px;" align="center">
+									<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
 										<label style="font: bolder; font-size: 20px;">권한 수정</label> 	
 									</div>
 									
