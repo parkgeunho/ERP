@@ -50,8 +50,8 @@
 	
 	<tr style="height: 15px">
 		<td style="width: 200px;" align="center">첨부파일</td>
-		<td style="width: 300px;"></td>
-		<td style="width: 1072px;">&nbsp;<a href="download.action">
+		<td style="width: 300px;">${fdto.originalFileName}</td>
+		<td style="width: 1072px;">&nbsp;<a href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
 			<img alt="" src="/erp/resources/boardimage/down002.png"></a>&nbsp;&nbsp;  </td>
 	</tr>
 	
