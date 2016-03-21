@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%-- <%@ taglib uri="http://ckeditor.com" prefix="ckeditor" %> --%>
 <%		
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -75,9 +76,20 @@ function sendIt(){
 	f.content.value = str;
 	f.action = "<%=cp%>/board/created_ok.action";
 	f.submit();
+	window.opener.location.reload();
+	window.close();
 	 
 
 }
+
+function redirect(){
+	
+	window.opener.location.reload();
+	window.close();
+	
+	
+}
+
 
 </script>
 
@@ -85,11 +97,11 @@ function sendIt(){
 <body style="font-style: 나눔고딕코딩;">
 
 
-<form action="created.action" name="myForm" method="post" enctype="multipart/form-data">
+<form action="" name="myForm" method="post" enctype="multipart/form-data">
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
 		<td colspan="3" style="width: 1572px; letter-spacing: 5px; font-size: 20px; 
-			right: 100px;" align="center">공지사항	
+			right: 100px;" align="center">
 		</td>	
 	</tr>
 	
@@ -150,10 +162,16 @@ function sendIt(){
     {
       //width : '620px',  // 입력창의 넓이, 넓이는 config.js 에서 % 로 제어
       height : '400px',  // 입력창의 높이
-      startupFocus : false
+      startupFocus : false,
+      uiColor : '#00D8FF' 
+     
     }
   );
 </script>
+
+
+
+
 		</td>
 	</tr>    
 </table>
@@ -170,7 +188,7 @@ function sendIt(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 50px;" align="left">&nbsp;&nbsp;&nbsp;
-		<input type="file" name="upload" id="file">
+		<input type="file" name="file" id="file">
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		
@@ -214,7 +232,7 @@ function sendIt(){
 			<input type="button" value="올리기" class="btn2" style="background: #00D8FF; color: white;"
 				onclick="sendIt();"/>
 			<input type="button" value="취소" class="btn2"  style="background: #00D8FF; color: #FFFFFF;"
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"/>
+				onclick="redirect();"/>
 		</td>
 		<td width="5"></td>	
 	</tr>

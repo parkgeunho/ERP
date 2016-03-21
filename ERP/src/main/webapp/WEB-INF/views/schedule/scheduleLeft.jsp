@@ -1,56 +1,17 @@
-<%@page import="java.util.Calendar"%>
+<%@ page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-
-	Calendar cal = Calendar.getInstance();
-	
-	//오늘 날짜 구하기
-	int nowYear = cal.get(Calendar.YEAR);
-	int nowMonth = cal.get(Calendar.MONTH)+1;
-	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-	
-	String strYear = request.getParameter("year");
-	String strMonth = request.getParameter("month");
-	
-	int year = nowYear;
-	int month = nowMonth;
-	
-	if(strYear != null)
-		year = Integer.parseInt(strYear);
-	
-	if(strMonth != null)
-		month = Integer.parseInt(strMonth);
-	
-	int preYear = year, preMonth = month-1;
-	
-	if(preMonth<1){
-		preYear = year-1;
-		preMonth = 12;
-	}
-	
-	int nextYear = year, nextMonth = month+1;
-	
-	if(nextMonth>12){
-		
-		nextYear = year+1;
-		nextMonth=1;
-	}
-	
-	cal.set(year, month-1, 1);
-	
-	int startDay = 1;
-	int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-	
-	int week = cal.get(Calendar.DAY_OF_WEEK);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="/erp/resources/schedule/list.css" type="text/css"/>
 
 	<style type="text/css">
 		
@@ -64,9 +25,9 @@
 	
 	</style>
  
- <script type="text/javascript">
+<script type="text/javascript">
 
-	function sel() {
+	<%-- function sel() {
 		
 		var f = document.myform;
 	
@@ -89,98 +50,92 @@
 			
 			if (smonth[i].value == <%=month%>)
 				smonth[i].selected = true; 
-		}	
-	}
+		}
+	} --%>
 	
-	function calendar() {
+	/* function calendar() {
 		var f = document.myform;
 		f.submit();
+	} */
+	
+	$(document).ready(function(){
+		
+		$('[id^="fold-"]').click(function(){
+			
+			var src = ($(this).attr('src')=='/erp/resources/schedule/image/minus.png') ?'/erp/resources/schedule/image/plus.png':'/erp/resources/schedule/image/minus.png';
+		     $(this).attr('src',src);
+			
+			var obj = $('.'+ this.id);
+			
+			if(obj.css('display')=='none')
+				obj.show();
+			else
+				obj.hide();
+		});
+	});
+	
+	$(document).ready(function(){
+		
+		$("#preCal").click(function(){
+			
+			var params = "year=" + $("#year").val() + "&month=" + $("#month").val();
+			
+			$.ajax({
+				
+				type : "POST",
+				url  : "preCal",
+				data : params,
+				success : function(args){
+					$("#leftCal").html(args);
+				},
+				error : function(e){
+					alert(e.responseText);
+				}
+			});
+		});
+	});
+	
+	$(function(){
+		leftCal();
+	});
+	
+	function leftCal(){
+
+		var url = "preCal";
+		
+		$.post(url,function(args){
+			
+			$("#leftCal").html(args);
+		});
+		
+		$("#leftCal").show();
 	}
 
 </script>
+
 </head>
 
 <body onload="sel()">
 
-<br/><br/>
+<span id="leftCal" style="display: none;"></span>
 
-<form method="get" name="myform">
-
-<table align="center" width="210" cellpadding="2" cellspacing="1">
-
-	<tr>
-		<td align="center">
-		
-		<a href="calendar?year=<%=nowYear%>&month=<%=nowMonth%>">
-		<img src="/erp/resources/schedule/image/today.jpg" width="25" height="17" align="left"></a>
-		
-		<a href="calendar?year=<%=preYear%>&month=<%=preMonth%>">
-		<img src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"></a>	
-		
-			<select name="year" onchange="calendar()">
-			</select>년
-			
-			<select name="month" onchange="calendar()">
-			</select>월
-		
-		<a href="calendar?year=<%=nextYear%>&month=<%=nextMonth%>">
-		<img src="/erp/resources/schedule/image/right.jpg" width="20" height="17" border="0"></a>
-		</td>
-	</tr>
-</table>
-
-</form>
-
-<table align="center" width="210" cellpadding="0" cellspacing="1" bgcolor="#cccccc">
-
-	<tr>
-		<td bgcolor="#e6e4e6" align="center"><font color="red">일</font></td>
-		<td bgcolor="#e6e4e6" align="center">월</td>
-		<td bgcolor="#e6e4e6" align="center">화</td>
-		<td bgcolor="#e6e4e6" align="center">수</td>
-		<td bgcolor="#e6e4e6" align="center">목</td>
-		<td bgcolor="#e6e4e6" align="center">금</td>
-		<td bgcolor="#e6e4e6" align="center"><font color="blue">토</font></td>
-	</tr>
-
-	<%
-		int newLine = 0;
-	
-		out.print("<tr height='20'>");
-		
-		for(int i=1; i<week; i++){
-			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
-			newLine++;
-		}
-		
-		for(int i=startDay; i<=endDay; i++){
-			
-			String fontColor = (newLine==0)?"red":(newLine==6)?"blue":"black";
-			
-			String bgColor = (nowYear==year)&&(nowMonth==month)&&(nowDay==i)?"#e6e4e6":"#ffffff";
-			
-			out.print("<td align='center' bgcolor='" + bgColor + "'><font color='" + fontColor + "'>" + i + "</font></td>");
-			//<td align='center' bgcolor='#e6e4e6'><font color='black'>5</font></td>
-			
-			newLine++;
-			
-			if(newLine==7 && i!=endDay){
-				
-				out.print("</tr><tr height='20'>");
-				newLine=0;
-			}
-		}
-		
-		while(newLine>0 && newLine<7){
-			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
-			newLine++;
-		}
-		
-		out.print("</tr>");
-	%>
-</table>
+	<div>
+		<dl>
+			<dd><img id="preCal" src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"/>	
+				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>&nbsp;일정</dd>
+			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">나의일정</font></a></dd>
+			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">그룹일정</font></a></dd>
+			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">전사일정</font></a></dd>
+			<dd>할일작성</dd>
+			<dd>회의실예약</dd>			
+		</dl>
+	</div>	
 
 </body>
 </html>

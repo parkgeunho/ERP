@@ -410,7 +410,7 @@ public class InsaController {
 				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
 			}else if(mDto.getDepth2().equals("no") || mDto.getDepth2()=="no"){
-	;
+	
 				mDto.setDepth2("");
 
 			}

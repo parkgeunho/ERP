@@ -1,14 +1,18 @@
 package com.exe.board;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Member;
+
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
-import java.util.Iterator;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +24,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exe.insa.ListDAO;
@@ -32,7 +39,7 @@ import com.exe.member.MemberDTO;
 public class BoardController {
 	
 	@Autowired
-	@Qualifier("BoardDAO")
+	@Qualifier("boardDAO")
 	BoardDAO dao;
 	
 	@Autowired
@@ -46,25 +53,179 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
-	
+
+	/*@Autowired
+	@Qualifier("BoardFileDAO")
+	BoardFileDAO boardfileDAO;*/
+
+	@Autowired
+	@Qualifier("boardFileDAO")
+	BoardFileDAO boardfileDAO;
+
 	
 	@RequestMapping(value="/board/created.action")
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
+
+
+		response.setCharacterEncoding("UTF-8");
+
+	
+		
+		ListDTO lDTO = listDAO.readData(listNum);
 	      
+	  	HttpSession session = request.getSession();
+	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+		  
+		  String read[] = null;
+		  List<String> Rlist = new ArrayList<String>();
+		  String check = lDTO.getBuseoW();
+		  boolean buseoCheck = false;
+		 
+		  
+		  if(null!=check){
+			  read = lDTO.getBuseoW().split(",");
+				
+			  Collections.addAll(Rlist, read);
+			  
+			  buseoCheck = Rlist.contains(mDTO.getDepth1());
+			  
+			  if(!buseoCheck){
+				  
+				  buseoCheck = Rlist.contains(mDTO.getDepth2());
+				  
+				  if(!buseoCheck){
+					  buseoCheck = Rlist.contains(mDTO.getDepth3());
+					  
+					  if(!buseoCheck){
+						  buseoCheck = Rlist.contains(mDTO.getDepth4());
+						  
+						  if(buseoCheck){
+							  
+							  buseoCheck = Rlist.contains(mDTO.getDepth5());
+						  }
+					  }
+				  }
+			  }
+			  
+		  }
+		  	
+		  Rlist.removeAll(Rlist);
+		  read = lDTO.getMemberW().split(",");
+		  Collections.addAll(Rlist, read);
+		  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
+		  
+
+		 
+		  System.out.println("쓰기권한확인 사람" + memberCheck);
+	      System.out.println("쓰기권한 부서" + buseoCheck);
+		 
+		 
+		 
+	      if(!buseoCheck && !memberCheck){
+			  
+				 
+				  try {
+
+			            PrintWriter writer = response.getWriter();
+
+			            writer.println("<script type='text/javascript'>");
+
+			            writer.println("alert('쓰기권한이없습니다.');");
+			            writer.println("window.close();");
+			            writer.println("</script>");
+
+			            writer.flush();
+			            
+			            
+
+			         } catch (Exception e) {
+			         
+			         }
+				  
+				  
+			  }
+		  
+
 		request.setAttribute("listNum", listNum);
-	      return "board/created";
+	      return "board/created";    
+	      
+	      
 	   }
+	
+	/*@RequestMapping(value="")*/
+	
+	
+	
+	
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	   public String created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
-	     
-		 int listNum = Integer.parseInt(request.getParameter("listNum"));
+	   public String created_ok(BoardFileDTO fdto,BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
+		 String ckNum = request.getParameter("listNum");
+		 int listNum = Integer.parseInt(ckNum);
 	      int maxNum = dao.getMaxNum();
-	      	     
+	      HttpSession session = request.getSession();
+	      
+	      MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
+	      
+	      System.out.println(mdto.getId());
+	      
+	      
+	      
 	      dto.setBoardNum(maxNum + 1);	  
 	   	  dto.setListNum(listNum);
+	   	  dto.setId(mdto.getId());
+	   	  
+	   	  //디비 저장
 	      dao.insertData(dto);
+	      
+	      //파일 저장경로
+	      String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+	      
+	      //파일 받아옴
+	      MultipartFile file = request.getFile("file");
+	      
+	      //경로로 폴더 생성
+	      File f = new File(path);
+			if(!f.exists())
+				f.mkdirs();
+			
+			
+		  //파일 이름 만들고 물리적 위치에 파일업로드
+			if(file!=null && file.getSize()>0){
+				
+				//save 파일 이름 만들어주는 부분
+				String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+				String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
+						.getInstance()) + fileExt;
+				String fullFileName = path + File.separator + newFileName;
+				
+				fdto.setOriginalFileName(file.getOriginalFilename());
+				fdto.setSaveFileName(newFileName);
+				
+				
+				//폴더에 업로드
+				f = new File(fullFileName);
+				file.transferTo(f);
+				
+				//파일 db저장
+				fdto.setBoardNum(dto.getBoardNum());
+				boardfileDAO.insertData(fdto);
+			}
+			
+	      
+	      	     
+	  
+	      
+	      
+	      
+	      
+	      session.setAttribute("cklistNum", ckNum);
+	      
+	      
+	      
+	      
+	      
 	      
 	      return "redirect:/board/list.action";
 	   }
@@ -176,12 +337,26 @@ public class BoardController {
 	      
 	      ModelAndView mav = new ModelAndView();
 	      
-	      mav.setViewName("/board/article");
+	      String listNum = request.getParameter("listNum");
+	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
+
+	      
+	      HttpSession session = request.getSession();
+	      session.setAttribute("cklistNum", listNum);
+	      
+	      BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
+	      
+	      
+
+	      mav.setViewName("/board/article");
+	      mav.addObject("listDTO",listDTO);
+	      mav.addObject("listNum",listNum);
 	      mav.addObject("dto", dto);
 	      mav.addObject("param", param);
 	      mav.addObject("lineSu", lineSu);
 	      mav.addObject("pageNum", pageNum);
+	      mav.addObject("fdto",fdto);
 	      
 	     return mav; 	      
 	      
@@ -212,7 +387,7 @@ public class BoardController {
 	 
 	 
 	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
@@ -223,75 +398,106 @@ public class BoardController {
 		  
 		  dao.updateData(dto);
 	  
-		  return "redirect:/board/list.action?pageNum=" + pageNum;
+		  /*return "redirect:/board/list.action?pageNum=" + pageNum;*/
 		  
 	  }
 	  
 	  @RequestMapping(value="/board/delete.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-		  String pageNum = request.getParameter("pageNum");
+		/*  String pageNum = request.getParameter("pageNum");*/
+		  
+			  
+		  
 	  
 		  dao.deleteData(boardNum);
+		  
+		  
+		  
+		   try {
+	
+	          PrintWriter writer = response.getWriter();
+	
+	          writer.println("<script type='text/javascript'>");
+	
+	         
+	     
+	          writer.println("window.opener.location.reload();");
+	          writer.println("window.close();");
+	          writer.println("</script>");
+	
+	          writer.flush();
+	
+	       } catch (Exception e) {
+	       
+	       }
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 	  
-		  return "redirect:/board/list.action?pageNum=" + pageNum;
+		/*  return "redirect:/board/list.action?pageNum=" + pageNum;*/
 		  
 	 
 	  }
 	  
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
-		public String boardMain(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
-		  	
+		public String boardMain(HttpServletRequest request,HttpServletResponse response,String ckpoint) throws IOException {
+		  			  
 		  	HttpSession session = request.getSession();
 			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-			request.setAttribute("LoginDTO", LoginDTO);
-		  
+			request.setAttribute("LoginDTO", LoginDTO);		  
 		  	
 			List<ListDTO> boardlist = listDAO.boardList();
 			List<ListDTO> parent = listDAO.getGroup();
 			List<ListDTO> depths = listDAO.getDepth();
-			int maxNum = listDAO.maxNum();
-			
-			
+			int maxNum = listDAO.maxNum();			
   
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
 			request.setAttribute("boardlist", boardlist);
-			  
-			
-			
 
 		  return "boardMain";
 	  }
 	  @RequestMapping(value = "/ajaxBoardList", method = {RequestMethod.GET,RequestMethod.POST})
-		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+		public String ajaxBoardList(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		  
-		  
+		  HttpSession session = request.getSession();
 		  		String cp = request.getContextPath();
-		      
+		  		response.setCharacterEncoding("UTF-8");
 		      String pageNum = request.getParameter("pageNum");
 		      int currentPage = 1;
 		      
 		      String num = request.getParameter("listNum");
-			  String LoginNum = request.getParameter("LoginNum");
+			  String cklistNum = (String) session.getAttribute("cklistNum");
 			  
 			  int listNum = 1;
 		      if(num!=null){
 		    	  listNum = Integer.parseInt(num);  
 		      }
+		      if(cklistNum!=null){
+		    	  listNum = Integer.parseInt(cklistNum);
+		      }
 			  
-			  ListDTO lDTO = listDAO.readData(listNum);
-		      System.out.println("번호확인" +LoginNum);
-		  	HttpSession session = request.getSession();
+
+		      
+		      session.removeAttribute("cklistNum");
+			ListDTO lDTO = listDAO.readData(listNum);
+
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
 			  
 			  String read[] = null;
 			  List<String> Rlist = new ArrayList<String>();
 			  String check = lDTO.getBuseoR();
 			  boolean buseoCheck = false;
-			  boolean memberCheck = false;
+			 
 			  
 			  if(null!=check){
 				  read = lDTO.getBuseoR().split(",");
@@ -312,7 +518,7 @@ public class BoardController {
 							  
 							  if(buseoCheck){
 								  
-								  buseoCheck = Rlist.contains(mDTO.getDepth4());
+								  buseoCheck = Rlist.contains(mDTO.getDepth5());
 							  }
 						  }
 					  }
@@ -321,33 +527,34 @@ public class BoardController {
 			  }
 			  
 		
-			  
+			  Rlist.removeAll(Rlist);
 			  read = lDTO.getMemberR().split(",");
 			  Collections.addAll(Rlist, read);
-			  
-			  
-			  for(int i = 0 ;i>100 ;i++){
-				  
-				  System.out.println("read"+ read[i]);
-			  }
-			  
-			  System.out.println("read"+ read);
-			  memberCheck = Rlist.contains(mDTO.getNum());
-			  System.out.println("buseoCheck값" + buseoCheck);
-			  System.out.println("memberCheck값"+ memberCheck);
-			  
+
+			  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
+			 
+			  System.out.println("memberCheck" + memberCheck);
+		      System.out.println("buseoCheck" + buseoCheck);
+			 
 			  if(!buseoCheck && !memberCheck){
-				  
-				  System.out.println("buseoCheck값" + buseoCheck);
-				  System.out.println("memberCheck값"+ memberCheck);
-				  try {
+				  return "read-error";
+				
+				 /* try {
+>>>>>>> refs/remotes/origin/master
 			            
 			            PrintWriter writer = response.getWriter();
 
 			            writer.println("<script type='text/javascript'>");
 
+<<<<<<< HEAD
 			            writer.println("alert('읽기권한이없습니다.');");
 			            
+=======
+			            writer.println("alert('권한없단다~');");
+
+			            writer.println("history.go()");
+
+>>>>>>> refs/remotes/origin/master
 			            writer.println("</script>");
 
 			            writer.flush();
@@ -356,33 +563,15 @@ public class BoardController {
 			            
 			         } catch (Exception e) {
 			         
-			         }
+			         }*/
+				  
+				  
+				  
+				  
+				  
+				  
 			  }
-			  
-			  
-			  
-			  
-			
-				
-			
-						
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
+
 			  
 			  
 			  
@@ -413,7 +602,7 @@ public class BoardController {
 		      
 		      
 		      int dataCount = dao.getDataCountTest(searchKey, searchValue, listNum);
-		      System.out.println("카운트 수" + dataCount);
+		      
 		      int numPerPage = 20;
 		      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 		      
@@ -453,8 +642,13 @@ public class BoardController {
 		      
 		      request.setAttribute("listNum", listNum);
 
-/*		      request.setAttribute("LDTO", lDTO);*/
-
+		      request.setAttribute("LDTO", lDTO);
+		      
+		      
+		      request.setAttribute("buseoCheck", buseoCheck);
+		      request.setAttribute("memberCheck", memberCheck);
+		      
+		    
 		      request.setAttribute("lists", lists);
 		      request.setAttribute("pageIndexList", pageIndexList);
 		      request.setAttribute("dataCount", dataCount);
@@ -462,6 +656,21 @@ public class BoardController {
 		      
 		      return "board/list";
 		  
+	  }
+	  
+	  @RequestMapping(value = "/download.action", method = {RequestMethod.GET,RequestMethod.POST})
+		public String download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		  
+		 int boardNum= Integer.parseInt(request.getParameter("boardNum"));
+		 int listNum= Integer.parseInt(request.getParameter("listNum"));
+		 
+		 BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
+		 
+		 
+		  
+		  
+		  
+		  return "redirect:/board/article.action?boardNum="+boardNum+"&listNum="+listNum;
 	  }
 		  
 		  

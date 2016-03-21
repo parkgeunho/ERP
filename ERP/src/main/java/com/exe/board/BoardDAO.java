@@ -118,8 +118,12 @@ public class BoardDAO {
 		      return result;
 		      
 		   }
-	   
-	
+	   	
+	   public List<BoardDTO> getNotice(){
+		   List<BoardDTO> lists = sessionTemplate.selectList("com.exe.board.BoardMapper.notice");
+		   return lists;
+		   
+	   }
 	
 	
 	
