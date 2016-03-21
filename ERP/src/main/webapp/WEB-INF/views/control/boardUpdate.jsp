@@ -92,14 +92,14 @@ $('[id^="ckMem-"]').click(function(){
 					
 					</div>
 					
-						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
+						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; border: 1px solid #D5D5D5; ">
 							<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; solid; line-height: 50px;" align="center">
 							
 								<div style="width: 229px;float: left;"> 
 								<label style="font: bolder; font-size: 20px;">리스트</label> 	
 								</div>
 								<div style="width: 120px; float: left; border-left: 1px solid #BDBDBD;" align="center">
-									<label style="font: bolder; font-size: 20px;">권한&삭제</label>
+									<label style="font: bolder; font-size: 20px;">권한 / 삭제</label>
 								</div>
 							</div>
 							<div>
@@ -161,7 +161,7 @@ $('[id^="ckMem-"]').click(function(){
 							</div>
 						</div>
 						
-						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
+						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 35px; border: 1px solid #D5D5D5;" id="boardSide">
 							<div>
 								<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
 									<label style="font: bolder; font-size: 20px;">정 보</label> 	
