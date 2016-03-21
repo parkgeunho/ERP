@@ -1,13 +1,16 @@
 package com.exe.board;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 
 import java.util.List;
@@ -21,7 +24,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.exe.insa.ListDAO;
@@ -48,9 +53,9 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
-/*	@Autowired
-	@Qualifier("BoardFileDAO")
-	BoardFileDAO boardfileDAO;*/
+	@Autowired
+	@Qualifier("boardFileDAO")
+	BoardFileDAO boardfileDAO;
 	
 	@RequestMapping(value="/board/created.action")
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -149,18 +154,66 @@ public class BoardController {
 	
 	
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	   public void created_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	   public String created_ok(BoardFileDTO fdto,BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
 		 String ckNum = request.getParameter("listNum");
 		 int listNum = Integer.parseInt(ckNum);
 	      int maxNum = dao.getMaxNum();
-	      	     
+	      HttpSession session = request.getSession();
+	      
+	      MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
+	      
+	      System.out.println(mdto.getId());
+	      
+	      
+	      
 	      dto.setBoardNum(maxNum + 1);	  
 	   	  dto.setListNum(listNum);
+	   	  dto.setId(mdto.getId());
+	   	  
+	   	  //디비 저장
 	      dao.insertData(dto);
 	      
+	      //파일 저장경로
+	      String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+	      
+	      //파일 받아옴
+	      MultipartFile file = request.getFile("file");
+	      
+	      //경로로 폴더 생성
+	      File f = new File(path);
+			if(!f.exists())
+				f.mkdirs();
+			
+			
+		  //파일 이름 만들고 물리적 위치에 파일업로드
+			if(file!=null && file.getSize()>0){
+				
+				//save 파일 이름 만들어주는 부분
+				String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+				String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
+						.getInstance()) + fileExt;
+				String fullFileName = path + File.separator + newFileName;
+				
+				fdto.setOriginalFileName(file.getOriginalFilename());
+				fdto.setSaveFileName(newFileName);
+				
+				
+				//폴더에 업로드
+				f = new File(fullFileName);
+				file.transferTo(f);
+				
+				//파일 db저장
+				fdto.setBoardNum(dto.getBoardNum());
+				boardfileDAO.insertData(fdto);
+			}
+			
+	      
+	      	     
+	  
 	      
 	      
-	      HttpSession session = request.getSession();
+	      
+	      
 	      session.setAttribute("cklistNum", ckNum);
 	      
 	      
@@ -168,7 +221,7 @@ public class BoardController {
 	      
 	      
 	      
-	     /* return "redirect:/board/list.action";*/
+	      return "redirect:/board/list.action";
 	   }
 	 
 	 
@@ -285,6 +338,10 @@ public class BoardController {
 	      HttpSession session = request.getSession();
 	      session.setAttribute("cklistNum", listNum);
 	      
+	      BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
+	      
+	      
+	      
 	      mav.setViewName("/board/article");
 	      mav.addObject("listDTO",listDTO);
 	      mav.addObject("listNum",listNum);
@@ -292,6 +349,7 @@ public class BoardController {
 	      mav.addObject("param", param);
 	      mav.addObject("lineSu", lineSu);
 	      mav.addObject("pageNum", pageNum);
+	      mav.addObject("fdto",fdto);
 	      
 	     return mav; 	      
 	      
@@ -595,6 +653,21 @@ public class BoardController {
 		      
 		      return "board/list";
 		  
+	  }
+	  
+	  @RequestMapping(value = "/download.action", method = {RequestMethod.GET,RequestMethod.POST})
+		public String download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		  
+		 int boardNum= Integer.parseInt(request.getParameter("boardNum"));
+		 int listNum= Integer.parseInt(request.getParameter("listNum"));
+		 
+		 BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
+		 
+		 
+		  
+		  
+		  
+		  return "redirect:/board/article.action?boardNum="+boardNum+"&listNum="+listNum;
 	  }
 		  
 		  
