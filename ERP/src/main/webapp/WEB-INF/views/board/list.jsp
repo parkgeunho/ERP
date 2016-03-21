@@ -31,6 +31,7 @@ function article(listNum,boardNum) {
 		f.action = "<%=cp%>/board/list.action";
 		f.submit();
 		
+		
 	}
 
 
@@ -43,16 +44,9 @@ ${LDTO.boardName}
 
 
 
-
-
-
-
-<table border="0" align="center" cellpadding="0" cellspacing="0">		
+<table border="0" align="center" cellpadding="0" cellspacing="15" >		
 	
-	<tr style="height: 30px">
-	
-			
-			
+	<tr style="height: 30px">			
 		<td style="width: 1500px" align="left" colspan="6">
 		<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
@@ -61,41 +55,44 @@ ${LDTO.boardName}
 					<option value="content">내용</option>
 				</select>	
 						<input type="text" name="searchValue" class="textField" style="width: 150px; height: 20px;">
-						<img alt="" src="/erp/resources/image/find.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img  title="찾기" alt="" src="/erp/resources/boardimage/search006.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <input type="button" value="상세"  onclick="" >	 -->
 			</form>	
 			
 		</td>
 		<td style="width: 72px;" align="center">
 		<a target="_blank" title="글쓰기">
-
-		  <img alt="" src="/erp/resources/boardimage/pencils002.png" onclick="javascript:openNewWindow(${listNum});" style="width: 20px;">
-			 
-	   </a> 
+		  <img alt="" src="/erp/resources/boardimage/pencils001.png" onclick="javascript:openNewWindow(${listNum});" style="width: 20px;"></a>
 		<!-- onclick="javascript:location.href='<%=cp%>/board/created.action?listNum=${listNum}';" -->
 		</td>
 		
 	</tr>
+</table>
+
+
+<table border="0" align="center" cellpadding="0" cellspacing="0">	
 	
 	<tr style="height: 30px; background-color: #E7E7E7">
-		<td style="width: 100px" align="center" class="boardNum">No</td>
-		<td style="width: 922px;" align="center" class="subject">제목
+		<td style="width: 100px; border-right: 1px solid" align="center" class="boardNum">No</td>
+		
+		<td style="width: 922px; border-right: 1px solid" align="center" class="subject">제목</td>
+	
+		
+		<td style="width: 150px; border-right: 1px solid" align="center" class="name">작성자
 		</td>
 		
-		<td style="width: 150px;" align="center" class="name">작성자
+		<td style="width: 150px; border-right: 1px solid" align="center" class="created">작성일
 		</td>
 		
-		<td style="width: 150px;" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px;" align="center" class="file">파일		
+		<td style="width: 150px; border-right: 1px solid" align="center" class="file">파일		
 		</td>
 		
 		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
 		</td>		
 	</tr>	
+	
 	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1572px;" colspan="7"></td>
+		<td style="width: 1572px;" colspan="11"></td>
 	</tr>
 </table>
 

@@ -53,9 +53,15 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
+
+	/*@Autowired
+	@Qualifier("BoardFileDAO")
+	BoardFileDAO boardfileDAO;*/
+
 	@Autowired
 	@Qualifier("boardFileDAO")
 	BoardFileDAO boardfileDAO;
+
 	
 	@RequestMapping(value="/board/created.action")
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -334,6 +340,7 @@ public class BoardController {
 	      String listNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
+
 	      
 	      HttpSession session = request.getSession();
 	      session.setAttribute("cklistNum", listNum);
@@ -341,7 +348,7 @@ public class BoardController {
 	      BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
 	      
 	      
-	      
+
 	      mav.setViewName("/board/article");
 	      mav.addObject("listDTO",listDTO);
 	      mav.addObject("listNum",listNum);
@@ -455,7 +462,7 @@ public class BoardController {
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
-			request.setAttribute("boardlist", boardlist);			
+			request.setAttribute("boardlist", boardlist);
 
 		  return "boardMain";
 	  }
