@@ -282,7 +282,7 @@ public class BoardController {
 		    	  listNum = Integer.parseInt(num);  
 		      }
 			  
-		/*	  ListDTO lDTO = listDAO.readData(listNum);
+			  ListDTO lDTO = listDAO.readData(listNum);
 		      System.out.println("번호확인" +LoginNum);
 		  	HttpSession session = request.getSession();
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
@@ -324,9 +324,22 @@ public class BoardController {
 			  
 			  read = lDTO.getMemberR().split(",");
 			  Collections.addAll(Rlist, read);
-			  memberCheck = Rlist.contains(LoginNum);
+			  
+			  
+			  for(int i = 0 ;i>100 ;i++){
+				  
+				  System.out.println("read"+ read[i]);
+			  }
+			  
+			  System.out.println("read"+ read);
+			  memberCheck = Rlist.contains(mDTO.getNum());
+			  System.out.println("buseoCheck값" + buseoCheck);
+			  System.out.println("memberCheck값"+ memberCheck);
 			  
 			  if(!buseoCheck && !memberCheck){
+				  
+				  System.out.println("buseoCheck값" + buseoCheck);
+				  System.out.println("memberCheck값"+ memberCheck);
 				  try {
 			            
 			            PrintWriter writer = response.getWriter();
@@ -334,12 +347,12 @@ public class BoardController {
 			            writer.println("<script type='text/javascript'>");
 
 			            writer.println("alert('읽기권한이없습니다.');");
-
+			            
 			            writer.println("</script>");
 
 			            writer.flush();
 			            
-			            return ajaxBoardList(request, response);
+			            
 			            
 			         } catch (Exception e) {
 			         
@@ -349,7 +362,7 @@ public class BoardController {
 			  
 			  
 			  
-			*/
+			
 				
 			
 						
