@@ -10,7 +10,7 @@
 
 <script language="javascript">
    function openWin(i) {
-    window.open('./approvalCreated?num='+i, '', 'width=1100, height=1080,scroll=yes');
+    window.open('./approvalCreated?num='+i, '', 'width=1000, height=1000,scroll=yes');
     window.close();
    }
 </script>

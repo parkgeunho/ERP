@@ -1,6 +1,7 @@
 package com.exe.approval;
 
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -103,6 +104,24 @@ public class ApprovalController {
 	@RequestMapping(value="/approvalCreated_ok", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalCreated_ok(ApprovalDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
+		response.setCharacterEncoding("UTF-8");
+					
+	/*	int approvalMax = ApprovalDAO.getApprovalMax;
+		
+		dto.setApprovalNum(approvalMax+1);*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return "ok";	
 		
 	}
@@ -115,7 +134,6 @@ public class ApprovalController {
 		return "approval/approvalTest";
 	}	
 	
-	//
 	@RequestMapping(value = "/approvalLine", method=RequestMethod.GET)
 	public String approvalLine(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
@@ -155,8 +173,6 @@ public class ApprovalController {
 		request.setAttribute("parent", parent);
 		request.setAttribute("restDiv",n);
 		request.setAttribute("lists", lists);
-	
-		 
 	
 		return "approval/approvalLine";
 		
@@ -221,7 +237,6 @@ public class ApprovalController {
 		String num = request.getParameter("num");
 		
 		BuseoDTO dto = new BuseoDTO();		
-		BuseoDTO dto2 = new BuseoDTO();
 		
 		int max = 15;
 		
@@ -391,6 +406,42 @@ public class ApprovalController {
 		return "approval/approvalMemberList";
 		
 	}
+	
+	@RequestMapping(value = "/approvalOptionList", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalOptionList(HttpServletRequest request , HttpServletResponse response) throws Exception{
+				
+		String id = request.getParameter("id");
+		id = id.substring(1, id.length()-1);
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto = approvalDAO.getApprovalMember(id);
+				
+		request.setAttribute("dto", dto);
+		
+		return "approval/approvalOptionList";
+	}
+
+	@RequestMapping(value = "/approvalLineOK_Ajax", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalLineOK_Ajax(HttpServletRequest request , HttpServletResponse response) throws Exception{
+				
+		int num = Integer.parseInt(request.getParameter("num"))-1;
+			
+		List<MemberDTO> lists = new ArrayList<MemberDTO>();
+						
+		for(int i = num; i > 0; i--){
+			System.out.println(i);
+			lists.add(approvalDAO.getApprovalMember(request.getParameter("id"+i)));	
+		}
+		
+		request.setAttribute("num", num);
+		request.setAttribute("lists", lists);
+		
+		return "approval/approvalLine";
+	}
+
+	
+	
 	
 	
 	//HttpSession session = request.getSession();

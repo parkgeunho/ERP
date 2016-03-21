@@ -20,28 +20,10 @@
 <script type="text/javascript" src="<%=cp%>/resources/schedule/jquery-2.2.0.js"></script>
 <script type="text/javascript" src="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 
-
-<!-- separater , -->
-
-<!-- 스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트 -->
-
-<script type="text/javascript">
-
-	
-
-</script>
-
 <script>
 
 	$(function() {
-		  
-	    var dialog, form,
-	    	name = $( "#name" ),
-	    	email = $( "#email" ),
-	    	password = $( "#password" ),
-	    	allFields = $( [] ).add( name ).add( email ).add( password ),
-	    	tips = $( ".validateTips" );
-			
+		  		
 		dialog = $( "#approvalLine" ).dialog({
 		      autoOpen: false,
 		      height:520,
@@ -53,214 +35,298 @@
 		          dialog.dialog( "close" );
 		        }		        
 		      },		      
-		      
 		      close: function() {
-		        /* allFields.removeClass( "ui-state-error" ); */        
+		                
 		      }		      
 		 });		
 		 
-		 $( "#approvalLineModal" ).button().on( "click", function() {
+		$( ".approvalLineModal" ).button().on( "click", function() {
 				dialog.dialog( "open" );
-		 });
-		
+		});	 
 		 
-		 
-		 
-		 function approvalLineOK (){
-
-				var valid = true;
-				 
-			      if ( valid ) {
-			        $( "#approvalLineOK" ).append( 
-			     		     
-			         "<table align=\"right\" cellspacing=\"0\" cellpadding=\"0\">"+
-			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"28\" bgcolor=\"#EAEAEA\" align=\"center\"><font style=\"font-size: 10pt; font-weight: bold;\">기안자</font></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"28\" align=\"center\"><font style=\"font-size: 9pt;\">session.userName</font></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"28\" align=\"center\"></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+			         
-			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"28\" align=\"center\"></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
-			         "</table>"
-			        
-			        );
-			        dialog.dialog( "close" );
-			      }
-			      
-			return valid;	
-		}
-		 
-		form = dialog.find( "form" ).on( "submit", function( event ) {
-			 event.preventDefault();
-			 approvalLineOK();
-		});
+		function approvalLineOK (){
 		
-		
-		function approvalLineTest (){
-		
-			if ($('.member').is(":checked")){
-				
-				
-				
-				
-				
-				
-			}		
+			var elSel = document.getElementById('selectX');
 			
+			var params = "";
+						
+			$('[id^="applovalfLine"]').remove();
+					    
+		 	for(var i = 1; i < elSel.length; i++){
+		 		if(i!=1){
+		 			params += "&"
+		 		}		 			 	
+		 		params += "id"+i+"="+elSel.options[i].value; 	 		 		
+		 	}
+		 	
+		 	params += "&num="+elSel.length;
+		 	
+		 	$.ajax({
+				
+				url:'approvalLineOK_Ajax',
+				data:params,
+				type:'POST',
+					
+				error:function(args){
+					alert("에러");
+				},					
+				success: function(args){
+					$("#approvalLineOK").prepend(args);
+				}					
+			});
+		 	
+		 		 	
 			dialog.dialog( "close" );
 		}
 		
-	
+		$('[id^="dep-"]').click(function(){
+			
+			var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+		     
+		    $(this).attr('src',src);
+		 
+			var obj = $('.'+ this.id);
+				
+			if(obj.css('display')=='none')
+				obj.show();
+			else
+				obj.hide();
+		});
+			
+		$('.check-all').click( function(){
+			$('.member').prop('checked',this.checked);
+		});	
+		
+		$('[id^="ch-"]').click(function(){
+						
+			num= $('.num'+this.id).val();
+				
+			$.ajax({
+				url:'approvalMemberList',
+				data:{num:num},
+				type:'POST',
+			
+				error:function(args){
+					
+				},
+				success: function(args){
+					$("#approvalMemberList").html(args);                           
+				}
+			});			
+		});
+			
+		$('.approvalLineAppend').click( function(){
+			
+			var elSel = document.getElementById('selectX');
+					
+			var mchk;
+			var chk = document.getElementsByName("member[]"); 
+			var len = chk.length;    
+			var checkRow = '';      
+			var checkCnt = 0;       
+			var checkLast = '';     
+			var rowid = '';         
+			var cnt = 0;             
+				
+			if (!$('.member').is(":checked")){
+				alert("결재자를 선택 하십시오.");
+				return;
+			}	
+			
+			for(var i=0; i<len; i++){
+				if(chk[i].checked == true){
+					checkCnt++;        
+					checkLast = i;     
+				}
+			} 
+			
+			if(checkCnt+elSel.length > 6){
+				alert("결재라인은 기안자를 포함하여 6명 까지 가능합니다.")
+				return;
+			}
+			
+			for(var i=0; i<len; i++){
+			
+				if(chk[i].checked == true){  
+
+					checkRow = chk[i].value;			            	
+
+					if(checkCnt == 1){       
+						rowid += "'"+checkRow+"'";
+					}else{                        
+						if(i == checkLast){        
+							rowid += "'"+checkRow+"'"; 
+						}else{
+							rowid += "'"+checkRow+"',";	         			
+						}
+					}
+					cnt++;
+					checkRow = '';    //checkRow초기화.
+				}
+			}
+								
+			mchk = rowid;
+					
+			for(var k=0; k < checkCnt; k++){
+				var a = rowid.split(",")
+			}
+				
+			for (var i = 0; i < a.length; i++){
+				
+				for(var j = 0; j < elSel.length; j++){
+					
+					var kn = a[i];		
+					kn = kn.substring(1, kn.length-1);
+					
+					if(kn == elSel.options[j].value){
+						alert("이미 등록되어 있습니다.");
+						return; 
+					}				
+				}			
+				
+				$.ajax({ 
+					url:'approvalOptionList',
+					data:{id:a[i]},
+					type:'POST',
+				
+					error:function(args){
+						alert("에러");
+					},
+					success: function(args){
+						$("#selectX").append(args);                           
+					}
+				});		
+			} 
+					
+			a = null;
+			
+		});
+		
+		$('.approvalLineRemove').click( function(){
+			
+			var elSel = document.getElementById('selectX');
+			var i;
+			
+			if(elSel.options[0].selected){
+				alert("기안자는 삭제할 수 없습니다.");
+				return;
+			}
+					
+			for (i = elSel.length - 1; i>=0; i--) {
+				if (elSel.options[i].selected) {
+					elSel.remove(i);
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		$('#approvalLineUp').click( function(){  
+			       
+			$('#selectX option:selected').each(function(){   
+				var selectObj = $(this);
+				
+				if(selectObj.index()==1){
+	        		alert("기안자는 이동할 수 없습니다.");
+	        		return;
+	        	}
+				
+				if(selectObj.index()==0){ 
+					alert("기안자는 이동할 수 없습니다.");
+	        		return;
+				}
+				
+				var targetObj = $('#selectX option:eq('+(selectObj.index()-1)+')');   
+			          targetObj.before(selectObj);
+			}); 
+		});
+		
+	    $("#approvalLineDown").click(function(){     
+			
+			$('#selectX option:selected').each(function(){   
+	        	var selectObj = $(this);
+	        	
+	        	if(selectObj.index()==0){
+	        		alert("기안자는 이동할 수 없습니다.");
+	        		return;
+	        	}
+	        	
+	    		if(selectObj.index() == $('#selectX').children().length ){ 
+	    			return false; 
+	    		}       
+	        	var targetObj = $('#selectX option:eq('+(selectObj.index()+1)+')');
+	   			targetObj.after(selectObj);
+			}); 
+		});
+		
+		$('.approvalSave').click( function(){
+			
+			
+			
+			
+			
+			
+		});
+		
+		$('.approvalClose').click( function(){
+			window.close();	
+		});
+	    	    
+	    
 	});
 	
 </script>
-
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-	
-	
-	$('.check-all').click( function(){
-		$('.member').prop('checked',this.checked);
+	$(document).ready(function(){
+		
+		
+	    
+	    
 	});
-	
-	
-	$('[id^="ch-"]').click(function(){
-					
-		num= $('.num'+this.id).val();
-			
-		$.ajax({
-			url:'approvalMemberList',
-			data:{num:num},
-			type:'POST',
-		
-			error:function(args){
-				alert("에러");
-			},
-			success: function(args){
-				$("#approvalMemberList").html(args);                           
-			}
-		});			
-	});
-		
-	$('.AppendLine').click( function(){
-		
-		var elSel = document.getElementById('selectX');
-		
-		alert(elSel.length()); 
-		
-		if (!$('.member').is(":checked")){
-			alert("결재자를 선택 하십시오.")		
-		}	
-
-		var chk = document.getElementsByName("member[]"); // 체크박스객체를 담는다
-		var len = chk.length;    //체크박스의 전체 개수
-		var checkRow = '';      //체크된 체크박스의 value를 담기위한 변수
-		var checkCnt = 0;        //체크된 체크박스의 개수
-		var checkLast = '';      //체크된 체크박스 중 마지막 체크박스의 인덱스를 담기위한 변수
-		var rowid = '';             //체크된 체크박스의 모든 value 값을 담는다
-		var cnt = 0;             
-		
-		for(var i=0; i<len; i++){
-			if(chk[i].checked == true){
-				checkCnt++;        //체크된 체크박스의 개수
-				checkLast = i;     //체크된 체크박스의 인덱스
-			}
-		} 
-		
-		for(var i=0; i<len; i++){
-		
-			if(chk[i].checked == true){  //체크가 되어있는 값 구분
-
-				checkRow = chk[i].value;			            	
-
-				if(checkCnt == 1){                            //체크된 체크박스의 개수가 한 개 일때,
-					rowid += "'"+checkRow+"'";        //'value'의 형태 (뒤에 ,(콤마)가 붙지않게)
-				}else{                                            //체크된 체크박스의 개수가 여러 개 일때,
-					if(i == checkLast){                     //체크된 체크박스 중 마지막 체크박스일 때,
-						rowid += "'"+checkRow+"'";  //'value'의 형태 (뒤에 ,(콤마)가 붙지않게)
-					}else{
-						rowid += "'"+checkRow+"',";	 //'value',의 형태 (뒤에 ,(콤마)가 붙게)         			
-					}
-				}
-			cnt++;
-			checkRow = '';    //checkRow초기화.
-			}
-		}
-						
-		for(var k=0; k < checkCnt; k++){
-						
-			
-			$( "#selectX" ).append(				
-							
-				 "<option value=\"original\" selected=\"selected\" >"+
-				"앙 기뮤띠!@!!!!"+k+
-				"</option>" 
-			)	
-		}	
-	});
-	
-	$('.approvalLineRemove').click( function(){
-		
-		var elSel = document.getElementById('selectX');
-		var i;
-		
-		if(elSel.options[0].selected){
-			alert("기안자는 삭제할 수 없습니다.");
-			return;
-		}
-				
-		for (i = elSel.length - 1; i>=0; i--) {
-			if (elSel.options[i].selected) {
-				elSel.remove(i);
-			}
-		}
-	});
-	
-	$('#approvalLineUp').click( function(){  
-		       
-		$('#selectX option:selected').each(function(){   
-			var selectObj = $(this);
-			
-			if(selectObj.index()==1){
-        		alert("기안자는 이동할 수 없습니다.");
-        		return;
-        	}
-			
-			if(selectObj.index() == 0 ){ 
-				return false;
-			}
-			
-			var targetObj = $('#selectX option:eq('+(selectObj.index()-1)+')');   
-		          targetObj.before(selectObj);
-		}); 
-	});
-	
-    $("#approvalLineDown").click(function(){     
-		
-		$('#selectX option:selected').each(function(){   
-        	var selectObj = $(this);
-        	
-        	if(selectObj.index()==0){
-        		alert("기안자는 이동할 수 없습니다.");
-        		return;
-        	}
-        	
-    		if(selectObj.index() == $('#selectX').children().length ){ 
-    			return false; 
-    		}       
-        	var targetObj = $('#selectX option:eq('+(selectObj.index()+1)+')');
-   			targetObj.after(selectObj);
-		}); 
-	});
-    
-    
-});
 
 </script>
+
+<script type="text/javascript">
+
+	function sendIt(){
+		
+		var elSel = document.getElementById('selectX');
+		
+		f = document.approvalForm;
+
+		str = f.subject.value;
+    	str = str.trim();
+        if(!str) {
+            alert("제목을 입력하십시오.");
+            f.subject.focus();
+            return;
+        }      
+        
+        str = f.contentArea.value;
+    	str = str.trim();
+        if(!str) {
+            alert("내용을 입력하십시오.");
+            f.contentArea.focus();
+            return;
+        }             
+        
+        if(elSel.length==1){
+        	alert("결재선을 지정하십시오.");
+        	return;
+        }
+           
+		alert("결재 상신 완료.");
+
+		f.action = "<%=cp%>/approvalCreated_ok";
+		f.submit();
+				
+	}
+</script>
+
 
 <!-- 스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트 -->
 
@@ -474,7 +540,6 @@ $(document).ready(function(){
 						<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 						<div>
 						<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
-						<a href="" style="text-decoration: none; color: black;">
 						<label id="ch-${depth0.buseoName}">${depth0.buseoName }</label>
 						<input type="hidden" class="numch-${depth0.buseoName }" value="${depth0.buseoNum }"></a>
 						</div>
@@ -608,7 +673,7 @@ $(document).ready(function(){
 	<input type="button" value="위" id="approvalLineUp" /></a></br>
 	<input type="button" value="아래" id="approvalLineDown" /></a></br></br></br>
 	<input type="button" value="삭제" class="approvalLineRemove"/></br>
-	<input type="button" value="추가" class="AppendLine"/>
+	<input type="button" value="추가" class="approvalLineAppend"/>
 	
 	
 	</td>
@@ -619,7 +684,7 @@ $(document).ready(function(){
 	<td width="1" bgcolor=""></td>
 	<td bgcolor="" colspan="5" style="font-size: 10pt">
 	<select id="selectX" multiple="multiple" style="width: 265px; height: 350px">
-		<option value="original1">
+		<option value="idididi">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결재자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직위&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;펀치상사&nbsp;&nbsp;&nbsp;&nbsp;
@@ -679,25 +744,30 @@ $(document).ready(function(){
 	</table>
 </div> 
 
+<form action="" method="post" name="approvalForm">
+
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
-<input type="button" value="결재선" id="approvalLineModal" />
-<input type="button" name="approvalSave" value="저장" />
-<input type="button" name="approvalClose" value="닫기"  />
+<input type="button" value="결재선" class="approvalLineModal" />
+<input type="button" class="approvalSave" value="저장" />
+<input type="button" class="approvalClose" value="닫기"  />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
 </table>
 
-<table border="1" cellspacing="0" align="right"> 
+<table border="0" cellspacing="0" align="right"> 
 
-<div id="approvalLineOK" align="right">
+  <div id="approvalLineOK" align="right">
+
+  </div>
+
   <table id="Approval2" class="" align="right" cellspacing="0" cellpadding="0">
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" bgcolor="#EAEAEA" align="center"><font style="font-size: 10pt; font-weight: bold;">기안자</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
+  <tr><td width="110" height="28" bgcolor="#EAEAEA" align="center"><font style="font-size: 10pt; font-weight: bold;">기안</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
   
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
   <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">session.userName</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
@@ -721,7 +791,8 @@ $(document).ready(function(){
 	  </tr>
   <tr><td width="1" height="1" bgcolor="#BDBDBD"></td><td width="13" bgcolor="#BDBDBD"></td><td width="1" bgcolor="#BDBDBD"></td></tr>
   </table>
-</div>
+  
+
 
 </table>
 
@@ -734,7 +805,7 @@ $(document).ready(function(){
 <tr>
 <td width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; font-style: 나눔고딕코딩;font-weight: bolder;">제목</font></td>
 <td width="1" bgcolor="#8C8C8C"></td>
-<td height="30" bgcolor="#E4F7BA" align="center"><input type="text" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td height="30" bgcolor="#E4F7BA" align="center"><input name="subject" type="text" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 </tr> 
 
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
@@ -750,7 +821,7 @@ $(document).ready(function(){
 	<script>		
 		CKEDITOR.replace( 
 		'editor1',{
-			toolbar : 'Standard',     	
+			toolbar : 'Basic',     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
 			height : '500'        //---높이값
@@ -759,12 +830,17 @@ $(document).ready(function(){
 	</script>          
           
 </td></tr>
+	
+	<div id="approvalLineInput" align="right">
 
+  	</div>
+	
 
-<tr height="60"><td colspan="4" align="center"><input type="button" name="approvalUp" value="결재상신" onclick="window.open('http://localhost:8080/erp/approvalCreated_ok')"/></td></tr>
-
+<tr height="60"><td colspan="4" align="center">
+<input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="approvalUp" value="결재상신" onclick="sendIt();"/></td></tr>
+<!-- <button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="sendIt();">등록하기</button> -->
 </table>
-
+</form>
 
 </body>
 </html>
