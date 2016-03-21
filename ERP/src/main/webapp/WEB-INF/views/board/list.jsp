@@ -31,6 +31,7 @@ function article(listNum,boardNum) {
 		f.action = "<%=cp%>/board/list.action";
 		f.submit();
 		
+		
 	}
 
 
@@ -43,16 +44,9 @@ ${LDTO.boardName}
 
 
 
-
-
-
-
 <table border="0" align="center" cellpadding="0" cellspacing="0">		
 	
-	<tr style="height: 30px">
-	
-			
-			
+	<tr style="height: 30px">			
 		<td style="width: 1500px" align="left" colspan="6">
 		<form action="" name="searchForm" method="post">
 				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
@@ -109,7 +103,7 @@ ${LDTO.boardName}
 		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
 		<td style="width: 922px;" class="subject">
 			<a href="#" onclick="article(${listNum},${dto.boardNum })">
-				${dto.subject }</a></td>
+			${dto.subject }</a></td>
 		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
 		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
 		<td style="width: 150px;" align="center"></td>

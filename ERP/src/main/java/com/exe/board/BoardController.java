@@ -48,7 +48,7 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
-/*	@Autowired
+	/*@Autowired
 	@Qualifier("BoardFileDAO")
 	BoardFileDAO boardfileDAO;*/
 	
@@ -237,7 +237,7 @@ public class BoardController {
 	 @RequestMapping(value="/board/article.action",method={RequestMethod.GET,RequestMethod.POST})
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
-	  public ModelAndView article(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		    
 	      
 	      String cp = request.getContextPath();
@@ -277,9 +277,7 @@ public class BoardController {
 	      
 	      String listNum = request.getParameter("listNum");
 	      
-	      
-	    
-	      
+	      	      
 	      mav.setViewName("/board/article");
 	      mav.addObject("listNum",listNum);
 	      mav.addObject("dto", dto);
@@ -391,7 +389,7 @@ public class BoardController {
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
-			request.setAttribute("boardlist", boardlist);			
+			request.setAttribute("boardlist", boardlist);
 
 		  return "boardMain";
 	  }
