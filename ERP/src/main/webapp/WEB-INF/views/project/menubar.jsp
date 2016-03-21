@@ -40,7 +40,7 @@ $(document).ready(function(){
 <div style="height: 90px; background-color: #dddddd; border: 1px solid;">
 <table width="90%" height="100%" border="1" align="center">
 	<tr>
-		<td align="right">로 그 아 웃</td>
+		
 	</tr>
 </table>
 </div>
@@ -83,7 +83,7 @@ $(document).ready(function(){
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 40%;float: left; margin-top: 10px;"></div>
+		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
 		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>

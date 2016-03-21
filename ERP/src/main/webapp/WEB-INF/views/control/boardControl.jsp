@@ -25,15 +25,12 @@
 var num = 1;
 var group = 0;
 
-/* var time = 3000
 
-;           //1초 * 60 * 60
-setInterval("teim()", time); */
 
 
 
 $(document).ready(function(){
-	/* $(".content").mCustomScrollbar(); */
+	
 	
 	
 	
@@ -50,32 +47,6 @@ $(document).ready(function(){
                     	 $("#boardList").html(args);                           
                     }
 	    });
-	
-/* 		    $.ajax({
-		        url:'boardUpdate',
-		        type:'POST',
-		        
-		        error:function(args){
-		            
-		        },
-		        success: function(args){
-		        	 $("#boardUpdate").html(args);                           
-		        }
-		});
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	$('[id^="buseo-"]').click(function(){
-		 alert("왜안되냐");
-	});
 	
 
 	
@@ -112,7 +83,6 @@ $(document).ready(function(){
 	
 	});
 
-
 	
 	
 	
@@ -145,22 +115,7 @@ $(document).ready(function(){
 					
 				}
 			} 
-		 
-		 
-		
-		
-		
-		
- 		
- 		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	
 	});
 	
@@ -174,18 +129,7 @@ function buseoManagement(){
 	
 }
 
-function sendIt() {
-	
-	var url = "<%=cp%>/memberList";
-	var searchValue = $("#searchValue").val();
-	$("#searchValue").val("");
-	
-	
-	$.post(url,{searchValue:searchValue,num:num},function(args){
-	$("#memberList").html(args);
-	
-	}).error(function(){alert("이미 최하 부서입니다.")});
-}
+
 	
 function created(){
 
@@ -215,10 +159,7 @@ function deleted(){
 		return;
 	}
 	
-	
-	
-	
-	
+
 	
 }
 
@@ -239,7 +180,7 @@ function trim(){
 function boardUpdate(){
 	
 	var myForm = $("#boardUpdateForm").serialize();
-	alert(myForm);
+
 	var url = "<%=cp%>/boardChange";
 	$.post(url,myForm,function(args){
 		window.location="/erp/con";
@@ -281,14 +222,13 @@ function Add(){
 			</div>
 	</div>
 	
-	<div style="width: 1320px; height: 740px;float: left;">
+	<div style="width: 1250px; height: 720px;float: left;">
 		
-		<div style=" height: 740px; width: 1320px;">
+		<div style=" height: 720px; width: 1250px; margin-left: 80px;">
 		
-			<div style="margin-top: 10px; margin-left: 10px; height: 730px; border: 1px solid; width: 400px; float: left;">
-			<div style="height: 30px;" class="buttonsq" onclick="Add()">실험 어디갓니!!!</div>
-			
-			<div style="overflow: hidden;">
+			<div style="margin-top: 10px; margin-left: 10px; height: 720px; border: 1px solid #D5D5D5; width: 300px; float: left;">
+				
+			<div style="overflow-y:scroll; height: 720px; width: 300px; background-color: #F6F6F6; ">
 			<c:forEach var="parent" items="${buseoParent }">
 				<c:forEach var="depth0" items="${buseolists }">
 					<c:choose>
@@ -297,7 +237,7 @@ function Add(){
 					<div>
 					<img id="buseo-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
 					
-					<label id="bus-${depth0.buseoNum}" style="font-size: 20px;" >${depth0.buseoName }</label>
+					<label id="bus-${depth0.buseoNum}" style="font-size: 20px; font-family: cursive; font-weight: bold;" >${depth0.buseoName }</label>
 					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
 					</div>
 						<div class="buseo-${depth0.buseoNum}">
@@ -306,7 +246,7 @@ function Add(){
 								<c:if test="${member1.depth1==depth0.buseoNum && member1.depth2=='no' }">
 									<div  style="margin-left: 30px; font-size: 20px; color: #6B9900" >
 									<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-									<label id="Mem-${member1.num }">${member1.name }</label>
+									<label id="Mem-${member1.num }" style="font-family: sans-serif;">${member1.name }</label>
 									
 									</div>
 									<input type="hidden" class="numMem-${member1.num }" value="${member1.num }">
@@ -323,7 +263,7 @@ function Add(){
 							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
 								<img id="buseo-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
-								<label id="bus-${depth1.buseoNum }" style="font-size: 20px;">${depth1.buseoName }</label>
+								<label id="bus-${depth1.buseoNum }" style="font-size: 20px;font-family: sans-serif;">${depth1.buseoName }</label>
 								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 								<div class="buseo-${depth1.buseoNum}">
@@ -424,7 +364,7 @@ function Add(){
 																	
 																	
 																				<c:forEach var="member5" items="${memberList }">
-																				<c:if test="${member5.depth4==depth4.buseoNum }">
+																				<c:if test="${member5.depth5==depth4.buseoNum }">
 																					<div  style="margin-left: 30px; font-size: 20px; color: #6B9900" >
 																					<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 																					<label id="Mem-${member5.num }">${member5.name }</label>
@@ -568,9 +508,11 @@ function Add(){
 			</c:forEach>
 			</div>
 		</div>
-			
+			<div style="height: 100px;width:30px;line-height:100px; float: left;  margin-top: 25%" class="buttonsq" onclick="Add()">
+				<label style="font-size: 25px; font-weight: bolder;">+</label>
+			</div>
 		
-			<div style="width: 800px; height: 740px;background-color: red; float: left;" id="boardUpdate">
+			<div style="width: 800px; height: 720px;  float: left; background-color: #F6F6F6;  border: 1px solid #D5D5D5; margin-top: 10px;" id="boardUpdate">
 			
 				<div style="width: 740px;margin-left: 30px; padding-top: 10px;">
 					<div >게시판설정<br>
@@ -580,37 +522,87 @@ function Add(){
 					<div style="border-bottom: 1px solid;height: 30px;"></div>
 					<div style="float: left; width: 200px; padding-top: 10px; ">
 					
-						<div style="height: 35px; border-bottom: 1px solid;" >게시판명</div>
+						<div style="height: 35px; border-bottom: 1px solid #D5D5D5;" >게시판명</div>
 					
 					</div>
 					
 					
 					<div style="float: left; padding-top: 10px; width: 540px;">
-						<div style="height: 35px; border-bottom: 1px solid;">
+						<div style="height: 35px; border-bottom: 1px solid #D5D5D5;">
 						<input type="text" id="boardName" name="boardName" value="게시판 이름이 나오는 곳입니다." style="width: 300px;" readonly="readonly">
 						</div>
 					
 					</div>
 					
-						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px;">
-							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
-							권한
+						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; border: 1px solid #D5D5D5">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; solid; line-height: 50px;" align="center">
+							
+								<div style="width: 229px;float: left;"> 
+								<label style="font: bolder; font-size: 20px;">리스트</label> 	
+								</div>
+								<div style="width: 120px; float: left; border-left: 1px solid #BDBDBD;" align="center">
+									<label style="font: bolder; font-size: 20px;">권한 / 삭제</label>
+								</div>
 							</div>
 							<div>
-								이이잉
-								
-								
-								
+								권한을 가진 사원 및 부서 가 출력됩니다.
 							</div>
 						</div>
 						
-						<DIV style="float: left; background-color: aqua; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
-							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
-							수정
-							</div>
+						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 35px; border: 1px solid #D5D5D5;" id="boardSide">
 							<div>
-							<input type="radio" onclick="trim()" value="앙">
-							</div> 
+								<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
+									<label style="font: bolder; font-size: 20px;">정 보</label> 	
+								</div>
+								<div style="height: 210px; width: 350px;">
+								<br/>
+								<br/>
+								<br/>
+								수정 하실 것에 대한 정보가 출력됩니다.<br>
+								<br/>
+								부서 일 경우 최상위 부서,인원 수가 출력이 되며 <br>
+								<br/>
+								개인 일 경우 속한 부서정보와 사번이 나옵니다.
+								<br/>
+								</div>
+								
+								<div style="height: 210px; width: 350px; border-top: 1px solid;">
+									
+									<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
+										<label style="font: bolder; font-size: 20px;">권한 수정</label> 	
+									</div>
+									
+									
+									<div style="float: left; width: 110px;">
+										글쓰기 권한
+									
+									</div>
+									
+									<div style="float: left;width: 110px;">
+										쓰기가능<br>
+										<c:if test="${ck!=null }">
+										<input type="radio"  value="write" checked="checked" name="writeck">
+										</c:if>
+										
+										<c:if test="${ck==null }">
+										<input type="radio"  value="write" name="writeck">
+										</c:if>
+									</div>
+								
+									<div style="float: left;width: 110px;">
+									쓰기불가<br>
+										<c:if test="${ck!=null }">
+										<input type="radio"  value="non" name="writeck">
+										</c:if>
+										<c:if test="${ck==null }">
+										<input type="radio"  value="non" checked="checked" name="writeck">
+										</c:if>
+									</div>
+								
+							
+								
+								</div>
+							</div>
 						</div>
 						
 						

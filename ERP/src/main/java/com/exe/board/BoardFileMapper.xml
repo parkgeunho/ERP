@@ -7,9 +7,17 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.exe.board.BoardFileMapper">
 	
 	<insert id="insertData" parameterType="com.exe.board.BoardFileDTO">
-		insert into erpboardfile (boardnum,saveFileName,originalFileName)
-			values (#{boardnum},#{saveFileName},#{originalFileName})	
+		insert into erpboardfile (boardNum,saveFileName,originalFileName)
+			values (#{boardNum},#{saveFileName},#{originalFileName})	
 	</insert>
+	
+	<select id="selectData" parameterType="integer" resultType="com.exe.board.BoardFileDTO">
+		select * from erpboardfile where boardNum=#{boardNum}
+	</select>
+	
+	<select id="maxNum" resultType="integer">
+		select nvl(max(boardNum),0) from erpboardfile
+	</select>
 	
 	
 </mapper>

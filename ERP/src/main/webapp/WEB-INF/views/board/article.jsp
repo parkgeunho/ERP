@@ -15,6 +15,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 
 </head>
@@ -25,7 +26,12 @@
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
+
 		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center">공지사항	
+
+		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center" >
+		${listDTO.boardName }	
+
 		</td>	
 	</tr>
 	
@@ -48,8 +54,8 @@
 	
 	<tr style="height: 15px">
 		<td style="width: 200px;" align="center">첨부파일</td>
-		<td style="width: 300px;"></td>
-		<td style="width: 1072px;">&nbsp;<a href="download.action">
+		<td style="width: 300px;">${fdto.originalFileName}</td>
+		<td style="width: 1072px;">&nbsp;<a href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
 			<img alt="" src="/erp/resources/boardimage/down002.png"></a>&nbsp;&nbsp;  </td>
 	</tr>
 	

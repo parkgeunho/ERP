@@ -97,7 +97,7 @@ function redirect(){
 <body style="font-style: 나눔고딕코딩;">
 
 
-<form action="created.action" name="myForm" method="post" enctype="multipart/form-data">
+<form action="" name="myForm" method="post" enctype="multipart/form-data">
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 80px; background: #D4D4D4">
 		<td colspan="3" style="width: 1572px; letter-spacing: 5px; font-size: 20px; 
@@ -188,7 +188,7 @@ function redirect(){
 	<tr style="height: 20px; ">
 		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
 		<td style="width: 50px;" align="left">&nbsp;&nbsp;&nbsp;
-		<input type="file" name="upload" id="file">
+		<input type="file" name="file" id="file">
 		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		

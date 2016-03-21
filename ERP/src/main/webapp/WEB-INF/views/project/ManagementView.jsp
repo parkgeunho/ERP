@@ -100,7 +100,7 @@ function sendIt() {
 	$.post(url,{searchValue:searchValue,num:num},function(args){
 	$("#memberList").html(args);
 	
-	}).error(function(){alert("이미 최하 부서입니다.")});
+	});
 }
 	
 
