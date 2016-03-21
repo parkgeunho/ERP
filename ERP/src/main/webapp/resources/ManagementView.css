@@ -19,7 +19,7 @@
 	
 	float: right; 
 	border: 1px solid;
-	background-color: #49B5F4;
+	background-color: #8C8C8C;
 	border-radius: 5px;
 	text-align: center;
 	color: white;
@@ -33,11 +33,11 @@
 
 .buseo{
 	
-	height: 80px;
+	height: 60px;
 	background: linear-gradient(#FFFFFF, #EAEAEA);
-	line-height: 80px;
+	line-height: 60px;
 	text-align: center;
-	font-size: 20pt;
+	font-size: 16pt;
 	font-weight: bold;
 	border-right:1px solid;
 	border-color: #CCCCCC;
@@ -75,7 +75,7 @@
 }
 #op{
 	
-	background-color: #49B5F4;
+	background-color: #8C8C8C;
 	text-align: center;
 	color: white;
 	font-family: 고딕;
@@ -108,7 +108,7 @@
 	
 	
 	border: 1px solid;
-	background-color: #49B5F4;
+	background-color: #8C8C8C;
 	border-radius: 5px;
 	text-align: center;
 	color: white;

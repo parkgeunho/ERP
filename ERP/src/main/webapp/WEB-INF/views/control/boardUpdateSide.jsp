@@ -25,7 +25,7 @@ $("input[name=writeck]").click(function(){
 
 </script>
 <div>
-	<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px;line-height: 50px;" align="center">
+	<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px;line-height: 50px;" align="center">
 		<label style="font: bolder; font-size: 20px;">정 보</label>
 	</div>
 	<div style="height: 210px; width: 350px;">
@@ -71,7 +71,7 @@ $("input[name=writeck]").click(function(){
 		
 		<div style="height: 210px; width: 350px; border-top: 1px solid;" >
 			
-			<div style="height: 50px; width: 350px; border-bottom: 1px solid;  line-height: 50px;" align="center">
+			<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD;  line-height: 50px;" align="center">
 				<label style="font: bolder; font-size: 20px;">권한 수정</label> 	
 			</div>
 			

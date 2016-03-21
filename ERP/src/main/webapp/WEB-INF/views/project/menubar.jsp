@@ -94,9 +94,9 @@ $(document).ready(function(){
 	
 	</div>
 	
-	<div style="font-size: 8pt; border-bottom: 2px solid orange; height: 10px; background-color: white;">
+	<div style="font-size: 8pt; border-bottom: 2px solid #2E9926; height: 10px; background-color: white;">
 	
-	<div  id="b" style="width: 50px; background-color: orange; float: right; margin-right: 10px;border-top-left-radius : 5px;
+	<div  id="b" style="width: 50px; background-color: #2E9926; float: right; margin-right: 10px;border-top-left-radius : 5px;
 	border-top-right-radius : 5px;" align="center">▽</div>
 	
 	</div>
