@@ -35,7 +35,7 @@
    <div class="buseo" >
    관리항목
    </div>
-   <div>
+   <div style="cursor: pointer;">
       <ul>
          <li><label onclick="javascript:location.href='<%=cp%>/insa'">부서관리</label>
       

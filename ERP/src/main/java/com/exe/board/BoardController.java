@@ -581,6 +581,8 @@ public class BoardController {
 		      String searchKey = request.getParameter("searchKey");
 		      String searchValue = request.getParameter("searchValue");
 		      
+		      System.out.println("searchKey"+searchKey);
+		      System.out.println("searchValue"+searchValue);
 		      if(searchKey==null){
 		         
 		         searchKey = "subject";
