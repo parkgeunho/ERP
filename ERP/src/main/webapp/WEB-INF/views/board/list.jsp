@@ -72,23 +72,22 @@ ${LDTO.boardName}
 
 <table border="0" align="center" cellpadding="0" cellspacing="0">	
 	
-	<tr style="height: 30px; background-color: #E7E7E7">
-		<td style="width: 100px; border-right: 1px solid" align="center" class="boardNum">No</td>
+	<tr style="height: 30px; background-color: #EEEEEE">
+		<td style="width: 100px; border-right: 1px solid; border-color:#CACACA;" align="center" class="boardNum">No</td>
 		
-		<td style="width: 922px; border-right: 1px solid" align="center" class="subject">제목</td>
+		<td style="width: 922px; border-right: 1px solid; border-color:#CACACA;" align="center" class="subject">제목</td>
 	
 		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="name">작성자
-		</td>
+		<td style="width: 150px; border-right: 1px solid; border-color:#CACACA;" align="center" class="name">작성자</td>
 		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="created">작성일
-		</td>
 		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="file">파일		
-		</td>
+		<td style="width: 150px; border-right: 1px solid; border-color:#CACACA;" align="center" class="created">작성일</td>
 		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
-		</td>		
+		
+		<td style="width: 150px; border-right: 1px solid; border-color:#CACACA;" align="center" class="file">파일</td>
+		
+		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수</td>		
+		
 	</tr>	
 	
 	<tr style="height: 1px; background: #B2EBF4">
@@ -104,7 +103,7 @@ ${LDTO.boardName}
 	</tr>
 	<tr style="height: 25px;">
 		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
-		<td style="width: 922px;" class="subject">
+		<td style="width: 922px;" class="subject">&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="article(${listNum},${dto.boardNum })">
 				${dto.subject }</a></td>
 		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
