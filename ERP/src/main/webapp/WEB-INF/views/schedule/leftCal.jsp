@@ -25,30 +25,53 @@
  
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		
+		$('[id^="cal"]').click(function(){
+			
+			var params;
+			
+			if ($(this).attr('id') == 'calLeft') {
+				params = "year=" + ${preYear} + "&month=" + ${preMonth};
+			} else if($(this).attr('id') == 'calRight'){
+				params = "year=" + ${nextYear} + "&month=" + ${nextMonth};
+			} else{
+				params = "year=" + ${nowYear} + "&month=" + ${nowMonth};
+			}
+			
+			$.ajax({
+				
+				type : "POST",
+				url  : "calChange",
+				data : params,
+				success : function(args){
+					$("#leftCal").html(args);
+				},
+				error : function(e){
+					alert(e.responseText);
+				}
+			});
+		});
+	});
+
 </script>
 
 </head>
 
-<br/><br/>
-
-<table align="center" width="210" cellpadding="2" cellspacing="1">
+<table style="padding-top :0px;" align="center" width="210" cellpadding="2" cellspacing="1">
 
 	<tr>
 		<td align="center">
-		<input type="hidden" id="year" value="${preYear}">
-		<input type="hidden" id="month" value="${preMonth}">
 		
-		<a href="calendar?year=${nowYear}&month=${nowMonth}">
-		<img src="/erp/resources/schedule/image/today.jpg" width="25" height="17" align="left"/></a>
+		<img style="cursor: pointer; vertical-align: middle;" id="calToday" src="/erp/resources/schedule/image/today.jpg" width="25" height="17" border="0"/>
 		
-		<img id="preCal" src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"/>
+		<img style="cursor: pointer; vertical-align: middle;" id="calLeft" src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"/>
 		
-			${year}년
-			
-			${month}월
+			<font style="vertical-align: middle;" size="3px">&nbsp;&nbsp;&nbsp;&nbsp;${year}년</font>
+			<c:if test="${month<10 }">&nbsp;</c:if>
+			<font style="vertical-align: middle;" size="3pt">${month}월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
 		
-		<a href="calendar?year=${nextYear}&month=${nextMonth}">
-		<img src="/erp/resources/schedule/image/right.jpg" width="20" height="17" border="0"/></a>
+		<img style="cursor: pointer; vertical-align: middle;" id="calRight" src="/erp/resources/schedule/image/right.jpg" width="20" height="17" border="0"/>
 		</td>
 	</tr>
 </table>
@@ -56,13 +79,13 @@
 <table align="center" width="210" cellpadding="0" cellspacing="1" bgcolor="#cccccc">
 
 	<tr>
-		<td bgcolor="#e6e4e6" align="center"><font color="red">일</font></td>
-		<td bgcolor="#e6e4e6" align="center">월</td>
-		<td bgcolor="#e6e4e6" align="center">화</td>
-		<td bgcolor="#e6e4e6" align="center">수</td>
-		<td bgcolor="#e6e4e6" align="center">목</td>
-		<td bgcolor="#e6e4e6" align="center">금</td>
-		<td bgcolor="#e6e4e6" align="center"><font color="blue">토</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt" color="#FF3636">일</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt">월</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt">화</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt">수</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt">목</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt">금</font></td>
+		<td style="padding-top: 2px;" width="25px" bgcolor="#e6e4e6" align="center"><font size="2pt" color="#0054FF">토</font></font></td>
 	</tr>
 
 	<%
@@ -72,17 +95,17 @@
 		
 		for(int i=1; i<week; i++){
 			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
+			out.print("<td width=\"25px\" bgcolor='#ffffff'>&nbsp;</td>");
 			newLine++;
 		}
 		
 		for(int i=startDay; i<=endDay; i++){
 			
-			String fontColor = (newLine==0)?"red":(newLine==6)?"blue":"black";
+			String fontColor = (newLine==0)?"#FF3636":(newLine==6)?"#0054FF":"black";
 			
 			String bgColor = (nowYear==year)&&(nowMonth==month)&&(nowDay==i)?"#e6e4e6":"#ffffff";
 			
-			out.print("<td onclick=\"window.location='http://kin.naver.com'\" style=\"cursor: pointer;\" align='center' bgcolor='" + bgColor + "'><font color='" + fontColor + "'>" + i + "</font></td>");
+			out.print("<td width=\"25px\" onclick=\"window.location='http://kin.naver.com'\" style=\"cursor: pointer;\" align='center' bgcolor='" + bgColor + "'><font size=\"2pt\" color='" + fontColor + "'>" + i + "</font></td>");
 			
 			newLine++;
 			
@@ -95,7 +118,7 @@
 		
 		while(newLine>0 && newLine<7){
 			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
+			out.print("<td width=\"25px\" bgcolor='#ffffff'>&nbsp;</td>");
 			newLine++;
 		}
 		

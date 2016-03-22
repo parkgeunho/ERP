@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+
+.buseoManagement{
+	
+	float: right; 
+	border: 1px solid;
+	background-color: #49B5F4;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	height: 28px;
+	width:100px;
+	line-height: 28px;
+}
+
+
+
+.boardManagement{
+	
+	float: right; 
+	border: 1px solid;
+	background-color: #8C8C8C;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	height: 28px;
+	width:70px;
+	line-height: 28px;
+}
+
+
+
+
+.buseo1{
+	
+	vertical-align: middle;
+	padding-top:4px;
+	height: 56px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 60px;
+	text-align: center;
+	font-size: 16pt;
+	font-weight: bold;
+	border-right:1px solid;
+	border-bottom:1px solid;
+	border-color: #CCCCCC;
+
+}
+.buseo2{
+	
+	vertical-align: middle;
+	padding-top:4px;
+	height: 56px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 60px;
+	text-align: center;
+	font-size: 16pt;
+	font-weight: bold;
+	border-bottom:1px solid;
+	border-right:1px solid;
+	border-color: #CCCCCC;
+
+}
+
+.button{
+	
+	 margin-left: 430px;
+	 background-color: #49B5F4;
+	 width: 100px;
+	 border-radius: 5px;
+	 text-align: center;
+	 line-height:25px;
+	 color: white;
+	
+}
+
+
+
+.button:HOVER{
+	
+	background-color:#BDBDBD;
+	color: black;
+	
+}
+
+#data td{
+	
+	
+	border-bottom: 1px dashed ;
+	border-bottom-color: #BDBDBD;
+	text-align: center;
+	
+}
+#op{
+	
+	background-color: #8C8C8C;
+	text-align: center;
+	color: white;
+	font-family: 고딕;
+	font-weight: bold;
+	
+}
+
+#op td{
+	
+	border-top-left-radius : 5px;
+	border-top-right-radius : 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	
+}
+
+
+.sawon{
+	
+	height: 80px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 80px;
+	text-align: center;
+	font-size: 20pt;
+	font-weight: bold;
+
+}
+
+.buttonsq{
+	
+	
+	border: 1px solid;
+	background-color: #8C8C8C;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	height: 28px;
+	width:100px;
+	line-height: 28px;
+	
+	
+}
+

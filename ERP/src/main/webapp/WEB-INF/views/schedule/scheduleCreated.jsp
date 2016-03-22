@@ -104,18 +104,6 @@
 		}
 	};
 
-	$("#calendar").datepicker({
-		
-		changeMonth: true,
-		changeYear: true,
-		showOn: 'button',
-		buttonImageOnly: true
-	});
-	
-	$('img.ui-datepicker-trigger').css({'cursor':'pointer','margin-left':'5px', 'margin-top':'3px'});
-	
-	$.datepicker.setDefaults({dateFormat:'YYYY-mm-dd'});
-
 </script>
 
 <script>
@@ -828,4 +816,21 @@ $(document).ready(function(){
 </form>
 
 </body>
+
+<script type="text/javascript">
+
+	$("#calendar").datepicker({
+		
+		changeMonth: true,
+		changeYear: true,
+		showOn: 'button',
+		buttonImageOnly: true
+	});
+	
+	$('img.ui-datepicker-trigger').css({'cursor':'pointer','margin-left':'5px', 'margin-top':'3px'});
+	
+	$.datepicker.setDefaults({dateFormat:'yy-mm-dd'});
+
+</script>
+
 </html>
