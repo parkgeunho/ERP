@@ -6,7 +6,6 @@ public class MemberDTO {
 	
 	private int num;
 	private String usernum;
-	private int birth;
 	private String name;
 	private String jumin;
 	private String addr;
@@ -40,10 +39,6 @@ public class MemberDTO {
 
 	public String getUsernum() {
 		return usernum;
-	}
-
-	public int getBirth() {
-		return birth;
 	}
 
 	public String getName() {
@@ -145,10 +140,6 @@ public class MemberDTO {
 
 	public void setUsernum(String usernum) {
 		this.usernum = usernum;
-	}
-
-	public void setBirth(int birth) {
-		this.birth = birth;
 	}
 
 	public void setName(String name) {
