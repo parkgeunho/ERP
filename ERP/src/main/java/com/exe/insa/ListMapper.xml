@@ -71,7 +71,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="boardListDelete" parameterType="integer">
-		delete boardlist where listNum=#{listNum}
+		delete erpboard where listNum=#{listNum}
 				
 	</delete>
 	
@@ -86,6 +86,11 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<update id="boardUpdate" parameterType="com.exe.insa.ListDTO">
 		update boardlist set boardName=#{boardName} where listNum=#{listNum}
 	</update>
+	
+	<delete id="boardReplyDelete" parameterType="integer">
+		delete boardlist where parent=#{parent}
+	</delete>
+	
 	
 	
 

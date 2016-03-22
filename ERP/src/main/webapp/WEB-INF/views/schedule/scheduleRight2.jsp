@@ -35,9 +35,9 @@
 	        ],
 	        // other options go here...
 	    	
-	    	dayClick: function() {
+	    	/* dayClick: function() {
 		        alert('a day has been clicked!');
-		    },
+		    }, */
 		    
 		    /* customButtons: {
 		        myCustomButton: {
@@ -105,10 +105,10 @@
 			
 			select: function(start, end, allDay) {
 				
-				prompt('일정을 입력하세요.!!!');
+				var dt_start = moment(start).format('YYYY.MM.DD.HH.mm');
+				var dt_end = moment(end).format('YYYY.MM.DD.HH.mm');
 				
-				/* var dt_start = moment(start).format('YYYY/MM/DD hh:mm');
-				var dt_end = moment(end).format('YYYY/MM/DD hh:mm'); */
+				window.open('./scheduleCreated?start='+dt_start+'&end='+dt_end, 'window', 'width=1100, height=1080,scroll=yes');
 			}
 	    });
 	});

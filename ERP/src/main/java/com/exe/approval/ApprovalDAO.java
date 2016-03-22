@@ -64,6 +64,12 @@ public class ApprovalDAO {
 		return lists;
 	}
 	
+	public MemberDTO getApprovalMember(String id){
+		
+		MemberDTO dto = sessionTemplate.selectOne("com.exe.approval.getApprovalOptionList",id);
+		
+		return dto;
+	}
 	
 	//approvalForm--------------------------------------------
 	

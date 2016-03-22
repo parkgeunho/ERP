@@ -100,7 +100,7 @@ function sendIt() {
 	$.post(url,{searchValue:searchValue,num:num},function(args){
 	$("#memberList").html(args);
 	
-	}).error(function(){alert("이미 최하 부서입니다.")});
+	});
 }
 	
 
@@ -119,7 +119,7 @@ function sendIt() {
 	<!-- 왼쪽 부서 관련  -->
 	<div style="width: 290px;float: left; margin-left: 30px;">
 	
-		<div style="margin-top: 10px; margin-left: 10px; height: 730px; border: 1px solid; width: 250px;">
+		<div style="margin-top: 10px; margin-left: 10px;  background-color: #F6F6F6; height: 730px; border: 1px solid #D5D5D5; width: 250px;">
 			<c:forEach var="parent" items="${parent }">
 				<c:forEach var="depth0" items="${lists }">
 					<c:choose>

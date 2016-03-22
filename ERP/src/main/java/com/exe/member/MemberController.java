@@ -200,8 +200,7 @@ public class MemberController {
 		String path = request.getSession().getServletContext().getRealPath("/resources/memberImage");
 		
 		response.setCharacterEncoding("UTF-8");
-		
-		
+				
 		MultipartFile file = request.getFile("file");
 		
 	

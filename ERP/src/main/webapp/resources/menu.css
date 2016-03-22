@@ -63,7 +63,7 @@ font-weight:bolder;
 
 
 .menubar ul{
-background: rgb(109,109,109);
+background: #2B2B2B;
 height:50px;
 list-style:none;
 margin:0;
@@ -81,7 +81,7 @@ padding:0px;
 
 
 .menubar li a{
-background: rgb(109,109,109);
+background: #2B2B2B;
 color:#cccccc;
 display:block;
 font-weight:normal;
@@ -92,16 +92,16 @@ padding:0px 25px;
 text-align:center;
 text-decoration:none;
 }
-/*  ÇÏÀ§ ¸Þ´º¿¡ ¸¶¿ì½º ¿À¹ö¸¦ ÇÑ »óÅÂ¿¡¼­µµ »óÀ§¸Þ´º »ö º¯°æÇÏ±â */
+/*  ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ */
 .menubar li a:hover, .menubar ul li:hover a{
-background: rgb(71,71,71);
+background: linear-gradient(#119208, #35B62C);
 color:#FFFFFF;
 text-decoration:none;
 }
 
 .menubar li ul{
-background: rgb(109,109,109);
-display:none; /* Æò»ó½Ã¿¡´Â µå¶ø¸Þ´º°¡ ¾Èº¸ÀÌ°Ô ÇÏ±â */
+background: #2B2B2B;
+display:none; /* ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Èºï¿½ï¿½Ì°ï¿½ ï¿½Ï±ï¿½ */
 height:auto;
 padding:0px;
 margin:0px;
@@ -114,11 +114,11 @@ z-index:200;
 }
 
 .menubar li:hover ul{
-display:block; /* ¸¶¿ì½º Ä¿¼­ ¿Ã¸®¸é µå¶ø¸Þ´º º¸ÀÌ°Ô ÇÏ±â */
+display:block; /* ï¿½ï¿½ï¿½ì½º Ä¿ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ï±ï¿½ */
 }
 
 .menubar li li {
-background: rgb(109,109,109);
+background: #2B2B2B;
 display:block;
 float:none;
 margin:0px;
@@ -142,7 +142,7 @@ text-align:left;
 }
 
 .menubar li ul a:hover, .menubar li ul li:hover a{
-background: rgb(71,71,71);
+background: linear-gradient(#119208, #35B62C);
 border:0px;
 color:#ffffff;
 text-decoration:none;
@@ -150,4 +150,18 @@ text-decoration:none;
 
 .menubar p{
 clear:left;
+}
+
+.dtonumber{
+	
+	display : none ;
+	line-height:20px;
+	height: 20px;
+	width: 30px;
+	margin-top:15px;
+	position: absolute;
+	border-radius:40%;
+	border: 1px solid #BDBDBD;
+	background-color: white;
+
 }

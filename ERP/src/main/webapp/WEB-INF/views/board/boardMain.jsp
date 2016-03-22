@@ -12,7 +12,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <title>Insert title here</title>
-<script>
+<script type="text/javascript">
+var num = 1;
 $(document).ready(function(){
 	
 	 
@@ -32,8 +33,8 @@ $(document).ready(function(){
 	    
 	    $('[id^="ch-"]').click(function(){
 			
+			num= $('.num'+this.id).val();
 			
-			var num= $('.num'+this.id).val();
 			var LoginNum = ${LoginDTO.num};
 			 $.ajax({
 			        url:'ajaxBoardList',
@@ -56,6 +57,25 @@ $(document).ready(function(){
 
 });
 
+
+function sendIt(){
+	
+	
+	
+	
+
+	var url = "<%=cp%>/ajaxBoardList";
+	var searchValue = $("#searchValue").val();
+	var searchKey = $("#searchKey").val();
+	
+
+	$.post(url,{listNum:num,searchValue:searchValue,searchKey:searchKey},function(args){
+	$("#boardList").html(args);
+	
+	});
+	
+	
+}
 
 
 

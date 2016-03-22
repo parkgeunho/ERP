@@ -15,6 +15,8 @@ public class ListDTO {
 	private String buseoW;
 	private String memberR;
 	private String memberW;
+	
+	
 	public int getListNum() {
 		return listNum;
 	}

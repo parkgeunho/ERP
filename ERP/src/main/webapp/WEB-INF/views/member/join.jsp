@@ -15,20 +15,18 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		
+	
+		$.ajax({
 
-			$.ajax({
+			url : "buseoChange",
+			type : 'POST',
 
-				url : "buseoChange",
-				type : 'POST',
-
-				success : function(args) {
-					$("#buseo1").html(args);
-				},
-				error : function(e) {
-					alert(e.responseText);
-
-				}
+			success : function(args) {
+				$("#buseo1").html(args);
+			},
+			error : function(e) {
+				alert(e.responseText);
+			}
 
 			});
 
@@ -104,7 +102,6 @@
 	function sendIt(){
 		
 		f = document.myForm;
-
 
 		thumbext = document.getElementById("file").value;
 		
@@ -221,8 +218,7 @@
 
 		f.action = "<%=cp%>/created_ok.action";
 		f.submit();
-		
-		
+				
 	}
 	
 	

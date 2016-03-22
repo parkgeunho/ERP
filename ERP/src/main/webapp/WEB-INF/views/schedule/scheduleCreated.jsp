@@ -1,7 +1,29 @@
+<%@page import="java.util.StringTokenizer"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	String start = request.getParameter("start");
+	String end = request.getParameter("end");
+	
+	String stY, stM, stD, stH, stMin;
+	String endY, endM, endD, endH, endMin;
+	
+	StringTokenizer st = new StringTokenizer(start,".");
+	stY = st.nextToken();
+	stM = st.nextToken();
+	stD = st.nextToken();
+	stH = st.nextToken();
+	stMin = st.nextToken();
+	
+	st = new StringTokenizer(end,".");
+	endY = st.nextToken();
+	endM = st.nextToken();
+	endD = st.nextToken();
+	endH = st.nextToken();
+	endMin = st.nextToken();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -10,20 +32,91 @@
   
 <script src="/erp/resources/script/ckeditor/ckeditor.js"></script>
 <script src="/erp/resources/script/ckeditor/config.js"></script>
-
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script><!-- ie10-viewport-bug-workaround.js -->
 <script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script><!-- holder.js -->
+<link rel="stylesheet" href="/erp/resources/script/jquery-ui-1.11.4.custom/jquery-ui.css" type="text/css">
+<script src="/erp/resources/schedule/jquery-2.2.0.js"></script>
+<script src="/erp/resources/schedule/jquery-1.12.2.min.js"></script>
+<script src="/erp/resources/script/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 
-<link rel="stylesheet" href="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.css" type="text/css">
-<script type="text/javascript" src="<%=cp%>/resources/schedule/jquery-2.2.0.js"></script>
-<script type="text/javascript" src="<%=cp%>/resources/script/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+<script type="text/javascript">
+
+	function sel() {
+		
+		var f = document.myform;
+	
+		var sStH = f.stH;
+		for (i=0; i<24; i++){
+			
+			if(i<10)
+				sStH[i] = new Option("0"+i);
+			else
+				sStH[i] = new Option(i);
+		}
+		for (i=0; i<24; i++){
+			
+			if (sStH[i].value == <%= stH%>)
+				sStH[i].selected = true; 
+		}	
+	
+		var sStMin = f.stMin;
+		for (i=0; i<60; i++){
+			
+			if(i<10)
+				sStMin[i] = new Option("0"+i);
+			else
+				sStMin[i] = new Option(i);
+		}
+		for (i=0; i<60; i++){
+			
+			if (sStMin[i].value == <%= stMin%>)
+				sStMin[i].selected = true; 
+		}	
+	
+		var sEndH = f.endH;
+		for (i=0; i<24; i++){
+			
+			if(i<10)
+				sEndH[i] = new Option("0"+i);
+			else
+				sEndH[i] = new Option(i);
+		}
+		for (i=0; i<24; i++){
+			
+			if (sEndH[i].value == <%= endH%>)
+				sEndH[i].selected = true; 
+		}	
+	
+		var sEndMin = f.endMin;
+		for (i=0; i<60; i++){
+			
+			if(i<10)
+				sEndMin[i] = new Option("0"+i);
+			else
+				sEndMin[i] = new Option(i);
+		}
+		for (i=0; i<60; i++){
+			
+			if (sEndMin[i].value == <%= endMin%>)
+				sEndMin[i].selected = true; 
+		}
+	};
+
+</script>
 
 <script>
 
 	$(function() {
-		  		
+		  
+	    var dialog, form,
+	    	name = $( "#name" ),
+	    	email = $( "#email" ),
+	    	password = $( "#password" ),
+	    	allFields = $( [] ).add( name ).add( email ).add( password ),
+	    	tips = $( ".validateTips" );
+			
 		dialog = $( "#approvalLine" ).dialog({
 		      autoOpen: false,
 		      height:520,
@@ -35,304 +128,215 @@
 		          dialog.dialog( "close" );
 		        }		        
 		      },		      
+		      
 		      close: function() {
-		                
+		        /* allFields.removeClass( "ui-state-error" ); */        
 		      }		      
 		 });		
 		 
-		$( ".approvalLineModal" ).button().on( "click", function() {
+		 $( "#approvalLineModal" ).button().on( "click", function() {
 				dialog.dialog( "open" );
-		});	 
+		 });
 		 
-		function approvalLineOK (){
+		 function approvalLineOK (){
+
+				var valid = true;
+				 
+			      if ( valid ) {
+			        $( "#approvalLineOK" ).append( 
+			     		     
+			         "<table align=\"right\" cellspacing=\"0\" cellpadding=\"0\">"+
+			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"28\" bgcolor=\"#EAEAEA\" align=\"center\"><font style=\"font-size: 10pt; font-weight: bold;\">기안자</font></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"28\" align=\"center\"><font style=\"font-size: 9pt;\">session.userName</font></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"28\" align=\"center\"></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+			         
+			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"28\" align=\"center\"></td><td width=\"1\" height=\"\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "<tr><td width=\"110\" height=\"1\" bgcolor=\"#BDBDBD\"></td><td width=\"1\" height=\"1\" bgcolor=\"#BDBDBD\"></td></tr>"+
+			         "</table>"
+			        
+			        );
+			        dialog.dialog( "close" );
+			      }
+			      
+			return valid;	
+		}
+		 
+		form = dialog.find( "form" ).on( "submit", function( event ) {
+			 event.preventDefault();
+			 approvalLineOK();
+		});
 		
-			var elSel = document.getElementById('selectX');
-			
-			var params = "";
-						
-			$('[id^="applovalfLine"]').remove();
-					    
-		 	for(var i = 1; i < elSel.length; i++){
-		 		if(i!=1){
-		 			params += "&"
-		 		}		 			 	
-		 		params += "id"+i+"="+elSel.options[i].value; 	 		 		
-		 	}
-		 	
-		 	params += "&num="+elSel.length;
-		 	
-		 	$.ajax({
+		
+		function approvalLineTest (){
+		
+			if ($('.member').is(":checked")){
 				
-				url:'approvalLineOK_Ajax',
-				data:params,
-				type:'POST',
-					
-				error:function(args){
-					alert("에러");
-				},					
-				success: function(args){
-					$("#approvalLineOK").prepend(args);
-				}					
-			});
-		 	
-		 		 	
+				
+				
+				
+				
+				
+			}		
+			
 			dialog.dialog( "close" );
 		}
 		
-		$('[id^="dep-"]').click(function(){
-			
-			var src = ($(this).attr('src')==='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
-		     
-		    $(this).attr('src',src);
-		 
-			var obj = $('.'+ this.id);
-				
-			if(obj.css('display')=='none')
-				obj.show();
-			else
-				obj.hide();
-		});
-			
-		$('.check-all').click( function(){
-			$('.member').prop('checked',this.checked);
-		});	
-		
-		$('[id^="ch-"]').click(function(){
-						
-			num= $('.num'+this.id).val();
-				
-			$.ajax({
-				url:'approvalMemberList',
-				data:{num:num},
-				type:'POST',
-			
-				error:function(args){
-					
-				},
-				success: function(args){
-					$("#approvalMemberList").html(args);                           
-				}
-			});			
-		});
-			
-		$('.approvalLineAppend').click( function(){
-			
-			var elSel = document.getElementById('selectX');
-					
-			var mchk;
-			var chk = document.getElementsByName("member[]"); 
-			var len = chk.length;    
-			var checkRow = '';      
-			var checkCnt = 0;       
-			var checkLast = '';     
-			var rowid = '';         
-			var cnt = 0;             
-				
-			if (!$('.member').is(":checked")){
-				alert("결재자를 선택 하십시오.");
-				return;
-			}	
-			
-			for(var i=0; i<len; i++){
-				if(chk[i].checked == true){
-					checkCnt++;        
-					checkLast = i;     
-				}
-			} 
-			
-			if(checkCnt+elSel.length > 6){
-				alert("결재라인은 기안자를 포함하여 6명 까지 가능합니다.")
-				return;
-			}
-			
-			for(var i=0; i<len; i++){
-			
-				if(chk[i].checked == true){  
-
-					checkRow = chk[i].value;			            	
-
-					if(checkCnt == 1){       
-						rowid += "'"+checkRow+"'";
-					}else{                        
-						if(i == checkLast){        
-							rowid += "'"+checkRow+"'"; 
-						}else{
-							rowid += "'"+checkRow+"',";	         			
-						}
-					}
-					cnt++;
-					checkRow = '';    //checkRow초기화.
-				}
-			}
-								
-			mchk = rowid;
-					
-			for(var k=0; k < checkCnt; k++){
-				var a = rowid.split(",")
-			}
-				
-			for (var i = 0; i < a.length; i++){
-				
-				for(var j = 0; j < elSel.length; j++){
-					
-					var kn = a[i];		
-					kn = kn.substring(1, kn.length-1);
-					
-					if(kn == elSel.options[j].value){
-						alert("이미 등록되어 있습니다.");
-						return; 
-					}				
-				}			
-				
-				$.ajax({ 
-					url:'approvalOptionList',
-					data:{id:a[i]},
-					type:'POST',
-				
-					error:function(args){
-						alert("에러");
-					},
-					success: function(args){
-						$("#selectX").append(args);                           
-					}
-				});		
-			} 
-					
-			a = null;
-			
-		});
-		
-		$('.approvalLineRemove').click( function(){
-			
-			var elSel = document.getElementById('selectX');
-			var i;
-			
-			if(elSel.options[0].selected){
-				alert("기안자는 삭제할 수 없습니다.");
-				return;
-			}
-					
-			for (i = elSel.length - 1; i>=0; i--) {
-				if (elSel.options[i].selected) {
-					elSel.remove(i);
-				}
-			}
-		});
-		
-		
-		
-		
-		
-		$('#approvalLineUp').click( function(){  
-			       
-			$('#selectX option:selected').each(function(){   
-				var selectObj = $(this);
-				
-				if(selectObj.index()==1){
-	        		alert("기안자는 이동할 수 없습니다.");
-	        		return;
-	        	}
-				
-				if(selectObj.index()==0){ 
-					alert("기안자는 이동할 수 없습니다.");
-	        		return;
-				}
-				
-				var targetObj = $('#selectX option:eq('+(selectObj.index()-1)+')');   
-			          targetObj.before(selectObj);
-			}); 
-		});
-		
-	    $("#approvalLineDown").click(function(){     
-			
-			$('#selectX option:selected').each(function(){   
-	        	var selectObj = $(this);
-	        	
-	        	if(selectObj.index()==0){
-	        		alert("기안자는 이동할 수 없습니다.");
-	        		return;
-	        	}
-	        	
-	    		if(selectObj.index() == $('#selectX').children().length ){ 
-	    			return false; 
-	    		}       
-	        	var targetObj = $('#selectX option:eq('+(selectObj.index()+1)+')');
-	   			targetObj.after(selectObj);
-			}); 
-		});
-		
-		$('.approvalSave').click( function(){
-			
-			
-			
-			
-			
-			
-		});
-		
-		$('.approvalClose').click( function(){
-			window.close();	
-		});
-	    	    
-	    
+	
 	});
 	
 </script>
 
+
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		
-	    
-	    
+$(document).ready(function(){
+	
+	
+	$('.check-all').click( function(){
+		$('.member').prop('checked',this.checked);
 	});
-
-</script>
-
-<script type="text/javascript">
-
-	function sendIt(){
+	
+	
+	$('[id^="ch-"]').click(function(){
+					
+		num= $('.num'+this.id).val();
+			
+		$.ajax({
+			url:'approvalMemberList',
+			data:{num:num},
+			type:'POST',
+		
+			error:function(args){
+				alert("에러");
+			},
+			success: function(args){
+				$("#approvalMemberList").html(args);                           
+			}
+		});			
+	});
+		
+	$('.AppendLine').click( function(){
 		
 		var elSel = document.getElementById('selectX');
 		
-		f = document.approvalForm;
+		alert(elSel.length()); 
+		
+		if (!$('.member').is(":checked")){
+			alert("결재자를 선택 하십시오.")		
+		}	
 
-		str = f.subject.value;
-    	str = str.trim();
-        if(!str) {
-            alert("제목을 입력하십시오.");
-            f.subject.focus();
-            return;
-        }      
-        
-        str = f.contentArea.value;
-    	str = str.trim();
-        if(!str) {
-            alert("내용을 입력하십시오.");
-            f.contentArea.focus();
-            return;
-        }             
-        
-        if(elSel.length==1){
-        	alert("결재선을 지정하십시오.");
-        	return;
-        }
-           
-		alert("결재 상신 완료.");
+		var chk = document.getElementsByName("member[]"); // 체크박스객체를 담는다
+		var len = chk.length;    //체크박스의 전체 개수
+		var checkRow = '';      //체크된 체크박스의 value를 담기위한 변수
+		var checkCnt = 0;        //체크된 체크박스의 개수
+		var checkLast = '';      //체크된 체크박스 중 마지막 체크박스의 인덱스를 담기위한 변수
+		var rowid = '';             //체크된 체크박스의 모든 value 값을 담는다
+		var cnt = 0;             
+		
+		for(var i=0; i<len; i++){
+			if(chk[i].checked == true){
+				checkCnt++;        //체크된 체크박스의 개수
+				checkLast = i;     //체크된 체크박스의 인덱스
+			}
+		} 
+		
+		for(var i=0; i<len; i++){
+		
+			if(chk[i].checked == true){  //체크가 되어있는 값 구분
 
-		f.action = "<%=cp%>/approvalCreated_ok";
-		f.submit();
+				checkRow = chk[i].value;			            	
+
+				if(checkCnt == 1){                            //체크된 체크박스의 개수가 한 개 일때,
+					rowid += "'"+checkRow+"'";        //'value'의 형태 (뒤에 ,(콤마)가 붙지않게)
+				}else{                                            //체크된 체크박스의 개수가 여러 개 일때,
+					if(i == checkLast){                     //체크된 체크박스 중 마지막 체크박스일 때,
+						rowid += "'"+checkRow+"'";  //'value'의 형태 (뒤에 ,(콤마)가 붙지않게)
+					}else{
+						rowid += "'"+checkRow+"',";	 //'value',의 형태 (뒤에 ,(콤마)가 붙게)         			
+					}
+				}
+			cnt++;
+			checkRow = '';    //checkRow초기화.
+			}
+		}
+						
+		for(var k=0; k < checkCnt; k++){
+						
+			
+			$( "#selectX" ).append(				
+							
+				 "<option value=\"original\" selected=\"selected\" >"+
+				"앙 기뮤띠!@!!!!"+k+
+				"</option>" 
+			)	
+		}	
+	});
+	
+	$('.approvalLineRemove').click( function(){
+		
+		var elSel = document.getElementById('selectX');
+		var i;
+		
+		if(elSel.options[0].selected){
+			alert("기안자는 삭제할 수 없습니다.");
+			return;
+		}
 				
-	}
+		for (i = elSel.length - 1; i>=0; i--) {
+			if (elSel.options[i].selected) {
+				elSel.remove(i);
+			}
+		}
+	});
+	
+	$('#approvalLineUp').click( function(){  
+		       
+		$('#selectX option:selected').each(function(){   
+			var selectObj = $(this);
+			
+			if(selectObj.index()==1){
+        		alert("기안자는 이동할 수 없습니다.");
+        		return;
+        	}
+			
+			if(selectObj.index() == 0 ){ 
+				return false;
+			}
+			
+			var targetObj = $('#selectX option:eq('+(selectObj.index()-1)+')');   
+		          targetObj.before(selectObj);
+		}); 
+	});
+	
+    $("#approvalLineDown").click(function(){     
+		
+		$('#selectX option:selected').each(function(){   
+        	var selectObj = $(this);
+        	
+        	if(selectObj.index()==0){
+        		alert("기안자는 이동할 수 없습니다.");
+        		return;
+        	}
+        	
+    		if(selectObj.index() == $('#selectX').children().length ){ 
+    			return false; 
+    		}       
+        	var targetObj = $('#selectX option:eq('+(selectObj.index()+1)+')');
+   			targetObj.after(selectObj);
+		}); 
+	});
+    
+    
+});
+
 </script>
 
-
-<!-- 스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트스크립트 -->
-
-<title>결재 상신</title>
+<title></title>
 </head>
-<body>
+<body onload="sel()">
 
 <div id="approvalLine" title="결재선 지정">
 
@@ -540,6 +544,7 @@
 						<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 						<div>
 						<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
+						<a href="" style="text-decoration: none; color: black;">
 						<label id="ch-${depth0.buseoName}">${depth0.buseoName }</label>
 						<input type="hidden" class="numch-${depth0.buseoName }" value="${depth0.buseoNum }"></a>
 						</div>
@@ -673,7 +678,7 @@
 	<input type="button" value="위" id="approvalLineUp" /></a></br>
 	<input type="button" value="아래" id="approvalLineDown" /></a></br></br></br>
 	<input type="button" value="삭제" class="approvalLineRemove"/></br>
-	<input type="button" value="추가" class="approvalLineAppend"/>
+	<input type="button" value="추가" class="AppendLine"/>
 	
 	
 	</td>
@@ -684,7 +689,7 @@
 	<td width="1" bgcolor=""></td>
 	<td bgcolor="" colspan="5" style="font-size: 10pt">
 	<select id="selectX" multiple="multiple" style="width: 265px; height: 350px">
-		<option value="idididi">
+		<option value="original1">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결재자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직위&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;펀치상사&nbsp;&nbsp;&nbsp;&nbsp;
@@ -744,103 +749,88 @@
 	</table>
 </div> 
 
-<form action="" method="post" name="approvalForm">
-
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
+<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt; 
+	font-style: 나눔고딕코딩;font-weight: bolder;">&nbsp;&nbsp;일정관리</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="40"><td align="right" colspan="3" >
-<input type="button" value="결재선" class="approvalLineModal" />
-<input type="button" class="approvalSave" value="저장" />
-<input type="button" class="approvalClose" value="닫기"  />
-</td></tr>
-<tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
+<tr height="40">
+	<td align="right" colspan="3" >
+		<font style="font-style: 나눔고딕코딩;"><input type="button" name="approvalSave" value="저장" />
+		<input type="button" name="approvalClose" value="닫기"  /></font></td></tr> 
 </table>
 
-<table border="0" cellspacing="0" align="right"> 
-
-  <div id="approvalLineOK" align="right">
-
-  </div>
-
-  <table id="Approval2" class="" align="right" cellspacing="0" cellpadding="0">
-  <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" bgcolor="#EAEAEA" align="center"><font style="font-size: 10pt; font-weight: bold;">기안</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
-  
-  <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">session.userName</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
-  
-  <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" align="center"></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
-  
-  <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" align="center"></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
-  
-  <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  </table>
-  <table id="ApprovalFirst" class="" align="right" cellspacing="0" cellpadding="0">
-  <tr><td width="1" height="1" bgcolor="#BDBDBD"></td><td width="13" bgcolor="#BDBDBD"></td><td width="1" bgcolor="#BDBDBD"></td></tr>
-	  <tr>
-	  <td width="1" bgcolor="#BDBDBD"></td>
-	  <td width="16" height="115" bgcolor="#EAEAEA" align="center">
-		  <font style="font-size: 9pt; font-weight: bold;">결</br>재</br>라</br>인</br></font>
-	  </td>
-	  <td width="1" bgcolor="#BDBDBD"></td>
-	  </tr>
-  <tr><td width="1" height="1" bgcolor="#BDBDBD"></td><td width="13" bgcolor="#BDBDBD"></td><td width="1" bgcolor="#BDBDBD"></td></tr>
-  </table>
-  
-
-
-</table>
-
+<form method="get" name="myform">
 <table align="center" width="100%" cellpadding="0" cellspacing="0">
-
-<tr height="20"><td colspan="3"></td></tr> <!-- 공백라인 -->
-
-<tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
+<tr>
+	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0" 
+		width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; 
+		font-style: 나눔고딕코딩;font-weight: bolder;">제목</font></td>
+	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-left-width: 0; 
+		border-bottom-width: 0" height="30" bgcolor="#E4F7BA">&nbsp;&nbsp;&nbsp;<input type="text" style="font-size:11pt; 
+		border-color:#E0E0E0; border-width: 1px; border-style: solid; width: 70%; height: 18px;"/></td></tr> 
+		
+<tr>
+	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0" 
+		width="150" height="30" bgcolor="#F6F6F6" align="center"> <font style="font-size: 11pt; 
+		font-style: 나눔고딕코딩;font-weight: bolder;">일자</font></td>
+	<td style="border-color:#CCCCCC; border-width: 1px; border-style: solid; border-left-width: 0; 
+		border-bottom-width: 0" height="30">&nbsp;&nbsp;&nbsp;<input  type="text" id="calendar" name="calendar"/></td></tr> 
 
 <tr>
-<td width="150" height="30" bgcolor="#E4F7BA" align="center"> <font style="font-size: 11pt; font-style: 나눔고딕코딩;font-weight: bolder;">제목</font></td>
-<td width="1" bgcolor="#8C8C8C"></td>
-<td height="30" bgcolor="#E4F7BA" align="center"><input name="subject" type="text" style="width: 90%; height: 40"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-</tr> 
+	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0" 
+		width="150" height="30" bgcolor="#F6F6F6" align="center"> <font style="font-size: 11pt; 
+		font-style: 나눔고딕코딩;font-weight: bolder;">시간</font></td>
+	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-left-width: 0; 
+		border-bottom-width: 0" height="30">&nbsp;&nbsp;
+		<select name="stH" onchange="stH()"></select>&nbsp;:
+		<select name="stMin" onchange="stMin()"></select>&nbsp;~
+		<select name="endH" onchange="endH()"></select>&nbsp;:
+		<select name="endMin" onchange="endMin()"></select></td></tr> 
 
-<tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-
-<tr><td colspan="3">
+<tr>
+	<td colspan="3">
                         
     <textarea name="contentArea" id="editor1" rows="10" cols="80">
     
-    	${dto.approvalFormContent}
+    	
     
 	</textarea>        
                         
 	<script>		
 		CKEDITOR.replace( 
 		'editor1',{
-			toolbar : 'Basic',     	
+			toolbar : 'Standard',     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
 			height : '500'        //---높이값
 			}
 		);    
-	</script>          
-          
-</td></tr>
-	
-	<div id="approvalLineInput" align="right">
+	</script></td></tr>
 
-  	</div>
-	
-
-<tr height="60"><td colspan="4" align="center">
-<input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="approvalUp" value="결재상신" onclick="sendIt();"/></td></tr>
-<!-- <button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="sendIt();">등록하기</button> -->
+<tr height="60">
+	<td colspan="4" align="center">
+		<input type="button" name="approvalUp" value="결재상신" 
+		onclick="window.open('http://localhost:8080/erp/approvalCreated_ok')"/></td></tr>
 </table>
 </form>
 
 </body>
+
+<script type="text/javascript">
+
+	$("#calendar").datepicker({
+		
+		changeMonth: true,
+		changeYear: true,
+		showOn: 'button',
+		buttonImageOnly: true
+	});
+	
+	$('img.ui-datepicker-trigger').css({'cursor':'pointer','margin-left':'0px', 'margin-top':'0px'});
+	
+	$.datepicker.setDefaults({dateFormat:'yy-mm-dd'});
+
+</script>
+
 </html>

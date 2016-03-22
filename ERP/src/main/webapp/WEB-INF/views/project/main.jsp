@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String cp = request.getContextPath();
 %>
@@ -57,7 +58,7 @@ $(document).ready(function(){
 
 </script>
 </head>
-<body>
+<body style="width: 100%">
 
 <div style="width:100%; height: 807px;">
 
@@ -98,12 +99,9 @@ $(document).ready(function(){
 	<div class="line">
 		<div id="name" class="ma">공지사항</div>
 			<div class="sub" id="content"  >
-				<div>1</div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-				<div>6</div>
+				<c:forEach var="notice" items="${notice }">
+					<div>● ${notice.subject }</div>
+				</c:forEach>
 			</div>
 	</div>
 	
