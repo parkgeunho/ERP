@@ -146,21 +146,39 @@ $(document).ready(function(){
 
 	<div style="margin-top: 20px;" class="line">
 			<div id="birth" class="ma">기념일</div>
-			<div id="do1" class="sub">
+			<div id="do1" class="sub" style="font-size: 10pt;">
 			
 			
 			
-			
-			<div style=":absolute; width:200px; height:60px; overflow:hidden;">
-				<div style=":relative;" id="banner_1">
-				<a href="#" style="display:block; height:60px;">테스트1</a>
-				<a href="#" style="display:block; height:60px;">테스트2(이미지도 OK)</a>
-				<a href="#" style="display:block; height:60px;">테스트3</a>
-				<a href="#" style="display:block; height:60px;">테스트4</a>
-				<a href="#" style="display:block; height:60px;">테스트5</a>
+			<div style="width: 265px;height: 175px; float: left;" align="center">
+			<span style="font-size: 15pt;">이번달 생일자</span>
+				<div style=":absolute; width:265px; height:175px; overflow:hidden;">
+					<div style=":relative;" id="banner_1" align="center">
+					<c:forEach var="dto" items="${nowBirth}">
+					<a href="#" style="display:block; height:175px;  "  >
+					${dto.seatPoint }<br>
+					${dto.name }님 생일을 축하드립니다.<br>
+					<img alt="" src="/erp/resources/image/birth.png">
+					
+					</a>
+					
+					
+					</c:forEach>
+					</div>
 				</div>
 			</div>
 			
+			<div style="width: 19px; height: 150px; border-right: 1px solid; float: left; margin-top: 10px;"></div>
+			<div style="width: 20px; height: 175px; float: left;"></div>
+			
+			<div style="width: 265px; height: 175px; float: left; " align="center">
+				<span style="font-size: 15pt;">다음달 생일자</span>
+			
+			
+			
+			
+			
+			</div>
 			
 			
 			
@@ -202,7 +220,7 @@ $(document).ready(function(){
 	
 	
 <script>
-banner_roll("banner_1", 60, 2000, 20, 0);
+banner_roll("banner_1", 175, 2000, 20, 0);
 </script>
 	
 

@@ -67,21 +67,22 @@ public class HomeController {
 		List<MemberDTO> mlists = Memberdao.memberList(hmap);
 		
 		SimpleDateFormat test = new SimpleDateFormat("yyMMdd");
+		SimpleDateFormat births = new SimpleDateFormat("MM월dd일");
 		Iterator<MemberDTO> it = mlists.iterator();
 		
-		List<MemberDTO> brithlist = new ArrayList<MemberDTO>();
-			
+		List<MemberDTO> nowBirth = new ArrayList<MemberDTO>();
+		List<MemberDTO> nextBirth = new ArrayList<MemberDTO>();	
 		Calendar cal = Calendar.getInstance();
-		String noe = test.format(new Date());
+		String nowMonth = test.format(new Date()).substring(2, 4);
 		
-		
+		System.out.println("확인 +"+births.format(new Date()));
 
-	
+		System.out.println("noe = "+nowMonth);
 		
 		cal.add(Calendar.MONTH, 1);
-		String next = test.format(cal.getTime());
+		String nextMonth = test.format(cal.getTime()).substring(2, 4);
 		
-		System.out.println("next=" + next);
+		System.out.println("next=" + nextMonth);
 		
 		
 		
@@ -90,9 +91,22 @@ public class HomeController {
 			MemberDTO mdto = it.next();
 			
 			String date = mdto.getJumin();
-			/*System.out.println("?"+date);*/
-			date = date.substring(2, 6);
+			System.out.println("?"+date);
+			String month = date.substring(2,4) + "월";
+			String day = date.substring(4,6) + "일";
+			String birth = month + day;
+			System.out.println("머지" + birth);
+			mdto.setSeatPoint(birth);
+			date = date.substring(2, 4);
 			System.out.println("짤린거확인" + date);
+			if(date.equals(nowMonth)){
+				System.out.println("걸린에" + mdto.getName());
+				nowBirth.add(mdto);
+			}
+			
+			if(date.equals(nextMonth)){
+				nextBirth.add(mdto);
+			}
 			
 			
 		}
@@ -101,8 +115,8 @@ public class HomeController {
 		
 		
 		
-		
-		request.setAttribute("brithlist", brithlist);
+		request.setAttribute("nextBirth", nextBirth);
+		request.setAttribute("nowBirth", nowBirth);
 		request.setAttribute("dto", LoginDTO);
 	
 		request.setAttribute("notice", lists);
