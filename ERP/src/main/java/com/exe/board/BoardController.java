@@ -53,9 +53,15 @@ public class BoardController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
+
+	/*@Autowired
+	@Qualifier("BoardFileDAO")
+	BoardFileDAO boardfileDAO;*/
+
 	@Autowired
 	@Qualifier("boardFileDAO")
 	BoardFileDAO boardfileDAO;
+
 	
 	@RequestMapping(value="/board/created.action")
 	  public String created(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -334,6 +340,7 @@ public class BoardController {
 	      String listNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
+
 	      
 	      HttpSession session = request.getSession();
 	      session.setAttribute("cklistNum", listNum);
@@ -341,7 +348,7 @@ public class BoardController {
 	      BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
 	      
 	      
-	      
+
 	      mav.setViewName("/board/article");
 	      mav.addObject("listDTO",listDTO);
 	      mav.addObject("listNum",listNum);
@@ -455,7 +462,7 @@ public class BoardController {
 			request.setAttribute("maxNum", maxNum);
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
-			request.setAttribute("boardlist", boardlist);			
+			request.setAttribute("boardlist", boardlist);
 
 		  return "boardMain";
 	  }
@@ -479,11 +486,11 @@ public class BoardController {
 		    	  listNum = Integer.parseInt(cklistNum);
 		      }
 			  
+
 		      
 		      session.removeAttribute("cklistNum");
 			ListDTO lDTO = listDAO.readData(listNum);
-		      
-		  	
+
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
 			  
 			  String read[] = null;
@@ -523,36 +530,31 @@ public class BoardController {
 			  Rlist.removeAll(Rlist);
 			  read = lDTO.getMemberR().split(",");
 			  Collections.addAll(Rlist, read);
+
 			  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
-			  
-			  
-		
-			  
-			 
-			 
-			 
-			 
-			 
 			 
 			  System.out.println("memberCheck" + memberCheck);
 		      System.out.println("buseoCheck" + buseoCheck);
 			 
-			 
-			 
-			 
 			  if(!buseoCheck && !memberCheck){
-				  
-				 return "read-error";
+				  return "read-error";
+				
 				 /* try {
+>>>>>>> refs/remotes/origin/master
 			            
 			            PrintWriter writer = response.getWriter();
 
 			            writer.println("<script type='text/javascript'>");
 
+<<<<<<< HEAD
+			            writer.println("alert('읽기권한이없습니다.');");
+			            
+=======
 			            writer.println("alert('권한없단다~');");
 
 			            writer.println("history.go()");
 
+>>>>>>> refs/remotes/origin/master
 			            writer.println("</script>");
 
 			            writer.flush();
@@ -569,7 +571,8 @@ public class BoardController {
 				  
 				  
 			  }
-			  	  
+
+			  
 			  
 			  
 		      if(pageNum != null)
@@ -578,6 +581,8 @@ public class BoardController {
 		      String searchKey = request.getParameter("searchKey");
 		      String searchValue = request.getParameter("searchValue");
 		      
+		      System.out.println("searchKey"+searchKey);
+		      System.out.println("searchValue"+searchValue);
 		      if(searchKey==null){
 		         
 		         searchKey = "subject";

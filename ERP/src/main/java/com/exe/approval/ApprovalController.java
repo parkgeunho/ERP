@@ -50,11 +50,7 @@ public class ApprovalController {
 		String userId = LoginDTO.getId();
 		
 		List<ApprovalDTO> listDTO = approvalDAO.approvalList(userId);
-				
-		String haha = "섹스섹스보지털";
 		
-		
-		request.setAttribute("haha", haha);
 		request.setAttribute("LoginDTO", LoginDTO);
 		request.setAttribute("listDTO", listDTO);
 		

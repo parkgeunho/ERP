@@ -58,7 +58,7 @@ $(document).ready(function(){
 
 </script>
 </head>
-<body>
+<body style="width: 100%">
 
 <div style="width:100%; height: 807px;">
 

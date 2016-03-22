@@ -3,7 +3,10 @@ package com.exe.member;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -590,6 +593,60 @@ public class MemberController {
 		
 		
 		return "redirect:/main";
+	}
+	
+	@RequestMapping(value = "/searchPop.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String searchPop(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String searchKey = request.getParameter("searchKey");
+		String searchValue = request.getParameter("searchValue");
+		
+		if(null==searchKey){
+			
+			searchKey="usernum";
+			searchValue="";
+			
+			return "member/searchPop";
+		}
+		
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("searchKey", searchKey);
+		hMap.put("searchValue", searchValue);
+		
+		
+		
+		List<MemberDTO> lists = dao.memberList(hMap);
+		
+		
+		
+		request.setAttribute("lists", lists);
+		
+		
+		
+		
+		
+		return "member/searchPop";
+	}
+	
+
+	@RequestMapping(value = "/search_ok.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String search_ok(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		String imagePath = request.getContextPath() + "/resources/memberImage";
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("imagePath", imagePath);
+		
+		
+		
+		return "member/smallView";
 	}
 	
 	

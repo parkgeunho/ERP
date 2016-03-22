@@ -19,7 +19,14 @@ $(document).ready(function(){
     $("#b").click(function(){
     	
     	
-    	
+    	/*  if($(".dtonumber").css("display") == "none"){
+    	      $(".dtonumber").show();
+    	  } else {
+    	      $(".dtonumber").hide();
+    	  }
+    	 */
+    	$(".dtonumber").slideToggle("slow");
+    	 
         $("#a").slideToggle("slow");
        
         var a = ($(this).text()=='▽')?'△':'▽';
@@ -83,10 +90,28 @@ $(document).ready(function(){
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+	
+		<div align="center" class="dtonumber" style="margin-left: 47%;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 1085px;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 1270px;">0</div>
+		<div style="width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;">
+		
+			<img alt="" src="${imagePath}/${dto.upload}" style="width: 80px; height: 80px; border-radius:100%">
+		</div>
+	
+		
+		<div align="center" style="padding-left:3px;  padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+			<img style="margin-top: 10px;" src="/erp/resources/image/memo.png">
+		</div>
+		
+		<div align="center" style="padding-left:10px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+			
+			<img style="margin-top: 10px;" src="/erp/resources/image/check.png">
+		</div>
+		
+		<div align="center" style=" padding-left:3px;padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+		<img style="margin-top: 10px;" src="/erp/resources/image/calender.png">
+		</div>
 		
 	<div style="float: left;">
 	
@@ -94,9 +119,9 @@ $(document).ready(function(){
 	
 	</div>
 	
-	<div style="font-size: 8pt; border-bottom: 2px solid orange; height: 10px; background-color: white;">
+	<div style="font-size: 8pt; border-bottom: 2px solid #2E9926; height: 10px; background-color: white;">
 	
-	<div  id="b" style="width: 50px; background-color: orange; float: right; margin-right: 10px;border-top-left-radius : 5px;
+	<div  id="b" style="width: 50px; background-color: #2E9926; float: right; margin-right: 10px;border-top-left-radius : 5px;
 	border-top-right-radius : 5px;" align="center">▽</div>
 	
 	</div>

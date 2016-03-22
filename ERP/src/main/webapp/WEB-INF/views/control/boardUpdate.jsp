@@ -80,26 +80,26 @@ $('[id^="ckMem-"]').click(function(){
 					<div style="border-bottom: 1px solid;height: 30px;"></div>
 					<div style="float: left; width: 200px; padding-top: 10px; ">
 					
-						<div style="height: 35px; border-bottom: 1px solid;" >게시판명</div>
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;" >게시판명</div>
 					
 					</div>
 					
 					
 					<div style="float: left; padding-top: 10px; width: 540px;">
-						<div style="height: 35px; border-bottom: 1px solid;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
 						<input type="hidden" name="num" value="${boardData.listNum }">
 						</div>
 					
 					</div>
 					
-						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
-							<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid; line-height: 50px;" align="center">
+						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; border: 1px solid #D5D5D5; ">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; solid; line-height: 50px;" align="center">
 							
 								<div style="width: 229px;float: left;"> 
 								<label style="font: bolder; font-size: 20px;">리스트</label> 	
 								</div>
-								<div style="width: 120px; float: left; border-left: 1px solid;" align="center">
-									<label style="font: bolder; font-size: 20px;">권한&삭제</label>
+								<div style="width: 120px; float: left; border-left: 1px solid #BDBDBD;" align="center">
+									<label style="font: bolder; font-size: 20px;">권한 / 삭제</label>
 								</div>
 							</div>
 							<div>
@@ -161,9 +161,9 @@ $('[id^="ckMem-"]').click(function(){
 							</div>
 						</div>
 						
-						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
+						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 35px; border: 1px solid #D5D5D5;" id="boardSide">
 							<div>
-								<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; line-height: 50px;" align="center">
+								<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
 									<label style="font: bolder; font-size: 20px;">정 보</label> 	
 								</div>
 								<div style="height: 210px; width: 350px;">
@@ -178,19 +178,19 @@ $('[id^="ckMem-"]').click(function(){
 								<br/>
 								</div>
 								
-								<div style="height: 210px; width: 350px; border-top: 1px solid;" align="left">
+								<div style="height: 210px; width: 350px; border-top: 1px solid #BDBDBD;" align="left">
 									
-									<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; line-height: 50px;" align="center">
+									<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
 										<label style="font: bolder; font-size: 20px;">권한 수정</label> 	
 									</div>
 									
 									
-									<div style="float: left; width: 110px;">
+									<div style="float: left; width: 110px; margin-top: 60px;">
 										글쓰기 권한
 									
 									</div>
 									
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 										쓰기가능<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="write" checked="checked" name="writeck">
@@ -201,7 +201,7 @@ $('[id^="ckMem-"]').click(function(){
 										</c:if>
 									</div>
 								
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 									쓰기불가<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="non" name="writeck">

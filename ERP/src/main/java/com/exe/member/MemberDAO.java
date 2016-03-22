@@ -1,6 +1,7 @@
 package com.exe.member;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,6 @@ public class MemberDAO {
 	public void insertData(MemberDTO dto){
 		
 		sessionTemplate.insert("com.exe.member.insertData",dto);
-		
 		
 		
 	}
@@ -142,6 +142,14 @@ public class MemberDAO {
 	public void deleteData(int num){
 		
 		sessionTemplate.delete("com.exe.member.deleteData", num);
+	}
+	
+	public List<MemberDTO> memberList(Map<String, Object> hmap){
+		
+		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.member.memberList",hmap);
+		
+		return lists;
+		
 	}
 	
 	

@@ -1,177 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
-	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
-	
+   "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+   
 <tiles-definitions>
 
-	<definition name="temp" template="/WEB-INF/views/layout.jsp">
-		<put-attribute name="title"		value="타일즈테스트" />
-		
-		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
-		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
-		<put-attribute name="main"	value="/WEB-INF/views/project/main.jsp" />
-	</definition>
-	
-	<definition name="rightCalendar" extends="temp">
-		<put-attribute name="main" value="scheduleMain">
-			<definition extends="scheduleMain">
-				<put-attribute  name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp"/>
-			</definition>
-		</put-attribute>
-	</definition>
-	
-	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
-		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp" />
-	</definition>
-	
+   <definition name="temp" template="/WEB-INF/views/layout.jsp">
+      <put-attribute name="title"      value="타일즈테스트" />
+      
+      <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />
+      <put-attribute name="menu"      value="/WEB-INF/views/project/sidemenu.jsp" />
+      <put-attribute name="main"   value="/WEB-INF/views/project/main.jsp" />
+   </definition>
+   
+   <!-- ///////////////////////////일정 시작////////////////////////////////////////// -->    
+
+    <definition name="scheTile" extends="temp">
+      <put-attribute name="main" value="scheduleMain" />
+   </definition>
+   
+   <definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain2.jsp">
+      <put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
+   </definition>
+   
+   <!-- <definition name="rightCalendar" extends="temp">
+      <put-attribute name="main" value="scheduleMain">
+         <definition extends="scheduleMain">
+            <put-attribute  name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp"/>
+         </definition>
+      </put-attribute>
+   </definition> -->
+   
+   <!-- <definition name="scheduleMain2" extends="temp">
+      <put-attribute name="main" value="scheduleMain">
+         <definition extends="scheduleMain">
+            <put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp"/>
+         </definition>
+      </put-attribute>
+   </definition>
+   
+   <definition name="leftCalendar" extends="temp">
+      <put-attribute name="main" value="scheduleMain">
+         <definition extends="scheduleMain">
+            <put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
+         </definition>
+      </put-attribute>
+   </definition> -->
+   
+   <!-- ///////////////////////////일정 끝////////////////////////////////////////// -->
+   
         <!-- 아래 name을 "/sample/egovSampleList"라고 정합니다.
                "/sample/egovSampleLIst"는 컨트롤러가 리턴하는 값입니다.
                컨트롤러에서 리턴할 때 맨앞에 "/"가 포함되어 있다는 점을 잊지 마세요. -->
+               
      <definition name="info" template="/WEB-INF/views/layout.jsp">
-		<put-attribute name="title"		value="타일즈테스트" />
-		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
-		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
-		<put-attribute name="main"	value="/WEB-INF/views/member/join.jsp" />
-	</definition>      
-
-    <definition name="scheTile" extends="temp">
-		<put-attribute name="main" value="scheduleMain" />
-	</definition>
-	
-	<definition name="buseo" extends="temp">
-		<put-attribute name="main" value="Buseocontrol" />
-	</definition>
-	
-	<definition name="Buseocontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
-		<put-attribute name="rightMain" value="/WEB-INF/views/project/ManagementView.jsp" />
-	</definition>
-	
-	<definition name="boardtest" extends="temp">
-		<put-attribute name="main" value="Boardcontrol" />
-	</definition>
-	
-	<definition name="Boardcontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
-		<put-attribute name="rightMain" value="/WEB-INF/views/control/boardControl.jsp" />
-	</definition>
-	
-	<definition name="boardMain" extends="temp">
-		<put-attribute name="main" value="/WEB-INF/views/board/boardMain.jsp" />
-	</definition>
-	
-	<definition name="BoardTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/board/boardSide.jsp" />
-		<put-attribute name="rightMain" value="/WEB-INF/views/board/list.jsp" />
-	</definition>
-
-	<!-- <definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
-		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp" />
-	</definition> -->	
-	
-	<definition name="scheduleMain2" extends="temp">
-		<put-attribute name="main" value="scheduleMain">
-			<definition extends="scheduleMain">
-				<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp"/>
-			</definition>
-		</put-attribute>
-	</definition>
-	
-	<definition name="leftCalendar" extends="temp">
-		<put-attribute name="main" value="scheduleMain">
-			<definition extends="scheduleMain">
-				<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
-			</definition>
-		</put-attribute>
-	</definition>
-
-	
-	<!-- <definition name="leftCalendar" extends="temp">
-		<put-attribute name="main" value="scheduleMain">
-			<definition extends="scheduleMain">
-				<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
-			</definition>
-		</put-attribute>
-	</definition> -->
-	
-	<!-- <definition name="rightCalendar" extends="temp">
-		<put-attribute name="main" value="scheduleMain">
-			<definition extends="scheduleMain">
-				<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp"/>
-			</definition>
-		</put-attribute>
-	</definition> -->
-	
-	
-	
-	
-	
-	<!-- 결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역 -->
-	
-	
-	<definition name="approvalTile" extends="temp">
-		<put-attribute name="main" value="approvalMain" />
-	</definition>
-	
-	<definition name="approvalMain" template="/WEB-INF/views/approval/approvalMain.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/approval/approvalLeft.jsp" />
-		<!-- <put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" /> -->
-		<put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" />
-	</definition>
-	
-	<definition name="buseo" extends="temp">
+      <put-attribute name="title"      value="타일즈테스트" />
+      <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />
+      <put-attribute name="menu"      value="/WEB-INF/views/project/sidemenu.jsp" />
+      <put-attribute name="main"   value="/WEB-INF/views/member/join.jsp" />
+   </definition>  
+   
+   <definition name="buseo" extends="temp">
       <put-attribute name="main" value="Buseocontrol" />
-   	</definition>
-	
+   </definition>
+   
+   <definition name="Buseocontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
+      <put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
+      <put-attribute name="rightMain" value="/WEB-INF/views/project/ManagementView.jsp" />
+   </definition>
+   
+   <definition name="boardtest" extends="temp">
+      <put-attribute name="main" value="Boardcontrol" />
+   </definition>
+   
+   <definition name="Boardcontrol" template="/WEB-INF/views/schedule/layoutMain.jsp">
+      <put-attribute name="leftMain" value="/WEB-INF/views/control/controlMenu.jsp" />
+      <put-attribute name="rightMain" value="/WEB-INF/views/control/boardControl.jsp" />
+   </definition>
+   
+   <definition name="boardMain" extends="temp">
+      <put-attribute name="main" value="/WEB-INF/views/board/boardMain.jsp" />
+   </definition>
+   
+   <definition name="BoardTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
+      <put-attribute name="leftMain" value="/WEB-INF/views/board/boardSide.jsp" />
+      <put-attribute name="rightMain" value="/WEB-INF/views/board/list.jsp" />
+   </definition>
+   
+   <definition name="approvalTile" extends="temp">
+      <put-attribute name="main" value="approvalMain" />
+   </definition>
+   
+   <definition name="approvalMain" template="/WEB-INF/views/approval/approvalMain.jsp">
+      <put-attribute name="leftMain" value="/WEB-INF/views/approval/approvalLeft.jsp" />
+      <put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" />
+   </definition>
 
-	
-
-
-
-
-
-
-	<!-- 결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역 -->
-
-
-
-
-
-
-
-	<!-- <definition name="scheTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
-		<put-attribute name="title"		value="타일즈테스트" />
-		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
-		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
-		<put-attribute name="leftMain"	value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
-		<put-attribute name="rightMain"	value="/WEB-INF/views/schedule/scheduleRight.jsp" />
-	</definition>
-	
-	<definition name="scheduleMain" extends="scheTile">
-		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
-	</definition> -->
-
-
-	<definition name="insa" extends="temp">
-		<put-attribute name="main"	value="/WEB-INF/views/project/ManagementView.jsp" />
-	</definition>
-	
-	<definition name="ep" template="/WEB-INF/views/layout2.jsp">
-		<put-attribute name="title"		value="타일즈테스트" />
-		<put-attribute name="header"	value="/WEB-INF/views/project/menubar.jsp" />
-		<put-attribute name="menu"		value="/WEB-INF/views/project/sidemenu.jsp" />
-		<put-attribute name="leftmenu"		value="/WEB-INF/views/ex.jsp" />
-		<put-attribute name="left2main"	value="/WEB-INF/views/ex2.jsp" />
-	</definition>
-	
-	<definition name="ep1" extends="ep">
-		<put-attribute name="left2main"	value="/WEB-INF/views/ex3.jsp" />
-	</definition>
-	
-</tiles-definitions>		
-
+   <definition name="insa" extends="temp">
+      <put-attribute name="main"   value="/WEB-INF/views/project/ManagementView.jsp" />
+   </definition>
+   
+   <definition name="ep" template="/WEB-INF/views/layout2.jsp">
+      <put-attribute name="title"      value="타일즈테스트" />
+      <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />
+      <put-attribute name="menu"      value="/WEB-INF/views/project/sidemenu.jsp" />
+      <put-attribute name="leftmenu"      value="/WEB-INF/views/ex.jsp" />
+      <put-attribute name="left2main"   value="/WEB-INF/views/ex2.jsp" />
+   </definition>
+   
+   <definition name="ep1" extends="ep">
+      <put-attribute name="left2main"   value="/WEB-INF/views/ex3.jsp" />
+   </definition>
+   
+</tiles-definitions>      
 
 
 

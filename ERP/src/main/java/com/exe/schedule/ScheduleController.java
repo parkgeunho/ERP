@@ -1,6 +1,7 @@
 package com.exe.schedule;
 
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +38,8 @@ public class ScheduleController {
 		return "scheduleMain2";
 	}
 
-	@RequestMapping(value = "/preCal", method={RequestMethod.GET,RequestMethod.POST})
-	public String preCal(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/calChange", method={RequestMethod.GET,RequestMethod.POST})
+	public String calChange(HttpServletRequest request,HttpServletResponse response) {
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -102,4 +103,68 @@ public class ScheduleController {
 		
 		return "schedule/scheduleRight2";
 	}
+
+	@RequestMapping(value = "/test2", method={RequestMethod.GET,RequestMethod.POST})
+	public String test2() {
+		
+		return "schedule/test2";
+	}
+	
+	@RequestMapping(value = "/scheduleCreated", method={RequestMethod.GET,RequestMethod.POST})
+	public String scheduleCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		
+		String stY, stM, stD, stH, stMin;
+		String endY, endM, endD, endH, endMin;
+		
+		StringTokenizer st = new StringTokenizer(start,".");
+		stY = st.nextToken();
+		stM = st.nextToken();
+		stD = st.nextToken();
+		stH = st.nextToken();
+		stMin = st.nextToken();
+		
+		st = new StringTokenizer(end,".");
+		endY = st.nextToken();
+		endM = st.nextToken();
+		endD = st.nextToken();
+		endH = st.nextToken();
+		endMin = st.nextToken();
+		
+		request.setAttribute("stY", stY);
+		request.setAttribute("stM", stM);
+		request.setAttribute("stD", stD);
+		request.setAttribute("stH", stH);
+		request.setAttribute("stMin", stMin);
+		request.setAttribute("endY", endY);
+		request.setAttribute("endM", endM);
+		request.setAttribute("endD", endD);
+		request.setAttribute("endH", endH);
+		request.setAttribute("endMin", endMin);
+		
+		return "schedule/scheduleCreated";
+	}
 }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

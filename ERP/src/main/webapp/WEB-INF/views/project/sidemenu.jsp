@@ -29,6 +29,14 @@
 		
 		
 	}
+	
+	function searchPop(){
+		
+		window.open("searchPop.action","","width=400px,height=580px");
+		
+		
+		
+	}
 
 
 </script>
@@ -46,16 +54,19 @@
 	</div>
 	
 	
-	<a href="#" onClick="window.open('http://localhost:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;">
-	<div class="Smenu" ><img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
+	
+	<div class="Smenu" onClick="window.open('http://localhost:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;" >
+	
+	<img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
 	결재 작성
 	</div>
-	</a>
 	
 	
+	<a href="javascript:searchPop();">
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
 	직원 검색
 	</div>
+	</a>
 	
 
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>
@@ -66,11 +77,11 @@
 	환경설정
 	</div>
 	
-	<a href="javascript:logout();">
-	<div class="Smenu"><img style="margin-top: 10px; width: 32px; height: 32px;" src="/erp/resources/image/out2.jpg"><br/>
+	
+	<div class="Smenu" onclick="javascript:logout();"><img style="margin-top: 10px; width: 32px; height: 32px;" src="/erp/resources/image/out.png"><br/>
 	로그아웃
 	</div>
-	</a>
+	
 	
 </div>
 </body>
