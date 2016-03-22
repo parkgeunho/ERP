@@ -28,12 +28,16 @@ public class HomeController {
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
+		
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		request.setAttribute("LoginDTO", LoginDTO);
 		
+		String imagePath = request.getContextPath() + "/resources/memberImage";
 		List<BoardDTO> lists = BoardDAO.getNotice();
 		
+		request.setAttribute("dto", LoginDTO);
+		request.setAttribute("imagePath",imagePath);
 		request.setAttribute("notice", lists);
 		
 		return "temp";

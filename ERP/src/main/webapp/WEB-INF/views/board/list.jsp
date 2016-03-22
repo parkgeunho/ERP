@@ -24,7 +24,7 @@ function article(listNum,boardNum) {
 	}
 
 
-	function sendIt(){
+<%-- 	function sendIt(){
 		
 		var f = document.searchForm;
 		
@@ -32,7 +32,7 @@ function article(listNum,boardNum) {
 		f.submit();
 		
 		
-	}
+	} --%>
 
 
 </script>
@@ -49,12 +49,12 @@ ${LDTO.boardName}
 	<tr style="height: 30px">			
 		<td style="width: 1500px" align="left" colspan="6">
 		<form action="" name="searchForm" method="post">
-				<select name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
+				<select id="searchKey"  name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
 					<option value="subject">제목</option>
 					<option value="name">작성자</option>
 					<option value="content">내용</option>
 				</select>	
-						<input type="text" name="searchValue" class="textField" style="width: 150px; height: 20px;">
+						<input type="text" name="searchValue" id="searchValue" class="textField" style="width: 150px; height: 20px;">
 						<img  title="찾기" alt="" src="/erp/resources/boardimage/search006.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <input type="button" value="상세"  onclick="" >	 -->
 			</form>	

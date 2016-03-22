@@ -486,11 +486,11 @@ public class BoardController {
 		    	  listNum = Integer.parseInt(cklistNum);
 		      }
 			  
+
 		      
 		      session.removeAttribute("cklistNum");
 			ListDTO lDTO = listDAO.readData(listNum);
-		      
-		  	
+
 		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
 			  
 			  String read[] = null;
@@ -530,36 +530,31 @@ public class BoardController {
 			  Rlist.removeAll(Rlist);
 			  read = lDTO.getMemberR().split(",");
 			  Collections.addAll(Rlist, read);
+
 			  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
-			  
-			  
-		
-			  
-			 
-			 
-			 
-			 
-			 
 			 
 			  System.out.println("memberCheck" + memberCheck);
 		      System.out.println("buseoCheck" + buseoCheck);
 			 
-			 
-			 
-			 
 			  if(!buseoCheck && !memberCheck){
-				  
-				 return "read-error";
+				  return "read-error";
+				
 				 /* try {
+>>>>>>> refs/remotes/origin/master
 			            
 			            PrintWriter writer = response.getWriter();
 
 			            writer.println("<script type='text/javascript'>");
 
+<<<<<<< HEAD
+			            writer.println("alert('읽기권한이없습니다.');");
+			            
+=======
 			            writer.println("alert('권한없단다~');");
 
 			            writer.println("history.go()");
 
+>>>>>>> refs/remotes/origin/master
 			            writer.println("</script>");
 
 			            writer.flush();
@@ -576,7 +571,8 @@ public class BoardController {
 				  
 				  
 			  }
-			  	  
+
+			  
 			  
 			  
 		      if(pageNum != null)
@@ -585,6 +581,8 @@ public class BoardController {
 		      String searchKey = request.getParameter("searchKey");
 		      String searchValue = request.getParameter("searchValue");
 		      
+		      System.out.println("searchKey"+searchKey);
+		      System.out.println("searchValue"+searchValue);
 		      if(searchKey==null){
 		         
 		         searchKey = "subject";
