@@ -5,7 +5,6 @@ public class ApprovalDTO {
 	String approvalNum,type,id,subject,content,created;
 	String approval2,approvalOK2,approval3,approvalOK3,approval4,approvalOK4,approval5,approvalOK5,approval6,approvalOK6;
 	
-	
 	public String getApprovalNum() {
 		return approvalNum;
 	}
@@ -102,6 +101,8 @@ public class ApprovalDTO {
 	public void setApprovalOK6(String approvalOK6) {
 		this.approvalOK6 = approvalOK6;
 	}
+	
+	
 	
 	
 }
