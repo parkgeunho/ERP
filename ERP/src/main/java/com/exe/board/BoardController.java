@@ -238,8 +238,7 @@ public class BoardController {
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
 	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		    
-	      
+		    	      
 	      String cp = request.getContextPath();
 	      
 	      int boardNum = Integer.parseInt(request.getParameter("boardNum"));
@@ -311,7 +310,7 @@ public class BoardController {
 	 
 	 
 	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public String updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
@@ -322,7 +321,7 @@ public class BoardController {
 		  
 		  dao.updateData(dto);
 	  
-		  return "redirect:/board/list.action?pageNum=" + pageNum;
+		 /* return "redirect:/board/list.action?pageNum=" + pageNum;*/
 		  
 	  }
 	  
