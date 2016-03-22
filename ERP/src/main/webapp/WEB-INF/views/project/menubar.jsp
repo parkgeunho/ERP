@@ -106,11 +106,11 @@ $(document).ready(function(){
 		
 		<div align="center" style="padding-left:10px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
 			
-			<img style="margin-top: 10px;" src="/erp/resources/image/checktest.png">
+			<img style="margin-top: 10px;" src="/erp/resources/image/check.png">
 		</div>
 		
 		<div align="center" style=" padding-left:3px;padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
-		<img style="margin-top: 10px;" src="/erp/resources/image/calander.png">
+		<img style="margin-top: 10px;" src="/erp/resources/image/calender.png">
 		</div>
 		
 	<div style="float: left;">
