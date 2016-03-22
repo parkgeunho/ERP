@@ -38,8 +38,8 @@ public class ScheduleController {
 		return "scheduleMain2";
 	}
 
-	@RequestMapping(value = "/preCal", method={RequestMethod.GET,RequestMethod.POST})
-	public String preCal(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/calChange", method={RequestMethod.GET,RequestMethod.POST})
+	public String calChange(HttpServletRequest request,HttpServletResponse response) {
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -102,6 +102,12 @@ public class ScheduleController {
 	public String test() {
 		
 		return "schedule/scheduleRight2";
+	}
+
+	@RequestMapping(value = "/test2", method={RequestMethod.GET,RequestMethod.POST})
+	public String test2() {
+		
+		return "schedule/test2";
 	}
 	
 	@RequestMapping(value = "/scheduleCreated", method={RequestMethod.GET,RequestMethod.POST})

@@ -6,8 +6,6 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 
 <configuration>
 
-	
-	
 
 	<properties>
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>

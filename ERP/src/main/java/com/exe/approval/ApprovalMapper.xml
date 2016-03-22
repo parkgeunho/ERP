@@ -6,6 +6,15 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.exe.approval">
 
+	<insert id="insertApproval" parameterType="com.exe.approval.ApprovalDTO">
+		insert into approval(approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
+		values (#{approvalNum},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
+	</insert>
+
+	<select id="approvalList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where id = #{id}
+	</select>
+
 	<!-- <insert id="insert" parameterType="com.exe.approval.ApprovalCommentDTO">
 		insert into approval (approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
 		values (#{int},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
@@ -70,5 +79,13 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getApprovalOptionList" parameterType="String" resultType="com.exe.member.MemberDTO">
 		select id,name,grade,depth2 from insadb where id=#{id}
 	</select>
+	
+	<select id="getApprovalMax" parameterType="String" resultType="integer">
+		select count(*) from approval where approvalnum like #{approvalNum} || '%'
+	</select>
+	
+	
+	
+	
 	
 </mapper>
