@@ -81,8 +81,8 @@ public class ListDAO {
 		return lists;
 	}
 	
-	public void boardListDelete(int listNum){
-		sessionTemplate.delete("com.exe.buseoControl.boardListDelete", listNum);
+	public void boardDelete(int listNum){
+		sessionTemplate.delete("com.exe.buseoControl.boardDelete", listNum);
 	}
 	
 	
@@ -100,6 +100,15 @@ public class ListDAO {
 		sessionTemplate.update("com.exe.buseoControl.boardUpdate",dto);
 		
 	}
+	
+	public void boardListDelete(int listNum){
+		sessionTemplate.delete("com.exe.buseoControl.boardListDelete", listNum);
+	}
+	
+	public void boardReplyDelete(int parent){
+		sessionTemplate.delete("com.exe.buseoControl.boardReplyDelete", parent);
+	}
+	
 	
 	
 

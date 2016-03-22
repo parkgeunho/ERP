@@ -1,56 +1,27 @@
-<%@page import="java.util.Calendar"%>
+<%@ page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-
-	Calendar cal = Calendar.getInstance();
-	
-	//오늘 날짜 구하기
-	int nowYear = cal.get(Calendar.YEAR);
-	int nowMonth = cal.get(Calendar.MONTH)+1;
-	int nowDay = cal.get(Calendar.DAY_OF_MONTH);
-	
-	String strYear = request.getParameter("year");
-	String strMonth = request.getParameter("month");
-	
-	int year = nowYear;
-	int month = nowMonth;
-	
-	if(strYear != null)
-		year = Integer.parseInt(strYear);
-	
-	if(strMonth != null)
-		month = Integer.parseInt(strMonth);
-	
-	int preYear = year, preMonth = month-1;
-	
-	if(preMonth<1){
-		preYear = year-1;
-		preMonth = 12;
-	}
-	
-	int nextYear = year, nextMonth = month+1;
-	
-	if(nextMonth>12){
-		
-		nextYear = year+1;
-		nextMonth=1;
-	}
-	
-	cal.set(year, month-1, 1);
-	
-	int startDay = 1;
-	int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-	
-	int week = cal.get(Calendar.DAY_OF_WEEK);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="/erp/resources/schedule/list.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/erp/resources/schedule/css/schedule.css">
+
+<link rel='stylesheet' href='/erp/resources/schedule/calendar/fullcalendar.css'/>
+<link href='/erp/resources/schedule/calendar/scheduler.css' rel='stylesheet' />
+<link href='/erp/resources/schedule/calendar/jquery-ui.css' rel='stylesheet' />
+<script src='/erp/resources/schedule/calendar/jquery.min.js'></script>
+<script src='/erp/resources/schedule/calendar/jquery-ui.js'></script>
+<script src='/erp/resources/schedule/calendar/moment.min.js'></script>
+<script src='/erp/resources/schedule/calendar/fullcalendar.js'></script>
+<script src='/erp/resources/schedule/calendar/scheduler.js'></script>
 
 	<style type="text/css">
 		
@@ -64,9 +35,103 @@
 	
 	</style>
  
- <script type="text/javascript">
+<script type="text/javascript">
 
-	function sel() {
+	$(document).ready(function() {
+		
+	    $('#calendar').fullCalendar({
+	
+	    	schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+	    	
+	        events: [
+	            // events go here
+	        ],
+	        resources: [
+	            // resources go here
+	        ],
+	        // other options go here...
+	    	
+	    	/* dayClick: function() {
+		        alert('a day has been clicked!');
+		    }, */
+		    
+		    /* customButtons: {
+		        myCustomButton: {
+		            text: 'custom!',
+		            click: function() {
+		                alert('clicked the custom button!');
+		            }
+		        }
+		    }, */
+	
+		    header: {
+		        left: 'prev,next,prevYear,nextYear today ',
+		        center: 'title',
+		        right: 'month,agendaWeek,agendaDay'
+		    },
+		    
+		    views: {
+		    	month: {
+		        	
+		            titleFormat: 'YYYY MMM'
+		        }
+		    },
+		    
+		    eventLimit: true,
+		    views: {
+		        agenda: {
+		            eventLimit: 6
+		        }
+		    },
+		    
+		    timezone: 'local',
+		    
+		    allDaySlot: false,
+		    
+		    slotLabelFormat: 'HH:mm',
+		    
+		    scrollTime: '00:00:00',
+		    
+		    slotEventOverlap: true,
+		    
+		    nowIndicator: true,
+		    
+		    events: [
+		             {
+		                 title:  '어린이날',
+		                 start:  '2016-05-05',
+		                 color: '#4374D9',
+		             }
+		             // other events here...
+		         ],
+		         
+		         eventColor: '#378006',
+		         
+			timeFormat: 'HH:mm',
+			
+			displayEventTime: true,
+			
+			selectable: true,
+			
+			selectOverlap: true,
+			
+			eventTextColor: '#FFFFD2',
+			
+			editable: true,
+			
+			select: function(start, end, allDay) {
+				
+				var dt_start = moment(start).format('YYYY.MM.DD.HH.mm');
+				var dt_end = moment(end).format('YYYY.MM.DD.HH.mm');
+				
+				window.open('./scheduleCreated?start='+dt_start+'&end='+dt_end, 'window', 'width=1100, height=1080,scroll=yes');
+			},
+			
+			handleWindowResize: true
+	    });
+	});
+
+	<%-- function sel() {
 		
 		var f = document.myform;
 	
@@ -89,98 +154,84 @@
 			
 			if (smonth[i].value == <%=month%>)
 				smonth[i].selected = true; 
-		}	
-	}
+		}
+	} --%>
 	
-	function calendar() {
+	/* function calendar() {
 		var f = document.myform;
 		f.submit();
+	} */
+	
+	$(document).ready(function(){
+		
+		$('[id^="fold-"]').click(function(){
+			
+			var src = ($(this).attr('src')=='/erp/resources/schedule/image/minus.png') ?'/erp/resources/schedule/image/plus.png':'/erp/resources/schedule/image/minus.png';
+		     $(this).attr('src',src);
+			
+			var obj = $('.'+ this.id);
+			
+			if(obj.css('display')=='none')
+				obj.show();
+			else
+				obj.hide();
+		});
+	});
+	
+	$(function(){
+		leftCal();
+	});
+	
+	function leftCal(){
+
+		var url = "calChange";
+		
+		$.post(url,function(args){
+			
+			$("#leftCal").html(args);
+		});
+		
+		$("#leftCal").show();
 	}
 
 </script>
+
 </head>
 
-<body onload="sel()">
+<body onload="sel()" style="width: 100%;">
 
-<br/><br/>
+<div style="width: 100%;">
+	<div style="width: 270px; float: left" class="buseo1"><font style="font-style: 나눔고딕코딩;">일정</font></div>
+	<div style="width: 1568px; float: left" class="buseo2"><font style="font-style: 나눔고딕코딩;">나의 일정</font></div>
+</div>
 
-<form method="get" name="myform">
-
-<table align="center" width="210" cellpadding="2" cellspacing="1">
-
-	<tr>
-		<td align="center">
+<div style="float: left; height: 761px; border-right:1px solid #CCCCCC; width: 270px; padding-left:0px;">
+	<div align="center" style="border-bottom:1px solid #CCCCCC; padding-left:0px; padding-top:10px; padding-bottom :15px; width: 270px;">
+		<span id="leftCal" style="padding-top :50px; width: 270px; display: none;"></span>
+	</div>
 		
-		<a href="calendar?year=<%=nowYear%>&month=<%=nowMonth%>">
-		<img src="/erp/resources/schedule/image/today.jpg" width="25" height="17" align="left"></a>
-		
-		<a href="calendar?year=<%=preYear%>&month=<%=preMonth%>">
-		<img src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"></a>	
-		
-			<select name="year" onchange="calendar()">
-			</select>년
-			
-			<select name="month" onchange="calendar()">
-			</select>월
-		
-		<a href="calendar?year=<%=nextYear%>&month=<%=nextMonth%>">
-		<img src="/erp/resources/schedule/image/right.jpg" width="20" height="17" border="0"></a>
-		</td>
-	</tr>
-</table>
-
-</form>
-
-<table align="center" width="210" cellpadding="0" cellspacing="1" bgcolor="#cccccc">
-
-	<tr>
-		<td bgcolor="#e6e4e6" align="center"><font color="red">일</font></td>
-		<td bgcolor="#e6e4e6" align="center">월</td>
-		<td bgcolor="#e6e4e6" align="center">화</td>
-		<td bgcolor="#e6e4e6" align="center">수</td>
-		<td bgcolor="#e6e4e6" align="center">목</td>
-		<td bgcolor="#e6e4e6" align="center">금</td>
-		<td bgcolor="#e6e4e6" align="center"><font color="blue">토</font></td>
-	</tr>
-
-	<%
-		int newLine = 0;
+	<div style="border-bottom:1px solid #CCCCCC; height: 584px; float:left; text-align:left; padding-left:0px; padding-top:0px; width: 270px;">
+		<dl>
+			<dd style="text-align: left; padding-left:0px; ">	
+				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>&nbsp;<font color="black" style="font-style: 나눔고딕코딩;">일정</font></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">나의일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">전사일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd>
+			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">회의실예약</font></dd>			
+		</dl>
+	</div>
+</div>
 	
-		out.print("<tr height='20'>");
-		
-		for(int i=1; i<week; i++){
-			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
-			newLine++;
-		}
-		
-		for(int i=startDay; i<=endDay; i++){
-			
-			String fontColor = (newLine==0)?"red":(newLine==6)?"blue":"black";
-			
-			String bgColor = (nowYear==year)&&(nowMonth==month)&&(nowDay==i)?"#e6e4e6":"#ffffff";
-			
-			out.print("<td align='center' bgcolor='" + bgColor + "'><font color='" + fontColor + "'>" + i + "</font></td>");
-			//<td align='center' bgcolor='#e6e4e6'><font color='black'>5</font></td>
-			
-			newLine++;
-			
-			if(newLine==7 && i!=endDay){
-				
-				out.print("</tr><tr height='20'>");
-				newLine=0;
-			}
-		}
-		
-		while(newLine>0 && newLine<7){
-			
-			out.print("<td bgcolor='#ffffff'>&nbsp;</td>");
-			newLine++;
-		}
-		
-		out.print("</tr>");
-	%>
-</table>
+<div align="center" style="border-bottom:1px solid #CCCCCC; overflow:auto; width:100%; max-width:1549px; float:left; height: 740px; padding:10px;">
+	<div id='calendar'><br></div>
+</div>
 
 </body>
 </html>

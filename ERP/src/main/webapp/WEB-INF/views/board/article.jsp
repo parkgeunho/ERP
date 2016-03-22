@@ -15,6 +15,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 
 </head>
@@ -24,38 +25,57 @@
 
 
 <table border="0" cellpadding="0" cellspacing="1" align="center" >
-	<tr style="height: 80px; background: #D4D4D4">
-		<td colspan="3" style="width: 1572px; font-size: 20px;" align="center">공&nbsp;지&nbsp;사&nbsp;항	
+	<tr style="height: 80px; background: #EEEEEE">
+
+		
+		<td colspan="3" style="width: 1572px; font-size: 20px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
+			font-style: 나눔고딕코딩;font-weight: bolder;" align="center" >
+			${listDTO.boardName }	
+
 		</td>	
 	</tr>
-	
-
-	<tr style="height: 25px; background: #00D8FF" >
-		<td style="width: 200px;  color: white; font-size: 20px;" align="center">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</td>
-		<td style="width: 1372px; color: white; font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
+	<tr style="height: 40px;">
+		<td style="width: 1572px;" align="right">			
+			<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
+				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
+				
+			<input type="button" value="수정" class="btn2" style="background: #E0E0E0"
+				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">	
+			
+			<input type="button" value="삭제" class="btn2" style="background: #E0E0E0"
+				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">
+		
+		</td>
 	</tr>
 	
-	<tr style="height: 25px; background: #00D8FF" >
-		<td style="width: 200px; height: 22px; color: white; font-size: 20px;" align="center">작&nbsp;성&nbsp;자</td>
-		<td style="width: 1372px; color: white; font-size: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
-	</tr>
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1572px;" colspan="3"></td>
-	</tr>
 </table>
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+	<tr style="height: 30px; background: #E4F7BA" >
+		<td style="width: 200px;  font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
+			font-style: 나눔고딕코딩;font-weight: bolder;" align="center" >제목</td>
+		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
+	</tr>
 	
-<table align="center" border="0" cellpadding="0" cellspacing="0">
+	<tr style="height: 30px;" >
+		<td style="width: 200px;  font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
+			font-style: 나눔고딕코딩;font-weight: bolder; background: #EEEEEE" align="center">작성자</td>
+		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
+	</tr>	
 	
-	<tr style="height: 15px">
-		<td style="width: 200px;" align="center">첨부파일</td>
-		<td style="width: 300px;"></td>
-		<td style="width: 1072px;">&nbsp;<a href="download.action">
-			<img alt="" src="/erp/resources/boardimage/down002.png"></a>&nbsp;&nbsp;  </td>
+	<tr style="height: 30px">
+		<td style="width: 200px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
+			font-style: 나눔고딕코딩;font-weight: bolder; background: #EEEEEE" align="center">첨부파일</td>
+		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;${fdto.originalFileName}
+		<a href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
+			<img style="width: 16px;" alt="" src="/erp/resources/boardimage/down003.png"></a></td>
+		
 	</tr>
 	
 	
 	
-	<tr style="height: 1px; background: #B2EBF4">
+	<tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1572px;" colspan="3"></td>
 	</tr>
 	
@@ -65,13 +85,14 @@
 	<tr style="height: 400px;">
 		<td style="width: 1572px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
 	</tr>
-	<tr style="height: 1px; background: #B2EBF4">
+	<tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1572px;"></td>
 	</tr>
 </table>
 
+
 <!-- 댓글 -->
-<table border="0" align="center" cellpadding="0" cellspacing="0" >
+<!-- <table border="0" align="center" cellpadding="0" cellspacing="0" >
 	<tr style="height: 60px; background: #E1E1E1">
 		<td style="width: 70px;" align="center">
 			<img alt="" src="/erp/resources/image/image.jpg" style="width: 60px; height: 55px;">
@@ -84,7 +105,7 @@
 		<td style="width: 60px;" align="center">
 			<img alt="" src="/erp/resources/image/regist002.PNG" style="width: 55px; height: 50px;" onclick=""/>
 		
-			<!-- <input type="button" value="등록" class="btn2" onclick=""> -->
+			<input type="button" value="등록" class="btn2" onclick="">
 		</td>
 	</tr>
 </table>
@@ -98,11 +119,11 @@
 
 
 </table>
-
-
+ -->
+ 
 
 <!-- 댓글보기 -->
-<table border="0" align="center" cellpadding="0" cellspacing="0"  >
+<!-- <table border="0" align="center" cellpadding="0" cellspacing="0"  >
 	<tr style="height: 15px; background: ">
 		<td style="width: 70px;" align="center" rowspan="2">
 			<img alt="" src="/erp/resources/image/image.jpg" style="width: 60px; height: 45px;">
@@ -123,33 +144,22 @@
 	
 </table>
 
+ -->
 
 
 
-
-<table border="0" align="center">
-	<tr style="height: 1px;">
-		<td style="width: 1572px; background: #B2EBF4" colspan="2">
-		</td>
-	</tr>
+<!-- <table border="0" align="center">
+	
 	<tr style="height: 3px;">
 		<td></td>
 	</tr>
 	
-	<tr style="height: 30px;">
-		<td style="width: 1572px;" align="right">			
-			<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
-				
-			<input type="button" value="수정" class="btn2" style="background: #00D8FF; color: white;"
-				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">	
-			
-			<input type="button" value="삭제" class="btn2" style="background: #00D8FF; color: white;" 
-				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}';">
-		
+	
+	<tr style="height: 1px;">
+		<td style="width: 1572px; background: #E7E7E7" colspan="2">
 		</td>
 	</tr>
-</table>
+</table> -->
 
 
 

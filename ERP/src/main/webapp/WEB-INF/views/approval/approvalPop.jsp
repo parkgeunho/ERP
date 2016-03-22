@@ -10,7 +10,7 @@
 
 <script language="javascript">
    function openWin(i) {
-    window.open('./approvalCreated?num='+i, '', 'width=1100, height=1200,scroll=yes');
+    window.open('./approvalCreated?num='+i, '', 'width=1000, height=1000, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
     window.close();
    }
 </script>
@@ -37,9 +37,9 @@
 <tr height="40" bgcolor="" style="width: 100%">
 <td>
 <select>
-<option value="에헤헤1">에헤이1</option>
-<option value="에헤헤2">에헤이2</option>
-<option value="에헤헤3">에헤이3</option>
+<c:forEach var="dto" items="${Typelists }">
+<option value="${dto.approvalFormType }">${dto.approvalFormType }</option>
+</c:forEach>
 </select>
 </td>
 <td></td>

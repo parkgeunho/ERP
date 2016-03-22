@@ -11,8 +11,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    </select>
 
    <insert id="insertData" parameterType="com.exe.board.BoardDTO">
-      insert into erpboard (boardNum,name,subject,content,hitCount,created,listNum) 
-      values (#{boardNum},#{name},#{subject},#{content},0,sysdate,#{listNum})
+      insert into erpboard (boardNum,name,id,subject,content,hitCount,created,listNum) 
+      values (#{boardNum},#{name},#{id},#{subject},#{content},0,sysdate,#{listNum})
    </insert>
    
    <select id="getDataCount" parameterType="hashMap" resultType="int">
@@ -64,7 +64,16 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
       select nvl(count(*),0) from erpboard where ${searchKey} like '%' || #{searchValue} || '%' and listNum=#{listNum}
    </select>
 
-
+	<select id="notice" resultType="com.exe.board.BoardDTO">
+		select * from(
+		select rownum rnum, data.* from(
+		select * from erpboard where listNum=1 order by boardNum desc) data)
+		<![CDATA[
+     	 where rnum>=1 and rnum<=6
+   		]]>
+		
+	</select>
+	
 
 
 

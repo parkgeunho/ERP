@@ -12,7 +12,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <title>Insert title here</title>
-<script>
+<script type="text/javascript">
+var num = 1;
 $(document).ready(function(){
 	
 	 
@@ -32,8 +33,8 @@ $(document).ready(function(){
 	    
 	    $('[id^="ch-"]').click(function(){
 			
+			num= $('.num'+this.id).val();
 			
-			var num= $('.num'+this.id).val();
 			var LoginNum = ${LoginDTO.num};
 			 $.ajax({
 			        url:'ajaxBoardList',
@@ -57,6 +58,25 @@ $(document).ready(function(){
 });
 
 
+function sendIt(){
+	
+	
+	
+	
+
+	var url = "<%=cp%>/ajaxBoardList";
+	var searchValue = $("#searchValue").val();
+	var searchKey = $("#searchKey").val();
+	
+
+	$.post(url,{listNum:num,searchValue:searchValue,searchKey:searchKey},function(args){
+	$("#boardList").html(args);
+	
+	});
+	
+	
+}
+
 
 
 </script>
@@ -75,7 +95,8 @@ $(document).ready(function(){
 		<div class="buseo" >
 		게시판 목록
 		</div>
-		<div>
+		<div style="height:744px; padding-left: 10px; padding-top: 10px; border-right: 1px solid #D5D5D5;">
+			<div>
 			<c:forEach var="parent" items="${parent }">
 					<c:forEach var="depth0" items="${boardlist }">
 						<c:choose>
@@ -112,6 +133,7 @@ $(document).ready(function(){
 						</c:choose>
 					</c:forEach>
 				</c:forEach>
+				</div>
 		</div>
 		
 		
@@ -120,7 +142,7 @@ $(document).ready(function(){
 		
 		
 	</div>
-	<div id="boardList" style="float: left; width: 1570px;">
+	<div id="boardList" style="float: left; width: 1568px;">
 	
 	
 	

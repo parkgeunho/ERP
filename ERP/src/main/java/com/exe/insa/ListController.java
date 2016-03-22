@@ -246,9 +246,18 @@ public class ListController {
 		
 		int listNum = Integer.parseInt(request.getParameter("num"));
 		
-		//원래 여기에 조건을 줘서 인사쪽을 확인하고 나서 있냐 없냐 여부 확인 후 없으면 삭제를 진행
-		//아니면 에러 처리를 실행해서 삭제가 안되게 해야됨
-		listDAO.boardListDelete(listNum);
+		dto =  listDAO.readData(listNum);
+				
+		if(dto.getReplyNum()!=0){
+			
+			listDAO.boardReplyDelete(dto.getListNum()); //하위 게시판의 게시물 삭제
+			
+		}
+			
+		
+		listDAO.boardListDelete(listNum); //게시판 안에 있는 게시물들 지우기
+		
+		listDAO.boardDelete(listNum); //하위 게시판까지 삭제 시키기
 		
 		return boardList(request, response);
 	}
@@ -609,10 +618,67 @@ public class ListController {
 		String date = ckNum.substring(4); //숫자확인
 		String sort = ckNum.substring(0, 3); //어디껀지 확인하는용
 		String ck = null;
-		
+		request.setAttribute("sort", sort);
 		ListDTO dto = listDAO.readData(listNum);
 		
 		if(sort.equals("Bus")){
+			
+			BuseoDTO bDTO = insaDAO.readBuseo(Integer.parseInt(date));
+			
+			int depth = bDTO.getDepth();
+			
+			String depth1 = "";
+			String depth2 = "";
+			String depth3 = "";
+			String depth4 = "";
+			String depth5 = "";
+			String depth1s =date;
+			String depth2s =date;
+			String depth3s =date;
+			String depth4s =date;
+			String depth5s =date;
+			
+			
+			
+			
+			for(int i = depth; i>=0 ; i--){
+				
+				if(i==4){
+					
+					depth5 = bDTO.getBuseoName();
+				}
+				if(i==3){
+					
+					depth4 = bDTO.getBuseoName() +"▶";
+				}
+				if(i==2){
+				
+					depth3 = bDTO.getBuseoName() +"▶";
+				}
+				if(i==1){
+					
+					depth2 = bDTO.getBuseoName() +"▶";
+				}
+				if(i==0){
+					
+					depth1 = bDTO.getBuseoName() +"▶";
+				}
+				bDTO = insaDAO.readBuseo(bDTO.getParent());
+			}
+			
+			
+			
+			
+			int count = insaDAO.deletecheck(depth1s, depth2s, depth3s, depth4s, depth5s);
+			
+			String lastDepth1 = depth1 + depth2;
+			String lastDepth2 =  depth3 + depth4 + depth5;
+			request.setAttribute("count", count);
+			request.setAttribute("lastDepth1", lastDepth1);
+			request.setAttribute("lastDepth2", lastDepth2);
+			
+			
+
 			if(dto.getBuseoW()!=null){
 			String buseoWs[] = dto.getBuseoW().split(",");
 			
@@ -625,6 +691,76 @@ public class ListController {
 		}
 		
 		if(sort.equals("Mem")){
+			
+			MemberDTO mDto = memberDAO.readOne(Integer.parseInt(date));
+			BuseoDTO bDto = null;
+			
+			
+			if(mDto.getDepth1()!="no" && !mDto.getDepth1().equals("no")){
+
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth1()));
+			
+				mDto.setDepth1(bDto.getBuseoName()+" ▶ ");
+			}else if(mDto.getDepth1().equals("no") || mDto.getDepth1()=="no"){
+
+				mDto.setDepth1("");
+
+			}
+			
+			
+			
+			if(mDto.getDepth2()!="no" && !mDto.getDepth2().equals("no")){
+	
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth2()));
+				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
+				
+			}else if(mDto.getDepth2().equals("no") || mDto.getDepth2()=="no"){
+	
+				mDto.setDepth2("");
+
+			}
+			
+			
+			if(mDto.getDepth3()!="no" && !mDto.getDepth3().equals("no") ){
+			
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth3()));
+				mDto.setDepth3(bDto.getBuseoName()+" ▶ ");
+				
+			}else if(mDto.getDepth3().equals("no") || mDto.getDepth3()=="no"){
+
+				mDto.setDepth3("");
+		
+			}
+			
+			
+			
+			if(mDto.getDepth4()!="no" && !mDto.getDepth4().equals("no")){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
+				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
+				
+			}else if(mDto.getDepth4().equals("no") || mDto.getDepth4()=="no"){
+
+				mDto.setDepth4("");
+		
+			}
+			
+			
+			
+			if(mDto.getDepth5()!="no" && !mDto.getDepth5().equals("no")){
+				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
+				mDto.setDepth5(bDto.getBuseoName());
+			}else if(mDto.getDepth5().equals("no") || mDto.getDepth5()=="no"){
+				mDto.setDepth5("");
+			}
+			
+			
+					
+			request.setAttribute("mDTO",mDto);
+			
+			
+			
+			
+			
 			if(dto.getMemberW()!=null){
 				String memberWs[] = dto.getMemberW().split(",");
 				

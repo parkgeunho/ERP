@@ -12,7 +12,7 @@ $('[id^="delBus-"]').click(function(){
 	
 	ck= "Bus-" + $('.num'+this.id).val();
 	var url ="<%=cp%>/boardDeleteControl";
-	alert(ck);
+	
 	$.post(url,{num:num,ckNum:ck},function(args){
 		trim();
 	});
@@ -25,7 +25,7 @@ $('[id^="delMem-"]').click(function(){
 	
 	ck= "Mem-" + $('.num'+this.id).val();
 	var url ="<%=cp%>/boardDeleteControl";
-	alert(ck);
+	
 	$.post(url,{num:num,ckNum:ck},function(args){
 		trim();
 	});
@@ -39,7 +39,7 @@ $('[id^="ckBus-"]').click(function(){
 	
 	
 	ck= "Bus-" + $('.num'+this.id).val();
-	alert(ck);
+	
 	var url = "<%=cp%>/boardSide";
 	$.post(url,{num:num,ckNum:ck},function(args){
 	$("#boardSide").html(args);
@@ -53,7 +53,7 @@ $('[id^="ckMem-"]').click(function(){
 	
 	
 	ck= "Mem-" + $('.num'+this.id).val();
-	alert(ck);
+	
 	var url = "<%=cp%>/boardSide";
 	$.post(url,{num:num,ckNum:ck},function(args){
 	$("#boardSide").html(args);
@@ -70,7 +70,7 @@ $('[id^="ckMem-"]').click(function(){
 </script>
 
 
-<form name="boardUpdateForm" id="boardUpdateForm">
+<form name="boardUpdateForm" id="boardUpdateForm" onsubmit="return false">
 <div style="width: 740px;margin-left: 30px; padding-top: 10px;">
 					<div >게시판설정<br>
 					게시판에 대한 정보 및 수정을 할 수 있습니다.<br>
@@ -80,21 +80,27 @@ $('[id^="ckMem-"]').click(function(){
 					<div style="border-bottom: 1px solid;height: 30px;"></div>
 					<div style="float: left; width: 200px; padding-top: 10px; ">
 					
-						<div style="height: 35px; border-bottom: 1px solid;" >게시판명</div>
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;" >게시판명</div>
 					
 					</div>
 					
 					
 					<div style="float: left; padding-top: 10px; width: 540px;">
-						<div style="height: 35px; border-bottom: 1px solid;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
+						<div style="height: 35px; border-bottom: 1px solid #BDBDBD;"><input type="text" id="boardName" name="boardName" value="${boardData.boardName }">
 						<input type="hidden" name="num" value="${boardData.listNum }">
 						</div>
 					
 					</div>
 					
-						<DIV style="float: left; background-color: yellow; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; ">
-							<div style="height: 50px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
-							권한
+						<DIV style="float: left; background-color: #EEEEEE; width:350px; height: 470px; margin-top: 10px; overflow-y: auto; overflow-x:hidden; border: 1px solid #D5D5D5; ">
+							<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; solid; line-height: 50px;" align="center">
+							
+								<div style="width: 229px;float: left;"> 
+								<label style="font: bolder; font-size: 20px;">리스트</label> 	
+								</div>
+								<div style="width: 120px; float: left; border-left: 1px solid #BDBDBD;" align="center">
+									<label style="font: bolder; font-size: 20px;">권한 / 삭제</label>
+								</div>
 							</div>
 							<div>
 								<c:forEach var="dto" items="${buseoRlist }">
@@ -105,12 +111,12 @@ $('[id^="ckMem-"]').click(function(){
 											</c:if>
 										</c:forEach>
 								<div style="height: 30px;">
-									<div style="float: left; width: 230px; background-color: aqua;">
+									<div style="float: left; width: 230px; background-color: #EEEEEE;">
 									<label id="ckBus-${dto.buseoNum }">${dto.buseoName }</label>
 									<input type="hidden" name="listNum" value="${dto.buseoNum }" class="numckBus-${dto.buseoNum }">
 									</div>
 									<div style="float: left; width: 100px;">
-										<img src="/erp/resources/image/xmark.png" id="delBus-${dto.buseoNum }">
+										
 										<input type="hidden" class="numdelBus-${dto.buseoNum }" value="${dto.buseoNum }">
 										<c:if test="${check=='ok' }">
 											읽기/쓰기
@@ -118,6 +124,7 @@ $('[id^="ckMem-"]').click(function(){
 										<c:if test="${check=='no' }">
 											읽기
 										</c:if>
+										<img src="/erp/resources/image/xmark.png" id="delBus-${dto.buseoNum }">
 									</div>
 								</div>
 								</c:forEach>
@@ -135,7 +142,7 @@ $('[id^="ckMem-"]').click(function(){
 									<input type="hidden" name="listNum" value="${dto.num }" class="numckMem-${dto.num }">
 									</div>
 									<div style="widows: 20px;float: left; width:100px;">
-										<img src="/erp/resources/image/xmark.png" id="delMem-${dto.num }">
+										
 										<input type="hidden" class="numdelMem-${dto.num }" value="${dto.num }">
 										<c:if test="${checkMember=='ok' }">
 											읽기/쓰기
@@ -143,6 +150,7 @@ $('[id^="ckMem-"]').click(function(){
 										<c:if test="${checkMember=='no' }">
 											읽기
 										</c:if>
+										<img src="/erp/resources/image/xmark.png" id="delMem-${dto.num }">
 									</div>
 								</div>
 								
@@ -153,13 +161,60 @@ $('[id^="ckMem-"]').click(function(){
 							</div>
 						</div>
 						
-						<DIV style="float: left; background-color: aqua; width:350px;height: 470px; margin-top: 10px; margin-left: 40px;" id="boardSide">
-							<div style="height: 30px; width: 350px; border-bottom: 1px solid; border-top: 1px; solid;">
-							수정
-							</div>
+						<DIV style="float: left; background-color: #EEEEEE; width:350px;height: 470px; margin-top: 10px; margin-left: 35px; border: 1px solid #D5D5D5;" id="boardSide">
 							<div>
-							<input type="radio" onclick="trim()" value="앙">
-							</div> 
+								<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
+									<label style="font: bolder; font-size: 20px;">정 보</label> 	
+								</div>
+								<div style="height: 210px; width: 350px;">
+								<br/>
+								<br/>
+								<br/>
+								수정 하실 것에 대한 정보가 출력됩니다.<br>
+								<br/>
+								부서 일 경우 최상위 부서,인원 수가 출력이 되며 <br>
+								<br/>
+								개인 일 경우 속한 부서정보와 사번이 나옵니다.
+								<br/>
+								</div>
+								
+								<div style="height: 210px; width: 350px; border-top: 1px solid #BDBDBD;" align="left">
+									
+									<div style="height: 50px; width: 350px; border-bottom: 1px solid #BDBDBD; border-top: 1px; line-height: 50px;" align="center">
+										<label style="font: bolder; font-size: 20px;">권한 수정</label> 	
+									</div>
+									
+									
+									<div style="float: left; width: 110px; margin-top: 60px;">
+										글쓰기 권한
+									
+									</div>
+									
+									<div style="float: left;width: 110px; margin-top: 40px;">
+										쓰기가능<br>
+										<c:if test="${ck!=null }">
+										<input type="radio"  value="write" checked="checked" name="writeck">
+										</c:if>
+										
+										<c:if test="${ck==null }">
+										<input type="radio"  value="write" name="writeck">
+										</c:if>
+									</div>
+								
+									<div style="float: left;width: 110px; margin-top: 40px;">
+									쓰기불가<br>
+										<c:if test="${ck!=null }">
+										<input type="radio"  value="non" name="writeck">
+										</c:if>
+										<c:if test="${ck==null }">
+										<input type="radio"  value="non" checked="checked" name="writeck">
+										</c:if>
+									</div>
+								
+							
+								
+								</div>
+							</div>
 						</div>
 						
 						

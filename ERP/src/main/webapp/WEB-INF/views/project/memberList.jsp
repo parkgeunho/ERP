@@ -38,7 +38,7 @@
 			<td width="180px;">${dto.email }</td>
 			<td width="80px;">${dto.grade }</td>
 			
-			<td width="450px;">${dto.depth1 }${dto.depth2 }${dto.depth3 }${dto.depth4 }${dto.depth5 }</td>
+			<td width="450px;" style="text-align: left; padding-left: 20px;">${dto.depth1 }${dto.depth2 }${dto.depth3 }${dto.depth4 }${dto.depth5 }</td>
 			<td width="70px;">${dto.dal }</td>
 		</tr>
 	</c:forEach>

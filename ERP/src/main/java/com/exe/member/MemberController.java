@@ -3,7 +3,11 @@ package com.exe.member;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -197,8 +201,7 @@ public class MemberController {
 		String path = request.getSession().getServletContext().getRealPath("/resources/memberImage");
 		
 		response.setCharacterEncoding("UTF-8");
-		
-		
+				
 		MultipartFile file = request.getFile("file");
 		
 	
@@ -578,6 +581,163 @@ public class MemberController {
 		
 		
 		return "redirect:/insa";
+	}
+	
+	@RequestMapping(value = "/logout.action", method = {RequestMethod.GET})
+	public String logout(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		session.invalidate();
+		
+		
+		
+		return "redirect:/main";
+	}
+	
+	@RequestMapping(value = "/searchPop.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String searchPop(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		String searchKey = request.getParameter("searchKey");
+		String searchValue = request.getParameter("searchValue");
+		
+		if(null==searchKey){
+			
+			searchKey="usernum";
+			searchValue="";
+			
+			return "member/searchPop";
+		}
+		
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("searchKey", searchKey);
+		hMap.put("searchValue", searchValue);
+		
+		
+		
+		List<MemberDTO> lists = dao.memberList(hMap);
+		
+		
+		
+		request.setAttribute("lists", lists);
+		
+		
+		
+		
+		
+		return "member/searchPop";
+	}
+	
+
+	@RequestMapping(value = "/search_ok.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String search_ok(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		String imagePath = request.getContextPath() + "/resources/memberImage";
+		
+		MemberDTO dto = dao.readOne(num);
+		
+		//주민번호로 나이 구하기
+		Calendar cal = Calendar.getInstance();
+		
+		String age = dto.getJumin();
+		age.trim(); //불러온 주민번호 앞뒤 공백제거
+		age = age.substring(0, 2); // 주민번호에서 앞자리 2자리만 추출
+		
+		int ageOk = Integer.parseInt(age);
+		String year = Integer.toString(cal.get(Calendar.YEAR)); //현재년도 불러옴
+		year = year.substring(2, 4);// 년도에서 뒤에 2자리 추출
+		int yearOk = Integer.parseInt(year);
+		
+		ageOk = (yearOk + 100) - ageOk;//만 나이 구해짐
+		ageOk = ageOk + 1; //한국나이로 바꾸기위해 +1 해줌
+		
+		
+		//주민번호로 성별 구하기
+		
+		String sex = dto.getJumin();
+		sex.trim();
+		int sexOk = Integer.parseInt(sex.substring(7, 8));
+		
+		if(sexOk==1 || sexOk==3){
+			sex = "남";
+		}
+		
+		if(sexOk==2 || sexOk==4){
+			sex = "여";
+		}
+		
+		//주민 번호로 생년월일 구하기
+		
+		String birth = dto.getJumin();
+		sex.trim();
+		
+		birth = birth.substring(2, 4) + "월"+ birth.substring(4, 6) + "일";
+		
+		//부서 출력
+		
+		String depth = null;
+		
+		BuseoDTO bdto = null;
+		
+		if(!dto.getDepth1().equals("no")){
+			
+			bdto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth1()));
+			
+			depth = bdto.getBuseoName();
+			
+			if(!dto.getDepth2().equals("no")){
+				
+				bdto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth2()));
+				
+				depth += " ▶ " + bdto.getBuseoName();
+				
+				if(!dto.getDepth3().equals("no")){
+					
+					bdto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth3()));
+					
+					depth += " ▶ " + bdto.getBuseoName();
+					
+					if(!dto.getDepth4().equals("no")){
+						
+						bdto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth4()));
+						
+						depth += " ▶ " + bdto.getBuseoName();
+						
+						if(!dto.getDepth5().equals("no")){
+							
+							bdto = insaDAO.readBuseo(Integer.parseInt(dto.getDepth5()));
+							
+							depth += " ▶ " + bdto.getBuseoName();
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+		
+		
+		
+		
+		request.setAttribute("depth", depth);
+		request.setAttribute("birth", birth);
+		request.setAttribute("sex", sex);
+		request.setAttribute("ageOk", ageOk);
+		request.setAttribute("dto", dto);
+		request.setAttribute("imagePath", imagePath);
+		
+		
+		
+		return "member/smallView";
 	}
 	
 	

@@ -41,9 +41,7 @@ public class InsaController {
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/insa", method = {RequestMethod.GET,RequestMethod.POST})
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
-	
-		
-		
+			
 		HttpSession session = request.getSession();
 		session.setAttribute("buseoNum", "1");
 		
@@ -60,7 +58,6 @@ public class InsaController {
 			
 			BuseoDTO vo = it.next();
 	
-			
 			vo.setDepthGap(depth - vo.getDepth() + 1);
 	         
 	        depth = vo.getDepth();
@@ -105,7 +102,7 @@ public class InsaController {
 		
 
 	
-		return "ex";
+		return "project/test";
 	}
 	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)
@@ -410,7 +407,7 @@ public class InsaController {
 				mDto.setDepth2(bDto.getBuseoName()+" ▶ ");
 				
 			}else if(mDto.getDepth2().equals("no") || mDto.getDepth2()=="no"){
-	;
+	
 				mDto.setDepth2("");
 
 			}

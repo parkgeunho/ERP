@@ -12,14 +12,21 @@ public class BoardFileDAO {
 	
 	public void insertData(BoardFileDTO filedto){
 		
-		sessionTemplate.insert("com.exe.board.insertData", filedto);
+		sessionTemplate.insert("com.exe.board.BoardFileMapper.insertData", filedto);
 		
 	}
-	public int boardNum(){
+	public int boardFileMaxNum(){
 		
-		int result = sessionTemplate.selectOne("com.exe.board.boardNum");
+		int result = sessionTemplate.selectOne("com.exe.board.BoardFileMapper.maxNum");
 		return result;
 		
 	}
+	public BoardFileDTO selectData(int num){
+		
+		BoardFileDTO dto = sessionTemplate.selectOne("com.exe.board.BoardFileMapper.selectData",num);
+		
+		return dto;
+	}
+	
 
 }
