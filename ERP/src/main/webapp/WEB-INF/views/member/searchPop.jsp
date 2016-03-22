@@ -27,7 +27,7 @@
 	function article(num){
 		
 		
-		window.open("search_ok.action?num="+num,"","width=400px,height=580px");
+		window.open("search_ok.action?num="+num,"","width=500px,height=600px");
 		
 		
 		
