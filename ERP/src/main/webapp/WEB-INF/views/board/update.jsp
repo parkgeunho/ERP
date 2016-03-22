@@ -35,7 +35,7 @@
 
 
 <script type="text/javascript" src="/ERP/src/resources/board/js/util.js"></script>
-
+<link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <script type="text/javascript">
 
 function sendIt(){
@@ -84,26 +84,36 @@ function redirect(){
 </head>
 <body style="font-style: 나눔고딕코딩;">
 
-
 <form action="" name="myForm" method="post">
+
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
-	<tr style="height: 80px; background: #D4D4D4">
-		<td colspan="3" style="width: 1572px; letter-spacing: 5px; font-size: 20px; 
-			right: 100px;" align="center">공지사항	
+	<tr style="height: 80px;" bgcolor=#EEEEEE>
+		<td colspan="3" style="width: 1572px; font-style: 나눔고딕코딩;font-weight: bolder; letter-spacing: 5px; font-size: 20px; 
+			right: 100px; border-color:#E0E0E0;" align="center">${listDTO.boardName }	
 		</td>	
 	</tr>
 	
-	<tr style="height: 1px;">
-		<td colspan="3" style="width: 1572px;" align="right">
+	<tr style="height: 40px;">
+		<td style="width: 1572px;" align="right" colspan="2">
 			
-		</td>
-	</tr>
+			<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
+			<input type="hidden" name="pageNum" value="${pageNum}"/>
+			<%-- <input type="hidden" name="listNum" value="${listNum }"> --%>
+			<input type="hidden" name="name" value="${dto.name }">
+			
+		
+			<input type="button" value="수정하기" class="btn2" style="background: #E0E0E0;"
+				onclick="sendIt();"/>
+			<input type="button" value="수정취소" class="btn2"  style="background: #E0E0E0;"
+				onclick="redirect()"/>
+			
+			
 
 
-	<tr style="height: 30px; background: #00D8FF" >
-		<td style="width: 200px; height: 22px; color: white; font-size: 20px; " align="center">제&nbsp;&nbsp;목</td>
+	<tr style="height: 30px; background: #E4F7BA" >
+		<td style="width: 200px; height: 25px;  font-size: 15px; font-weight: bolder; border-color:#E0E0E0;" align="center">제&nbsp;&nbsp;목</td>
 		<td style="width: 1372px;">
-			<input type="text" name="subject" value="${dto.subject}" style="width:1000px; height: 22px;"/>	
+			<input type="text" name="subject" value="${dto.subject}" style="width:1000px; height: 17px;"/>	
 		</td>	
 	</tr>
 	
@@ -111,22 +121,12 @@ function redirect(){
 		<td colspan="2"></td>
 	</tr>
 
-	<tr style="height: 30px; background: #00D8FF">
+	<%-- <tr style="height: 30px; background: #00D8FF">
 		<td style="width: 200px; height: 20px; color: white; font-size: 20px;" align="center">작&nbsp;성&nbsp;자</td>
 		<td style="width: 1372px;">
 			<input type="text" name="name" value="${dto.name }" style="width:1000px; height: 20px;"/>	
 		</td>	
-	</tr>
-	
-	
-	
-	<tr style="">
-		<td>
-		
-		
-		</td>
-	</tr>
-	
+	</tr> --%>
 	
 	
 	
@@ -163,26 +163,32 @@ function redirect(){
 
 
 
-<table style="font-size: 15px; width: 1572px;" border="0"  cellspacing="0" align="center">	
-	<tr style="width: 10px;">
-		<td></td>
-	</tr>
+<table border="0"  cellspacing="0" align="left">	
+	
 	
 	<tr style="height: 20px; ">
-		<td style="width: 250px; background: #E7E7E7"  align="center" rowspan="4" >첨&nbsp;부&nbsp;파&nbsp;일</td>
-		<td style="width: 50px;" align="left">&nbsp;&nbsp;&nbsp;
-		<input type="file" name="upload">
-		<img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
+		<td style="width: 150px; background: #E7E7E7; font-size: 15px; font-style: 나눔고딕코딩;font-weight: bolder;"  align="center" >첨&nbsp;부&nbsp;파&nbsp;일</td>
+		<td style="width: 100px;" align="left">&nbsp;&nbsp;&nbsp;
+			<input type="file" name="file" id="file">
+		<!-- <img alt="" src="/erp/resources/image/file001.png" style="width: 15px; height: 15px;" 
 			onclick="">파일찾기	
 		
 		<img alt="" src="/erp/resources/image/delete001.png" style="width: 15px; height: 15px;" 
-			onclick="">삭제
+			onclick="">삭제  -->
 		</td>	
+		<td style="width: 1000px;"></td>
 	</tr>
 	
+	 <tr style="height: 3px;" >
+		<td colspan="3"></td>
+	</tr> 
+	
+	<tr style="height: 1px; background: #E7E7E7;" >
+		<td colspan="3"></td>
+	</tr>
 
 
-	<tr style="height: 20px;">					
+	<!-- <tr style="height: 20px;">					
 		<td style="width: 400px;" align="left">&nbsp;&nbsp;&nbsp;&nbsp;파일명</td>		
 		<td style="width: 272px;" align="right">크기</td>
 		<td style="width: 200px;" align="center">첨부방식</td>		
@@ -196,7 +202,7 @@ function redirect(){
 		<td style="width: 200px;" align="center"></td>		
 		<td style="width: 200px;" align="center"></td>
 		<td style="width: 200px;"></td>
-	</tr>
+	</tr> -->
 	
 	<!-- <tr style="height: 15px; ">	
 		<td style="width: 300px;" align="left"></td>
@@ -207,36 +213,24 @@ function redirect(){
 	</tr>  -->
 </table>
 
-<table border="0" align="center">
+<table border="1" align="center">
 
-	<tr style="height: 1px; background: #E7E7E7">
+	<!-- <tr style="height: 1px; background: #E7E7E7">
+		<td style="width: 1572px;"></td>
+	</tr> -->
+	
+	
+	
+	<!-- <tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1572px;"></td>
 	</tr>
+ -->
+ 
+ 
 	
-	<tr style="height: 33px;" align="right">
-		<td style="width: 1572px;">
-			
-			<input type="hidden" name="boardNum" value="${dto.boardNum }"/>
-			<input type="hidden" name="pageNum" value="${pageNum}"/>
-			<input type="hidden" name="name" value="${dto.name }">
-		
-			<input type="button" value="수정하기" class="btn2" style="background: #00D8FF; color: white;"
-				onclick="sendIt();"/>
-			<input type="button" value="수정취소" class="btn2"  style="background: #00D8FF; color: white;"
-				onclick="redirect()"/>
-			
-			
-			
-		</td>
-		<td width="5"></td>	
-	</tr>
-	
-	<tr style="height: 1px; background: #E7E7E7">
-		<td style="width: 1572px;"></td>
-	</tr>
-
 
 </table>
+	
 
 </form>
 

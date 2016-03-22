@@ -14,8 +14,14 @@ public class ApprovalDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
+	
+	public List<ApprovalDTO> approvalList(String id){
 		
-	//approvalForm--------------------------------------------
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalList",id);
+		
+		return lists;
+	}
+	
 	
 	public int approvalFormMaxNum(){			
 		int num = sessionTemplate.selectOne("com.exe.approval.approvalFormMaxNum");
@@ -71,7 +77,21 @@ public class ApprovalDAO {
 		return dto;
 	}
 	
-	//approvalForm--------------------------------------------
+	public void insertApproval(ApprovalDTO dto){
+		
+		sessionTemplate.insert("com.exe.approval.insertApproval", dto);
+		
+		return ;
+	}
+	
+	public int getApprovalMax(String approvalNum){
+
+		int num = sessionTemplate.selectOne("com.exe.approval.getApprovalMax",approvalNum);
+		
+		return num;
+	}
+	
+	
 	
 	
 	
