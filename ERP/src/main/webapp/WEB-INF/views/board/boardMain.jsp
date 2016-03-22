@@ -95,7 +95,8 @@ function sendIt(){
 		<div class="buseo" >
 		게시판 목록
 		</div>
-		<div>
+		<div style="height:744px; padding-left: 10px; padding-top: 10px; border-right: 1px solid #D5D5D5;">
+			<div>
 			<c:forEach var="parent" items="${parent }">
 					<c:forEach var="depth0" items="${boardlist }">
 						<c:choose>
@@ -132,6 +133,7 @@ function sendIt(){
 						</c:choose>
 					</c:forEach>
 				</c:forEach>
+				</div>
 		</div>
 		
 		
@@ -140,7 +142,7 @@ function sendIt(){
 		
 		
 	</div>
-	<div id="boardList" style="float: left; width: 1570px;">
+	<div id="boardList" style="float: left; width: 1568px;">
 	
 	
 	

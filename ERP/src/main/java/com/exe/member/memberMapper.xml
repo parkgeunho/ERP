@@ -17,6 +17,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		#{blood},#{reli},#{hobby},#{memo},#{grade},#{duty},#{dal},#{depth1},#{depth2},#{depth3},#{depth4},#{depth5},#{upload},#{secure})
 	</insert>
 	
+	<select id="memberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
+	select num,userNum,jumin,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where ${searchKey} like '%'||#{searchValue}||'%' order by name asc	
+	</select>
+	
 	<select id="idOK" parameterType="String" resultType="String">
 		select id from insadb where id=#{id}
 	</select>
@@ -36,6 +40,8 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteData" parameterType="Integer">
 		delete insadb where num=#{num}
 	</delete>
+	
+	
 	
 	
 	

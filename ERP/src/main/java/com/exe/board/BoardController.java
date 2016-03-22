@@ -69,15 +69,33 @@ public class BoardController {
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
 
 
-		response.setCharacterEncoding("UTF-8");
-
-	
+		response.setCharacterEncoding("UTF-8");	
 		
 		ListDTO lDTO = listDAO.readData(listNum);
+
 	      
+	      String listsNum = request.getParameter("listNum");
+	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listsNum));
+	  	
+	      request.setAttribute("listDTO", listDTO);
+	      
+	      
+	      
+	      
+	      
+	      
+	      
+
 	  	HttpSession session = request.getSession();
 	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
-		  
+
+		 
+
+
+	  	
+	  	request.setAttribute("dto", mDTO);
+
+	  	
 		  String read[] = null;
 		  List<String> Rlist = new ArrayList<String>();
 		  String check = lDTO.getBuseoW();
@@ -222,11 +240,6 @@ public class BoardController {
 	      
 	      session.setAttribute("cklistNum", ckNum);
 	      
-	      
-	      
-	      
-	      
-	      
 	      return "redirect:/board/list.action";
 	   }
 	 
@@ -300,8 +313,7 @@ public class BoardController {
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
 	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		    
-	      
+		    	      
 	      String cp = request.getContextPath();
 	      
 	      int boardNum = Integer.parseInt(request.getParameter("boardNum"));
@@ -340,8 +352,6 @@ public class BoardController {
 	      String listNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
-
-	      
 	      HttpSession session = request.getSession();
 	      session.setAttribute("cklistNum", listNum);
 	      
@@ -366,6 +376,20 @@ public class BoardController {
 	  public String update(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
 		  String cp = request.getContextPath();
+		  
+		  HttpSession session = request.getSession();
+		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+			
+		  	request.setAttribute("dto", mDTO);		  	
+		  	
+		      
+		      String listNum = request.getParameter("listNum");
+		      System.out.println("listNum"  + listNum);
+		      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));		      
+		     
+		      session.setAttribute("cklistNum", listNum);
+		  	
+		    request.setAttribute("listDTO", listDTO);
 		  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 	      String pageNum = request.getParameter("pageNum");
@@ -395,10 +419,11 @@ public class BoardController {
 		  dto.setSubject(request.getParameter("subject"));
 		  dto.setName(request.getParameter("name"));
 		  dto.setContent(request.getParameter("content"));
+		 
 		  
 		  dao.updateData(dto);
 	  
-		  /*return "redirect:/board/list.action?pageNum=" + pageNum;*/
+
 		  
 	  }
 	  

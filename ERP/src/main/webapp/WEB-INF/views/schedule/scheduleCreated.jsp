@@ -104,18 +104,6 @@
 		}
 	};
 
-	$("#calendar").datepicker({
-		
-		changeMonth: true,
-		changeYear: true,
-		showOn: 'button',
-		buttonImageOnly: true
-	});
-	
-	$('img.ui-datepicker-trigger').css({'cursor':'pointer','margin-left':'5px', 'margin-top':'3px'});
-	
-	$.datepicker.setDefaults({dateFormat:'YYYY-mm-dd'});
-
 </script>
 
 <script>
@@ -786,8 +774,8 @@ $(document).ready(function(){
 	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0" 
 		width="150" height="30" bgcolor="#F6F6F6" align="center"> <font style="font-size: 11pt; 
 		font-style: 나눔고딕코딩;font-weight: bolder;">일자</font></td>
-	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-left-width: 0; 
-		border-bottom-width: 0" height="30">&nbsp;&nbsp;&nbsp;<input type="text" id="calendar" name="calendar"/></td></tr> 
+	<td style="border-color:#CCCCCC; border-width: 1px; border-style: solid; border-left-width: 0; 
+		border-bottom-width: 0" height="30">&nbsp;&nbsp;&nbsp;<input  type="text" id="calendar" name="calendar"/></td></tr> 
 
 <tr>
 	<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0" 
@@ -828,4 +816,21 @@ $(document).ready(function(){
 </form>
 
 </body>
+
+<script type="text/javascript">
+
+	$("#calendar").datepicker({
+		
+		changeMonth: true,
+		changeYear: true,
+		showOn: 'button',
+		buttonImageOnly: true
+	});
+	
+	$('img.ui-datepicker-trigger').css({'cursor':'pointer','margin-left':'0px', 'margin-top':'0px'});
+	
+	$.datepicker.setDefaults({dateFormat:'yy-mm-dd'});
+
+</script>
+
 </html>

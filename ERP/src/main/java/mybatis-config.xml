@@ -6,16 +6,17 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 
 <configuration>
 
-	
-	
 
 	<properties>
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
 
+
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB"/>
+
 
 		<property name="username" value="SUZI"/>
 		<property name="password" value="A123"/>
+
 	</properties>
 
 	

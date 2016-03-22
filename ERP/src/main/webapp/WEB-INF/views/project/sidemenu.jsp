@@ -29,6 +29,14 @@
 		
 		
 	}
+	
+	function searchPop(){
+		
+		window.open("searchPop.action","","width=400px,height=580px");
+		
+		
+		
+	}
 
 
 </script>
@@ -54,10 +62,11 @@
 	</div>
 	
 	
-	
-	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
+
+	<div class="Smenu" onclick="javascript:searchPop();"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
 	직원 검색
 	</div>
+	
 	
 
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>

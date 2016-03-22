@@ -12,6 +12,16 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/erp/resources/schedule/list.css" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/erp/resources/schedule/css/schedule.css">
+
+<link rel='stylesheet' href='/erp/resources/schedule/calendar/fullcalendar.css'/>
+<link href='/erp/resources/schedule/calendar/scheduler.css' rel='stylesheet' />
+<link href='/erp/resources/schedule/calendar/jquery-ui.css' rel='stylesheet' />
+<script src='/erp/resources/schedule/calendar/jquery.min.js'></script>
+<script src='/erp/resources/schedule/calendar/jquery-ui.js'></script>
+<script src='/erp/resources/schedule/calendar/moment.min.js'></script>
+<script src='/erp/resources/schedule/calendar/fullcalendar.js'></script>
+<script src='/erp/resources/schedule/calendar/scheduler.js'></script>
 
 	<style type="text/css">
 		
@@ -26,6 +36,100 @@
 	</style>
  
 <script type="text/javascript">
+
+	$(document).ready(function() {
+		
+	    $('#calendar').fullCalendar({
+	
+	    	schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+	    	
+	        events: [
+	            // events go here
+	        ],
+	        resources: [
+	            // resources go here
+	        ],
+	        // other options go here...
+	    	
+	    	/* dayClick: function() {
+		        alert('a day has been clicked!');
+		    }, */
+		    
+		    /* customButtons: {
+		        myCustomButton: {
+		            text: 'custom!',
+		            click: function() {
+		                alert('clicked the custom button!');
+		            }
+		        }
+		    }, */
+	
+		    header: {
+		        left: 'prev,next,prevYear,nextYear today ',
+		        center: 'title',
+		        right: 'month,agendaWeek,agendaDay'
+		    },
+		    
+		    views: {
+		    	month: {
+		        	
+		            titleFormat: 'YYYY MMM'
+		        }
+		    },
+		    
+		    eventLimit: true,
+		    views: {
+		        agenda: {
+		            eventLimit: 6
+		        }
+		    },
+		    
+		    timezone: 'local',
+		    
+		    allDaySlot: false,
+		    
+		    slotLabelFormat: 'HH:mm',
+		    
+		    scrollTime: '00:00:00',
+		    
+		    slotEventOverlap: true,
+		    
+		    nowIndicator: true,
+		    
+		    events: [
+		             {
+		                 title:  '어린이날',
+		                 start:  '2016-05-05',
+		                 color: '#4374D9',
+		             }
+		             // other events here...
+		         ],
+		         
+		         eventColor: '#378006',
+		         
+			timeFormat: 'HH:mm',
+			
+			displayEventTime: true,
+			
+			selectable: true,
+			
+			selectOverlap: true,
+			
+			eventTextColor: '#FFFFD2',
+			
+			editable: true,
+			
+			select: function(start, end, allDay) {
+				
+				var dt_start = moment(start).format('YYYY.MM.DD.HH.mm');
+				var dt_end = moment(end).format('YYYY.MM.DD.HH.mm');
+				
+				window.open('./scheduleCreated?start='+dt_start+'&end='+dt_end, 'window', 'width=1100, height=1080,scroll=yes');
+			},
+			
+			handleWindowResize: true
+	    });
+	});
 
 	<%-- function sel() {
 		
@@ -74,34 +178,13 @@
 		});
 	});
 	
-	$(document).ready(function(){
-		
-		$("#preCal").click(function(){
-			
-			var params = "year=" + $("#year").val() + "&month=" + $("#month").val();
-			
-			$.ajax({
-				
-				type : "POST",
-				url  : "preCal",
-				data : params,
-				success : function(args){
-					$("#leftCal").html(args);
-				},
-				error : function(e){
-					alert(e.responseText);
-				}
-			});
-		});
-	});
-	
 	$(function(){
 		leftCal();
 	});
 	
 	function leftCal(){
 
-		var url = "preCal";
+		var url = "calChange";
 		
 		$.post(url,function(args){
 			
@@ -115,27 +198,40 @@
 
 </head>
 
-<body onload="sel()">
+<body onload="sel()" style="width: 100%;">
 
-<span id="leftCal" style="display: none;"></span>
+<div style="width: 100%;">
+	<div style="width: 270px; float: left" class="buseo1"><font style="font-style: 나눔고딕코딩;">일정</font></div>
+	<div style="width: 1568px; float: left" class="buseo2"><font style="font-style: 나눔고딕코딩;">나의 일정</font></div>
+</div>
 
-	<div>
+<div style="float: left; height: 761px; border-right:1px solid #CCCCCC; width: 270px; padding-left:0px;">
+	<div align="center" style="border-bottom:1px solid #CCCCCC; padding-left:0px; padding-top:10px; padding-bottom :15px; width: 270px;">
+		<span id="leftCal" style="padding-top :50px; width: 270px; display: none;"></span>
+	</div>
+		
+	<div style="border-bottom:1px solid #CCCCCC; height: 584px; float:left; text-align:left; padding-left:0px; padding-top:0px; width: 270px;">
 		<dl>
-			<dd><img id="preCal" src="/erp/resources/schedule/image/left.jpg" width="20" height="17" border="0"/>	
-				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>&nbsp;일정</dd>
-			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
-			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">나의일정</font></a></dd>
-			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
-			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">그룹일정</font></a></dd>
-			<dd class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
-			&nbsp;<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black">전사일정</font></a></dd>
-			<dd>할일작성</dd>
-			<dd>회의실예약</dd>			
+			<dd style="text-align: left; padding-left:0px; ">	
+				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>&nbsp;<font color="black" style="font-style: 나눔고딕코딩;">일정</font></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">나의일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">전사일정</font></a></dd>
+			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd>
+			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">회의실예약</font></dd>			
 		</dl>
-	</div>	
+	</div>
+</div>
+	
+<div align="center" style="border-bottom:1px solid #CCCCCC; overflow:auto; width:100%; max-width:1549px; float:left; height: 740px; padding:10px;">
+	<div id='calendar'><br></div>
+</div>
 
 </body>
 </html>
