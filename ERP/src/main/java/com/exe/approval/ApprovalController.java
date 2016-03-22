@@ -1,7 +1,9 @@
 package com.exe.approval;
 
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -39,7 +41,22 @@ public class ApprovalController {
 	MyUtil myUtil;
 	
 	@RequestMapping(value = "/approval", method={RequestMethod.GET,RequestMethod.POST})
-	public String scheduleMain() {
+	public String approval(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		String userId = LoginDTO.getId();
+		
+		List<ApprovalDTO> listDTO = approvalDAO.approvalList(userId);
+				
+		String haha = "섹스섹스보지털";
+		
+		
+		request.setAttribute("haha", haha);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("listDTO", listDTO);
 		
 		return "approvalTile";
 	}
@@ -54,6 +71,10 @@ public class ApprovalController {
 	public String approvalCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
 		System.out.println("approvalCreated.Controller");
+		
+		HttpSession session = request.getSession();
+		
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 				
 		int num = Integer.parseInt(request.getParameter("num"));
 		
@@ -95,35 +116,92 @@ public class ApprovalController {
 		request.setAttribute("parent", parent);
 		request.setAttribute("restDiv",n);
 		request.setAttribute("lists", lists);
-	
+		request.setAttribute("LoginDTO", LoginDTO);
 		request.setAttribute("dto", dto);
 		
 		return "approval/approvalCreated";
 	}	
 
 	@RequestMapping(value="/approvalCreated_ok", method={RequestMethod.GET,RequestMethod.POST})
-	public String approvalCreated_ok(ApprovalDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
+	public String approvalCreated_ok(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		ApprovalDTO dto = new ApprovalDTO();
+		
+		System.out.println("approvalCreated_ok.Controller");
 		
 		response.setCharacterEncoding("UTF-8");
-					
-	/*	int approvalMax = ApprovalDAO.getApprovalMax;
+
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy.MM.dd-");
+		Date currentTime = new Date();
+		String approvalNum = formatter.format ( currentTime );
+		int approvalMax = approvalDAO.getApprovalMax(approvalNum)+1;
+			
+		approvalNum += approvalMax;
+			
+		System.out.println(approvalNum);
 		
-		dto.setApprovalNum(approvalMax+1);*/
+		String approvalType = request.getParameter("type");
+		String subject = request.getParameter("subject");
+		String content = request.getParameter("contentArea");		
+				
+		int approvalDepth = Integer.parseInt(request.getParameter("approvalDepth"));
+				
+		for(int i = 2; i < 8; i++ ){
+			
+			String approval = request.getParameter("depth"+i);
+			
+			System.out.println(approval);
+			
+			if(i==2){
+				if(approval==null){
+					dto.setApproval2("X");
+				}else{
+					dto.setApproval2(approval);
+				}
+			}
+			if(i==3){
+				if(approval==null){
+					dto.setApproval3("X");
+				}else{
+					dto.setApproval3(approval);
+				}
+			}
+			if(i==4){
+				if(approval==null){
+					dto.setApproval4("X");
+				}else{
+					dto.setApproval4(approval);
+				}
+			}
+			if(i==5){
+				if(approval==null){
+					dto.setApproval5("X");
+				}else{
+					dto.setApproval5(approval);
+				}
+			}
+			if(i==6){
+				if(approval==null){
+					dto.setApproval6("X");
+				}else{
+					dto.setApproval6(approval);
+				}
+			}			
+		}
 		
+		SimpleDateFormat TimeFormat = new SimpleDateFormat ("yyyy-MM-dd_HH.mm.ss");
+		Date createdTime = new Date();
+		String created = TimeFormat.format (createdTime);
+		dto.setCreated(created);
+		dto.setId(request.getParameter("depth1"));
+		dto.setType(approvalType);
+		dto.setSubject(subject);
+		dto.setContent(content);
+		dto.setApprovalNum(approvalNum);
+				
+		approvalDAO.insertApproval(dto);
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return "ok";	
-		
+		return null;	
 	}
 
 	@RequestMapping(value = "/approvalTest", method={RequestMethod.GET,RequestMethod.POST})
@@ -232,7 +310,7 @@ public class ApprovalController {
 	public String approvalMemberList(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
 		System.out.println("approvalMemberList.Controller");
-		
+
 		String cp = request.getContextPath();
 		String num = request.getParameter("num");
 		
@@ -252,8 +330,7 @@ public class ApprovalController {
 		int currentPage = 1;
 		
 		String searchValue = request.getParameter("searchValue");
-		
-		System.out.println("에러확인");
+				
 		dto = insaDAO.readBuseo(buseoNum);
 		
 		if(dto==null){
@@ -303,8 +380,7 @@ public class ApprovalController {
 		}				
 		
 		int dataCount = insaDAO.dataCount(depth1,depth2,depth3,depth4,depth5,searchValue);
-		
-		System.out.println("데이터 숫자 : "+dataCount);
+				
 		int numPerPage = 99;
 		
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -361,7 +437,6 @@ public class ApprovalController {
 			
 			
 			if(mDto.getDepth4()!="no" && !mDto.getDepth4().equals("no")){
-				System.out.println("뎁스4");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth4()));
 				mDto.setDepth4(bDto.getBuseoName()+" ▶ ");
 				
@@ -374,28 +449,20 @@ public class ApprovalController {
 			
 			
 			if(mDto.getDepth5()!="no" && !mDto.getDepth5().equals("no")){
-				System.out.println("뎁스51");
 				bDto = insaDAO.readBuseo(Integer.parseInt(mDto.getDepth5()));
 				mDto.setDepth5(bDto.getBuseoName());
-				System.out.println("뎁스51나감");
 			}else if(mDto.getDepth5().equals("no") || mDto.getDepth5()=="no"){
-				System.out.println("뎁스5");
 				mDto.setDepth5("");
-				System.out.println("뎁스5나감");
 			}
 			
 		}
 				
-		
-		
 		String listUrl = cp +"/approvalMemberList";
 		
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 		
 		int size = lists.size();
 				
-		System.out.println("근호짱" + size);
-		
 		request.setAttribute("max", max);
 		request.setAttribute("lists", lists);
 		request.setAttribute("pageIndexList", pageIndexList);
@@ -440,7 +507,15 @@ public class ApprovalController {
 		return "approval/approvalLine";
 	}
 
-	
+	@RequestMapping(value = "/aptest", method={RequestMethod.GET,RequestMethod.POST})
+	public String aptest(HttpServletRequest request , HttpServletResponse response) throws Exception{
+				
+		String haha = "haha";
+		
+		request.setAttribute("haha", haha);
+		
+		return "approval/approvalRight";
+	}
 	
 	
 	

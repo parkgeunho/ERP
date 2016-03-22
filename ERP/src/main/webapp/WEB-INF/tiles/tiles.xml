@@ -48,7 +48,6 @@
 		<put-attribute name="rightMain" value="/WEB-INF/views/project/ManagementView.jsp" />
 	</definition>
 	
-	
 	<definition name="boardtest" extends="temp">
 		<put-attribute name="main" value="Boardcontrol" />
 	</definition>
@@ -58,28 +57,15 @@
 		<put-attribute name="rightMain" value="/WEB-INF/views/control/boardControl.jsp" />
 	</definition>
 	
-	
-	
-	
 	<definition name="boardMain" extends="temp">
 		<put-attribute name="main" value="/WEB-INF/views/board/boardMain.jsp" />
 	</definition>
-	
-	
-	
-	
-	
 	
 	<definition name="BoardTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/board/boardSide.jsp" />
 		<put-attribute name="rightMain" value="/WEB-INF/views/board/list.jsp" />
 	</definition>
-	
-	
-	
-	
-	
-	
+
 	<!-- <definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
 		<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp" />
@@ -118,14 +104,42 @@
 		</put-attribute>
 	</definition> -->
 	
+	
+	
+	
+	
+	<!-- 결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역 -->
+	
+	
 	<definition name="approvalTile" extends="temp">
 		<put-attribute name="main" value="approvalMain" />
 	</definition>
 	
 	<definition name="approvalMain" template="/WEB-INF/views/approval/approvalMain.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/approval/approvalLeft.jsp" />
+		<!-- <put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" /> -->
 		<put-attribute name="rightMain" value="/WEB-INF/views/approval/approvalRight.jsp" />
 	</definition>
+	
+	<definition name="buseo" extends="temp">
+      <put-attribute name="main" value="Buseocontrol" />
+   	</definition>
+	
+
+	
+
+
+
+
+
+
+	<!-- 결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역결재영역 -->
+
+
+
+
+
+
 
 	<!-- <definition name="scheTile" template="/WEB-INF/views/schedule/layoutMain.jsp">
 		<put-attribute name="title"		value="타일즈테스트" />
