@@ -574,12 +574,12 @@ function Add(){
 									</div>
 									
 									
-									<div style="float: left; width: 110px;">
+									<div style="float: left; width: 110px; margin-top: 60px;">
 										글쓰기 권한
 									
 									</div>
 									
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 										쓰기가능<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="write" checked="checked" name="writeck">
@@ -590,7 +590,7 @@ function Add(){
 										</c:if>
 									</div>
 								
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 									쓰기불가<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="non" name="writeck">

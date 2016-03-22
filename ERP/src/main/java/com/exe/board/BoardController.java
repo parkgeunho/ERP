@@ -74,10 +74,12 @@ public class BoardController {
 	
 		
 		ListDTO lDTO = listDAO.readData(listNum);
-	      
+	     
 	  	HttpSession session = request.getSession();
 	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
-		  
+		 
+
+	  	
 		  String read[] = null;
 		  List<String> Rlist = new ArrayList<String>();
 		  String check = lDTO.getBuseoW();

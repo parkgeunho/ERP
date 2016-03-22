@@ -18,7 +18,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="memberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
-	select num,userNum,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where ${searchKey} like '%'||#{searchValue}||'%' order by name asc	
+	select num,userNum,jumin,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where ${searchKey} like '%'||#{searchValue}||'%' order by name asc	
 	</select>
 	
 	<select id="idOK" parameterType="String" resultType="String">

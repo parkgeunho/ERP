@@ -10,6 +10,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <title>펀치상사 그룹웨어</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/menu.css">
+
+<script >
+//banner_roll("div태그 id", 배너1개높이, 딜레이, 1칸이동속도, 0);
+function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_height){
+	
+	var div_tag = document.getElementById(div_id);
+	var a_tag, i;
+	
+	this_height ++;
+	if(this_height < banner_height) {
+		div_tag.style.top = -this_height;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", " + this_height + ");", banner_speed);
+	} else {
+		a_tag = div_tag.getElementsByTagName("A");
+		div_tag.appendChild(a_tag[0]);
+		div_tag.style.top = 0;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", 0);", banner_delay);
+	}
+
+	return true;
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -52,7 +85,7 @@ $(document).ready(function(){
     });
                
     
- 
+	 
 });
 
 
@@ -114,7 +147,27 @@ $(document).ready(function(){
 	<div style="margin-top: 20px;" class="line">
 			<div id="birth" class="ma">기념일</div>
 			<div id="do1" class="sub">
-				아무것도없음
+			
+			
+			
+			
+			<div style=":absolute; width:200px; height:60px; overflow:hidden;">
+				<div style=":relative;" id="banner_1">
+				<a href="#" style="display:block; height:60px;">테스트1</a>
+				<a href="#" style="display:block; height:60px;">테스트2(이미지도 OK)</a>
+				<a href="#" style="display:block; height:60px;">테스트3</a>
+				<a href="#" style="display:block; height:60px;">테스트4</a>
+				<a href="#" style="display:block; height:60px;">테스트5</a>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
 			</div>	
 		</div>
 	
@@ -148,8 +201,9 @@ $(document).ready(function(){
 
 	
 	
-
-	
+<script>
+banner_roll("banner_1", 60, 2000, 20, 0);
+</script>
 	
 
 </body>
