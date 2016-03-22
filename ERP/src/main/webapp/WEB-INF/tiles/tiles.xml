@@ -18,7 +18,7 @@
 		<put-attribute name="main" value="scheduleMain" />
 	</definition>
 	
-	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain.jsp">
+	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain2.jsp">
 		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
 	</definition>
 	
