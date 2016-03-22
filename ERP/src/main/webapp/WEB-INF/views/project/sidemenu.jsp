@@ -62,11 +62,11 @@
 	</div>
 	
 	
-	<a href="javascript:searchPop();">
-	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
+
+	<div class="Smenu" onclick="javascript:searchPop();"><img style="margin-top: 10px;" src="/erp/resources/image/search.png"><br/>
 	직원 검색
 	</div>
-	</a>
+	
 	
 
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>
