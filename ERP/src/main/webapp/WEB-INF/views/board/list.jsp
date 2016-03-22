@@ -98,7 +98,7 @@ ${LDTO.boardName}
 
 
 
-<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 1550px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 1572px;">
 	<c:forEach var="dto" items="${lists }">
 	<tr style="height: 1px; background: #B2EBF4">		
 	</tr>
