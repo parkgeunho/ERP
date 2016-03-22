@@ -19,7 +19,14 @@ $(document).ready(function(){
     $("#b").click(function(){
     	
     	
-    	
+    	/*  if($(".dtonumber").css("display") == "none"){
+    	      $(".dtonumber").show();
+    	  } else {
+    	      $(".dtonumber").hide();
+    	  }
+    	 */
+    	$(".dtonumber").slideToggle("slow");
+    	 
         $("#a").slideToggle("slow");
        
         var a = ($(this).text()=='▽')?'△':'▽';
@@ -83,10 +90,28 @@ $(document).ready(function(){
 <div id="c">
 	<div id="a" style="height: 100px; background-color: white;">
 	
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
-		<div style="width: 80px;height: 80px;background-color: red; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;"></div>
+	
+		<div align="center" class="dtonumber" style="margin-left: 47%;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 1085px;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 1270px;">0</div>
+		<div style="width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;">
+		
+			<img alt="" src="${imagePath}/${dto.upload}" style="width: 80px; height: 80px; border-radius:100%">
+		</div>
+	
+		
+		<div align="center" style="padding-left:3px;  padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+			<img style="margin-top: 10px;" src="/erp/resources/image/memo.png">
+		</div>
+		
+		<div align="center" style="padding-left:10px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+			
+			<img style="margin-top: 10px;" src="/erp/resources/image/checktest.png">
+		</div>
+		
+		<div align="center" style=" padding-left:3px;padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
+		<img style="margin-top: 10px;" src="/erp/resources/image/calander.png">
+		</div>
 		
 	<div style="float: left;">
 	
