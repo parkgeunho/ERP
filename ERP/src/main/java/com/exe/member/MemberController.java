@@ -637,11 +637,11 @@ public class MemberController {
 			HttpServletResponse response) throws Exception {
 		
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		String id = request.getParameter("id");
 		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
-		MemberDTO dto = dao.readOne(num);
+		MemberDTO dto = dao.readOne(id);
 		
 		//주민번호로 나이 구하기
 		Calendar cal = Calendar.getInstance();
