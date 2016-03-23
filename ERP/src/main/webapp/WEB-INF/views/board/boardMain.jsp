@@ -95,7 +95,8 @@ function sendIt(){
 		<div class="buseo" >
 		게시판 목록
 		</div>
-		<div>
+		<div style="height:744px; padding-left: 10px; padding-top: 10px; border-right: 1px solid #D5D5D5;">
+			<div>
 			<c:forEach var="parent" items="${parent }">
 					<c:forEach var="depth0" items="${boardlist }">
 						<c:choose>
@@ -115,8 +116,10 @@ function sendIt(){
 								
 								<c:when test="${depth1.parent==depth0.listNum}">
 							
-									<div style="margin-left: 20px;">
-									<label id="ch-${depth1.listNum }">┖${depth1.boardName }</label>
+									<div style="margin-left: 10px;">
+									<label id="ch-${depth1.listNum }">
+									<img src="/erp/resources/insa/ㄴ.png"><img src="/erp/resources/insa/folder2.png">
+									${depth1.boardName }</label>
 									<input type="hidden" class="numch-${depth1.listNum }" value="${depth1.listNum }">
 									<input type="hidden" name="listNum" value="${depth1.listNum }" id="${depth1.listNum }">
 									</div>
@@ -132,6 +135,7 @@ function sendIt(){
 						</c:choose>
 					</c:forEach>
 				</c:forEach>
+				</div>
 		</div>
 		
 		
@@ -140,7 +144,7 @@ function sendIt(){
 		
 		
 	</div>
-	<div id="boardList" style="float: left; width: 1570px;">
+	<div id="boardList" style="float: left; width: 1568px;">
 	
 	
 	

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>직 원 검 색</title>
 
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
@@ -24,10 +24,10 @@
 		
 	}
 	
-	function article(num){
+	function article(id){
 		
 		
-		window.open("search_ok.action?num="+num,"","width=400px,height=580px");
+		window.open("search_ok.action?id="+id,"","width=500px,height=600px");
 		
 		
 		
@@ -94,7 +94,7 @@
 		<c:forEach items="${lists}" var="dto">
 		<tr >
 			<td align="center" width="50%">${dto.usernum}</td>
-			<td align="center"><a href="javascript:article(${dto.num });">${dto.name}</a></td>
+			<td align="center"><a href="javascript:article(${dto.id });">${dto.name}</a></td>
 			<td align="center">${dto.grade}</td>
 		</tr>
 		</c:forEach>

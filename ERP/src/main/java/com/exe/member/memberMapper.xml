@@ -18,7 +18,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="memberList" parameterType="HashMap" resultType="com.exe.member.MemberDTO">
-	select num,userNum,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where ${searchKey} like '%'||#{searchValue}||'%' order by name asc	
+	select num,userNum,jumin,name,id,Ophone,Mphone,email,dal,duty,grade,depth1,depth2,depth3,depth4,depth5 from insadb where ${searchKey} like '%'||#{searchValue}||'%' order by name asc	
 	</select>
 	
 	<select id="idOK" parameterType="String" resultType="String">
@@ -29,6 +29,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select * from insadb where num=#{num}
 	</select>
 	
+	<select id="readTwo" parameterType="String" resultType="com.exe.member.MemberDTO">
+		select * from insadb where id=#{id}
+	</select>
+	
 	<select id="login" parameterType="com.exe.member.MemberDTO" resultType="com.exe.member.MemberDTO">
 		select * from insadb where id=#{id} and pwd=#{pwd}
 	</select>
@@ -37,6 +41,11 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		update insadb set name=#{name},jumin=#{jumin},addr=#{addr},id=#{id},pwd=#{pwd},oPhone=#{oPhone},mPhone=#{mPhone},email=#{email},blood=#{blood},reli=#{reli},hobby=#{hobby},memo=#{memo},grade=#{grade},duty=#{duty},
 		dal=#{dal},depth1=#{depth1},depth2=#{depth2},depth3=#{depth3},depth4=#{depth4},depth5=#{depth5},upload=#{upload},secure=#{secure} where num=#{num}
 	</update>
+	
+	<update id="smallUpdatedData" parameterType="com.exe.member.MemberDTO">
+		update insadb set addr=#{addr},pwd=#{pwd},mPhone=#{mPhone},email=#{email},reli=#{reli},hobby=#{hobby} where id=#{id}
+	</update>
+	
 	<delete id="deleteData" parameterType="Integer">
 		delete insadb where num=#{num}
 	</delete>

@@ -244,9 +244,10 @@ function Add(){
 					
 							<c:forEach var="member1" items="${memberList }">
 								<c:if test="${member1.depth1==depth0.buseoNum && member1.depth2=='no' }">
-									<div  style="margin-left: 30px; color: #6B9900" >
+									<div  style="margin-left: 10px; color: #6B9900" >
+									<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 									<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-									<label id="Mem-${member1.num }" ">${member1.name }</label>
+									<label id="Mem-${member1.num }" >${member1.name }</label>
 									
 									</div>
 									<input type="hidden" class="numMem-${member1.num }" value="${member1.num }">
@@ -271,6 +272,7 @@ function Add(){
 									<c:forEach var="member2" items="${memberList }">
 									<c:if test="${member2.depth2==depth1.buseoNum && member2.depth3=='no' }">
 										<div style="margin-left: 30px; color: #6B9900" >
+										<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 										<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 										<label id="Mem-${member2.num }"> ${member2.name }</label>
 										</div>
@@ -421,8 +423,10 @@ function Add(){
 										
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
-											<div style="margin-left: 40px;">
-											┖ <label id="bus-${depth2.buseoNum }" >${depth2.buseoName }</label>
+											<div style="margin-left: 30px;">
+											<img src="/erp/resources/insa/ㄴ1.png" align="middle">
+											<img src="/erp/resources/insa/folder2.png" align="middle">
+											<label id="bus-${depth2.buseoNum }" >${depth2.buseoName }</label>
 											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 											
@@ -574,12 +578,12 @@ function Add(){
 									</div>
 									
 									
-									<div style="float: left; width: 110px;">
+									<div style="float: left; width: 110px; margin-top: 60px;">
 										글쓰기 권한
 									
 									</div>
 									
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 										쓰기가능<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="write" checked="checked" name="writeck">
@@ -590,7 +594,7 @@ function Add(){
 										</c:if>
 									</div>
 								
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 									쓰기불가<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="non" name="writeck">

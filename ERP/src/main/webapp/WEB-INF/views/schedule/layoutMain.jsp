@@ -13,7 +13,7 @@
 <body style="margin: 0px; width: 100%;">
 <div style="width: 1840px; height: 822px;">
 	
-	<div style="float: left; width: 270px; height:822px;"><tiles:insertAttribute name="leftMain"/></div>
+	<div style="float: left; width: 270px; height:822px; border-right: 1px solid #D5D5D5; "><tiles:insertAttribute name="leftMain"/></div>
 	<div style="float: left; width: 1568px; height:822px; ">
 	<tiles:insertAttribute name="rightMain"/></div>
 	

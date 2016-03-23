@@ -207,7 +207,6 @@
         f.file.value = str;
         
         var check = $("#check").text();
-	
 		
 		if(check=="사용불가 아이디"){
 			alert("사용 불가능한 아이디 입니다.")

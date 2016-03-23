@@ -10,6 +10,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <title>펀치상사 그룹웨어</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/menu.css">
+<SCRIPT src="http://www.clocklink.com/embed.js"></SCRIPT>
+<script >
+//banner_roll("div태그 id", 배너1개높이, 딜레이, 1칸이동속도, 0);
+function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_height){
+	
+	var div_tag = document.getElementById(div_id);
+	var a_tag, i;
+	
+	this_height ++;
+	if(this_height < banner_height) {
+		div_tag.style.top = -this_height;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", " + this_height + ");", banner_speed);
+	} else {
+		a_tag = div_tag.getElementsByTagName("div");
+		div_tag.appendChild(a_tag[0]);
+		div_tag.style.top = 0;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", 0);", banner_delay);
+	}
+
+	return true;
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -52,7 +85,7 @@ $(document).ready(function(){
     });
                
     
- 
+	 
 });
 
 
@@ -65,12 +98,9 @@ $(document).ready(function(){
 
 <!-- 왼쪽 첫번재 div -->
 <div style="margin-top :100px; margin-left: 27px; float: left;">
-	<div class="line">
-		<div id="test33" class="ma">메일/결제 알림판</div>
-		<div class="sub" id="mail">메일아이콘과 결제 관련아이콘이 들어가는 자리 입니다.</div>
-	</div>
+
 	
-	<div class="line" style="margin-top: 20px;" >
+	<div class="line"  >
 			<div id="nonmail" class="ma">안읽은메일</div>
 			<div id="ex" class="sub">
 				<div>1</div>
@@ -84,7 +114,7 @@ $(document).ready(function(){
 	</div>
 
 
-	<div style="margin-top: 20px;" class="line">
+	<div style="margin-top: 40px;" class="line">
 			<div id="check" class="ma">결재함</div>
 			<div id="dod" class="sub">
 				아무것도없음
@@ -98,23 +128,64 @@ $(document).ready(function(){
 	
 	<div class="line">
 		<div id="name" class="ma">공지사항</div>
-			<div class="sub" id="content"  >
+			<div class="sub" id="content" >
 				<c:forEach var="notice" items="${notice }">
-					<div>● ${notice.subject }</div>
+					<div  style="height: 30px; line-height: 30px;">● ${notice.subject }</div>
 				</c:forEach>
 			</div>
 	</div>
 	
-	<div style="margin-top: 20px;" class="line">
-		<div class="back">
-			사진들어감
-		</div>
-	</div>
+	
 
-	<div style="margin-top: 20px;" class="line">
+	<div style="margin-top: 40px;" class="line">
 			<div id="birth" class="ma">기념일</div>
-			<div id="do1" class="sub">
-				아무것도없음
+			<div id="do1" class="sub" style="font-size: 10pt;">
+			
+			
+			
+			<div style="width: 265px;height: 200px; float: left; padding-top: 10px;" align="center">
+			<span style="font-size: 15pt; ">이번달 생일자</span>
+				<div style=":absolute; width:265px; height:200px; overflow:hidden;">
+					<div style=":relative;" id="banner_1" align="center">
+					<c:forEach var="dto" items="${nowBirth}">
+					<div style="display:block; height:190px; margin-top: 10px; font-size: 12pt;">
+					${dto.seatPoint }<br>
+					${dto.name }님 생일을 축하드립니다.<br>
+					<br>
+					<img alt="" src="/erp/resources/image/birth.png">
+					
+					</div>
+					
+					
+					</c:forEach>
+					</div>
+				</div>
+			</div>
+			
+			<div style="width: 19px; height: 220px; border-right: 1px solid; float: left; margin-top: 10px;"></div>
+			<div style="width: 20px; height: 175px; float: left;"></div>
+			
+			<div style="width: 265px; height: 250px; float: left; padding-top: 10px;" align="center">
+				<span style="font-size: 15pt;">다음달 생일자</span>
+				<div style=":absolute; width:265px; height:180px; overflow:hidden; margin-top: 10px; font-size: 12pt;">
+				<div style=":relative;" id="banner_2">
+				<c:forEach var="dto" items="${nextBirth }">
+				<div style="display:block; height:30px;">${dto.seatPoint } ${dto.name }님</div>
+				</c:forEach>
+				</div>
+				</div>
+			
+			
+			
+			
+			</div>
+			
+			
+			
+			
+			
+			
+			
 			</div>	
 		</div>
 	
@@ -134,9 +205,12 @@ $(document).ready(function(){
 	
 	
 	
-		<div style="margin-top: 20px;" class="line">
+		<div style="margin-top: 40px;" class="line">
 			<div id="time" class="ma">세계시간</div>
-			<div id="ck" class="sub">세계시간이 들어가는건데 필요한가 모르겟음</div>	
+			<div id="ck" class="sub" align="center" style="background-color: #666666;">
+			
+			<embed src="http://www.clocklink.com/clocks/world001-gray.swf?TimeZone=JST" width="570" height="250" wmode="transparent" type="application/x-shockwave-flash">
+			</div>	
 		</div>
 		
 	</div>
@@ -148,8 +222,11 @@ $(document).ready(function(){
 
 	
 	
+<script>
+banner_roll("banner_1", 175, 2000, 20, 0);
+banner_roll("banner_2", 180, 2000, 5, 0);
+</script>
 
-	
 	
 
 </body>

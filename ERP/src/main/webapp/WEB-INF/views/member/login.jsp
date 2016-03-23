@@ -48,7 +48,7 @@ function login(){
 </head>
 
 
-<body onload="pass()">
+<body style="background-image: url('/erp/resources/image/backok.jpg');">
 
 <form action="" method="post" name="myForm">
 <center>
