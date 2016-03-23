@@ -145,4 +145,16 @@ public class HomeController {
 		return "temp";
 	}	
 	
+	
+	@RequestMapping(value = "/NoteWrite", method = RequestMethod.GET)
+	public String NoteWrite(HttpServletRequest request,HttpServletResponse response) throws ParseException {
+		
+		
+		
+		
+		
+		return "note/write";
+		
+	}
+	
 }

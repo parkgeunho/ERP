@@ -13,11 +13,11 @@
 .ma{
 	
 	background: linear-gradient(#FFFFFF, #EAEAEA);
-	height: 50px;
+	height: 40px;
 	width: 570px;
-	font-size: 16pt;
+	font-size: 15pt;
 	font-weight: bold;
-	line-height: 50px;
+	line-height: 40px;
 	padding-left:10px;
 	
 	
@@ -35,7 +35,7 @@
 	padding-left:10px;
 	height: 250px;
 	width:570px;
-	font-size: 15pt;
+	font-size: 11pt;
 	font-weight: bold;
 	
 }

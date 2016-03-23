@@ -103,7 +103,7 @@ function sendIt(){
 						
 						<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum}">
 						<div>
-						<label id="ch-${depth0.listNum}">${depth0.boardName }</label>
+						<label id="ch-${depth0.listNum}" style="">${depth0.boardName }</label>
 						<input type="hidden" class="numch-${depth0.listNum }" value="${depth0.listNum }">
 						<input type="hidden" name="listNum" value="${depth0.listNum }" id="${depth0.listNum }">
 						</div>
