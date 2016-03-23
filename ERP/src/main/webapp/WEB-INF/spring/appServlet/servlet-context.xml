@@ -55,6 +55,9 @@
 		</interceptor>
 	</interceptors>
 
+	<beans:bean id="NoteDAO" class="com.exe.erp.NoteDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
  
     
    <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
