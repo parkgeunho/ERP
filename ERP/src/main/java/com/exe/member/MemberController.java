@@ -637,11 +637,11 @@ public class MemberController {
 			HttpServletResponse response) throws Exception {
 		
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		String id = request.getParameter("id");
 		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
-		MemberDTO dto = dao.readOne(num);
+		MemberDTO dto = dao.readOne(id);
 		
 		//주민번호로 나이 구하기
 		Calendar cal = Calendar.getInstance();
@@ -738,6 +738,33 @@ public class MemberController {
 		
 		
 		return "member/smallView";
+	}
+	
+	@RequestMapping(value = "/smallUpdated.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String smallUpdated(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		
+		request.setAttribute("dto", dto);
+		
+		return "member/smallUpdated";
+	}
+	
+	@RequestMapping(value = "/smallUpdated_ok.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public void smallUpdated_ok(HttpServletRequest request,
+			HttpServletResponse response,MemberDTO dto) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		
+		
+		dao.smallUpdatedData(dto); //업데이트
+		
+		session.invalidate();//세션값 지워서 강제 로그아웃
+		
 	}
 	
 	
