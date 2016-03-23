@@ -307,13 +307,13 @@
         	alert("결재선을 지정하십시오.");
         	return;
         }
-           
-		alert("결재 상신 완료.");
-
+        
 		f.action = "<%=cp%>/approvalCreated_ok";
 		f.submit();
-				
+		
+		alert("결재 상신 완료.");
 		window.close();
+		
 		
 	}
 </script>
@@ -737,7 +737,7 @@
 
 <form action="" method="post" name="approvalForm">
 
-<input type="hidden" name="depth1" value="dto.session">
+<input type="hidden" name="depth1" value="${LoginDTO.id }">
 
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->

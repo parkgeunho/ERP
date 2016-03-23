@@ -55,11 +55,7 @@
 		</interceptor>
 	</interceptors>
 
-   
-   
-   
  
-       
     
    <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
@@ -107,7 +103,6 @@
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.10.128:1521:orcl" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
-
 
 	</beans:bean>
 
