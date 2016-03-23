@@ -69,11 +69,8 @@
 			font-style: 나눔고딕코딩;font-weight: bolder; background: #EEEEEE" align="center">첨부파일</td>
 		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;" title="다운받기">&nbsp;&nbsp;${fdto.originalFileName}
 		&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
-			<img style="width: 16px;" alt="" src="/erp/resources/boardimage/down003.png"></a></td>
-		
-	</tr>
-	
-	
+			<img style="width: 16px;" alt="" src="/erp/resources/boardimage/down003.png"></a></td>		
+	</tr>	
 	
 	<tr style="height: 1px; background: #E7E7E7">
 		<td style="width: 1572px;" colspan="3"></td>

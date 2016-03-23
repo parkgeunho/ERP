@@ -214,9 +214,6 @@ public class BoardController {
         
         
                 
-    
-        
-        
         
         
         session.setAttribute("cklistNum", ckNum);
@@ -575,7 +572,6 @@ public class BoardController {
 				  
 				  
 				  
-				  
 			  }
 
 			  
@@ -602,10 +598,6 @@ public class BoardController {
 
 		     
 		      
-		      
-
-		 
-		      	      
 
 		      
 		      
@@ -666,13 +658,12 @@ public class BoardController {
 	  @RequestMapping(value = "/download.action", method = {RequestMethod.GET,RequestMethod.POST})
 		public String download(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		  
-		// Map<String, Object> map = BoardFileDAO.selectData("BoardFileDAO");
-		  
+		
 		  
 		 int boardNum= Integer.parseInt(request.getParameter("boardNum"));
 		 int listNum= Integer.parseInt(request.getParameter("listNum"));
 		 
-		//byte fileByte [] = fi
+		
 		 
 		 
 		 BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
