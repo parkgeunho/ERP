@@ -37,7 +37,7 @@
         </beans:property>
     </beans:bean>
     
-    <beans:bean id="multipartResolver"
+   <beans:bean id="multipartResolver"
    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    
    <beans:property name="maxUploadSize" value="10240000"/>
@@ -104,9 +104,6 @@
 	destroy-method="close">
 
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-
-
-
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
