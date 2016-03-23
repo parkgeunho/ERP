@@ -50,7 +50,7 @@ public class ApprovalController {
 		String head = "진행중 - 상신한 문서";
 		
 		List<ApprovalDTO> approvalList = approvalDAO.approvalIngList(userId); 
-		
+		 
 		if(approvalList.size()==0){
 			approvalList =null;
 		}		
