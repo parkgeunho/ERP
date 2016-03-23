@@ -10,6 +10,39 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <title>펀치상사 그룹웨어</title>
 <link rel="stylesheet" type="text/css" href="/erp/resources/menu.css">
+
+<script >
+//banner_roll("div태그 id", 배너1개높이, 딜레이, 1칸이동속도, 0);
+function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_height){
+	
+	var div_tag = document.getElementById(div_id);
+	var a_tag, i;
+	
+	this_height ++;
+	if(this_height < banner_height) {
+		div_tag.style.top = -this_height;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", " + this_height + ");", banner_speed);
+	} else {
+		a_tag = div_tag.getElementsByTagName("A");
+		div_tag.appendChild(a_tag[0]);
+		div_tag.style.top = 0;
+		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", 0);", banner_delay);
+	}
+
+	return true;
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -52,7 +85,7 @@ $(document).ready(function(){
     });
                
     
- 
+	 
 });
 
 
@@ -113,8 +146,46 @@ $(document).ready(function(){
 
 	<div style="margin-top: 20px;" class="line">
 			<div id="birth" class="ma">기념일</div>
-			<div id="do1" class="sub">
-				아무것도없음
+			<div id="do1" class="sub" style="font-size: 10pt;">
+			
+			
+			
+			<div style="width: 265px;height: 175px; float: left;" align="center">
+			<span style="font-size: 15pt;">이번달 생일자</span>
+				<div style=":absolute; width:265px; height:175px; overflow:hidden;">
+					<div style=":relative;" id="banner_1" align="center">
+					<c:forEach var="dto" items="${nowBirth}">
+					<a href="#" style="display:block; height:175px;  "  >
+					${dto.seatPoint }<br>
+					${dto.name }님 생일을 축하드립니다.<br>
+					<img alt="" src="/erp/resources/image/birth.png">
+					
+					</a>
+					
+					
+					</c:forEach>
+					</div>
+				</div>
+			</div>
+			
+			<div style="width: 19px; height: 150px; border-right: 1px solid; float: left; margin-top: 10px;"></div>
+			<div style="width: 20px; height: 175px; float: left;"></div>
+			
+			<div style="width: 265px; height: 175px; float: left; " align="center">
+				<span style="font-size: 15pt;">다음달 생일자</span>
+			
+			
+			
+			
+			
+			</div>
+			
+			
+			
+			
+			
+			
+			
 			</div>	
 		</div>
 	
@@ -148,8 +219,9 @@ $(document).ready(function(){
 
 	
 	
-
-	
+<script>
+banner_roll("banner_1", 175, 2000, 20, 0);
+</script>
 	
 
 </body>

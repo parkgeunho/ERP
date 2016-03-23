@@ -70,17 +70,25 @@ public class BoardController {
 
 		response.setCharacterEncoding("UTF-8");	
 		
+
 		ListDTO lDTO = listDAO.readData(listNum);		
+
 	      
 	      String listsNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listsNum));
 	  	
-	      request.setAttribute("listDTO", listDTO);	      
+	      request.setAttribute("listDTO", listDTO);
 	      
+
 	  	HttpSession session = request.getSession();
-	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");	  	
+
+
+	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+
+		 
 	  	
 	  	request.setAttribute("dto", mDTO);
+
 	  	
 		  String read[] = null;
 		  List<String> Rlist = new ArrayList<String>();
@@ -273,8 +281,7 @@ public class BoardController {
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
 	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		    
-	      
+		    	      
 	      String cp = request.getContextPath();
 	      
 	      int boardNum = Integer.parseInt(request.getParameter("boardNum"));
@@ -384,7 +391,7 @@ public class BoardController {
 		  
 		  dao.updateData(dto);
 	  
-		  /*return "redirect:/board/list.action?pageNum=" + pageNum;*/
+
 		  
 	  }
 	  

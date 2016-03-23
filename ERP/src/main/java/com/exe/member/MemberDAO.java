@@ -95,6 +95,15 @@ public class MemberDAO {
 		
 	}
 	
+	public MemberDTO readOne(String id){
+		
+		
+		MemberDTO dto = sessionTemplate.selectOne("com.exe.member.readTwo",id);
+		
+		return dto;
+		
+	}
+	
 	public MemberDTO login(MemberDTO dto){
 		
 		MemberDTO result = sessionTemplate.selectOne("com.exe.member.login",dto);

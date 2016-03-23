@@ -200,11 +200,14 @@ var myForm = $('form').serialize();
 
 		f.file.value = str;
 
-		/* var check = $("#check").text();
-		if (check == "사용불가 아이디") {
-			alert("사용 불가능한 아이디 입니다.")
-			return;
-		} */
+		 var check = $("#check").text();
+			
+			if(check=="사용불가 아이디"){
+				alert("사용 불가능한 아이디 입니다.")
+				return;
+			}
+			
+			alert("정상적으로 수정이 완료되었습니다.");
 
 		f.action = "<%=cp%>/updated_ok.action";
 		f.submit();
