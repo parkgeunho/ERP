@@ -126,12 +126,15 @@ int restDiv = (Integer)request.getAttribute("restDiv");
             </c:forEach>
          </c:if>
          <c:if test="${dto.replyNum == 0 && dto.depth != 0}">
-            &nbsp; &nbsp;
+            
          </c:if>
          <c:if test="${dto.replyNum != 0}">
          <img id="fold-${dto.buseoNum}" src="/erp/resources/image/minus.png"/>
          </c:if>
-        
+           <c:if test="${dto.replyNum == 0}">
+          <img src="/erp/resources/insa/ㄴ.png">
+         </c:if>
+       
        
         <c:choose>
         	<c:when test="${dto.checked=='a' }">
@@ -139,6 +142,7 @@ int restDiv = (Integer)request.getAttribute("restDiv");
         	</c:when>
         	
         	<c:when test="${dto.checked!='a' }">
+        	
         	 <label id="edit-${dto.buseoNum}">${dto.buseoName }</label>
         	</c:when>
         </c:choose>

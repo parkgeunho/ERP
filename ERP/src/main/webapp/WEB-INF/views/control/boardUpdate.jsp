@@ -219,8 +219,10 @@ $('[id^="ckMem-"]').click(function(){
 						
 						
 						
-							<div style="float: left; height: 30px;margin-top: 30px;" class="boardManagement" onclick="boardUpdate();" >저장</div > <div style="float: left;">취소</div>
-					
+						<div align="center">
+							<div style="float: left; margin-left:300px; height: 30px;margin-top: 30px;" class="boardManagement" onclick="boardUpdate();" >저장</div > 
+							<div style="float: left; height: 30px;margin-top: 30px;" class="boardManagement">취소</div>
+						</div>
 					
 					
 				</div>

@@ -130,7 +130,7 @@ $(document).ready(function(){
 		<div id="name" class="ma">공지사항</div>
 			<div class="sub" id="content" >
 				<c:forEach var="notice" items="${notice }">
-					<div  style="height: 30px; line-height: 30px;">● ${notice.subject }</div>
+					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● ${notice.subject }</div>
 				</c:forEach>
 			</div>
 	</div>

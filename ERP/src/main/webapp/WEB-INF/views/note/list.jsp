@@ -12,9 +12,9 @@
 </head>
 <body>
 <Div style="width: 600px; height: 600px; border: 1px solid;">
-	<div style="height: 50px;">받은 쪽지함</Div>
+	<div style="width:560px; height: 40px; margin-left:20px; line-height: 40px; border-bottom: 1px solid">받은 쪽지함</Div>
 	<div>
-	<table height="550px;" width="560px;" border="1">
+	<table height="500px; " width="560px;" border="1" style="margin-left: 20px; margin-top: 10px;" >
 		<tr height="25px;">
 			<td width="100px;">보낸사람</td> <td width="360px;">내용</td> <td width="100px;">보낸 날짜</td>
 		</tr>
@@ -22,9 +22,7 @@
 		<tr height="25px;">
 			<td>이</td><td>게</td><td>20개</td>
 		</tr>
-		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
-		</tr>
+	
 		<tr height="25px;">
 			<td>이</td><td>게</td><td>20개</td>
 		</tr>
