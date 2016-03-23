@@ -116,8 +116,10 @@ function sendIt(){
 								
 								<c:when test="${depth1.parent==depth0.listNum}">
 							
-									<div style="margin-left: 20px;">
-									<label id="ch-${depth1.listNum }">┖${depth1.boardName }</label>
+									<div style="margin-left: 10px;">
+									<label id="ch-${depth1.listNum }">
+									<img src="/erp/resources/insa/ㄴ.png"><img src="/erp/resources/insa/folder2.png">
+									${depth1.boardName }</label>
 									<input type="hidden" class="numch-${depth1.listNum }" value="${depth1.listNum }">
 									<input type="hidden" name="listNum" value="${depth1.listNum }" id="${depth1.listNum }">
 									</div>

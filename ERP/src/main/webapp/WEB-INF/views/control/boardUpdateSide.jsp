@@ -54,12 +54,12 @@ $("input[name=writeck]").click(function(){
 			</div>
 			
 			<Div style="height: 140px;">
-				<Div style="height: 70px;">
+				<Div style="height: 70px; line-height: 70px;">
 					<div style="float: left; width: 100px;">사원번호</div>
 					<Div style="float: left;">${mDTO.usernum }</Div>
 				</Div>
 			
-				<div style="height: 70px;">
+				<div style="height: 70px; line-height: 70px;">
 					<div style="float: left; width: 100px;">사내번호</div>
 					<Div style="float: left;">${mDTO.oPhone }</Div>
 				</Div>

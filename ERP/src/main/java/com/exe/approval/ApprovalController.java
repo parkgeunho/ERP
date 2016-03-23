@@ -44,22 +44,177 @@ public class ApprovalController {
 	public String approval(HttpServletRequest request,HttpServletResponse response) {
 		
 		HttpSession session = request.getSession();
-		
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-		
 		String userId = LoginDTO.getId();
 		
-		List<ApprovalDTO> listDTO = approvalDAO.approvalList(userId);
+		String head = "진행중 - 상신한 문서";
 		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalIngList(userId); 
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
 		request.setAttribute("LoginDTO", LoginDTO);
-		request.setAttribute("listDTO", listDTO);
+		request.setAttribute("approvalList", approvalList);
+		
+		return "approvalTile";
+	}
+	//결재할 문서
+	@RequestMapping(value = "/approval2", method={RequestMethod.GET,RequestMethod.POST})
+	public String approval2(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		String userId = LoginDTO.getId();
+		
+		String head = "진행중 - 결재한 문서";
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalNextList(userId);
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("approvalList", approvalList);
 		
 		return "approvalTile";
 	}
 	
+	//완료 - 상신한 문서
+	@RequestMapping(value = "/approval3", method={RequestMethod.GET,RequestMethod.POST})
+	public String approval3(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		String userId = LoginDTO.getId();
+		
+		String head = "완료 - 상신한 문서";
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalSuccessList(userId);
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("approvalList", approvalList);
+		
+		return "approvalTile";
+	}
+	//완료 - 결재한 문서
+	@RequestMapping(value = "/approval4", method={RequestMethod.GET,RequestMethod.POST})
+	public String approval4(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		String userId = LoginDTO.getId();
+		
+		String head = "완료 - 결재한 문서";
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalAgreementList(userId);
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("approvalList", approvalList);
+		
+		return "approvalTile";
+	}
+	//완료 - 반려문서
+	@RequestMapping(value = "/approval5", method={RequestMethod.GET,RequestMethod.POST})
+	public String approval5(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		String userId = LoginDTO.getId();
+		
+		String head = "완료 - 반려문서";
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalReturnList(userId);
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("approvalList", approvalList);
+		
+		return "approvalTile";
+	}
+	
+	@RequestMapping(value = "/approval6", method={RequestMethod.GET,RequestMethod.POST})
+	public String approval6(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		String userId = LoginDTO.getId();
+		
+		String head = "진행중 - 결재할 문서";
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalNextIngList(userId);
+		
+		if(approvalList.size()==0){
+			approvalList =null;
+		}		
+		
+		request.setAttribute("head", head);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("approvalList", approvalList);
+		
+		return "approvalTile";
+	}
+	
+	
 	@RequestMapping(value = "/approvalArticle", method={RequestMethod.GET,RequestMethod.POST})
-	public String approvalArticle() {
-
+	public String approvalArticle(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
+		HttpSession session = request.getSession();
+			
+		String approvalNum = request.getParameter("approvalNum");
+		
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		ApprovalDTO dto = approvalDAO.getLeadData(approvalNum);
+		MemberInfoDTO nameDTO = new MemberInfoDTO();
+		
+		int approvalDepth = dto.getApprovalDepth();
+				
+		for(int i = 1; i < approvalDepth+1; i++ ){	
+			if(i==1){
+				nameDTO.setDepth1(approvalDAO.getName(dto.id));	
+			}
+			if(i==2){
+				nameDTO.setDepth2(approvalDAO.getName(dto.approval2));	
+			}
+			if(i==3){
+				nameDTO.setDepth3(approvalDAO.getName(dto.approval3));	
+			}
+			if(i==4){
+				nameDTO.setDepth4(approvalDAO.getName(dto.approval4));	
+			}
+			if(i==5){
+				nameDTO.setDepth5(approvalDAO.getName(dto.approval5));	
+			}
+			if(i==6){
+				nameDTO.setDepth6(approvalDAO.getName(dto.approval6));	
+			}		
+		}
+				
+		request.setAttribute("approvalNum", approvalNum);
+		request.setAttribute("nameDTO", nameDTO );
+		request.setAttribute("approvalDepth", approvalDepth);
+		request.setAttribute("LoginDTO", LoginDTO);
+		request.setAttribute("dto", dto);
+		
 		return "approval/approvalArticle";
 	}
 
@@ -141,7 +296,8 @@ public class ApprovalController {
 		String content = request.getParameter("contentArea");		
 				
 		int approvalDepth = Integer.parseInt(request.getParameter("approvalDepth"));
-				
+		
+		
 		for(int i = 2; i < 8; i++ ){
 			
 			String approval = request.getParameter("depth"+i);
@@ -153,6 +309,7 @@ public class ApprovalController {
 					dto.setApproval2("X");
 				}else{
 					dto.setApproval2(approval);
+					dto.setNextapproval(approval);
 				}
 			}
 			if(i==3){
@@ -185,28 +342,69 @@ public class ApprovalController {
 			}			
 		}
 		
-		SimpleDateFormat TimeFormat = new SimpleDateFormat ("yyyy-MM-dd_HH.mm.ss");
+		SimpleDateFormat TimeFormat = new SimpleDateFormat ("yyyy-MM-dd_HH:mm");
 		Date createdTime = new Date();
 		String created = TimeFormat.format (createdTime);
+		
 		dto.setCreated(created);
 		dto.setId(request.getParameter("depth1"));
 		dto.setType(approvalType);
 		dto.setSubject(subject);
 		dto.setContent(content);
 		dto.setApprovalNum(approvalNum);
-				
+		dto.setApprovalDepth(approvalDepth+1);
+		
 		approvalDAO.insertApproval(dto);
 		
-		return null;	
+		return "";	
 	}
 
-	@RequestMapping(value = "/approvalTest", method={RequestMethod.GET,RequestMethod.POST})
-	public String approvalTest(HttpServletRequest request) {
+	@RequestMapping(value="/approvalOK_ok", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalOK_ok(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
-
-
-		return "approval/approvalTest";
-	}	
+		System.out.println("approvalOK_ok.Controller");
+				
+		int mydepth = Integer.parseInt(request.getParameter("mydepth"));
+		String approvalNum = request.getParameter("approvalNum");
+		String info = "ing";
+		String nextUser = ""; 
+		
+		SimpleDateFormat TimeFormat = new SimpleDateFormat ("yyyy-MM-dd_HH:mm");
+		Date createdTime = new Date();
+		String created = TimeFormat.format (createdTime);	
+		
+		ApprovalDTO dto = approvalDAO.getLeadData(approvalNum);
+		
+		if(mydepth!=6){
+			nextUser = approvalDAO.approvalChk(approvalNum, mydepth);
+		}	 
+				
+		System.out.println(approvalNum);		
+		System.out.println(created);
+		System.out.println(nextUser);
+		
+		if(dto.getApprovalDepth() == mydepth){
+			info = "success";
+			approvalDAO.approvalSuccess(approvalNum, created, mydepth , info);
+		}else{
+			approvalDAO.approvalOK(approvalNum, created, mydepth, nextUser);
+		}		
+		
+		return "";
+	}
+	
+	@RequestMapping(value="/approvalReturn_ok", method={RequestMethod.GET,RequestMethod.POST})
+	public String approvalReturn_ok(HttpServletRequest request , HttpServletResponse response) throws Exception{
+	
+		System.out.println("approvalReturn_ok.Controller");
+		
+		int mydepth = Integer.parseInt(request.getParameter("mydepth"));
+		String approvalNum = request.getParameter("approvalNum");
+						
+		approvalDAO.approvalReturn(approvalNum, mydepth);
+		
+		return "";
+	}
 	
 	@RequestMapping(value = "/approvalLine", method=RequestMethod.GET)
 	public String approvalLine(HttpServletRequest request , HttpServletResponse response) throws Exception{
@@ -298,7 +496,7 @@ public class ApprovalController {
 	
 		request.setAttribute("message", message);
 		
-		return "close"; 
+		return ""; 
 		
 	}
 	
@@ -502,19 +700,4 @@ public class ApprovalController {
 		
 		return "approval/approvalLine";
 	}
-
-	@RequestMapping(value = "/aptest", method={RequestMethod.GET,RequestMethod.POST})
-	public String aptest(HttpServletRequest request , HttpServletResponse response) throws Exception{
-				
-		String haha = "haha";
-		
-		request.setAttribute("haha", haha);
-		
-		return "approval/approvalRight";
-	}
-	
-	
-	
-	//HttpSession session = request.getSession();
-
 }

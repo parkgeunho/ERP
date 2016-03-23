@@ -13,6 +13,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 		<property name="username" value="SUZI"/>
 		<property name="password" value="A123"/>
 
+
 	</properties>
 
 	

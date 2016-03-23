@@ -202,7 +202,6 @@
 
 <div style="width: 100%;">
 	<div style="width: 270px; float: left" class="buseo1"><font style="font-style: 나눔고딕코딩;">일정</font></div>
-	<div style="width: 1568px; float: left" class="buseo2"><font style="font-style: 나눔고딕코딩;">나의 일정</font></div>
 </div>
 
 <div style="float: left; height: 761px; border-right:1px solid #CCCCCC; width: 270px; padding-left:0px;">

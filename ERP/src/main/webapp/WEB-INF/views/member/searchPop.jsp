@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>직 원 검 색</title>
 
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
