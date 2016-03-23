@@ -289,7 +289,7 @@ var myForm = $('form').serialize();
 		<td width="100" class="color" align="center">아이디</td>
 		<td width="150" ><input type="text" value="${dto.id }" class="dap_text_box" id="usr" name="id" placeholder="ex) kim123" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 150px;" onkeyup="compareId();"></td>
 		<td width="100" class="color" align="center">비밀번호</td>
-		<td width="150" ><input type="text" value="${dto.pwd }" class="dap_text_box" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 90%;"></td>
+		<td width="150" ><input type="password" value="${dto.pwd }" class="dap_text_box" id="usr" name="pwd" placeholder="ex) 1234" style="height: 35px; font-size: 15pt; font-family: 고딕; width: 90%;"></td>
 		<td width="100" class="color" align="center">직 급</td>
 		<td width="150">
 		<select name="grade"  class="dap_text_box" id="usr" style="height: 35px; font-family: 고딕; width: 99%;">

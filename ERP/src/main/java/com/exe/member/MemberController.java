@@ -740,6 +740,33 @@ public class MemberController {
 		return "member/smallView";
 	}
 	
+	@RequestMapping(value = "/smallUpdated.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String smallUpdated(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		MemberDTO dto = (MemberDTO) session.getAttribute("dto");
+		
+		request.setAttribute("dto", dto);
+		
+		return "member/smallUpdated";
+	}
+	
+	@RequestMapping(value = "/smallUpdated_ok.action", method = {RequestMethod.GET,RequestMethod.POST})
+	public void smallUpdated_ok(HttpServletRequest request,
+			HttpServletResponse response,MemberDTO dto) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		
+		
+		dao.smallUpdatedData(dto); //업데이트
+		
+		session.invalidate();//세션값 지워서 강제 로그아웃
+		
+	}
+	
 	
 	
 	

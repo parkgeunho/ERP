@@ -144,7 +144,7 @@ public class MemberDAO {
 	
 	public void updatedData(MemberDTO dto) {
 		
-		sessionTemplate.selectOne("com.exe.member.updatedData",dto);
+		sessionTemplate.update("com.exe.member.updatedData",dto);
 		
 	}
 	
@@ -158,6 +158,12 @@ public class MemberDAO {
 		List<MemberDTO> lists = sessionTemplate.selectList("com.exe.member.memberList",hmap);
 		
 		return lists;
+		
+	}
+	
+	public void smallUpdatedData(MemberDTO dto) {
+		
+		sessionTemplate.update("com.exe.member.smallUpdatedData",dto);
 		
 	}
 	
