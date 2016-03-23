@@ -70,11 +70,16 @@ $(document).ready(function(){
 	
 	
 	
-    $('[id^="fold-"]').click(function(){
+    $('[id^="plus-"]').click(function(){
+    	
+    	var folderNum = this.id.substr(5);
     	
     	
+       var foldersrc = ($("#fold-"+folderNum).attr('src')=='/erp/resources/insa/folder.png')?'/erp/resources/insa/folder2.png':'/erp/resources/insa/folder.png';
+       $("#fold-"+folderNum).attr('src',foldersrc);
        
          var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
+         
           $(this).attr('src',src);
         
         var obj = $('.'+ this.id);
@@ -126,11 +131,12 @@ function sendIt() {
 					
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 					<div>
-					<img id="fold-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
+					<img id="plus-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
+					<img id="fold-${depth0.buseoNum}" src="/erp/resources/insa/folder.png"/>
 					<label id="ch-${depth0.buseoNum}">${depth0.buseoName }</label>
 					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
 					</div>
-						<div class="fold-${depth0.buseoNum}">
+						<div class="plus-${depth0.buseoNum}">
 						
 						
 						<c:forEach var="depth1" items="${lists }">
@@ -140,11 +146,12 @@ function sendIt() {
 							
 							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
-								<img id="fold-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
+								<img id="plus-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
+								<img id="fold-${depth1.buseoNum}" src="/erp/resources/insa/folder.png"/>
 								<label id="ch-${depth1.buseoNum }">${depth1.buseoName }</label>
 								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
-								<div class="fold-${depth1.buseoNum}">
+								<div class="plus-${depth1.buseoNum}">
 								
 								
 									<c:forEach var="depth2" items="${lists}">
@@ -154,12 +161,12 @@ function sendIt() {
 									
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
 											<div style="margin-left: 40px;">
-											<img id="fold-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
-											
+											<img id="plus-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
+											<img id="fold-${depth2.buseoNum}" src="/erp/resources/insa/folder.png"/>
 											<label id="ch-${depth2.buseoNum }"> ${depth2.buseoName }</label>
 											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
-											<div class="fold-${depth2.buseoNum}">
+											<div class="plus-${depth2.buseoNum}">
 											
 											
 												<c:forEach var="depth3" items="${lists }" >
@@ -168,21 +175,25 @@ function sendIt() {
 													
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
-														<div style="margin-left: 60px;">
-														<img id="fold-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
+														<div style="margin-left: 50px;">
+														<img id="plus-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
+														<img id="fold-${depth3.buseoNum}" src="/erp/resources/insa/folder.png"/>
 														<label id="ch-${depth3.buseoNum }"> ${depth3.buseoName }</label>
 														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														
 														</div>
-														<div class="fold-${depth3.buseoNum}">
+														<div class="plus-${depth3.buseoNum}">
 												
 														<c:forEach var="depth4" items="${lists }">
 														
 															<c:choose>
 															
 																<c:when test="${depth3.buseoNum==depth4.parent }">
-																	<div style="margin-left: 80px;">
-																	<label id="ch-${depth4.buseoNum }">┖ ${depth4.buseoName }</label>
+																	<div style="margin-left: 60px;">
+																	<label id="ch-${depth4.buseoNum }">
+																	<img src="/erp/resources/insa/ㄴ1.png">
+																	<img id="fold-${depth4.buseoNum}" src="/erp/resources/insa/folder2.png"/>
+																	 ${depth4.buseoName }</label>
 																	<input type="hidden" class="numch-${depth4.buseoNum }" value="${depth4.buseoNum }">
 																	</div>
 																</c:when>
@@ -199,8 +210,11 @@ function sendIt() {
 													
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
-														<div style="margin-left: 60px;">
-														<label id="ch-${depth3.buseoNum }">┖ ${depth3.buseoName }</label>
+														<div style="margin-left: 50px;">
+														<label id="ch-${depth3.buseoNum }">
+														<img src="/erp/resources/insa/ㄴ1.png">
+														<img id="fold-${depth3.buseoNum}" src="/erp/resources/insa/folder2.png"/>
+														 ${depth3.buseoName }</label>
 														<input type="hidden" class="numch-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														</div>
 													</c:when>
@@ -212,8 +226,11 @@ function sendIt() {
 										
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
-											<div style="margin-left: 40px;">
-											<label id="ch-${depth2.buseoNum }">┖ ${depth2.buseoName }</label>
+											<div style="margin-left: 30px;">
+											<label id="ch-${depth2.buseoNum }">
+											<img src="/erp/resources/insa/ㄴ1.png">
+											<img id="fold-${depth2.buseoNum}" src="/erp/resources/insa/folder2.png"/>
+											 ${depth2.buseoName }</label>
 											<input type="hidden" class="numch-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 										</c:when>
@@ -226,8 +243,11 @@ function sendIt() {
 							
 							
 							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
-								<div style="margin-left: 20px;">
-								<label id="ch-${depth1.buseoNum }">┖${depth1.buseoName }</label>
+								<div style="margin-left: 10px;">
+								<label id="ch-${depth1.buseoNum }">
+								<img src="/erp/resources/insa/ㄴ1.png">
+								<img id="fold-${depth1.buseoNum}" src="/erp/resources/insa/folder2.png"/>
+								${depth1.buseoName }</label>
 								<input type="hidden" class="numch-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 							</c:when>
@@ -238,7 +258,8 @@ function sendIt() {
 								
 					</c:when>
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
-					<div>
+					<div style="margin-left: 15px;">
+					<img id="fold-${depth0.buseoNum}" src="/erp/resources/insa/folder2.png"/>
 					<label id="ch-${depth0.buseoNum }">${depth0.buseoName }</label>
 					<input type="hidden" class="numch-${depth0.buseoNum }" value="${depth0.buseoNum }">
 

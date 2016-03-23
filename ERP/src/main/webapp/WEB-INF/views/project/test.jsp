@@ -29,38 +29,11 @@ function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_hei
 </script>
 </head>
 <body>
-<table>
-<tr>
-<td width="200px" height="120px">
-배너 돌리기 1<br />
-<div style=":absolute; width:200px; height:60px; overflow:hidden;">
-<div style=":relative;" id="banner_1">
-<a href="#" style="display:block; height:60px;">테스트1</a>
-<a href="#" style="display:block; height:60px;">테스트2(이미지도 OK)</a>
-<a href="#" style="display:block; height:60px;">테스트3</a>
-<a href="#" style="display:block; height:60px;">테스트4</a>
-<a href="#" style="display:block; height:60px;">테스트5</a>
-</div>
-</div>
-</td>
-<td width="200px">
-배너 돌리기 2<br />
-<div style=":absolute; width:200px; height:120px; overflow:hidden;">
-<div style=":relative;" id="banner_2">
-<a href="#" style="display:block; height:120px;">테스트1</a>
-<a href="#" style="display:block; height:120px;">테스트2</a>
-<a href="#" style="display:block; height:120px;">테스트3</a>
-<a href="#" style="display:block; height:120px;">테스트4</a>
-<a href="#" style="display:block; height:120px;">테스트5</a>
-<a href="#" style="display:block; height:120px;">테스트6</a>
-<a href="#" style="display:block; height:120px;">테스트7</a>
-</div>
-</div>
-</td>
-</tr>
-</table>
-<script>
-banner_roll("banner_1", 60, 2000, 20, 0);
-</script>
+
+<!-- 구글 세계시간 시작 -->
+
+<SCRIPT src="http://www.clocklink.com/embed.js"></SCRIPT>
+<SCRIPT language=JavaScript type=text/javascript>obj=new Object;obj.clockfile="world001-gray.swf";obj.TimeZone="GMT0900";obj.width=570;obj.height=200;obj.wmode="transparent";showClock(obj);</SCRIPT>
+
 </body>
 </html>

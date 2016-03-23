@@ -22,14 +22,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exe.board.BoardDAO;
 import com.exe.board.BoardDTO;
-
+import com.exe.insa.BuseoDTO;
+import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
 @Controller
 public class HomeController {
 
-	
+	@Autowired
+	@Qualifier("insaDAO")
+	InsaDAO insaDAO;
 	
 	@Autowired
 	@Qualifier("boardDAO")
@@ -95,12 +98,12 @@ public class HomeController {
 			String month = date.substring(2,4) + "월";
 			String day = date.substring(4,6) + "일";
 			String birth = month + day;
-			System.out.println("머지" + birth);
+			
 			mdto.setSeatPoint(birth);
 			date = date.substring(2, 4);
-			System.out.println("짤린거확인" + date);
+			
 			if(date.equals(nowMonth)){
-				System.out.println("걸린에" + mdto.getName());
+		
 				nowBirth.add(mdto);
 			}
 			
@@ -110,14 +113,32 @@ public class HomeController {
 			
 			
 		}
+		BuseoDTO bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth1()));
+		String buseo = bdto.getBuseoName();
+		
+		if(!LoginDTO.getDepth2().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth2()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth3().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth3()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth4().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth4()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth5().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth5()));
+			buseo =bdto.getBuseoName();
+		}
+			
 		
 		
-		
-		
-		
+		request.setAttribute("buseo", buseo);
 		request.setAttribute("nextBirth", nextBirth);
 		request.setAttribute("nowBirth", nowBirth);
-		request.setAttribute("dto", LoginDTO);
+		request.setAttribute("LoginDTO", LoginDTO);
 	
 		request.setAttribute("notice", lists);
 		
