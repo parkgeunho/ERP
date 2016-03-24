@@ -16,13 +16,13 @@ public class NoteDAO {
 	
 	public void insertData(NoteDTO dto){
 		
-		sessionTemplate.insert("com.exe.note.insertData", dto);
+		sessionTemplate.insert("com.exe.buseoControl.NoteinsertData", dto);
 		
 	}
 	
 	public int maxNum(){
 		
-		int result = sessionTemplate.selectOne("com.exe.note.maxNum");
+		int result = sessionTemplate.selectOne("com.exe.buseoControl.NotemaxNum");
 		return result;
 		
 		
@@ -30,7 +30,7 @@ public class NoteDAO {
 	
 	public void deleteData(int noteNum){
 		
-		sessionTemplate.delete("com.exe.note.deleteData", noteNum);
+		sessionTemplate.delete("com.exe.buseoControl.NotedeleteData", noteNum);
 	}
 	
 	public List<NoteDTO> readList(int start,int end,String reader){
@@ -39,15 +39,21 @@ public class NoteDAO {
 		params.put("start", start);
 		params.put("end", end);
 		params.put("reader", reader);
-		List<NoteDTO> lists = sessionTemplate.selectList("com.exe.note.readlist", params);
+		List<NoteDTO> lists = sessionTemplate.selectList("com.exe.buseoControl.Notereadlist", params);
 		return lists;
 	}
 	
-	public int getCount(){
+	public int getCount(String reader){
 		
-		int result = sessionTemplate.selectOne("com.exe.note.getCount");
+		int result = sessionTemplate.selectOne("com.exe.buseoControl.NotegetCount",reader);
 		return result;
 		
+		
+	}
+	
+	public int ReadCount(String reader){
+		int result = sessionTemplate.selectOne("com.exe.buseoControl.NoteReadCount",reader);
+		return result;
 		
 	}
 

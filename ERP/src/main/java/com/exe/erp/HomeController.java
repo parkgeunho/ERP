@@ -59,11 +59,52 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
-		
+		int readCount = NoteDAO.ReadCount(LoginDTO.getName());
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
 		//상단바 개인 사진을 불러오기 위한 값
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		request.setAttribute("imagePath",imagePath);
 		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		
+		
+		BuseoDTO bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth1()));
+		String buseo = bdto.getBuseoName();
+		
+		if(!LoginDTO.getDepth2().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth2()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth3().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth3()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth4().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth4()));
+			buseo =bdto.getBuseoName();
+		}
+		if(!LoginDTO.getDepth5().equals("no")){
+			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth5()));
+			buseo =bdto.getBuseoName();
+		}
+			
+
+		
+		request.setAttribute("buseo", buseo);
+		
+		
+		
+		
+		//여기 까지가 기본적으로 메인 바에 필요한 것들 넘겨주는것
+		
+		
+		
+		
+		
+		
 		
 		//공지사항 에 필요한 값
 		List<BoardDTO> lists = BoardDAO.getNotice();
@@ -87,14 +128,14 @@ public class HomeController {
 		Calendar cal = Calendar.getInstance();
 		String nowMonth = test.format(new Date()).substring(2, 4);
 		
-		System.out.println("확인 +"+births.format(new Date()));
+		
 
-		System.out.println("noe = "+nowMonth);
+		
 		
 		cal.add(Calendar.MONTH, 1);
 		String nextMonth = test.format(cal.getTime()).substring(2, 4);
 		
-		System.out.println("next=" + nextMonth);
+		
 		
 		
 		
@@ -103,7 +144,7 @@ public class HomeController {
 			MemberDTO mdto = it.next();
 			
 			String date = mdto.getJumin();
-			System.out.println("?"+date);
+			
 			String month = date.substring(2,4) + "월";
 			String day = date.substring(4,6) + "일";
 			String birth = month + day;
@@ -122,32 +163,10 @@ public class HomeController {
 			
 			
 		}
-		BuseoDTO bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth1()));
-		String buseo = bdto.getBuseoName();
 		
-		if(!LoginDTO.getDepth2().equals("no")){
-			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth2()));
-			buseo =bdto.getBuseoName();
-		}
-		if(!LoginDTO.getDepth3().equals("no")){
-			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth3()));
-			buseo =bdto.getBuseoName();
-		}
-		if(!LoginDTO.getDepth4().equals("no")){
-			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth4()));
-			buseo =bdto.getBuseoName();
-		}
-		if(!LoginDTO.getDepth5().equals("no")){
-			bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth5()));
-			buseo =bdto.getBuseoName();
-		}
-			
-		
-		
-		request.setAttribute("buseo", buseo);
 		request.setAttribute("nextBirth", nextBirth);
 		request.setAttribute("nowBirth", nowBirth);
-		request.setAttribute("LoginDTO", LoginDTO);
+		
 	
 		request.setAttribute("notice", lists);
 		
@@ -170,9 +189,11 @@ public class HomeController {
 	public String NoteWrite_ok(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
 		
 		int maxNum = NoteDAO.maxNum();
-		
+		System.out.println("값확인2"  + dto.getWriter());
+		System.out.println("값확인" + dto.getReader());
 		dto.setNoteNum(maxNum+1);
-		
+		System.out.println("숫자" + dto.getNoteNum());
+		System.out.println("내용확인" + dto.getContent());
 		NoteDAO.insertData(dto);
 		
 		
@@ -195,9 +216,9 @@ public class HomeController {
 	      
 	      
 	      
-	      int dataCount = NoteDAO.getCount();
+	      int dataCount = NoteDAO.getCount(LoginDTO.getName());
 	      
-	      int numPerPage = 12;
+	      int numPerPage = 13;
 	      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 	      
 	      if(currentPage>totalPage)
@@ -216,11 +237,11 @@ public class HomeController {
 	      
 	      String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	      
-	      String articleUrl = cp + "/board/article.action?pageNum=" + currentPage;
+	      String articleUrl = cp + "/note/article.action?pageNum=" + currentPage;
 	      
 	      request.setAttribute("lists", lists);
 	      request.setAttribute("pageIndexList", pageIndexList);
-		
+	      request.setAttribute("articleUrl", articleUrl);
 		
 		return "note.list";
 	}
