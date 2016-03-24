@@ -44,7 +44,7 @@ $(document).ready(function(){
 function openlist(){
 	
 	
-	window.open
+	window.open("note/readList","","width=600px,height=600px;")
 	
 	
 };
@@ -101,7 +101,7 @@ function openlist(){
 	<div id="a" style="height: 100px; background-color: white;">
 	
 	
-		<div align="center" class="dtonumber" style="margin-left: 47%;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 47%;">${readCount }</div>
 		<div align="center" class="dtonumber" style="margin-left: 1085px;">0</div>
 		<div align="center" class="dtonumber" style="margin-left: 1270px;">0</div>
 		<div style="width: 160px;height:80px; margin-left: 35%;margin-top: 10px; float: left;">
@@ -120,7 +120,7 @@ function openlist(){
 		</div>
 		
 		<div align="center" style="padding-left:3px;  padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 1%;  margin-top: 10px;">
-			<img style="margin-top: 10px;" src="/erp/resources/image/memo.png">
+			<img onclick="openlist()" style="margin-top: 10px;" src="/erp/resources/image/memo.png">
 		</div>
 		
 		<div align="center" style="padding-left:10px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">

@@ -110,6 +110,11 @@ public class HomeController {
 		List<BoardDTO> lists = BoardDAO.getNotice();
 		//공지사항 에 필요한 값
 		
+		//안읽은쪽지
+		List<NoteDTO> NoteList = NoteDAO.readList(LoginDTO.getName());
+		request.setAttribute("NoteList", NoteList);
+		//안읽은쪽지
+		
 		String searchKey = "usernum";
 		String searchValue = "";
 		
@@ -186,7 +191,7 @@ public class HomeController {
 		
 	}
 	@RequestMapping(value = "/note/Write_ok",method = {RequestMethod.POST,RequestMethod.GET})
-	public String NoteWrite_ok(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
+	public void NoteWrite_ok(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
 		
 		int maxNum = NoteDAO.maxNum();
 		System.out.println("값확인2"  + dto.getWriter());
@@ -197,7 +202,7 @@ public class HomeController {
 		NoteDAO.insertData(dto);
 		
 		
-		return "";
+		
 	}
 	
 	@RequestMapping(value = "/note/readList",method = {RequestMethod.POST,RequestMethod.GET})
@@ -229,22 +234,56 @@ public class HomeController {
 	      
 	      List<NoteDTO> lists = NoteDAO.readList(start, end, LoginDTO.getName());
 	     
+	      Iterator<NoteDTO> it = lists.iterator();
 	      
+	      while(it.hasNext()){
+	    	  NoteDTO vo = it.next();
+	    	  MemberDTO mdto = Memberdao.readOne(Integer.parseInt(vo.getWriter()));
+	    	  vo.setWriter(mdto.getName());
+	    	  
+	      }
 	      
 	      String listUrl = cp + "/note/readList";
 	      
 	     
-	      
+	      int max = 13;
 	      String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 	      
-	      String articleUrl = cp + "/note/article.action?pageNum=" + currentPage;
-	      
+	      String articleUrl = cp + "/note/article?noteNum=";
+	      request.setAttribute("listSize", lists.size());
+	      request.setAttribute("max", max);
 	      request.setAttribute("lists", lists);
 	      request.setAttribute("pageIndexList", pageIndexList);
 	      request.setAttribute("articleUrl", articleUrl);
 		
-		return "note.list";
+		return "note/list";
 	}
+	
+	
+	@RequestMapping(value = "/note/article",method = {RequestMethod.POST,RequestMethod.GET})
+	public String NoteArticle(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
+		
+		int noteNum = Integer.parseInt(request.getParameter("noteNum")) ;
+		
+		dto = NoteDAO.ReadOne(noteNum);
+		NoteDAO.ReadTime(noteNum);
+		request.setAttribute("NoteDTO",dto );
+		return "note/article";
+	}
+	@RequestMapping(value = "/note/delete",method = {RequestMethod.POST,RequestMethod.GET})
+	public void NoteDelete(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
+		
+		int noteNum = Integer.parseInt(request.getParameter("noteNum")) ;
+		
+		NoteDAO.deleteData(noteNum);
+		
+	}
+	
+	
+		
+		
+		
+		
 		
 	
 	

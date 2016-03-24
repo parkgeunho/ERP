@@ -100,14 +100,14 @@ function notices(boardNum) {
 
 	
 	<div class="line"  >
-			<div id="nonmail" class="ma">안읽은메일</div>
+			<div id="nonmail" class="ma">안 읽은 쪽지</div>
 			<div id="ex" class="sub">
-				<div>1</div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-				<div>6</div>
+				<c:forEach var="note" items="${NoteList }">
+				<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
+				${note.content }
+				</div>
+				
+				</c:forEach>
 			</div>	
 		
 	</div>

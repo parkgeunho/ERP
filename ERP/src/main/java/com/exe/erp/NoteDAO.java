@@ -39,7 +39,7 @@ public class NoteDAO {
 		params.put("start", start);
 		params.put("end", end);
 		params.put("reader", reader);
-		List<NoteDTO> lists = sessionTemplate.selectList("com.exe.buseoControl.Notereadlist", params);
+		List<NoteDTO> lists = sessionTemplate.selectList("com.exe.buseoControl.Notelist", params);
 		return lists;
 	}
 	
@@ -55,6 +55,25 @@ public class NoteDAO {
 		int result = sessionTemplate.selectOne("com.exe.buseoControl.NoteReadCount",reader);
 		return result;
 		
+	}
+	
+	public NoteDTO ReadOne(int noteNum){
+		
+		
+		NoteDTO dto = sessionTemplate.selectOne("com.exe.buseoControl.NoteReadOne",noteNum);
+		return dto;
+		
+	}
+	
+	public void ReadTime(int noteNum){
+		
+		sessionTemplate.update("com.exe.buseoControl.NotereadTime", noteNum);
+	}
+	
+	public List<NoteDTO> readList(String reader){
+		
+		List<NoteDTO> list = sessionTemplate.selectList("com.exe.buseoControl.NoteRead",reader);
+		return list;
 	}
 
 }
