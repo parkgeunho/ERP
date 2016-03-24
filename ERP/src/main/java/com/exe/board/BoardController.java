@@ -76,7 +76,6 @@ public class BoardController {
 		
 
 		ListDTO lDTO = listDAO.readData(listNum);		
-
 	      
 	      String listsNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listsNum));
