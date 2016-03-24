@@ -81,6 +81,14 @@ public class BoardDAO {
 	      sessionTemplate.delete("com.exe.board.BoardMapper.deleteData",boardNum);
 	   }
 	   
+	   //파일삭제
+	   
+	   public void deleteFileData(int boardNum){
+		      
+		      sessionTemplate.delete("com.exe.board.BoardMapper.deleteFileData",boardNum);
+		   }
+	   
+	   
 	   //수정
 	   public void updateData(BoardDTO dto){
 

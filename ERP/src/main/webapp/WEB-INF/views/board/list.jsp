@@ -108,7 +108,13 @@ ${LDTO.boardName}
 				${dto.subject }</a></td>
 		<td style="width: 140px;" class="name" align="center">${dto.name}</td>
 		<td style="width: 140px;" class="created" align="center">${dto.created}</td>
-		<td style="width: 140px;" align="center"></td>
+		<td style="width: 140px;" align="center">
+		<c:forEach var="fdto" items="${fileList }">
+			<c:if test="${fdto.boardNum==dto.boardNum }">
+				${fdto.originalFileName}
+			</c:if>
+		</c:forEach>
+		</td>
 		<td style="width: 90px;" class="hitCount" align="center">${dto.hitCount }</td>		
 	</tr>	
 	<tr style="height: 1px; background: #B2EBF4">
