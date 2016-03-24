@@ -59,10 +59,10 @@
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>
    </beans:bean>
        
-<!-- 
+
    <beans:bean id="scheduleDAO" class="com.exe.schedule.ScheduleDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>   
-   </beans:bean> -->
+   </beans:bean>
     
    <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
       <beans:property name="sessionTemplate" ref="sessionTemplate"/>

@@ -1,4 +1,4 @@
-/*package com.exe.schedule;
+package com.exe.schedule;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -239,4 +239,4 @@ public class ScheduleController {
 	
 	
 	
-	*/
+	
