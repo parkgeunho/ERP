@@ -94,6 +94,11 @@
       <put-attribute name="main"   value="/WEB-INF/views/project/ManagementView.jsp" />
    </definition>
    
+    <definition name="insaView" extends="temp">
+      <put-attribute name="main"   value="/WEB-INF/views/member/insaView.jsp" />
+   </definition>
+   
+   
    <definition name="ep" template="/WEB-INF/views/layout2.jsp">
       <put-attribute name="title"      value="타일즈테스트" />
       <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />

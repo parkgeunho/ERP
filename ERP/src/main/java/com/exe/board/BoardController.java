@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exe.erp.NoteDAO;
 import com.exe.insa.ListDAO;
 import com.exe.insa.ListDTO;
 import com.exe.member.MemberDAO;
@@ -56,6 +57,11 @@ public class BoardController {
 	@Autowired
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
+	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
+	
 	
 
 	/*@Autowired
@@ -510,9 +516,26 @@ public class BoardController {
 	  @RequestMapping(value = "/boardMain", method = {RequestMethod.GET,RequestMethod.POST})
 		public String boardMain(HttpServletRequest request,HttpServletResponse response,String ckpoint) throws IOException {
 		  			  
-		  	HttpSession session = request.getSession();
+
+		  
+			HttpSession session = request.getSession();
 			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-			request.setAttribute("LoginDTO", LoginDTO);		  
+			
+			int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+			request.setAttribute("readCount", readCount);
+			request.setAttribute("LoginDTO", LoginDTO);
+			//상단바 개인 사진을 불러오기 위한 값
+			String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+			request.setAttribute("LoginimagePath",LoginimagePath);
+			//상단바 개인 사진을 불러오기 위한 값
+		  
+		  
+		  
+		  
+		  
+		  
+		  
 		  	
 			List<ListDTO> boardlist = listDAO.boardList();
 			List<ListDTO> parent = listDAO.getGroup();

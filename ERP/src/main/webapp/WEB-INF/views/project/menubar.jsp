@@ -106,7 +106,7 @@ function openlist(){
 		<div align="center" class="dtonumber" style="margin-left: 1270px;">0</div>
 		<div style="width: 160px;height:80px; margin-left: 35%;margin-top: 10px; float: left;">
 			<div style="width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%; ;float: left; ">
-				<img alt="" src="${imagePath}/${LoginDTO.upload}" style="width: 80px; height: 80px; border-radius:100%">
+				<img alt="" src="${LoginimagePath}/${LoginDTO.upload}" style="width: 80px; height: 80px; border-radius:100%">
 				
 			</div>
 			<div style="width: 80px;height: 80px; float: left; padding-top: 10px;">
