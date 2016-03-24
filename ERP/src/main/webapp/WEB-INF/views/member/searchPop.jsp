@@ -23,13 +23,15 @@
 		
 	}
 	
-	function article(id){
-		/* 
-		var checked = document.getElementById("checked").value; */
-		/* winob =  */
+
+	function article(num){
+
+	
+
+		var checked = document.getElementById("checked").value;
 		
-		var userid = id;
-		window.open("search_ok.action?id="+userid,"","width=500px,height=600px");
+	winob = window.open("search_ok.action?num="+num+"&checked="+checked,"","width=500px,height=600px");
+
 	
 		
 		
@@ -103,7 +105,7 @@
 		<c:forEach items="${lists}" var="dto">
 		<tr >
 			<td align="center" width="50%">${dto.usernum}</td>
-			<td align="center"><a href="javascript:article(${dto.id });">${dto.name}</a></td>
+			<td align="center"><a href="javascript:article(${dto.num });">${dto.name}</a></td>
 			<td align="center">${dto.grade}</td>
 		</tr>
 		</c:forEach>

@@ -95,7 +95,7 @@ public class MemberDAO {
 		
 	}
 	
-	public MemberDTO readOne(String id){
+	public MemberDTO readTwo(String id){
 		
 		
 		MemberDTO dto = sessionTemplate.selectOne("com.exe.member.readTwo",id);
