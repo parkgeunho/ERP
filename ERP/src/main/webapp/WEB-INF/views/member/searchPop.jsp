@@ -12,7 +12,7 @@
 
 
 <script type="text/javascript">
-var winob = null;
+/* var winob = null; */
 	function search(){
 		
 		var f = document.myForm;
@@ -24,21 +24,23 @@ var winob = null;
 	}
 	
 	function article(id){
+		/* 
+		var checked = document.getElementById("checked").value; */
+		/* winob =  */
 		
-		var checked = document.getElementById("checked").value;
-		
-	winob = window.open("search_ok.action?id="+id+"&checked="+checked,"","width=500px,height=600px");
+		var userid = id;
+		window.open("search_ok.action?id="+userid,"","width=500px,height=600px");
 	
 		
 		
 		
 	}
 	
-	function setChildValue(name,num){
+	/* function setChildValue(name,num){
 		opener.setChildValue(name,num);
 		window.close();
 	}
-	
+	 */
 
 	
 
@@ -62,7 +64,7 @@ var winob = null;
 		<tr><td height="1" width="100%" style="background-color: #cccccc;"></td></tr>
 		
 	</table>
-	<input type="hidden" name="checked" id="checked" value="${checked }">
+	<%-- <input type="hidden" name="checked" id="checked" value="${checked }"> --%>
 </div>
 
 	<div style="margin-top: 15px;">

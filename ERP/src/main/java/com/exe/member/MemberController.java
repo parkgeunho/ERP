@@ -599,14 +599,14 @@ public class MemberController {
 	@RequestMapping(value = "/searchPop.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String searchPop(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+		/*
 		String checked = request.getParameter("checked");
 		
 		if(null!=checked){
 			System.out.println("확인" + checked);
 			request.setAttribute("checked", checked);
 			
-		}
+		}*/
 		
 		
 		String searchKey = request.getParameter("searchKey");
@@ -645,13 +645,13 @@ public class MemberController {
 	public String search_ok(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String checked = request.getParameter("checked");
+		/*String checked = request.getParameter("checked");
 		
 		if(null!=checked){
 			System.out.println("확인2" + checked);
 			request.setAttribute("checked", checked);
 			
-		}
+		}*/
 		
 		String id = request.getParameter("id");
 		
