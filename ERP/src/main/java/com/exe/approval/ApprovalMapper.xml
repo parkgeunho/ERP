@@ -6,46 +6,113 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.exe.approval">
 
-	<!-- <insert id="insert" parameterType="com.exe.approval.ApprovalCommentDTO">
-		insert into approval (approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6) 
-		values (#{int},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6})		
+	<insert id="insertApproval" parameterType="com.exe.approval.ApprovalDTO">
+		insert into approval(approvalNum,type,id,subject,content,created,approval2,approval3,approval4,approval5,approval6,approvalDepth,nextapproval) 
+		values (#{approvalNum},#{type},#{id},#{subject},#{content},#{created},#{approval2},#{approval3},#{approval4},#{approval5},#{approval6},#{approvalDepth},#{nextapproval})		
 	</insert>
-		
-	<select id="list" resultType="com.exe.springmybatis.CustomDTO" parameterType="String">
-		
+
+	<select id="approvalIngList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where id = #{id} and info = 'ing'
+	</select>
+
+	<select id="approvalNextIngList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where info = 'ing' and nextapproval = #{id}
+	</select>
+
+	<select id="approvalSuccessList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where id = #{id} and info = 'success'
+	</select>
+
+	<select id="approvalAgreementList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where info = 'success' and (approval2=#{id} or approval3=#{id} or approval4=#{id} or approval5=#{id} or approval6=#{id})
 	</select>
 	
-	<select id="listOne" resultType="com.exe.springmybatis.CustomDTO" parameterType="int">
-		
+	<select id="approvalReturnList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where info='back' and (id=#{id} or approval2=#{id} or approval3=#{id} or approval4=#{id} or approval5=#{id} or approval6=#{id})
+	</select>
+
+	<select id="approvalNextList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where info= 'ing' and (approval2=#{id} or approval3=#{id} or approval4=#{id} or approval5=#{id} or approval6=#{id}) 
+	</select>
+
+	<select id="getLeadData" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
+		select * from approval where approvalNum = #{approvalNum}
+	</select>
+
+	<select id="getName" resultType="String" parameterType="String">
+		select name from insadb where id = #{id}
 	</select>
 	
-	<update id="update" parameterType="com.exe.springmybatis.CustomDTO">
-		
+	<select id="approvalChk3" resultType="String" parameterType="HashMap">
+		select approval3 from approval where approvalNum=#{approvalNum}
+	</select>
+	<select id="approvalChk4" resultType="String" parameterType="HashMap">
+		select approval4 from approval where approvalNum=#{approvalNum}
+	</select>
+	<select id="approvalChk5" resultType="String" parameterType="HashMap">
+		select approval5 from approval where approvalNum=#{approvalNum}
+	</select>
+	<select id="approvalChk6" resultType="String" parameterType="HashMap">
+		select approval6 from approval where approvalNum=#{approvalNum}
+	</select>
+	
+	<update id="approvalSuccess2" parameterType="HashMap">
+		update approval set approvalOK2=#{created},info=#{info},nextApproval=null where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalSuccess3" parameterType="HashMap">
+		update approval set approvalOK3=#{created},info=#{info},nextApproval=null where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalSuccess4" parameterType="HashMap">
+		update approval set approvalOK4=#{created},info=#{info},nextApproval=null where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalSuccess5" parameterType="HashMap">
+		update approval set approvalOK5=#{created},info=#{info},nextApproval=null where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalSuccess6" parameterType="HashMap">
+		update approval set approvalOK6=#{created},info=#{info},nextApproval=null where approvalNum=#{approvalNum}
 	</update>
 	
-	<delete id="delete" parameterType="int">
-		
-	</delete>
-
-	<select id="todayNum" resultType="int" parameterType="int">
-	</select> -->
 	
+	<update id="approvalOK2" parameterType="HashMap">
+		update approval set approvalOK2=#{created},nextapproval=#{nextUser} where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalOK3" parameterType="HashMap">
+		update approval set approvalOK3=#{created},nextapproval=#{nextUser} where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalOK4" parameterType="HashMap">
+		update approval set approvalOK4=#{created},nextapproval=#{nextUser} where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalOK5" parameterType="HashMap">
+		update approval set approvalOK5=#{created},nextapproval=#{nextUser} where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalOK6" parameterType="HashMap">
+		update approval set approvalOK6=#{created},nextapproval=#{nextUser} where approvalNum=#{approvalNum}
+	</update>
+	
+	
+	<!-- #{myapproval} -->
+	<update id="approvalReturn2" parameterType="String">
+		update approval set approvalOK2='반려',info='back' where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalReturn3" parameterType="String">
+		update approval set approvalOK3='반려',info='back' where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalReturn4" parameterType="String">
+		update approval set approvalOK4='반려',info='back' where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalReturn5" parameterType="String">
+		update approval set approvalOK5='반려',info='back' where approvalNum=#{approvalNum}
+	</update>
+	<update id="approvalReturn6" parameterType="String">
+		update approval set approvalOK6='반려',info='back' where approvalNum=#{approvalNum}
+	</update>
 	
 	<!-- ApprovalForm -->
-	
-<!-- 	<insert id="approvalForminsert" parameterType="com.exe.approval.ApprovalFormDTO">
-		insert into approvalForm (approvalNum,approvalName,approvalType,approvalContent)
-		values (#{approvalNum},#{approvalName},#{approvalType},#{approvalContent})
-	</insert> -->
 	
 	<select id="approvalFormMaxNum" resultType="integer">
 		select nvl(max(approvalFormNum),0) from approvalForm
 	</select>
 	
-<!-- 	<select id="approvalFormData" parameterType="St ring" resultType="com.exe.approval.ApprovalFormDTO">
-		select * from approvalForm where approvalName = #{approvalName}
-	</select>
--->
 	<select id="approvalFormList" resultType="com.exe.approval.ApprovalFormDTO">
 		select * from approvalForm
 	</select> 
@@ -70,5 +137,13 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getApprovalOptionList" parameterType="String" resultType="com.exe.member.MemberDTO">
 		select id,name,grade,depth2 from insadb where id=#{id}
 	</select>
+	
+	<select id="getApprovalMax" parameterType="String" resultType="integer">
+		select count(*) from approval where approvalnum like #{approvalNum} || '%'
+	</select>
+	
+	
+	
+	
 	
 </mapper>

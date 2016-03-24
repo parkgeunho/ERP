@@ -2,7 +2,9 @@ package com.exe.board;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 
@@ -14,6 +16,8 @@ import java.util.Calendar;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.ListIterator;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -68,16 +72,28 @@ public class BoardController {
 	      
 		int listNum= Integer.parseInt(request.getParameter("listNum"));
 
-
-		response.setCharacterEncoding("UTF-8");
-
-	
+		response.setCharacterEncoding("UTF-8");	
 		
-		ListDTO lDTO = listDAO.readData(listNum);
+
+		ListDTO lDTO = listDAO.readData(listNum);		
+
 	      
+	      String listsNum = request.getParameter("listNum");
+	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listsNum));
+	  	
+	      request.setAttribute("listDTO", listDTO);
+	      
+
 	  	HttpSession session = request.getSession();
+
+
 	  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
-		  
+
+		 
+	  	
+	  	request.setAttribute("dto", mDTO);
+
+	  	
 		  String read[] = null;
 		  List<String> Rlist = new ArrayList<String>();
 		  String check = lDTO.getBuseoW();
@@ -91,8 +107,7 @@ public class BoardController {
 			  
 			  buseoCheck = Rlist.contains(mDTO.getDepth1());
 			  
-			  if(!buseoCheck){
-				  
+			  if(!buseoCheck){				  
 				  buseoCheck = Rlist.contains(mDTO.getDepth2());
 				  
 				  if(!buseoCheck){
@@ -101,30 +116,23 @@ public class BoardController {
 					  if(!buseoCheck){
 						  buseoCheck = Rlist.contains(mDTO.getDepth4());
 						  
-						  if(buseoCheck){
-							  
+						  if(buseoCheck){							  
 							  buseoCheck = Rlist.contains(mDTO.getDepth5());
 						  }
 					  }
 				  }
-			  }
-			  
+			  }			  
 		  }
 		  	
 		  Rlist.removeAll(Rlist);
 		  read = lDTO.getMemberW().split(",");
 		  Collections.addAll(Rlist, read);
 		  boolean memberCheck = Rlist.contains(Integer.toString(mDTO.getNum()));
-		  
-
 		 
 		  System.out.println("쓰기권한확인 사람" + memberCheck);
-	      System.out.println("쓰기권한 부서" + buseoCheck);
+	      System.out.println("쓰기권한 부서" + buseoCheck);		 
 		 
-		 
-		 
-	      if(!buseoCheck && !memberCheck){
-			  
+	      if(!buseoCheck && !memberCheck){			  
 				 
 				  try {
 
@@ -136,17 +144,13 @@ public class BoardController {
 			            writer.println("window.close();");
 			            writer.println("</script>");
 
-			            writer.flush();
-			            
-			            
+			            writer.flush();			            
 
 			         } catch (Exception e) {
 			         
 			         }
 				  
-				  
-			  }
-		  
+			  }		  
 
 		request.setAttribute("listNum", listNum);
 	      return "board/created";    
@@ -154,86 +158,78 @@ public class BoardController {
 	      
 	   }
 	
-	/*@RequestMapping(value="")*/
-	
-	
-	
+	/*@RequestMapping(value="")*/	
 	
 	 @RequestMapping(value="/board/created_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	   public String created_ok(BoardFileDTO fdto,BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
-		 String ckNum = request.getParameter("listNum");
-		 int listNum = Integer.parseInt(ckNum);
-	      int maxNum = dao.getMaxNum();
-	      HttpSession session = request.getSession();
-	      
-	      MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
-	      
-	      System.out.println(mdto.getId());
-	      
-	      
-	      
-	      dto.setBoardNum(maxNum + 1);	  
-	   	  dto.setListNum(listNum);
-	   	  dto.setId(mdto.getId());
-	   	  
-	   	  //디비 저장
-	      dao.insertData(dto);
-	      
-	      //파일 저장경로
-	      String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
-	      
-	      //파일 받아옴
-	      MultipartFile file = request.getFile("file");
-	      
-	      //경로로 폴더 생성
-	      File f = new File(path);
-			if(!f.exists())
-				f.mkdirs();
-			
-			
-		  //파일 이름 만들고 물리적 위치에 파일업로드
-			if(file!=null && file.getSize()>0){
-				
-				//save 파일 이름 만들어주는 부분
-				String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-				String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
-						.getInstance()) + fileExt;
-				String fullFileName = path + File.separator + newFileName;
-				
-				fdto.setOriginalFileName(file.getOriginalFilename());
-				fdto.setSaveFileName(newFileName);
-				
-				
-				//폴더에 업로드
-				f = new File(fullFileName);
-				file.transferTo(f);
-				
-				//파일 db저장
-				fdto.setBoardNum(dto.getBoardNum());
-				boardfileDAO.insertData(fdto);
-			}
-			
-	      
-	      	     
-	  
-	      
-	      
-	      
-	      
-	      session.setAttribute("cklistNum", ckNum);
-	      
-	      
-	      
-	      
-	      
-	      
-	      return "redirect:/board/list.action";
-	   }
+     public String created_ok(BoardFileDTO fdto,BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
+      
+		String ckNum = request.getParameter("listNum");
+		
+		int listNum = Integer.parseInt(ckNum);
+		int maxNum = dao.getMaxNum();
+		
+        HttpSession session = request.getSession();
+        
+        MemberDTO mdto = (MemberDTO) session.getAttribute("dto");
+        
+        System.out.println(mdto.getId());        
+                
+        dto.setBoardNum(maxNum + 1);     
+        dto.setListNum(listNum);
+        dto.setId(mdto.getId());
+          
+        //디비 저장
+        dao.insertData(dto);
+        
+        //파일 저장경로
+        String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+        
+        //파일 받아옴
+        MultipartFile file = request.getFile("file");
+        
+        //경로로 폴더 생성
+        File f = new File(path);
+        if(!f.exists())
+           f.mkdirs();
+        
+        
+       //파일 이름 만들고 물리적 위치에 파일업로드
+        if(file!=null && file.getSize()>0){
+           
+           //save 파일 이름 만들어주는 부분
+           String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+           String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
+                 .getInstance()) + fileExt;
+           String fullFileName = path + File.separator + newFileName;
+           
+           fdto.setOriginalFileName(file.getOriginalFilename());
+           fdto.setSaveFileName(newFileName);
+           
+           
+           //폴더에 업로드
+           f = new File(fullFileName);
+           file.transferTo(f);
+           
+           //파일 db저장
+           fdto.setBoardNum(dto.getBoardNum());
+           boardfileDAO.insertData(fdto);
+        }
+        
+        
+                
+        
+        
+        session.setAttribute("cklistNum", ckNum);
+        
+        return "redirect:/board/list.action";
+     }
 	 
 	 
 	 @RequestMapping(value="/board/list.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
+		  
+		 
 	      String cp = request.getContextPath();
 	      
 	      String pageNum = request.getParameter("pageNum");
@@ -288,6 +284,7 @@ public class BoardController {
 	      if(!param.equals(""))
 	         articleUrl = articleUrl + "&" + param;
 	      
+	     
 	      request.setAttribute("lists", lists);
 	      request.setAttribute("pageIndexList", pageIndexList);
 	      request.setAttribute("dataCount", dataCount);
@@ -300,8 +297,7 @@ public class BoardController {
 	  //public String article(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	   
 	  public ModelAndView article(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		    
-	      
+		    	      
 	      String cp = request.getContextPath();
 	      
 	      int boardNum = Integer.parseInt(request.getParameter("boardNum"));
@@ -340,8 +336,6 @@ public class BoardController {
 	      String listNum = request.getParameter("listNum");
 	      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));
 	      
-
-	      
 	      HttpSession session = request.getSession();
 	      session.setAttribute("cklistNum", listNum);
 	      
@@ -367,6 +361,20 @@ public class BoardController {
 	  
 		  String cp = request.getContextPath();
 		  
+		  HttpSession session = request.getSession();
+		  	MemberDTO mDTO = (MemberDTO)session.getAttribute("dto");
+			
+		  	request.setAttribute("dto", mDTO);		  	
+		  	
+		      
+		      String listNum = request.getParameter("listNum");
+		      System.out.println("listNum"  + listNum);
+		      ListDTO listDTO = listDAO.readData(Integer.parseInt(listNum));		      
+		     
+		      session.setAttribute("cklistNum", listNum);
+		  	
+		    request.setAttribute("listDTO", listDTO);
+		  
 		  int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 	      String pageNum = request.getParameter("pageNum");
 	      
@@ -387,8 +395,10 @@ public class BoardController {
 	 
 	 
 	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public void updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void updated_ok(BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
+		 String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+		 
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
 		  dto.setBoardNum(Integer.parseInt(request.getParameter("boardNum")));
@@ -396,9 +406,57 @@ public class BoardController {
 		  dto.setName(request.getParameter("name"));
 		  dto.setContent(request.getParameter("content"));
 		  
+		  BoardFileDTO fdto = boardfileDAO.selectData(Integer.parseInt(request.getParameter("boardNum")));
+		  
+		  	
+		  MultipartFile file = request.getFile("file");
+		  
+		  System.out.println("이름확인:" + fdto.getOriginalFileName());
+		  
+		  if(file.getName().equals("") || file==null || file.getSize()==0){
+				
+			}
+		  
+		  File f = new File(path);
+			if(!f.exists())
+				f.mkdirs();
+		  
+		  if(file!=null && file.getSize()>0){
+			  
+			  //save 파일 이름 만들어주는 부분
+	           String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+	           String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
+	                 .getInstance()) + fileExt;
+	           String fullFileName = path + File.separator + newFileName;
+			  
+	           //파일이 이미 있으면 물리적 위치 삭제
+	           
+	           if(dto.getBoardNum()==fdto.getBoardNum()){
+	           File d = new File(path + "/" + fdto.getSaveFileName());
+	           d.delete();
+	           }
+	           
+	           
+	 		  //폴더에 업로드
+	 		  f = new File(fullFileName);
+	 		  
+	 		  file.transferTo(f);
+	 		  
+	 		 fdto.setOriginalFileName(file.getOriginalFilename());
+	         fdto.setSaveFileName(newFileName);
+	         
+	         
+	         //파일 db저장
+	           fdto.setBoardNum(dto.getBoardNum());
+	           boardfileDAO.insertData(fdto);
+			  
+		  }
+		
+		  
+		  
 		  dao.updateData(dto);
 	  
-		  /*return "redirect:/board/list.action?pageNum=" + pageNum;*/
+
 		  
 	  }
 	  
@@ -409,8 +467,10 @@ public class BoardController {
 		/*  String pageNum = request.getParameter("pageNum");*/
 		  
 			  
-		  
+
+		  dao.deleteFileData(boardNum);
 	  
+
 		  dao.deleteData(boardNum);
 		  
 		  
@@ -463,6 +523,7 @@ public class BoardController {
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
 			request.setAttribute("boardlist", boardlist);
+			
 
 		  return "boardMain";
 	  }
@@ -538,38 +599,9 @@ public class BoardController {
 			 
 			  if(!buseoCheck && !memberCheck){
 				  return "read-error";
-				
-				 /* try {
->>>>>>> refs/remotes/origin/master
-			            
-			            PrintWriter writer = response.getWriter();
 
-			            writer.println("<script type='text/javascript'>");
-
-<<<<<<< HEAD
-			            writer.println("alert('읽기권한이없습니다.');");
 			            
-=======
-			            writer.println("alert('권한없단다~');");
 
-			            writer.println("history.go()");
-
->>>>>>> refs/remotes/origin/master
-			            writer.println("</script>");
-
-			            writer.flush();
-			            
-			            
-			            
-			         } catch (Exception e) {
-			         
-			         }*/
-				  
-				  
-				  
-				  
-				  
-				  
 			  }
 
 			  
@@ -596,10 +628,6 @@ public class BoardController {
 
 		     
 		      
-		      
-
-		 
-		      	      
 
 		      
 		      
@@ -618,9 +646,7 @@ public class BoardController {
 		      
 		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, listNum);
 		      
-		
-		      
-		     
+
 		      
 		      String param = "";
 		      
@@ -642,6 +668,37 @@ public class BoardController {
 		      if(!param.equals(""))
 		         articleUrl = articleUrl + "&" + param;
 		      
+		      
+		      List<BoardFileDTO> fileList = new ArrayList<BoardFileDTO>();
+		      ListIterator<BoardDTO> it = lists.listIterator();
+		      
+		      int num1 =0;
+		      
+		      System.out.println("바보:");
+		      while(it.hasNext()){
+		    	  
+		    	  BoardDTO vo = it.next();
+		    	  
+		    	  num1 = vo.getBoardNum();
+		    	  
+		    	  System.out.println("들어오는 숫자 확인: " + num1);
+		    	  
+		    	  BoardFileDTO fdto = boardfileDAO.selectData(num1);
+		    	 
+		    	  fileList.add(fdto);
+		    	  
+		      }
+		      
+		      
+		      
+		      
+		      request.setAttribute("fileList", fileList);
+		      
+		      
+		      
+		      
+		      
+		      
 		      request.setAttribute("listNum", listNum);
 
 		      request.setAttribute("LDTO", lDTO);
@@ -661,23 +718,79 @@ public class BoardController {
 	  }
 	  
 	  @RequestMapping(value = "/download.action", method = {RequestMethod.GET,RequestMethod.POST})
-		public String download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		public void download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		  
+		
 		  
 		 int boardNum= Integer.parseInt(request.getParameter("boardNum"));
-		 int listNum= Integer.parseInt(request.getParameter("listNum"));
+		 
+		
+		 
 		 
 		 BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
 		 
+		 String originalFileName = fdto.getOriginalFileName();
+		 String saveFileName = fdto.getSaveFileName();
 		 
+		 try {
+			
+		
+		 
+		
+		 // MIME Type 을 application/octet-stream 타입으로 변경
+	     // 무조건 팝업(다운로드창)이 뜨게 된다.
+		 response.setContentType("application/octet-stream");
+		 
+		 // 브라우저는 ISO-8859-1을 인식하기 때문에
+	     // UTF-8 -> ISO-8859-1로 디코딩, 인코딩 한다(한글이름의 파일을 다운받을때 파일 이름을 깨지지 않게하기 위해서
+		 originalFileName = new String(originalFileName.getBytes("euc-kr"), "iso-8859-1");
+		 
+		 String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+		 String pathOk= path + File.separator + saveFileName;
+		 
+		 
+		 File f = new File(pathOk);
+			
+			if(!f.exists())
+				return;
+		 
+		 
+		 
+		 //파일명 지정
+		 response.setHeader("Content-Disposition", "attachment; filename=\""+ originalFileName+"\"");
+			
+		 OutputStream os = response.getOutputStream();
+		 // String path = servletContext.getRealPath("/resources/boardFile"); 경로설정
+	     // server에 clean을 하면 resources 경로의 것이 다 지워지기 때문에
+	     // 다른 경로로 잡는다(실제 서버에서는 위의 방식으로)
 		  
-		  
-		  
-		  return "redirect:/board/article.action?boardNum="+boardNum+"&listNum="+listNum;
-	  }
-		  
-		  
-	  
-	  
+		 
+		 
+		 
+		 
+		 FileInputStream fis = new FileInputStream(pathOk);
+		 
+		 if(fis!=null ){
+		 
+		 int n = 0;
+		 byte[] b = new byte[4096];
+		 while((n = fis.read(b)) != -1){
+			 
+			 os.write(b,0,n);
+			 
+		 }
+		 fis.close();
+		 os.close();
+		 }
+		 
+		 
+		} catch (Exception e) {
+			System.out.println(e);
+			return;
+		}
+
+
+	}
 	  
 	  
 

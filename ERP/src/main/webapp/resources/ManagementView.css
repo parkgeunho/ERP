@@ -4,7 +4,7 @@
 	
 	float: right; 
 	border: 1px solid;
-	background-color: #49B5F4;
+	background-color: #8C8C8C;
 	border-radius: 5px;
 	text-align: center;
 	color: white;
@@ -117,6 +117,25 @@
 	width:100px;
 	line-height: 28px;
 	
+	
+}
+
+.search{
+	
+	height: 20px;
+	background: linear-gradient(#FFFFFF, #EAEAEA);
+	line-height: 20px;
+	text-align: center;
+	font-size: 12pt;
+	font-weight: bold;
+	border:2px solid;
+	border-color: #bbbbbb;
+
+}
+
+.underLine{
+	
+	border-bottom: 1px dotted;
 	
 }
 

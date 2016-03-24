@@ -37,7 +37,7 @@
         </beans:property>
     </beans:bean>
     
-    <beans:bean id="multipartResolver"
+   <beans:bean id="multipartResolver"
    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    
    <beans:property name="maxUploadSize" value="10240000"/>
@@ -55,10 +55,9 @@
 		</interceptor>
 	</interceptors>
 
-   
-   
-   
- 
+	<beans:bean id="NoteDAO" class="com.exe.erp.NoteDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
        
 
    <beans:bean id="scheduleDAO" class="com.exe.schedule.ScheduleDAO">
@@ -104,16 +103,16 @@
    
 
   
+
+
 <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 	destroy-method="close">
 
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-
-
-
-		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.8:1521:TestDB" />
+		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.4:1521:sys" />
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
+
 
 	</beans:bean>
 

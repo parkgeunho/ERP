@@ -45,6 +45,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
    <delete id="deleteData" parameterType="int">
       delete erpboard where boardNum=#{boardNum}
    </delete>
+   
+   <delete id="deleteFileData" parameterType="int">
+      delete erpboardFile where boardNum=#{boardNum}
+   </delete>
 
 
 	 <select id="getListsTest" parameterType="hashMap" resultType="com.exe.board.BoardDTO">
@@ -69,7 +73,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select rownum rnum, data.* from(
 		select * from erpboard where listNum=1 order by boardNum desc) data)
 		<![CDATA[
-     	 where rnum>=1 and rnum<=6
+     	 where rnum>=1 and rnum<=9
    		]]>
 		
 	</select>

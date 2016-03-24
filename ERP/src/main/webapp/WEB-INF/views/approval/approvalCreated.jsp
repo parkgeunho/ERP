@@ -281,17 +281,6 @@
 
 <script type="text/javascript">
 
-	$(document).ready(function(){
-		
-		
-	    
-	    
-	});
-
-</script>
-
-<script type="text/javascript">
-
 	function sendIt(){
 		
 		var elSel = document.getElementById('selectX');
@@ -318,12 +307,14 @@
         	alert("결재선을 지정하십시오.");
         	return;
         }
-           
-		alert("결재 상신 완료.");
-
+        
 		f.action = "<%=cp%>/approvalCreated_ok";
 		f.submit();
-				
+		
+		alert("결재 상신 완료.");
+		window.close();
+		
+		
 	}
 </script>
 
@@ -647,8 +638,8 @@
 						</c:when>
 						</c:choose>
 					</c:forEach>
-				</c:forEach>
-			</div>
+			</c:forEach>
+		</div>
 	</td>
 	<td width="4" bgcolor=""></td>
 	<td width="1" bgcolor="#8C8C8C"></td>
@@ -684,16 +675,16 @@
 	<td width="1" bgcolor=""></td>
 	<td bgcolor="" colspan="5" style="font-size: 10pt">
 	<select id="selectX" multiple="multiple" style="width: 265px; height: 350px">
-		<option value="idididi">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;결재자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;직위&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;펀치상사&nbsp;&nbsp;&nbsp;&nbsp;
+		<option value="${LoginDTO.id }">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${LoginDTO.name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${LoginDTO.grade }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;${LoginDTO.depth2 }&nbsp;&nbsp;&nbsp;&nbsp;
 		</option>
 	</select>
 	</td>	
 	<td width="1" bgcolor=""></td>
 	
-	<td width="10"></td>
+	<td width="10"></td> 
 	</tr>
 	<!-- 55555555555555555555555555555 -->
 	
@@ -746,17 +737,21 @@
 
 <form action="" method="post" name="approvalForm">
 
+<input type="hidden" name="depth1" value="${LoginDTO.id }">
+
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA"><font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font></td><td bgcolor="#8C8C8C" width="1"></td></tr>
+<tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA">
+<font style="font-size: 16pt"> ${Adto.approvalFormType} - ${Adto.approvalFormName}</font>
+<input type="hidden" name="type" value="${Adto.approvalFormType}">
+</td>
+<td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
-<input type="button" value="결재선" class="approvalLineModal" />
-<input type="button" class="approvalSave" value="저장" />
-<input type="button" class="approvalClose" value="닫기"  />
+<input type="button" value="결재선" class="approvalLineModal" style="width: 70px; height: 30px; font-size: 11pt; font-family: 고딕; " />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
+<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${Adto.approvalFormName}</font></td></tr> 
 </table>
 
 <table border="0" cellspacing="0" align="right"> 
@@ -770,7 +765,7 @@
   <tr><td width="110" height="28" bgcolor="#EAEAEA" align="center"><font style="font-size: 10pt; font-weight: bold;">기안</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
   
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">session.userName</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
+  <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">${LoginDTO.name }</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
   
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
   <tr><td width="110" height="28" align="center"></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
@@ -814,14 +809,24 @@
                         
     <textarea name="contentArea" id="editor1" rows="10" cols="80">
     
-    	${dto.approvalFormContent}
+    	${Adto.approvalFormContent}
     
 	</textarea>        
                         
 	<script>		
 		CKEDITOR.replace( 
 		'editor1',{
-			toolbar : 'Basic',     	
+			toolbar :
+				[
+					[ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] ,
+					[ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] ,
+					[ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] ,
+					[ 'Link', 'Unlink', 'Anchor' ] ,
+					[ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] ,
+					'/',
+					[ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ], 
+					[ 'Styles', 'Format', 'Font', 'FontSize' ] ,
+				],     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
 			height : '500'        //---높이값
@@ -830,14 +835,9 @@
 	</script>          
           
 </td></tr>
-	
-	<div id="approvalLineInput" align="right">
-
-  	</div>
-	
 
 <tr height="60"><td colspan="4" align="center">
-<input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="approvalUp" value="결재상신" onclick="sendIt();"/></td></tr>
+<input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="approvalUpLoad" value="결재상신" onclick="sendIt();"/></td></tr>
 <!-- <button type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕; " class="okbtn" onclick="sendIt();">등록하기</button> -->
 </table>
 </form>

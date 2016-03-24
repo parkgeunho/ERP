@@ -40,9 +40,23 @@ $(document).ready(function(){
 
 
 </script>
+<script type="text/javascript">
+function openlist(){
+	
+	
+	window.open("note/readList","","width=600px,height=600px;")
+	
+	
+};
+
+</script>
+
 
 </head>
 <body>
+
+
+
 
 <div style="height: 90px; background-color: #dddddd; border: 1px solid;">
 <table width="90%" height="100%" border="1" align="center">
@@ -66,9 +80,8 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">업무 지원</a></li>
-		
-		<li style="line-height: 50px">|</li>
+	
+	
 		
 		<li><a href="boardMain">게시판</a></li>
 		
@@ -78,9 +91,6 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">메일</a></li>
-		
-		<li style="line-height: 50px">|</li>
 		<c:if test="${LoginDTO.secure==1 }">
 		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
 		</c:if>
@@ -91,26 +101,35 @@ $(document).ready(function(){
 	<div id="a" style="height: 100px; background-color: white;">
 	
 	
-		<div align="center" class="dtonumber" style="margin-left: 47%;">0</div>
+		<div align="center" class="dtonumber" style="margin-left: 47%;">${readCount }</div>
 		<div align="center" class="dtonumber" style="margin-left: 1085px;">0</div>
 		<div align="center" class="dtonumber" style="margin-left: 1270px;">0</div>
-		<div style="width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%; ;margin-left: 35%;float: left; margin-top: 10px;">
+		<div style="width: 160px;height:80px; margin-left: 35%;margin-top: 10px; float: left;">
+			<div style="width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%; ;float: left; ">
+				<img alt="" src="${imagePath}/${LoginDTO.upload}" style="width: 80px; height: 80px; border-radius:100%">
+				
+			</div>
+			<div style="width: 80px;height: 80px; float: left; padding-top: 10px;">
+			${LoginDTO.name }<br>
+			${LoginDTO.grade }<br>
+			${buseo }<br>
+			</div>
 		
-			<img alt="" src="${imagePath}/${dto.upload}" style="width: 80px; height: 80px; border-radius:100%">
+			
+		
 		</div>
-	
 		
-		<div align="center" style="padding-left:3px;  padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
-			<img style="margin-top: 10px;" src="/erp/resources/image/memo.png">
+		<div align="center" style="padding-left:3px;  padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 1%;  margin-top: 10px;">
+			<img onclick="openlist()" style="margin-top: 10px;" src="/erp/resources/image/memo.png">
 		</div>
 		
 		<div align="center" style="padding-left:10px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
 			
-			<img style="margin-top: 10px;" src="/erp/resources/image/checktest.png">
+			<img style="margin-top: 10px;" src="/erp/resources/image/check.png">
 		</div>
 		
 		<div align="center" style=" padding-left:3px;padding-top:5px; width: 80px;height: 80px;background-color: #F6F6F6; border-radius:100%;float: left; margin-left: 5%;  margin-top: 10px;">
-		<img style="margin-top: 10px;" src="/erp/resources/image/calander.png">
+		<img style="margin-top: 10px;" src="/erp/resources/image/calender.png">
 		</div>
 		
 	<div style="float: left;">
@@ -119,9 +138,9 @@ $(document).ready(function(){
 	
 	</div>
 	
-	<div style="font-size: 8pt; border-bottom: 2px solid #2E9926; height: 10px; background-color: white;">
+	<div style="font-size: 8pt; border-bottom: 2px solid #AAD34A; height: 10px; background-color: white;">
 	
-	<div  id="b" style="width: 50px; background-color: #2E9926; float: right; margin-right: 10px;border-top-left-radius : 5px;
+	<div  id="b" style="width: 50px; background-color: #AAD34A; float: right; margin-right: 10px;border-top-left-radius : 5px;
 	border-top-right-radius : 5px;" align="center">▽</div>
 	
 	</div>

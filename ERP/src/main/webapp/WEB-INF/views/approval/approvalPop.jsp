@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%
 	String cp = request.getContextPath();
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 
 <script language="javascript">
    function openWin(i) {
-    window.open('./approvalCreated?num='+i, '', 'width=1000, height=1000,scroll=yes');
+    window.open('./approvalCreated?num='+i, '','width=1000, height=1000, toolbar=no, menubar=no, scrollbars=no, resizable=yes');
     window.close();
    }
 </script>

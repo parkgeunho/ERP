@@ -17,6 +17,7 @@
 </c:when>
 <c:when test="${num==a}">
 전결
+<input type="hidden" value="${num }" name="approvalDepth"/>
 </c:when>
 </c:choose>
 </font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
@@ -27,7 +28,7 @@
 <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
 <tr><td width="110" height="28" align="center"></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
 <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-<input type="hidden" value="${dto.id }" name="depth${a}"/>
+<input type="hidden" value="${dto.id }" name="depth${a + 1}"/>
 <c:set var="a" value="${a - 1}"/>
 </table>
 </div>

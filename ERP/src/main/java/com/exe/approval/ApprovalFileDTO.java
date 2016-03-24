@@ -11,7 +11,6 @@ public class ApprovalFileDTO {
 	public void setApprovalNum(String approvalNum) {
 		this.approvalNum = approvalNum;
 	}
-
 	public String getFileNum() {
 		return fileNum;
 	}

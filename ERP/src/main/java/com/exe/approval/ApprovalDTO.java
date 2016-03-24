@@ -4,6 +4,8 @@ public class ApprovalDTO {
 
 	String approvalNum,type,id,subject,content,created;
 	String approval2,approvalOK2,approval3,approvalOK3,approval4,approvalOK4,approval5,approvalOK5,approval6,approvalOK6;
+	String leadOK,info,nextapproval;
+	int approvalDepth;
 	
 	
 	public String getApprovalNum() {
@@ -102,6 +104,34 @@ public class ApprovalDTO {
 	public void setApprovalOK6(String approvalOK6) {
 		this.approvalOK6 = approvalOK6;
 	}
+	public String getLeadOK() {
+		return leadOK;
+	}
+	public void setLeadOK(String leadOK) {
+		this.leadOK = leadOK;
+	}
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public String getNextapproval() {
+		return nextapproval;
+	}
+	public void setNextapproval(String nextapproval) {
+		this.nextapproval = nextapproval;
+	}
+	public int getApprovalDepth() {
+		return approvalDepth;
+	}
+	public void setApprovalDepth(int approvalDepth) {
+		this.approvalDepth = approvalDepth;
+	}
+	
+	
+	
+	
 	
 	
 }

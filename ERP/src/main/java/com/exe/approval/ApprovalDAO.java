@@ -14,8 +14,64 @@ public class ApprovalDAO {
 	public void setSessionTemplate(SqlSessionTemplate sessionTemplate) {
 		this.sessionTemplate = sessionTemplate;
 	}
+	
+	public List<ApprovalDTO> approvalSuccessList(String id){
 		
-	//approvalForm--------------------------------------------
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalSuccessList",id);
+		
+		return lists;
+	}
+	
+	public List<ApprovalDTO> approvalNextIngList(String id){
+		
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalNextIngList",id);
+		
+		return lists;
+	}
+	
+	public List<ApprovalDTO> approvalNextList(String id){
+		
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalNextList",id);
+		
+		return lists;
+	}
+	
+	public List<ApprovalDTO> approvalAgreementList(String id){
+		
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalAgreementList",id);
+		
+		return lists;
+	}
+	
+	public List<ApprovalDTO> approvalReturnList(String id){
+		
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalReturnList",id);
+		
+		return lists;
+	}
+	
+	
+	public List<ApprovalDTO> approvalIngList(String id){
+		
+		List<ApprovalDTO> lists = sessionTemplate.selectList("com.exe.approval.approvalIngList",id);
+		
+		return lists;
+	}
+	
+	public ApprovalDTO getLeadData(String approvalNum){
+		
+		ApprovalDTO dto = sessionTemplate.selectOne("com.exe.approval.getLeadData",approvalNum);
+		
+		return dto;
+	}
+	
+	public String getName(String id){
+		
+		String returnId = sessionTemplate.selectOne("com.exe.approval.getName",id);
+		
+		return returnId;
+	}
+	
 	
 	public int approvalFormMaxNum(){			
 		int num = sessionTemplate.selectOne("com.exe.approval.approvalFormMaxNum");
@@ -71,7 +127,74 @@ public class ApprovalDAO {
 		return dto;
 	}
 	
-	//approvalForm--------------------------------------------
+	public void insertApproval(ApprovalDTO dto){
+		
+		sessionTemplate.insert("com.exe.approval.insertApproval", dto);
+		
+		return ;
+	}
+	
+	public int getApprovalMax(String approvalNum){
+
+		int num = sessionTemplate.selectOne("com.exe.approval.getApprovalMax",approvalNum);
+		
+		return num;
+	}
+	
+	public void approvalOK(String approvalNum, String created, int mydepth, String nextUser){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		String mapperAddress = "com.exe.approval.approvalOK";
+		mapperAddress += mydepth;
+		
+		params.put("approvalNum", approvalNum);
+		params.put("created", created);
+		params.put("nextUser", nextUser);
+			
+		sessionTemplate.update(mapperAddress, params);
+		
+	}
+	
+	public String approvalChk(String approvalNum, int mydepth){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		String mapperAddress = "com.exe.approval.approvalChk";
+		mydepth++;
+		mapperAddress += mydepth;
+				
+		params.put("approvalNum", approvalNum);
+						
+		String nextUser = sessionTemplate.selectOne(mapperAddress, params);
+		
+		return nextUser;
+		
+	}
+	
+	public void approvalSuccess(String approvalNum, String created, int mydepth, String info){
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		
+		String mapperAddress = "com.exe.approval.approvalSuccess";
+		mapperAddress += mydepth;
+		
+		params.put("approvalNum", approvalNum);
+		params.put("created", created);
+		params.put("info", info);
+		
+		sessionTemplate.update(mapperAddress, params);
+				
+	}
+	
+	public void approvalReturn(String approvalNum, int mydepth){
+		
+		String mapperAddress = "com.exe.approval.approvalReturn";
+		mapperAddress += mydepth;
+				
+		sessionTemplate.update(mapperAddress, approvalNum);
+				
+	}
 	
 	
 	

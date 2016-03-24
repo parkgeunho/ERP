@@ -18,7 +18,7 @@ function openNewWindow(listNum) {
 
 	}
 function article(listNum,boardNum) { 
-	
+
 	
 	open ("board/article.action?listNum="+listNum+"&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
 	}
@@ -44,10 +44,10 @@ ${LDTO.boardName}
 
 
 
-<table border="0" align="center" cellpadding="0" cellspacing="15" >		
+<table border="0" align="center" cellpadding="0" cellspacing="15" st>		
 	
 	<tr style="height: 30px">			
-		<td style="width: 1500px" align="left" colspan="6">
+		<td style="width: 1568px" align="left" colspan="6">
 		<form action="" name="searchForm" method="post">
 				<select id="searchKey"  name="searchKey" class="selectFiled" style="width: 80px; height: 26px;">
 					<option value="subject">제목</option>
@@ -55,7 +55,7 @@ ${LDTO.boardName}
 					<option value="content">내용</option>
 				</select>	
 						<input type="text" name="searchValue" id="searchValue" class="textField" style="width: 150px; height: 20px;">
-						<img  title="찾기" alt="" src="/erp/resources/boardimage/search006.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img  title="검색" alt="" src="/erp/resources/boardimage/search006.png" style="width: 20px; height: " onclick="sendIt();"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- <input type="button" value="상세"  onclick="" >	 -->
 			</form>	
 			
@@ -70,57 +70,65 @@ ${LDTO.boardName}
 </table>
 
 
-<table border="0" align="center" cellpadding="0" cellspacing="0">	
-	
-	<tr style="height: 30px; background-color: #E7E7E7">
-		<td style="width: 100px; border-right: 1px solid" align="center" class="boardNum">No</td>
-		
-		<td style="width: 922px; border-right: 1px solid" align="center" class="subject">제목</td>
-	
-		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="name">작성자
-		</td>
-		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="created">작성일
-		</td>
-		
-		<td style="width: 150px; border-right: 1px solid" align="center" class="file">파일		
-		</td>
-		
-		<td style="width: 100px;" align="center" class="hitCount" colspan="2">조회수
-		</td>		
+<table border="0" align="center" cellpadding="0" cellspacing="0" style="width: 100%; size: 11pt; font-weight: bold; font-style: 나눔고딕코딩;">
+<tr style="height: 1px; background: #EAEAEA">
+		<td colspan="7"></td>
 	</tr>	
 	
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1572px;" colspan="11"></td>
+	<tr style="height: 32px; background-color: #FCFCFC">
+		<td style="width: 90px;"  align="center" class="boardNum">No</td>
+		
+		<td style="width: 922px;" align="center" class="subject">제목</td>
+	
+		
+		<td style="width: 140px;" align="center" class="name">작성자</td>
+		
+		
+		<td style="width: 140px;" align="center" class="created">작성일</td>
+		
+		
+		<td style="width: 140px;" align="center" class="file">파일</td>
+		
+		<td style="width: 90px;" align="center" class="hitCount" colspan="2">조회수</td>		
+		
+	</tr>	
+	
+	<tr style="height: 1px; background: #EAEAEA">
+		<td colspan="7"></td>
 	</tr>
 </table>
 
 
 
-<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 1572px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 100%; font-style: 나눔고딕코딩; font-size: 13pt;">
 	<c:forEach var="dto" items="${lists }">
-	<tr style="height: 1px; background: #B2EBF4">		
-	</tr>
-	<tr style="height: 25px;">
-		<td style="width: 100px;" class="boardNum" align="center">${dto.boardNum}</td>
-		<td style="width: 922px;" class="subject">
+	
+	
+	<tr style="height: 28px;">
+		<td style="width: 90px;" class="boardNum" align="center">${dto.boardNum}</td>
+		<td style="width: 922px;" class="subject">&nbsp;&nbsp;&nbsp;&nbsp;
 			<a href="#" onclick="article(${listNum},${dto.boardNum })">
 				${dto.subject }</a></td>
-		<td style="width: 150px;" class="name" align="center">${dto.name}</td>
-		<td style="width: 150px;" class="created" align="center">${dto.created}</td>
-		<td style="width: 150px;" align="center"></td>
-		<td style="width: 100px;" class="hitCount" align="center">${dto.hitCount }</td>		
+		<td style="width: 140px;" class="name" align="center">${dto.name}</td>
+		<td style="width: 140px;" class="created" align="center">${dto.created}</td>
+		<td style="width: 140px;" align="center">
+		<c:forEach var="fdto" items="${fileList }">
+			<c:if test="${fdto.boardNum==dto.boardNum }">
+				${fdto.originalFileName}
+			</c:if>
+		</c:forEach>
+		</td>
+		<td style="width: 90px;" class="hitCount" align="center">${dto.hitCount }</td>		
 	</tr>	
-	<tr style="height: 1px; background: #B2EBF4">
-		<td style="width: 1572px;" colspan="7"></td>
+	<tr style="height: 1px; background: #EAEAEA">
+		<td colspan="7"></td>
 	</tr> 
 	</c:forEach>				
 </table>
 
-<table border="0" cellpadding="0" cellspacing="0" align="center">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="font-style: 나눔고딕코딩; font-size: 12pt; width: 1568px">
 	<tr style="height: 1px; ">
-		<td style="width: 1572px; background: #B2EBF4"></td>
+		<td  background="#EAEAEA" colspan="7"></td>
 	</tr>
 	
 	<tr style="height: 10px;">
@@ -128,14 +136,14 @@ ${LDTO.boardName}
 	</tr>
 	
 	<tr style="height: 55px;">
-		<td style="width: 1572px;" align="center">
+		<td style="width: 1568px;" align="center">
 	<p>
 		<c:if test="${dataCount!=0 }">
 			${pageIndexList }
 		</c:if>
 		
 		<c:if test="${dataCount==0 }">
-					등록된게시물이 없습니다.
+					등록된 게시물이 없습니다.
 		</c:if>	
 	</p>
 	

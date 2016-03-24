@@ -236,7 +236,7 @@ function Add(){
 					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
 					<div>
 					<img id="buseo-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
-					
+					<img id="fold-${depth0.buseoNum}" src="/erp/resources/insa/folder.png"/>
 					<label id="bus-${depth0.buseoNum}" style="font-weight: bold;" >${depth0.buseoName }</label>
 					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
 					</div>
@@ -244,9 +244,10 @@ function Add(){
 					
 							<c:forEach var="member1" items="${memberList }">
 								<c:if test="${member1.depth1==depth0.buseoNum && member1.depth2=='no' }">
-									<div  style="margin-left: 30px; color: #6B9900" >
+									<div  style="margin-left: 10px; color: #6B9900" >
+									<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 									<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-									<label id="Mem-${member1.num }" ">${member1.name }</label>
+									<label id="Mem-${member1.num }" >${member1.name }</label>
 									
 									</div>
 									<input type="hidden" class="numMem-${member1.num }" value="${member1.num }">
@@ -263,6 +264,7 @@ function Add(){
 							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
 								<div style="margin-left: 20px;">
 								<img id="buseo-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
+								<img id="fold-${depth1.buseoNum}" src="/erp/resources/insa/folder.png"/>
 								<label id="bus-${depth1.buseoNum }">${depth1.buseoName }</label>
 								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
@@ -271,6 +273,7 @@ function Add(){
 									<c:forEach var="member2" items="${memberList }">
 									<c:if test="${member2.depth2==depth1.buseoNum && member2.depth3=='no' }">
 										<div style="margin-left: 30px; color: #6B9900" >
+										<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 										<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 										<label id="Mem-${member2.num }"> ${member2.name }</label>
 										</div>
@@ -294,7 +297,7 @@ function Add(){
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
 											<div style="margin-left: 40px;">
 											<img id="buseo-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
-											
+											<img id="fold-${depth2.buseoNum}" src="/erp/resources/insa/folder.png"/>
 											<label id="bus-${depth2.buseoNum }" > ${depth2.buseoName }</label>
 											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
@@ -307,7 +310,8 @@ function Add(){
 											
 												 <c:forEach var="member3" items="${memberList }">
 												<c:if test="${member3.depth3==depth2.buseoNum && member3.depth4=='no' }">
-													<div  style="margin-left: 30px; color: #6B9900" >
+													<div  style="margin-left: 35px; color: #6B9900" >
+													<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 													<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 													<label id="Mem-${member3.num }"> ${member3.name }</label>
 													
@@ -331,6 +335,7 @@ function Add(){
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
 														<div style="margin-left: 60px;">
 														<img id="buseo-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
+														<img id="fold-${depth3.buseoNum}" src="/erp/resources/insa/folder.png"/>
 														<label id="bus-${depth3.buseoNum }"> ${depth3.buseoName }</label>
 														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														
@@ -339,8 +344,9 @@ function Add(){
 															
 															
 																<c:forEach var="member4" items="${memberList }">
-																<c:if test="${member4.depth4==depth3.buseoNum && member4.depth4=='no' }">
-																	<div  style="margin-left: 30px;  color: #6B9900" >
+																<c:if test="${member4.depth4==depth3.buseoNum && member4.depth5=='no' }">
+																	<div  style="margin-left: 60px;  color: #6B9900" >
+																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 																	<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
 																	<label id="Mem-${member4.num }">${member4.name }</label>
 																	
@@ -356,8 +362,11 @@ function Add(){
 															<c:choose>
 															
 																<c:when test="${depth3.buseoNum==depth4.parent }">
-																	<div style="margin-left: 80px;">
-																	<label id="bus-${depth4.buseoNum }">┖ ${depth4.buseoName }</label>
+																	<div style="margin-left: 70px;">
+																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
+																	<img id="fold-${depth0.buseoNum}" src="/erp/resources/insa/folder2.png"/>
+																	
+																	<label id="bus-${depth4.buseoNum }"> ${depth4.buseoName }</label>
 																	<input type="hidden" class="numbus-${depth4.buseoNum }" value="${depth4.buseoNum }">
 																	</div>
 																	<div class="buseo-${depth4.buseoNum }">
@@ -365,7 +374,8 @@ function Add(){
 																	
 																				<c:forEach var="member5" items="${memberList }">
 																				<c:if test="${member5.depth5==depth4.buseoNum }">
-																					<div  style="margin-left: 30px; color: #6B9900" >
+																					<div  style="margin-left: 90px; color: #6B9900" >
+																					<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 																					<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 																					<label id="Mem-${member5.num }">${member5.name }</label>
 																					 
@@ -391,7 +401,9 @@ function Add(){
 													
 													
 													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
-														<div style="margin-left: 60px;">┖
+														<div style="margin-left: 35px;">
+														<img src="/erp/resources/insa/ㄴ1.png" align="middle">
+														<img id="fold-${depth0.buseoNum}" src="/erp/resources/insa/folder2.png"/>
 														<label id="bus-${depth3.buseoNum }" > ${depth3.buseoName }</label>
 														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
 														</div>
@@ -399,7 +411,8 @@ function Add(){
 														<div>
 																<c:forEach var="member4" items="${memberList }">
 																<c:if test="${member4.depth4==depth3.buseoNum && member4.depth4=='no' }">
-																	<div  style="margin-left: 30px; color: #6B9900" >
+																	<div  style="margin-left: 35px; color: #6B9900" >
+																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 																	<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
 																	<label id="Mem-${member4.num }" >${member4.name }</label>
 																																	
@@ -421,8 +434,10 @@ function Add(){
 										
 										
 										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
-											<div style="margin-left: 40px;">
-											┖ <label id="bus-${depth2.buseoNum }" >${depth2.buseoName }</label>
+											<div style="margin-left: 30px;">
+											<img src="/erp/resources/insa/ㄴ1.png" align="middle">
+											<img src="/erp/resources/insa/folder2.png" align="middle">
+											<label id="bus-${depth2.buseoNum }" >${depth2.buseoName }</label>
 											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
 											</div>
 											
@@ -431,6 +446,7 @@ function Add(){
 												<c:forEach var="member3" items="${memberList }">
 													<c:if test="${member3.depth3==depth2.buseoNum && member3.depth4=='no' }">
 														<div  style="margin-left: 30px; color: #6B9900" >
+														<img src="/erp/resources/insa/ㄴ1.png" align="middle">
 														<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
 														<label id="Mem-${member3.num }">${member3.name }</label>
 														 
@@ -574,12 +590,12 @@ function Add(){
 									</div>
 									
 									
-									<div style="float: left; width: 110px;">
+									<div style="float: left; width: 110px; margin-top: 60px;">
 										글쓰기 권한
 									
 									</div>
 									
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 										쓰기가능<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="write" checked="checked" name="writeck">
@@ -590,7 +606,7 @@ function Add(){
 										</c:if>
 									</div>
 								
-									<div style="float: left;width: 110px;">
+									<div style="float: left;width: 110px; margin-top: 40px;">
 									쓰기불가<br>
 										<c:if test="${ck!=null }">
 										<input type="radio"  value="non" name="writeck">
@@ -607,9 +623,10 @@ function Add(){
 						</div>
 						
 						
-						
-							<div style="float: left; height: 30px;margin-top: 30px;" class="boardManagement" onclick="boardUpdate();" >저장</div > <div style="float: left;">취소</div>
-					
+						<div align="center">
+							<div style="float: left; margin-left:300px; height: 30px;margin-top: 30px;" class="boardManagement" onclick="boardUpdate();" >저장</div > 
+							<div style="float: left; height: 30px;margin-top: 30px;" class="boardManagement">취소</div>
+						</div>
 					
 					
 				</div>
