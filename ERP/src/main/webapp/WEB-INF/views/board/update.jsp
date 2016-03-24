@@ -84,7 +84,7 @@ function redirect(){
 </head>
 <body style="font-style: 나눔고딕코딩;">
 
-<form action="" name="myForm" method="post">
+<form action="" name="myForm" method="post" enctype="multipart/form-data">
 
 <table border="0" cellpadding="0" cellspacing="0" align="center" >
 	<tr style="height: 80px;" bgcolor=#EEEEEE>

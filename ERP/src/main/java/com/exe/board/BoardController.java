@@ -395,15 +395,64 @@ public class BoardController {
 	 
 	 
 	 @RequestMapping(value="/board/update_ok.action",method={RequestMethod.GET,RequestMethod.POST})
-	  public void updated_ok(BoardDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	  public void updated_ok(BoardDTO dto, MultipartHttpServletRequest request, HttpServletResponse response) throws Exception{
 	  
+		 String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+		 
 		  String pageNum = request.getParameter("pageNum");
 		 		 	  
 		  dto.setBoardNum(Integer.parseInt(request.getParameter("boardNum")));
 		  dto.setSubject(request.getParameter("subject"));
 		  dto.setName(request.getParameter("name"));
 		  dto.setContent(request.getParameter("content"));
-		 
+		  
+		  BoardFileDTO fdto = boardfileDAO.selectData(Integer.parseInt(request.getParameter("boardNum")));
+		  
+		  	
+		  MultipartFile file = request.getFile("file");
+		  
+		  System.out.println("이름확인:" + file.getName());
+		  
+		  if(file.getName().equals("") || file==null || file.getSize()==0){
+				
+			}
+		  
+		  File f = new File(path);
+			if(!f.exists())
+				f.mkdirs();
+		  
+		  if(file!=null && file.getSize()>0){
+			  
+			  //save 파일 이름 만들어주는 부분
+	           String fileExt =  file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+	           String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar
+	                 .getInstance()) + fileExt;
+	           String fullFileName = path + File.separator + newFileName;
+			  
+	           //파일이 이미 있으면 물리적 위치 삭제
+	           
+	           if(dto.getBoardNum()==fdto.getBoardNum()){
+	           File d = new File(path + "/" + fdto.getSaveFileName());
+	           d.delete();
+	           }
+	           
+	           
+	 		  //폴더에 업로드
+	 		  f = new File(fullFileName);
+	 		  
+	 		  file.transferTo(f);
+	 		  
+	 		 fdto.setOriginalFileName(file.getOriginalFilename());
+	         fdto.setSaveFileName(newFileName);
+	         
+	         
+	         //파일 db저장
+	           fdto.setBoardNum(dto.getBoardNum());
+	           boardfileDAO.insertData(fdto);
+			  
+		  }
+		
+		  
 		  
 		  dao.updateData(dto);
 	  
@@ -474,6 +523,7 @@ public class BoardController {
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
 			request.setAttribute("boardlist", boardlist);
+			
 
 		  return "boardMain";
 	  }

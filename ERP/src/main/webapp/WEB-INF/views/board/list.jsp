@@ -18,7 +18,7 @@ function openNewWindow(listNum) {
 
 	}
 function article(listNum,boardNum) { 
-	
+
 	
 	open ("board/article.action?listNum="+listNum+"&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
 	}
