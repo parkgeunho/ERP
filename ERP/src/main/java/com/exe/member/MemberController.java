@@ -653,11 +653,11 @@ public class MemberController {
 			
 		}
 		
-		String id = request.getParameter("id");
+		int num = Integer.parseInt(request.getParameter("num"));
 		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
-		MemberDTO dto = dao.readOne(id);
+		MemberDTO dto = dao.readOne(num);
 		
 		//주민번호로 나이 구하기
 		Calendar cal = Calendar.getInstance();
