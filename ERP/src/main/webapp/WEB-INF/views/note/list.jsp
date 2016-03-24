@@ -40,7 +40,7 @@ function closeList(){
 </head>
 <body>
 <Div style="width: 600px; height: 600px; border: 0px solid;">
-	<div style="width:560px; height: 40px; margin-left:20px; line-height: 40px; border-bottom: 1px solid">받은 쪽지함</Div>
+	<div style="width:560px; height: 40px; margin-left:20px; line-height: 40px; border-bottom: 1px solid; border-bottom-color: #C3C3C3">받은 쪽지함</Div>
 	<div>
 	<table height="500px; " width="560px;" border="0" style="margin-left: 20px; margin-top: 10px; 
 		border-bottom: 0px solid; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 1; font-style: 나눔고딕코딩;" 

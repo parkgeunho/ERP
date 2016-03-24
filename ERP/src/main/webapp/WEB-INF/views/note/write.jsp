@@ -65,7 +65,7 @@ function setChildValue(name,num){
 </script>
 <body>
 <form name="myForm">
-<div style="padding-left: 10px; width: 500px; height: 430px; border: 1px solid;">
+<div style="padding-left: 10px; width: 500px; height: 430px;">
 	<div style="height: 40px; line-height: 40px; width: 490px;">쪽지 쓰기</div>
 	<div style="border-bottom: 1px solid;border-top: 1px solid; height: 40px; line-height: 40px; width: 490px;">
 		<div style="float: left;">받는사람</div>

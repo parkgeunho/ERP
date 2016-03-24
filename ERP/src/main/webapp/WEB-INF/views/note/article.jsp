@@ -44,7 +44,7 @@ function sendIt(){
 <link rel="stylesheet" type="text/css" href="/erp/resources/note.css">
 <body>
 <Form name="noteForm">
-<div style="padding-left: 10px; width: 500px; height: 430px; border: 1px solid;">
+<div style="padding-left: 10px; width: 500px; height: 430px;">
 <div style="height: 80px; width: 490px;">
 	<div style="height: 40px; line-height: 40px; width: 490px;">
 	<div style="float: left;height: 40px;line-height: 40px;width: 100px;">보낸사람</div>
