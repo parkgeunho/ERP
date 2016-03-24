@@ -89,7 +89,7 @@
 <button type="button" name="approvalClose" onclick="closeSelf()" >닫기</button>
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
+<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${Adto.approvalFormName}</font></td></tr> 
 </table>
 
 <table align="center" width="100%" cellpadding="0" cellspacing="0">

@@ -268,7 +268,7 @@ public class ApprovalController {
 	      request.setAttribute("restDiv",n);
 	      request.setAttribute("lists", lists);
 	      request.setAttribute("LoginDTO", LoginDTO);
-	      request.setAttribute("dto", dto);
+	      request.setAttribute("Adto", dto); //세션값하고 충돌문제로 attribute값 수정
 	      
 	      return "approval/approvalCreated";
 	}	
