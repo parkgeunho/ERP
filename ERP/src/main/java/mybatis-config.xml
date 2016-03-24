@@ -43,7 +43,6 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 		   
 		<mapper resource="com/exe/insa/ListMapper.xml"/>
 		
-		<mapper resource="com/exe/erp/NoteMapper.xml"/>
 		
 		<mapper resource="com/exe/board/BoardFileMapper.xml"/> 
 

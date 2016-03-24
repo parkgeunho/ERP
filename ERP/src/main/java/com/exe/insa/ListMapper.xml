@@ -93,5 +93,47 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
+	<!-- 쪽지 관련 쿼리 -->
+	
+	<select id="NotemaxNum" resultType="integer">
+		select nvl(max(noteNum),0) from note
+	</select>
+	
+	<insert id="NoteinsertData" parameterType="com.exe.erp.NoteDTO">
+		insert into note(noteNum,writer,reader,content,writeTime) values (#{noteNum},#{writer},#{reader},#{content},to_char(sysdate,'yyyy-MM-DD HH24:MI:SS'))
+	</insert>
+
+	<delete id="NotedeleteData" parameterType="integer">
+		delete note where noteNum=#{noteNum}
+	</delete>
+	
+	<update id="NotereadTime" parameterType="com.exe.erp.NoteDTO">
+		update note set readTime=to_char(sysdate,'yyyy-mm-dd HH24:MI:SS') where noteNum=#{noteNum}
+	</update>
+	
+	<select id="Notelist" resultType="com.exe.erp.NoteDTO" parameterType="hashMap">
+		select * from(
+		select rownum rnum, data.* from(
+		select * from note where reader=#{reader} order by noteNum desc) data)
+		<![CDATA[
+     	 where rnum>=#{start} and rnum<=#{end}
+   		]]>
+	
+	</select>
+	
+	<select id="NotegetCount" resultType="integer">
+		select nvl(count(*),0) from note where reader=#{reader}
+	
+	</select>
+	
+	
+	<select id="NoteReadCount" resultType="integer">
+		select nvl(count(*),0) from note where reader=#{reader} and readTime!='no'
+	</select>
+	
+	
+
+	
 
 </mapper>
+

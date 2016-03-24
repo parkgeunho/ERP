@@ -30,7 +30,7 @@ function sendIt(){
 		return;
 	}
 	
-	f.action = "<%=cp%>/note/write_ok";
+	f.action = "<%=cp%>/note/Write_ok";
 	f.submit();
 	
 	
@@ -50,7 +50,7 @@ function sendIt(){
 	<div style="height: 300px;  padding-top: 20px;" >
 	<div><textarea name="content" rows="13" cols="58" style="overflow-y:auto; "></textarea></div>
 	<div style="margin-top: 40px;" >
-	<div class="chk" align="center" style="float: left; margin-left: 175px;">보내기</div>
+	<div class="chk" align="center" style="float: left; margin-left: 175px;" onclick="sendIt()">보내기</div>
 	<div class="chk" align="center" style="float: left; margin-left: 10px;">취소</div>
 	</div>
 	

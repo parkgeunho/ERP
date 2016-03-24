@@ -40,6 +40,17 @@ $(document).ready(function(){
 
 
 </script>
+<script type="text/javascript">
+function openlist(){
+	
+	
+	window.open
+	
+	
+};
+
+</script>
+
 
 </head>
 <body>
