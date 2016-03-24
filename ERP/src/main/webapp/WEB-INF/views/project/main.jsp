@@ -36,6 +36,8 @@ function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_hei
 </script>
 
 
+
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -81,6 +83,10 @@ $(document).ready(function(){
 	 
 });
 
+function notices(boardNum) { 
+	
+	open ("board/article.action?listNum=1&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
+}
 
 </script>
 </head>
@@ -117,13 +123,18 @@ $(document).ready(function(){
 </div>
 
 
-<div style="margin-top :100px; margin-left: 27px; float: left;" >
+<div style="margin-top :100px; margin-left: 27px; float: left;">
 	
 	<div class="line">
 		<div id="name" class="ma">공지사항</div>
 			<div class="sub" id="content" >
 				<c:forEach var="notice" items="${notice }">
-					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● ${notice.subject }</div>
+					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
+					
+					<a href="#" onclick="notices(${notice.boardNum })">
+						${notice.subject }
+					</a>
+					</div>
 				</c:forEach>
 			</div>
 	</div>

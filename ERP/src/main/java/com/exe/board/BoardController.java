@@ -523,6 +523,7 @@ public class BoardController {
 			request.setAttribute("depths", depths);
 			request.setAttribute("parent", parent);
 			request.setAttribute("boardlist", boardlist);
+			
 
 		  return "boardMain";
 	  }
