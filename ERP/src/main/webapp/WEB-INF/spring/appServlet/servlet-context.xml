@@ -55,6 +55,9 @@
 		</interceptor>
 	</interceptors>
 
+	<beans:bean id="NoteDAO" class="com.exe.erp.NoteDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
  
     
    <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
@@ -104,6 +107,7 @@
 
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.16.15:1521:TestDB" />
+
 		<beans:property name="username" value="SUZI"/>
 		<beans:property name="password" value="A123"/>	
 

@@ -36,13 +36,6 @@ function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_hei
 </script>
 
 
-
-
-
-
-
-
-
 <script type="text/javascript">
 
 $(document).ready(function(){

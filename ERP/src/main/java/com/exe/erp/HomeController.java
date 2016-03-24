@@ -1,5 +1,7 @@
 package com.exe.erp;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exe.board.BoardDAO;
 import com.exe.board.BoardDTO;
+import com.exe.board.MyUtil;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDAO;
@@ -38,10 +41,16 @@ public class HomeController {
 	@Qualifier("boardDAO")
 	BoardDAO BoardDAO;
 	
+	@Autowired
+	MyUtil myUtil;
 	
 	@Autowired
 	@Qualifier("memberDAO")
 	MemberDAO Memberdao;
+	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
 	
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
@@ -146,15 +155,77 @@ public class HomeController {
 	}	
 	
 	
-	@RequestMapping(value = "/NoteWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "/NoteWrite",method = {RequestMethod.POST,RequestMethod.GET})
 	public String NoteWrite(HttpServletRequest request,HttpServletResponse response) throws ParseException {
 		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
 		
-		
-		
+		request.setAttribute("LoginDTO", LoginDTO);
 		return "note/write";
 		
 	}
+	@RequestMapping(value = "/note/Write_ok",method = {RequestMethod.POST,RequestMethod.GET})
+	public String NoteWrite_ok(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
+		
+		int maxNum = NoteDAO.maxNum();
+		
+		dto.setNoteNum(maxNum+1);
+		
+		NoteDAO.insertData(dto);
+		
+		
+		return "";
+	}
+	
+	@RequestMapping(value = "/note/readList",method = {RequestMethod.POST,RequestMethod.GET})
+	public String NotereadList(HttpServletRequest request,NoteDTO dto,HttpServletResponse response) throws ParseException {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		  String cp = request.getContextPath();
+		
+		String pageNum = request.getParameter("pageNum");
+	      int currentPage = 1;
+	      
+	      if(pageNum != null)
+	         currentPage = Integer.parseInt(pageNum);
+	      
+	      
+	      
+	      int dataCount = NoteDAO.getCount();
+	      
+	      int numPerPage = 12;
+	      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+	      
+	      if(currentPage>totalPage)
+	         currentPage = totalPage;
+	      
+	      int start = (currentPage-1)*numPerPage +1;
+	      int end = currentPage*numPerPage;
+	      
+	      List<NoteDTO> lists = NoteDAO.readList(start, end, LoginDTO.getName());
+	     
+	      
+	      
+	      String listUrl = cp + "/note/readList";
+	      
+	     
+	      
+	      String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+	      
+	      String articleUrl = cp + "/board/article.action?pageNum=" + currentPage;
+	      
+	      request.setAttribute("lists", lists);
+	      request.setAttribute("pageIndexList", pageIndexList);
+		
+		
+		return "note.list";
+	}
+		
+	
+	
 	
 }
