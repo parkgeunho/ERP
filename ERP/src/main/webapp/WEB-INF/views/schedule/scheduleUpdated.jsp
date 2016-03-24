@@ -50,11 +50,11 @@
 		window.close();
 	}
 	
-	function saveSche(){
+	function updateSche(){
 		
 		var f = document.myform;
 		
-		f.action = "<%=cp%>/scheduleSave";
+		f.action = "<%=cp%>/scheduleUpdated_ok";
 	    f.submit();
 	    
 		window.close();
@@ -819,7 +819,7 @@ $(document).ready(function(){
 	<tr height="40">
 		<td align="right" colspan="3" >
 			<font style="font-style: 나눔고딕코딩;">
-			<input type="button" id="scheSave" value="저장" onclick="saveSche()"/>
+			<input type="button" id="scheUpdate" value="수정" onclick="updateSche()"/>
 			<input type="button" id="scheClose" value="닫기" onclick="closeSche()"/></font></td></tr> 
 	</table>
 
@@ -831,7 +831,7 @@ $(document).ready(function(){
 			font-style: 나눔고딕코딩;font-weight: bolder;">제목</font></td>
 		<td style="border-color:#E0E0E0; border-width: 1px; border-style: solid; border-left-width: 0; 
 			border-bottom-width: 0" height="30" bgcolor="#E4F7BA">&nbsp;&nbsp;
-			<input name="title" id="title" type="text" style="font-size:11pt; 
+			<input value="${dto.title }" name="title" id="title" type="text" style="font-size:11pt; 
 			border-color:#E0E0E0; border-width: 1px; border-style: solid; width: 70%; height: 18px;"/></td></tr> 
 			
 	<tr>
@@ -858,6 +858,8 @@ $(document).ready(function(){
 		<td colspan="3">
 	                        
 	    <textarea name="content" id="editor" rows="10" cols="80">
+	    
+	    		${dto.content }
 	    	
 		</textarea>        
 	                        
@@ -873,6 +875,8 @@ $(document).ready(function(){
 		</script></td></tr>
 		
 	</table>
+	
+	<input id="scheduleNum" name="scheduleNum" type="hidden" value="${dto.scheduleNum }">
 </form>
 
 </body>

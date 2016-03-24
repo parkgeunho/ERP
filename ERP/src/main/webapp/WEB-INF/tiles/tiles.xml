@@ -15,11 +15,7 @@
 	<!-- ///////////////////////////일정 시작////////////////////////////////////////// -->    
 
     <definition name="scheTile" extends="temp">
-		<put-attribute name="main" value="scheduleMain" />
-	</definition>
-	
-	<definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain2.jsp">
-		<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
 	</definition>
 	
 	<!-- <definition name="rightCalendar" extends="temp">

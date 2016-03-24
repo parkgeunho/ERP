@@ -32,6 +32,8 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
    </environments>
    
    <mappers>
+   
+		<mapper resource="com/exe/schedule/ScheduleMapper.xml"/>
 
 		<mapper resource="com/exe/board/BoardMapper.xml"/>
 		
