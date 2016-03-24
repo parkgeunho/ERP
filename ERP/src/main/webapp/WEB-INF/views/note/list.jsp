@@ -16,6 +16,21 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
+<script type="text/javascript">
+
+function openArticle(noteNum){
+	
+	window.open("article?noteNum="+noteNum,"","width=520px,height=450px;")
+	
+}
+function closeList(){
+	
+	window.opener.location.reload();
+	window.close();
+	
+}
+
+</script>
 
 
 
@@ -30,116 +45,32 @@
 	<table height="500px; " width="560px;" border="0" style="margin-left: 20px; margin-top: 10px; 
 		border-bottom: 0px solid; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 1; font-style: 나눔고딕코딩;" 
 		cellpadding="0" cellspacing="0" >
-		<tr height="25px;" style="background: #EAEAEA; font-weight: bold;">
+		<tr height="25px;" style="background: #EAEAEA; font-weight: bold; border-bottom: 1px solid #E0E0E0;">
 			<td width="100px;" align="center">보낸사람</td> <td width="330px;" align="center">내용</td> <td width="130px;" align="center">보낸 날짜</td>
 		</tr>
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
 	
+		<c:forEach var="Notedto" items="${lists }">
 		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
+			<td align="center"style="border-bottom: 1px solid #E0E0E0;">${Notedto.writer }</td>
+			<td align="left" style="border-bottom: 1px solid #E0E0E0; padding-left: 10px">
+			
+			<c:if test="${Notedto.readTime=='no'}">
+			<a href="javascript:openArticle(${Notedto.noteNum })">${Notedto.content}
+			</a>
+			</c:if>
+			<c:if test="${Notedto.readTime!='no' }">
+			<label onclick="openArticle(${Notedto.noteNum })">${Notedto.content}</label>
+			
+			
+			</c:if>
+			</td>
+			<td align="center" style="border-bottom: 1px solid #E0E0E0;">${Notedto.writeTime }</td>
 		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</c:forEach>
+		<c:forEach begin="1" end="${max-listSize }" step="1">
+		<tr height="25px;"><td></td>
 		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-		
-		<tr height="25px;">
-			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
-		</tr>
-		
-		<tr style="height: 1px;">
-			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
-		</tr>
-	
+		</c:forEach>
 		
 		<tr height="25px;" >
 			
@@ -161,7 +92,7 @@
 		<tr style="height: 30px;">
 			<td style="width: 560px;" align="right" colspan="3">
 				<input type="button" value="닫기" class="btn2" style="background: #EAEAEA"
-					onclick="">
+					onclick="closeList()">
 			</td>
 		</tr>
 	</table>

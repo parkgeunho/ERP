@@ -32,6 +32,8 @@ function sendIt(){
 	
 	f.action = "<%=cp%>/note/Write_ok";
 	f.submit();
+	window.opener.location.reload();
+	window.close();
 	
 	
 	
@@ -55,7 +57,7 @@ function sendIt(){
 	</div>
 	
 	</div>
-	<input type="hidden" name="writer" value="${LoginDTO.name }">
+	<input type="hidden" name="writer" value="${LoginDTO.num }">
 	
 	</div>
 	
