@@ -29,6 +29,11 @@
 		
 		
 	}
+	function openNote(){
+		
+		window.open("NoteWrite","","width=520px,height=450px;")
+		
+	}
 	
 	function searchPop(){
 		
@@ -55,8 +60,8 @@
 	<div class="quick" >QUICK</div>
 
 
-	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/mail.png"><br/>
-	메일 쓰기
+	<div class="Smenu" onclick="openNote()"><img style="margin-top: 10px;" src="/erp/resources/image/mail.png"><br/>
+	쪽지 쓰기
 	</div>
 	
 	

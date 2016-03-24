@@ -37,7 +37,7 @@
         </beans:property>
     </beans:bean>
     
-    <beans:bean id="multipartResolver"
+   <beans:bean id="multipartResolver"
    class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    
    <beans:property name="maxUploadSize" value="10240000"/>
@@ -55,6 +55,9 @@
 		</interceptor>
 	</interceptors>
 
+	<beans:bean id="NoteDAO" class="com.exe.erp.NoteDAO">
+      <beans:property name="sessionTemplate" ref="sessionTemplate"/>
+   </beans:bean>
  
     
    <beans:bean id="ListDAO" class="com.exe.insa.ListDAO">
@@ -104,6 +107,7 @@
 		<beans:property name="url" value="jdbc:oracle:thin:@192.168.220.128:1521:orcl" />
 		<beans:property name="username" value="KBL"/>
 		<beans:property name="password" value="K123"/>	
+
 	</beans:bean>
 
 

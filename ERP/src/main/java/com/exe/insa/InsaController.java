@@ -102,7 +102,7 @@ public class InsaController {
 		
 
 	
-		return "project/test";
+		return "note/list";
 	}
 	
 	@RequestMapping(value = "/buseoManagement", method = RequestMethod.GET)

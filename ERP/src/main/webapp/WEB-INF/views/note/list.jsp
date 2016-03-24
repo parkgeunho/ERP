@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%        
-	
+	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
 %>
@@ -9,63 +10,159 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/ERP/src/resources/css/style.css" type="text/css"/>
+<link rel="stylesheet" href="/ERP/src/resources/css/created.css" type="text/css"/>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+
+
+
+
+
+
 </head>
 <body>
-<Div style="width: 600px; height: 600px; border: 1px solid;">
-	<div style="height: 50px;">받은 쪽지함</Div>
+<Div style="width: 600px; height: 600px; border: 0px solid;">
+	<div style="width:560px; height: 40px; margin-left:20px; line-height: 40px; border-bottom: 1px solid">받은 쪽지함</Div>
 	<div>
-	<table height="550px;" width="560px;" border="1">
-		<tr height="25px;">
-			<td width="100px;">보낸사람</td> <td width="360px;">내용</td> <td width="100px;">보낸 날짜</td>
+	<table height="500px; " width="560px;" border="0" style="margin-left: 20px; margin-top: 10px; 
+		border-bottom: 0px solid; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 1; font-style: 나눔고딕코딩;" 
+		cellpadding="0" cellspacing="0" >
+		<tr height="25px;" style="background: #EAEAEA; font-weight: bold;">
+			<td width="100px;" align="center">보낸사람</td> <td width="360px;" align="center">내용</td> <td width="100px;" align="center">보낸 날짜</td>
+		</tr>
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
 		</tr>
 		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+	
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
+		</tr>
+		
 		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+			<td align="center">이</td><td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;게</td><td align="center">20개</td>
 		</tr>
-		<tr height="25px;">
-			<td>이</td><td>게</td><td>20개</td>
+		
+		<tr style="height: 1px;">
+			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
 		</tr>
-
 	
 		
 		<tr height="25px;" >
 			<td char="3">페이징처리</td>
+			<td>
+		<p>	
+			<c:if test="${dataCount!=0 }">
+				${pageIndexList}			
+			</c:if>
+			
+			<c:if test="${dataCount==0 }">
+						등록된 게시물이 없습니다.
+			</c:if>
+		</p>	
+			</td>
+		</tr>
+		
+		
+		
+		<tr style="height: 30px;">
+			<td style="width: 560px;" align="right" colspan="3">
+				<input type="button" value="닫기" class="btn2" style="background: #EAEAEA"
+					onclick="">
+			</td>
 		</tr>
 	</table>
 	</Div>

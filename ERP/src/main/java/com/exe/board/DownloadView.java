@@ -1,4 +1,4 @@
-package com.exe.board;
+/*package com.exe.board;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -64,3 +64,4 @@ public class DownloadView extends AbstractView{
 	
 	
 }
+*/

@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
 <script src="/erp/resources/script/ckeditor/ckeditor.js"></script>
-<script src="/erp/resources/script/ckeditor/config.js"></script>
+<script src="/erp/resources/script/ckeditor/config2.js"></script>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -488,8 +488,14 @@
  	<script>		
 		CKEDITOR.replace( 
 		'editor1',{
+			toolbar: 
+				[
+				[ 'Source' ],
+				[ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ], 
+				[ 'Styles', 'Format', 'Font', 'FontSize' ]	
+				],
 			width : '100%',       //---넓이값
-			height : '500'        //---높이값
+			height : '780'        //---높이값
 			}
 		);    
 	</script>   

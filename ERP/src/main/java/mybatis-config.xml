@@ -12,6 +12,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 		<property name="url" value="jdbc:oracle:thin:@192.168.220.128:1521:orcl"/>
 		<property name="username" value="KBL"/>
 		<property name="password" value="K123"/>
+
 	</properties>
 
 	
@@ -38,6 +39,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 		<mapper resource="com/exe/insa/InsaMapper.xml"/>   
 		   
 		<mapper resource="com/exe/insa/ListMapper.xml"/>
+		
 		
 		<mapper resource="com/exe/board/BoardFileMapper.xml"/> 
 

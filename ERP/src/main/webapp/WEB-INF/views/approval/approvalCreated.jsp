@@ -638,8 +638,8 @@
 						</c:when>
 						</c:choose>
 					</c:forEach>
-				</c:forEach>
-			</div>
+			</c:forEach>
+		</div>
 	</td>
 	<td width="4" bgcolor=""></td>
 	<td width="1" bgcolor="#8C8C8C"></td>
@@ -748,9 +748,7 @@
 <td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="40"><td align="right" colspan="3" >
-<input type="button" value="결재선" class="approvalLineModal" />
-<input type="button" class="approvalSave" value="저장" />
-<input type="button" class="approvalClose" value="닫기"  />
+<input type="button" value="결재선" class="approvalLineModal" style="width: 70px; height: 30px; font-size: 11pt; font-family: 고딕; " />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
@@ -818,7 +816,17 @@
 	<script>		
 		CKEDITOR.replace( 
 		'editor1',{
-			toolbar : 'Basic',     	
+			toolbar :
+				[
+					[ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] ,
+					[ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] ,
+					[ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] ,
+					[ 'Link', 'Unlink', 'Anchor' ] ,
+					[ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] ,
+					'/',
+					[ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ], 
+					[ 'Styles', 'Format', 'Font', 'FontSize' ] ,
+				],     	
 			filebrowserImageUploadUrl : 'fileupload.jsp?type=Images',   //파일업로드시 사용
 			width : '100%',       //---넓이값
 			height : '500'        //---높이값

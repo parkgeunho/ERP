@@ -40,6 +40,17 @@ $(document).ready(function(){
 
 
 </script>
+<script type="text/javascript">
+function openlist(){
+	
+	
+	window.open
+	
+	
+};
+
+</script>
+
 
 </head>
 <body>
@@ -69,9 +80,8 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">업무 지원</a></li>
-		
-		<li style="line-height: 50px">|</li>
+	
+	
 		
 		<li><a href="boardMain">게시판</a></li>
 		
@@ -81,9 +91,6 @@ $(document).ready(function(){
 		
 		<li style="line-height: 50px">|</li>
 		
-		<li><a href="#">메일</a></li>
-		
-		<li style="line-height: 50px">|</li>
 		<c:if test="${LoginDTO.secure==1 }">
 		<li><a href="javascript:location.href='<%=cp%>/insa';">관리자</a></li>
 		</c:if>
