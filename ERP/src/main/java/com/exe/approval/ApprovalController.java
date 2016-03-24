@@ -222,55 +222,55 @@ public class ApprovalController {
 	public String approvalCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
 		System.out.println("approvalCreated.Controller");
-		
-		HttpSession session = request.getSession();
-		
-		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-				
-		int num = Integer.parseInt(request.getParameter("num"));
-		
-		System.out.println(num);
-		
-		ApprovalFormDTO dto = approvalDAO.getApprovalForm(num);
-						
-		List<BuseoDTO> lists = insaDAO.buseoList();
-		
-		ListIterator<BuseoDTO> it = lists.listIterator();
-		
-		int depth = -1;
-		int n =0;
-		Map<String, Object> hMap = new HashMap<String, Object>();
-		while(it.hasNext()){
-			
-			BuseoDTO vo = it.next();
-				
-			vo.setDepthGap(depth - vo.getDepth() + 1);
+	      
+	      HttpSession session = request.getSession();
+	      
+	      MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+	            
+	      int num = Integer.parseInt(request.getParameter("num"));
+	      
+	      System.out.println(num);
+	      
+	      ApprovalFormDTO dto = approvalDAO.getApprovalForm(num);
+	                  
+	      List<BuseoDTO> lists = insaDAO.buseoList();
+	      
+	      ListIterator<BuseoDTO> it = lists.listIterator();
+	      
+	      int depth = -1;
+	      int n =0;
+	      Map<String, Object> hMap = new HashMap<String, Object>();
+	      while(it.hasNext()){
 	         
-	        depth = vo.getDepth();
-			n++;
-			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
-			hMap.put("depth", Integer.toString(vo.getDepth()));
-			hMap.put("buseoNum",vo.getBuseoNum());
-			
-			vo.setReplyNum(insaDAO.replyNum(hMap));
-			System.out.println(vo.getReplyNum());
-			
-			hMap.put("replyNum", vo.getReplyNum());
-			insaDAO.updateReply(hMap);
-				
-		}
-		
-		List<BuseoDTO> parent = insaDAO.getGroup();
-		List<BuseoDTO> depths = insaDAO.getDepth();
-		
-		request.setAttribute("depths", depths);
-		request.setAttribute("parent", parent);
-		request.setAttribute("restDiv",n);
-		request.setAttribute("lists", lists);
-		request.setAttribute("LoginDTO", LoginDTO);
-		request.setAttribute("dto", dto);
-		
-		return "approval/approvalCreated";
+	         BuseoDTO vo = it.next();
+	            
+	         vo.setDepthGap(depth - vo.getDepth() + 1);
+	            
+	           depth = vo.getDepth();
+	         n++;
+	         hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
+	         hMap.put("depth", Integer.toString(vo.getDepth()));
+	         hMap.put("buseoNum",vo.getBuseoNum());
+	         
+	         vo.setReplyNum(insaDAO.replyNum(hMap));
+	         System.out.println(vo.getReplyNum());
+	         
+	         hMap.put("replyNum", vo.getReplyNum());
+	         insaDAO.updateReply(hMap);
+	            
+	      }
+	      
+	      List<BuseoDTO> parent = insaDAO.getGroup();
+	      List<BuseoDTO> depths = insaDAO.getDepth();
+	      
+	      request.setAttribute("depths", depths);
+	      request.setAttribute("parent", parent);
+	      request.setAttribute("restDiv",n);
+	      request.setAttribute("lists", lists);
+	      request.setAttribute("LoginDTO", LoginDTO);
+	      request.setAttribute("dto", dto);
+	      
+	      return "approval/approvalCreated";
 	}	
 
 	@RequestMapping(value="/approvalCreated_ok", method={RequestMethod.GET,RequestMethod.POST})
