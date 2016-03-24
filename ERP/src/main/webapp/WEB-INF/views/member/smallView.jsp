@@ -9,7 +9,17 @@
 <title>직 원 정 보</title>
 
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
+<script type="text/javascript">
 
+
+function sendChildValue(name,num){
+	opener.setChildValue(name,num);
+	window.close();
+}
+
+
+
+</script>
 
 </head>
 <body style="background-image: url('/erp/resources/image/backok.jpg'); height: 600px; width: 490px;">
@@ -71,11 +81,14 @@
 			<td class="search">근태</td>
 			<td class="underLine"> ${dto.dal}</td>
 		</tr>
+		
 	</table>
+	
+	
 </div>
-
-
-
+<c:if test="${checked=='note' }">
+<div style="margin-top: 10px; margin-left: 50%" class="buttonsq" onclick="sendChildValue(${dto.name},${dto.num })">선택</div>
+</c:if>
 
 
 </body>
