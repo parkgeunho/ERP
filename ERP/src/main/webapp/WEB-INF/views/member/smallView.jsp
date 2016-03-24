@@ -13,6 +13,7 @@
 
 
 function sendChildValue(name,num){
+	
 	opener.setChildValue(name,num);
 	window.close();
 }
@@ -87,7 +88,7 @@ function sendChildValue(name,num){
 	
 </div>
 <c:if test="${checked=='note' }">
-<div style="margin-top: 10px; margin-left: 50%" class="buttonsq" onclick="sendChildValue(${dto.name},${dto.num })">선택</div>
+<div style="margin-top: 10px; margin-left: 50%" class="buttonsq" onclick="sendChildValue(${dto.id},${dto.num });">선택</div>
 </c:if>
 
 
