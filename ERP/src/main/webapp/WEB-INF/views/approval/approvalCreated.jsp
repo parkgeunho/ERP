@@ -742,8 +742,8 @@
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
 <tr height="45"><td bgcolor="#8C8C8C" width="1"></td><td bgcolor="#EAEAEA">
-<font style="font-size: 16pt"> ${dto.approvalFormType} - ${dto.approvalFormName}</font>
-<input type="hidden" name="type" value="${dto.approvalFormType}">
+<font style="font-size: 16pt"> ${Adto.approvalFormType} - ${Adto.approvalFormName}</font>
+<input type="hidden" name="type" value="${Adto.approvalFormType}">
 </td>
 <td bgcolor="#8C8C8C" width="1"></td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
@@ -751,7 +751,7 @@
 <input type="button" value="결재선" class="approvalLineModal" style="width: 70px; height: 30px; font-size: 11pt; font-family: 고딕; " />
 </td></tr>
 <tr style="height:1px;" bgcolor="#8C8C8C"><td colspan="3"></td></tr> <!-- 라인 -->
-<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${dto.approvalFormName}</font></td></tr> 
+<tr height="70"><td colspan="3" align="center"><font style="font-size: 15pt; font-weight: bolder;">${Adto.approvalFormName}</font></td></tr> 
 </table>
 
 <table border="0" cellspacing="0" align="right"> 
@@ -809,7 +809,7 @@
                         
     <textarea name="contentArea" id="editor1" rows="10" cols="80">
     
-    	${dto.approvalFormContent}
+    	${Adto.approvalFormContent}
     
 	</textarea>        
                         

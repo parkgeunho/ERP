@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/note.css">
 </head>
 <script type="text/javascript">
+var winObject = null;
 function sendIt(){
 	
 	
@@ -39,6 +40,28 @@ function sendIt(){
 	
 }
 
+function searchPop(){
+	
+	
+	winObject = window.open("searchPop.action","","width=400px,height=580px");
+	submitTowindow();
+	
+	
+}
+
+function submitTowindow(){
+	
+	winObject.document.getElementById("checked").value = "note";
+	
+}
+
+function setChildValue(name,num){
+	
+	document.getElementById("dummy").value = name;
+	document.getElementById("reader").value = num;
+	
+}
+
 </script>
 <body>
 <form name="myForm">
@@ -46,8 +69,8 @@ function sendIt(){
 	<div style="height: 40px; line-height: 40px; width: 490px;">쪽지 쓰기</div>
 	<div style="border-bottom: 1px solid;border-top: 1px solid; height: 40px; line-height: 40px; width: 490px;">
 		<div style="float: left;">받는사람</div>
-		<div style="float: left;margin-top: 9px; margin-left: 15px; "><input type="text" size="49" name="reader"></div>
-		<div class="chk" align="center" style="float: left; margin-left: 10px;margin-top: 9px; ">주소록</div>
+		<div style="float: left;margin-top: 9px; margin-left: 15px; "><input type="text" size="49" name="dummy" id="dummy"></div>
+		<div class="chk" align="center" style="float: left; margin-left: 10px;margin-top: 9px; " onclick="searchPop()">주소록</div>
 	</div>
 	<div style="height: 300px;  padding-top: 20px;" >
 	<div><textarea name="content" rows="13" cols="58" style="overflow-y:auto; "></textarea></div>
@@ -58,7 +81,7 @@ function sendIt(){
 	
 	</div>
 	<input type="hidden" name="writer" value="${LoginDTO.num }">
-	
+	<input type="hidden" name="reader" id="reader">
 	</div>
 	
 	<div>

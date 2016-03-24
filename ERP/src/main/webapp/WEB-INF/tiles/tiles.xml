@@ -15,39 +15,34 @@
    <!-- ///////////////////////////일정 시작////////////////////////////////////////// -->    
 
     <definition name="scheTile" extends="temp">
-      <put-attribute name="main" value="scheduleMain" />
-   </definition>
-   
-   <definition name="scheduleMain" template="/WEB-INF/views/schedule/layoutMain2.jsp">
-      <put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp" />
-   </definition>
-   
-   <!-- <definition name="rightCalendar" extends="temp">
-      <put-attribute name="main" value="scheduleMain">
-         <definition extends="scheduleMain">
-            <put-attribute  name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp"/>
-         </definition>
-      </put-attribute>
-   </definition> -->
-   
-   <!-- <definition name="scheduleMain2" extends="temp">
-      <put-attribute name="main" value="scheduleMain">
-         <definition extends="scheduleMain">
-            <put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp"/>
-         </definition>
-      </put-attribute>
-   </definition>
-   
-   <definition name="leftCalendar" extends="temp">
-      <put-attribute name="main" value="scheduleMain">
-         <definition extends="scheduleMain">
-            <put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
-         </definition>
-      </put-attribute>
-   </definition> -->
-   
-   <!-- ///////////////////////////일정 끝////////////////////////////////////////// -->
-   
+		<put-attribute name="main" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
+	</definition>
+	
+	<!-- <definition name="rightCalendar" extends="temp">
+		<put-attribute name="main" value="scheduleMain">
+			<definition extends="scheduleMain">
+				<put-attribute  name="rightMain" value="/WEB-INF/views/schedule/scheduleRight2.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition> -->
+	
+	<!-- <definition name="scheduleMain2" extends="temp">
+		<put-attribute name="main" value="scheduleMain">
+			<definition extends="scheduleMain">
+				<put-attribute name="rightMain" value="/WEB-INF/views/schedule/scheduleMain.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition>
+	
+	<definition name="leftCalendar" extends="temp">
+		<put-attribute name="main" value="scheduleMain">
+			<definition extends="scheduleMain">
+				<put-attribute name="leftMain" value="/WEB-INF/views/schedule/scheduleLeft.jsp"/>
+			</definition>
+		</put-attribute>
+	</definition> -->
+	
+	<!-- ///////////////////////////일정 끝////////////////////////////////////////// -->
         <!-- 아래 name을 "/sample/egovSampleList"라고 정합니다.
                "/sample/egovSampleLIst"는 컨트롤러가 리턴하는 값입니다.
                컨트롤러에서 리턴할 때 맨앞에 "/"가 포함되어 있다는 점을 잊지 마세요. -->

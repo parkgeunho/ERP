@@ -410,7 +410,7 @@ public class BoardController {
 		  	
 		  MultipartFile file = request.getFile("file");
 		  
-		  System.out.println("이름확인:" + file.getName());
+		  System.out.println("이름확인:" + fdto.getOriginalFileName());
 		  
 		  if(file.getName().equals("") || file==null || file.getSize()==0){
 				

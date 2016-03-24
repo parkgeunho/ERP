@@ -1,45 +1,47 @@
 package com.exe.schedule;
 
 import java.util.Calendar;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.member.MemberDAO;
+import com.exe.member.MemberDTO;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 @Controller
 public class ScheduleController {
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
+	@Autowired
+	@Qualifier("memberDAO")
+	MemberDAO memberDAO;
 
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/schedule", method={RequestMethod.GET,RequestMethod.POST})
-	public String scheduleMain() {
+	public String scheduleMain(ScheduleDTO dto, HttpServletRequest request, HttpServletResponse response) {
 		
 		return "scheTile";
 	}
 
-	@RequestMapping(value = "/calendar", method={RequestMethod.GET,RequestMethod.POST})
-	public String calendar() {
-		
-		return "leftCalendar";
-	}
-
-	@RequestMapping(value = "/calendar2", method={RequestMethod.GET,RequestMethod.POST})
-	public String calendar2() {
-		
-		return "rightCalendar";
-	}
-
-	@RequestMapping(value = "/schedulemain2", method={RequestMethod.GET,RequestMethod.POST})
-	public String scheduleMain2() {
-		
-		return "scheduleMain2";
-	}
-
-	@RequestMapping(value = "/calChange", method={RequestMethod.GET,RequestMethod.POST})
-	public String calChange(HttpServletRequest request,HttpServletResponse response) {
+	@RequestMapping(value = "/leftCalChange", method={RequestMethod.GET,RequestMethod.POST})
+	public String leftCalChange(HttpServletRequest request,HttpServletResponse response) {
 		
 		Calendar cal = Calendar.getInstance();
 		
@@ -98,53 +100,128 @@ public class ScheduleController {
 		return "schedule/leftCal";
 	}
 
-	@RequestMapping(value = "/test", method={RequestMethod.GET,RequestMethod.POST})
-	public String test() {
+	@RequestMapping(value = "/rightCalChange", method={RequestMethod.GET,RequestMethod.POST})
+	public String rightCalChange(HttpServletRequest request , HttpServletResponse response) {
 		
-		return "schedule/scheduleRight2";
-	}
+		HttpSession session = request.getSession();
+		MemberDTO mdto = (MemberDTO)session.getAttribute("dto");
+		
+		String id = (String)mdto.getId();
+		
+		int count = dao.getDataCount(id);
+		
+		System.out.println("스케줄 갯수 :" + count);
+		
+		List<ScheduleDTO> scheduleList = null;
+		
+		if(count>0){
+			
+			scheduleList = dao.getList(id);
+			
+			ListIterator<ScheduleDTO> it = scheduleList.listIterator();
+			
+			ScheduleDTO vo = it.next();
+			
+			System.out.println(vo.getContent());
+			
+			JSONArray jsonArray = JSONArray.fromObject(scheduleList);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("scheduleList", jsonArray);
+			
+			JSONObject jsonObject = JSONObject.fromObject(map);
 
-	@RequestMapping(value = "/test2", method={RequestMethod.GET,RequestMethod.POST})
-	public String test2() {
+			request.setAttribute("jsonObject", jsonObject);
+			request.setAttribute("ScheduleList", scheduleList);
+		}
 		
-		return "schedule/test2";
+		if(count == 0){
+			
+			request.setAttribute("jsonObject", 0);
+		}
+		
+		return "schedule/rightCal";
 	}
 	
 	@RequestMapping(value = "/scheduleCreated", method={RequestMethod.GET,RequestMethod.POST})
 	public String scheduleCreated(HttpServletRequest request , HttpServletResponse response) throws Exception{
 		
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		
-		String stY, stM, stD, stH, stMin;
-		String endY, endM, endD, endH, endMin;
-		
-		StringTokenizer st = new StringTokenizer(start,".");
-		stY = st.nextToken();
-		stM = st.nextToken();
-		stD = st.nextToken();
-		stH = st.nextToken();
-		stMin = st.nextToken();
-		
-		st = new StringTokenizer(end,".");
-		endY = st.nextToken();
-		endM = st.nextToken();
-		endD = st.nextToken();
-		endH = st.nextToken();
-		endMin = st.nextToken();
-		
-		request.setAttribute("stY", stY);
-		request.setAttribute("stM", stM);
-		request.setAttribute("stD", stD);
-		request.setAttribute("stH", stH);
-		request.setAttribute("stMin", stMin);
-		request.setAttribute("endY", endY);
-		request.setAttribute("endM", endM);
-		request.setAttribute("endD", endD);
-		request.setAttribute("endH", endH);
-		request.setAttribute("endMin", endMin);
-		
 		return "schedule/scheduleCreated";
+	}
+	
+	@RequestMapping(value = "/scheduleUpdated", method={RequestMethod.GET,RequestMethod.POST})
+	public String scheduleUpdated(HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		String scheduleNum = request.getParameter("scheduleNum");
+		
+		ScheduleDTO dto = dao.getReadData(scheduleNum);
+		
+		String start = dto.getStartDate();
+		String end = dto.getEndDate();
+		
+		System.out.println(start);
+		System.out.println(end);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
+		
+		return "schedule/scheduleUpdated";
+	}
+	
+	@RequestMapping(value = "/scheduleUpdated_ok", method={RequestMethod.GET,RequestMethod.POST})
+	public String scheduleUpdated_ok(ScheduleDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		System.out.println("들어오니");
+		
+		String scheduleNum = request.getParameter("scheduleNum");
+		String title = request.getParameter("title");
+		String calendarSt = request.getParameter("calendarSt");
+		String stH = request.getParameter("stH");
+		String stMin = request.getParameter("stMin");
+		String calendarEnd = request.getParameter("calendarEnd");
+		String endH = request.getParameter("endH");
+		String endMin = request.getParameter("endMin");
+		String content = request.getParameter("content");
+		
+		dto.setScheduleNum(Integer.parseInt(scheduleNum));
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setStartDate(calendarSt +"-"+ stH +"-"+ stMin);
+		dto.setEndDate(calendarEnd +"-"+ endH +"-"+ endMin);
+		
+		dao.updateData(dto);
+		
+		return "redirect:/schedule";
+	}
+	
+	@RequestMapping(value = "/scheduleSave", method={RequestMethod.GET,RequestMethod.POST})
+	public String scheduleSave(ScheduleDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		HttpSession session = request.getSession();
+	    
+		MemberDTO mdto = (MemberDTO)session.getAttribute("dto");
+		String title = request.getParameter("title");
+		String calendarSt = request.getParameter("calendarSt");
+		String stH = request.getParameter("stH");
+		String stMin = request.getParameter("stMin");
+		String calendarEnd = request.getParameter("calendarEnd");
+		String endH = request.getParameter("endH");
+		String endMin = request.getParameter("endMin");
+		String content = request.getParameter("content");
+		
+		int maxNum = dao.getMaxNum();
+		
+		dto.setScheduleNum(maxNum+1);
+		dto.setId(mdto.getId());
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setStartDate(calendarSt +"-"+ stH +"-"+ stMin);
+		dto.setEndDate(calendarEnd +"-"+ endH +"-"+ endMin);
+		
+		dao.insertSchedule(dto);
+		
+		return "redirect:/schedule";
 	}
 }
 

@@ -23,31 +23,62 @@
 
 	$(document).ready(function() {
 		
-	    $('#calendar').fullCalendar({
+		var arr = '${jsonObject}';
+    	
+    	var obj = JSON.parse(arr);		// 문자열을 다시 배열로 변환
+    	
+    	/* alert(obj.scheduleList[0].created);  */
+    	
+    	var events_array = [];
 
+    	/* var arr = '${jsonObject}';
+    	
+    	alert(arr);
+    	
+    	var text = JSON.stringify(arr);		// 배열을 JSON 문자열로 변환
+    	
+    	alert(text);
+    	
+    	var obj = JSON.parse(text);		// 문자열을 다시 배열로 변환
+    	
+    	alert(obj);
+    	
+    	var events_array = []; */
+    	
+		for(var i=0; i<obj.scheduleList.length; i++){
+
+    		var schedule_object = {
+
+    			id : obj.scheduleList[i].scheduleNum,
+    			title : obj.scheduleList[i].title,
+    			start : obj.scheduleList[i].startDate,
+    			end : obj.scheduleList[i].endDate
+    		};
+
+    		events_array.push(schedule_object);
+    	}
+    	
+    	/* for(var i in obj.scheduleList){
+
+    		var schedule_object = {
+
+    			id : obj.scheduleList[i].id,
+    			title : obj.scheduleList[i].title,
+    			start : obj.scheduleList[i].startDate,
+    			end : obj.scheduleList[i].endDate
+    		};
+
+    		events_array.push(schedule_object);
+    	} */
+		
+	    $('#calendar').fullCalendar({
+	
 	    	schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
 	    	
-	        events: [
-	            // events go here
-	        ],
-	        resources: [
-	            // resources go here
-	        ],
-	        // other options go here...
-	    	
-	    	/* dayClick: function() {
-		        alert('a day has been clicked!');
-		    }, */
-		    
-		    /* customButtons: {
-		        myCustomButton: {
-		            text: 'custom!',
-		            click: function() {
-		                alert('clicked the custom button!');
-		            }
-		        }
-		    }, */
-
+	        events: events_array,
+		         
+			eventColor: '#378006',
+	
 		    header: {
 		        left: 'prev,next,prevYear,nextYear today ',
 		        center: 'title',
@@ -62,6 +93,7 @@
 		    },
 		    
 		    eventLimit: true,
+		    
 		    views: {
 		        agenda: {
 		            eventLimit: 6
@@ -79,19 +111,10 @@
 		    slotEventOverlap: true,
 		    
 		    nowIndicator: true,
-		    
-		    events: [
-		             {
-		                 title:  '어린이날',
-		                 start:  '2016-05-05',
-		                 color: '#4374D9',
-		             }
-		             // other events here...
-		         ],
-		         
-		         eventColor: '#378006',
 		         
 			timeFormat: 'HH:mm',
+			
+			/* timeFormat: 'YYYY-MM-DD-HH-mm', */
 			
 			displayEventTime: true,
 			
@@ -105,24 +128,34 @@
 			
 			select: function(start, end, allDay) {
 				
-				var dt_start = moment(start).format('YYYY.MM.DD.HH.mm');
-				var dt_end = moment(end).format('YYYY.MM.DD.HH.mm');
+				var dt_start = moment(start).format('YYYY-MM-DD-HH-mm');
+				var dt_end = moment(end).format('YYYY-MM-DD-HH-mm');
 				
-				window.open('./scheduleCreated?start='+dt_start+'&end='+dt_end, 'window', 'width=1100, height=1080,scroll=yes');
-			}
+				window.open('./scheduleCreated?start='+dt_start+'&end='+dt_end, 'window', 'width=1100, height=900,scroll=yes');
+			},
+			
+			eventClick: function(event) {
+				
+				/* var dt_start = moment(event.start).format('YYYY-MM-DD-HH-mm');
+				var dt_end = moment(event.end).format('YYYY-MM-DD-HH-mm'); */
+				
+				window.open('./scheduleUpdated?scheduleNum='+event.id, 'window', 'width=1100, height=900,scroll=yes');
+		    },
+		    
+		    droppable: true,
+			
+			handleWindowResize: true,
+			
+			eventStartEditable: true,
+			
+			eventDurationEditable: true
 	    });
 	});
 
 </script>
 
 </head>
-<body >
 
-<br/><br/>
+	<div id='calendar'><br></div>
 
-<div id='calendar'></div>
-
-<br/><br/>
-
-</body>
 </html>

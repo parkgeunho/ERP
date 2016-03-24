@@ -12,11 +12,10 @@
 
 
 <script type="text/javascript">
-
+/* var winob = null; */
 	function search(){
 		
 		var f = document.myForm;
-		
 		
 		f.action = "<%=cp%>/searchPop.action";
 		
@@ -24,15 +23,27 @@
 		
 	}
 	
-	function article(id){
+
+	function article(num){
+
+	
+
+		var checked = document.getElementById("checked").value;
 		
-		
-		window.open("search_ok.action?id="+id,"","width=500px,height=600px");
-		
+	winob = window.open("search_ok.action?num="+num+"&checked="+checked,"","width=500px,height=600px");
+
+	
 		
 		
 		
 	}
+	
+	/* function setChildValue(name,num){
+		opener.setChildValue(name,num);
+		window.close();
+	}
+	 */
+
 	
 
 
@@ -55,7 +66,7 @@
 		<tr><td height="1" width="100%" style="background-color: #cccccc;"></td></tr>
 		
 	</table>
-
+	<%-- <input type="hidden" name="checked" id="checked" value="${checked }"> --%>
 </div>
 
 	<div style="margin-top: 15px;">
@@ -94,7 +105,7 @@
 		<c:forEach items="${lists}" var="dto">
 		<tr >
 			<td align="center" width="50%">${dto.usernum}</td>
-			<td align="center"><a href="javascript:article(${dto.id });">${dto.name}</a></td>
+			<td align="center"><a href="javascript:article(${dto.num });">${dto.name}</a></td>
 			<td align="center">${dto.grade}</td>
 		</tr>
 		</c:forEach>
