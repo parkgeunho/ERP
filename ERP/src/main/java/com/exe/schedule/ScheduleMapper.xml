@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"      
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ScheduleMapper">
+
+   <select id="maxNum" resultType="int">
+      select nvl(max(scheduleNum),0) from schedule
+   </select>
+
+   <insert id="insertData" parameterType="com.exe.schedule.ScheduleDTO">
+      insert into schedule (scheduleNum,id,title,content,created,startDate,endDate) 
+      values (#{scheduleNum},#{id},#{title},#{content},sysdate,#{startDate},#{endDate})
+   </insert>
+   
+   <select id="getDataCount" parameterType="string" resultType="int">
+      select nvl(count(*),0) from schedule where id=#{id}
+   </select>
+   
+   <select id="getLists" parameterType="string" resultType="com.exe.schedule.ScheduleDTO">
+      select * from (
+      select rownum rnum, data.* from (
+      select scheduleNum,id,title,to_char(created,'YYYY-MM-DD') created,startDate,endDate
+      from schedule where id=#{id}) data)
+   </select>
+   
+   <select id="getReadData" parameterType="string" resultType="com.exe.schedule.ScheduleDTO">
+      select scheduleNum,id,title,content,to_char(created,'YYYY-MM-DD') created,startDate,endDate 
+      from schedule where scheduleNum=#{scheduleNum}
+   </select>
+   
+   <update id="updateData" parameterType="com.exe.schedule.ScheduleDTO">
+      update schedule set title=#{title},content=#{content},startDate=#{startDate},endDate=#{endDate}
+      where scheduleNum=#{scheduleNum}
+   </update>
+   
+   <delete id="deleteData" parameterType="int">
+      delete schedule where scheduleNum=#{scheduleNum}
+   </delete>
+   
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
