@@ -42,7 +42,7 @@
 			$.ajax({
 				
 				type : "POST",
-				url  : "calChange",
+				url  : "leftCalChange",
 				data : params,
 				success : function(args){
 					$("#leftCal").html(args);
