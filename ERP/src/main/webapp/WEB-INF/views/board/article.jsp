@@ -18,77 +18,116 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 
 
+<script type="text/javascript">
+
+	function deleted(){
+		
+		var url ="<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }";
+		
+		var del = confirm("정말 삭제 하시겠습니까?");
+		
+		if(del==true){
+			location.href = url;
+		}else{
+			
+			return;
+		}
+		
+		
+	}
+
+
+
+</script>
+
+
 </head>
 <body>
 
 
 
+<form action="" name="myForm">
+		<div>
+			<table border="0" cellpadding="0" cellspacing="1" align="center">
+				<tr style="height: 80px; background: #EEEEEE">
 
-<table border="0" cellpadding="0" cellspacing="1" align="center" >
-	<tr style="height: 80px; background: #EEEEEE">
 
-		
-		<td colspan="3" style="width: 1572px; font-size: 20px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
-			font-style: 나눔고딕코딩;font-weight: bolder;" align="center" >
-			${listDTO.boardName }	
-
-		</td>	
-	</tr>
-	<tr style="height: 40px;">
-		<td style="width: 1572px;" align="right">			
-			<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
+					<td colspan="3"
+						style="width: 1572px; font-size: 20px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0; font-style: 나눔고딕코딩; font-weight: bolder;"
+						align="center">${listDTO.boardName }</td>
+				</tr>
+				<tr style="height: 40px;">
+					<td style="width: 1572px;" align="right">
+						<%-- <input type="button" value="리스트" class="btn2" style="background: #00D8FF; color: white;" 
 				onclick="javasctipt:location.href='<%=cp%>/board/list.action';"> --%>
-				
-			<input type="button" value="수정" class="btn2" style="background: #E0E0E0"
-				onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">	
-			
-			<input type="button" value="삭제" class="btn2" style="background: #E0E0E0"
-				onclick="javascript:location.href='<%=cp%>/board/delete.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">
-		
-		</td>
-	</tr>
-	
-</table>
+
+						<input type="button" value="수정" class="btn2"
+						style="background: #E0E0E0"
+						onclick="javascript:location.href='<%=cp%>/board/update.action?boardNum=${dto.boardNum}&pageNum=${pageNum}&listNum=${listNum }';">
+
+						<input type="button" value="삭제" class="btn2"
+						style="background: #E0E0E0" onclick="deleted();">
+
+					</td>
+				</tr>
+
+			</table>
 
 
-<table border="0" cellpadding="0" cellspacing="0">
-	<tr style="height: 30px; background: #E4F7BA" >
-		<td style="width: 200px;  font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
-			font-style: 나눔고딕코딩;font-weight: bolder;" align="center" >제목</td>
-		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>	
-	</tr>
-	
-	<tr style="height: 30px;" >
-		<td style="width: 200px;  font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
-			font-style: 나눔고딕코딩;font-weight: bolder; background: #EEEEEE" align="center">작성자</td>
-		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
-	</tr>	
-	
-	<tr style="height: 30px">
-		<td style="width: 200px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;
-			font-style: 나눔고딕코딩;font-weight: bolder; background: #EEEEEE" align="center">첨부파일</td>
-		<td style="width: 1372px; font-size: 15px; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;" title="다운받기">&nbsp;&nbsp;${fdto.originalFileName}
-		&nbsp;&nbsp;&nbsp;&nbsp; <a href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
-			<img style="width: 16px;" alt="" src="/erp/resources/boardimage/down003.png"></a></td>		
-	</tr>	
-	
-	<tr style="height: 1px; background: #E7E7E7">
-		<td style="width: 1572px;" colspan="3"></td>
-	</tr>
-	
-</table>
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr style="height: 30px; background: #E4F7BA">
+					<td
+						style="width: 200px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0; font-style: 나눔고딕코딩; font-weight: bolder;"
+						align="center">제목</td>
+					<td
+						style="width: 1372px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}</td>
+				</tr>
 
-<table  border="0" align="center">
-	<tr style="height: 400px;">
-		<td style="width: 1572px;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
-	</tr>
-	<tr style="height: 1px; background: #E7E7E7">
-		<td style="width: 1572px;"></td>
-	</tr>
-</table>
+				<tr style="height: 30px;">
+					<td
+						style="width: 200px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0; font-style: 나눔고딕코딩; font-weight: bolder; background: #EEEEEE"
+						align="center">작성자</td>
+					<td
+						style="width: 1372px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;&nbsp;&nbsp;${dto.name}</td>
+				</tr>
+
+				<tr style="height: 30px">
+					<td
+						style="width: 200px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0; font-style: 나눔고딕코딩; font-weight: bolder; background: #EEEEEE"
+						align="center">첨부파일</td>
+					<td
+						style="width: 1372px; font-size: 15px; border-color: #E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 0;">&nbsp;&nbsp;${fdto.originalFileName}
+
+						<c:if test="${fdto.boardNum!=null}">
+							<a
+								href="javascript:location.href='<%=cp%>/download.action?boardNum=${dto.boardNum}&listNum=${listNum }';">
+								<img style="width: 16px;" alt=""
+								src="/erp/resources/boardimage/down003.png">
+							</a>
+						</c:if>
+					</td>
+
+				</tr>
 
 
-<!-- 댓글 -->
+
+				<tr style="height: 1px; background: #E7E7E7">
+					<td style="width: 1572px;" colspan="3"></td>
+				</tr>
+
+			</table>
+
+			<div style="overflow-y: scroll; height: 580px;">
+				<table border="0" align="center">
+					<tr style="height: 580px;">
+						<td style="width: 1572px; height: 500px;"
+							valign="top">&nbsp;&nbsp;&nbsp;&nbsp;${dto.content}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<!-- 댓글 -->
 <!-- <table border="0" align="center" cellpadding="0" cellspacing="0" >
 	<tr style="height: 60px; background: #E1E1E1">
 		<td style="width: 70px;" align="center">
@@ -162,7 +201,7 @@
 
 
 
-
+</form>
 
 </body>
 </html>

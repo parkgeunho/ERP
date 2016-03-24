@@ -40,8 +40,11 @@
 		
 		
 		
+		
 		f.action = "<%=cp%>/smallUpdated_ok.action";
 		f.submit();
+		
+		alert("수정완료!");
 		
 		window.opener.location.reload();
 		window.close();

@@ -31,7 +31,7 @@
 		border-bottom: 0px solid; border-color:#E0E0E0; border-width: 1px; border-style: solid; border-bottom-width: 1; font-style: 나눔고딕코딩;" 
 		cellpadding="0" cellspacing="0" >
 		<tr height="25px;" style="background: #EAEAEA; font-weight: bold;">
-			<td width="100px;" align="center">보낸사람</td> <td width="360px;" align="center">내용</td> <td width="100px;" align="center">보낸 날짜</td>
+			<td width="100px;" align="center">보낸사람</td> <td width="330px;" align="center">내용</td> <td width="130px;" align="center">보낸 날짜</td>
 		</tr>
 		<tr style="height: 1px;">
 			<td style="width: 560px; background: #E0E0E0" colspan="3"></td>
@@ -142,15 +142,15 @@
 	
 		
 		<tr height="25px;" >
-			<td char="3">페이징처리</td>
-			<td>
+			
+			<td colspan="3" align="center">
 		<p>	
 			<c:if test="${dataCount!=0 }">
 				${pageIndexList}			
 			</c:if>
 			
 			<c:if test="${dataCount==0 }">
-						등록된 게시물이 없습니다.
+						쪽지가 없습니다.
 			</c:if>
 		</p>	
 			</td>

@@ -2,7 +2,9 @@ package com.exe.board;
 
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 
@@ -14,7 +16,8 @@ import java.util.Calendar;
 import java.util.Collections;
 
 import java.util.List;
-import java.util.Map;
+import java.util.ListIterator;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -225,6 +228,8 @@ public class BoardController {
 	 @RequestMapping(value="/board/list.action",method={RequestMethod.GET,RequestMethod.POST})
 	   public String list(HttpServletRequest request, HttpServletResponse response) throws Exception{
 	      
+		  
+		 
 	      String cp = request.getContextPath();
 	      
 	      String pageNum = request.getParameter("pageNum");
@@ -279,6 +284,7 @@ public class BoardController {
 	      if(!param.equals(""))
 	         articleUrl = articleUrl + "&" + param;
 	      
+	     
 	      request.setAttribute("lists", lists);
 	      request.setAttribute("pageIndexList", pageIndexList);
 	      request.setAttribute("dataCount", dataCount);
@@ -412,8 +418,10 @@ public class BoardController {
 		/*  String pageNum = request.getParameter("pageNum");*/
 		  
 			  
-		  
-		  //fdao.deletedata(boardNum);
+
+		  dao.deleteFileData(boardNum);
+	  
+
 		  dao.deleteData(boardNum);
 		  
 		  
@@ -541,37 +549,9 @@ public class BoardController {
 			 
 			  if(!buseoCheck && !memberCheck){
 				  return "read-error";
-				
-				 /* try {
->>>>>>> refs/remotes/origin/master
-			            
-			            PrintWriter writer = response.getWriter();
 
-			            writer.println("<script type='text/javascript'>");
-
-<<<<<<< HEAD
-			            writer.println("alert('읽기권한이없습니다.');");
 			            
-=======
-			            writer.println("alert('권한없단다~');");
 
-			            writer.println("history.go()");
-
->>>>>>> refs/remotes/origin/master
-			            writer.println("</script>");
-
-			            writer.flush();
-			            
-			            
-			            
-			         } catch (Exception e) {
-			         
-			         }*/
-				  
-				  
-				  
-				  
-				  
 			  }
 
 			  
@@ -616,6 +596,7 @@ public class BoardController {
 		      
 		      List<BoardDTO> lists = dao.getListTest(start, end, searchKey, searchValue, listNum);
 		      
+
 		      
 		      String param = "";
 		      
@@ -637,6 +618,37 @@ public class BoardController {
 		      if(!param.equals(""))
 		         articleUrl = articleUrl + "&" + param;
 		      
+		      
+		      List<BoardFileDTO> fileList = new ArrayList<BoardFileDTO>();
+		      ListIterator<BoardDTO> it = lists.listIterator();
+		      
+		      int num1 =0;
+		      
+		      System.out.println("바보:");
+		      while(it.hasNext()){
+		    	  
+		    	  BoardDTO vo = it.next();
+		    	  
+		    	  num1 = vo.getBoardNum();
+		    	  
+		    	  System.out.println("들어오는 숫자 확인: " + num1);
+		    	  
+		    	  BoardFileDTO fdto = boardfileDAO.selectData(num1);
+		    	 
+		    	  fileList.add(fdto);
+		    	  
+		      }
+		      
+		      
+		      
+		      
+		      request.setAttribute("fileList", fileList);
+		      
+		      
+		      
+		      
+		      
+		      
 		      request.setAttribute("listNum", listNum);
 
 		      request.setAttribute("LDTO", lDTO);
@@ -656,28 +668,79 @@ public class BoardController {
 	  }
 	  
 	  @RequestMapping(value = "/download.action", method = {RequestMethod.GET,RequestMethod.POST})
-		public String download(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		public void download(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		  
 		
 		  
 		 int boardNum= Integer.parseInt(request.getParameter("boardNum"));
-		 int listNum= Integer.parseInt(request.getParameter("listNum"));
 		 
 		
 		 
 		 
 		 BoardFileDTO fdto = boardfileDAO.selectData(boardNum);
 		 
+		 String originalFileName = fdto.getOriginalFileName();
+		 String saveFileName = fdto.getSaveFileName();
 		 
+		 try {
+			
+		
+		 
+		
+		 // MIME Type 을 application/octet-stream 타입으로 변경
+	     // 무조건 팝업(다운로드창)이 뜨게 된다.
+		 response.setContentType("application/octet-stream");
+		 
+		 // 브라우저는 ISO-8859-1을 인식하기 때문에
+	     // UTF-8 -> ISO-8859-1로 디코딩, 인코딩 한다(한글이름의 파일을 다운받을때 파일 이름을 깨지지 않게하기 위해서
+		 originalFileName = new String(originalFileName.getBytes("euc-kr"), "iso-8859-1");
+		 
+		 String path = request.getSession().getServletContext().getRealPath("/resources/boardFile");
+		 String pathOk= path + File.separator + saveFileName;
+		 
+		 
+		 File f = new File(pathOk);
+			
+			if(!f.exists())
+				return;
+		 
+		 
+		 
+		 //파일명 지정
+		 response.setHeader("Content-Disposition", "attachment; filename=\""+ originalFileName+"\"");
+			
+		 OutputStream os = response.getOutputStream();
+		 // String path = servletContext.getRealPath("/resources/boardFile"); 경로설정
+	     // server에 clean을 하면 resources 경로의 것이 다 지워지기 때문에
+	     // 다른 경로로 잡는다(실제 서버에서는 위의 방식으로)
 		  
-		  
-		  
-		  return "redirect:/board/article.action?boardNum="+boardNum+"&listNum="+listNum;
-	  }
-		  
-		  
-	  
-	  
+		 
+		 
+		 
+		 
+		 FileInputStream fis = new FileInputStream(pathOk);
+		 
+		 if(fis!=null ){
+		 
+		 int n = 0;
+		 byte[] b = new byte[4096];
+		 while((n = fis.read(b)) != -1){
+			 
+			 os.write(b,0,n);
+			 
+		 }
+		 fis.close();
+		 os.close();
+		 }
+		 
+		 
+		} catch (Exception e) {
+			System.out.println(e);
+			return;
+		}
+
+
+	}
 	  
 	  
 
