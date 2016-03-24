@@ -59,9 +59,9 @@ function openlist(){
 
 
 <div style="height: 90px; background-color: #dddddd; border: 1px solid;">
-<table width="90%" height="100%" border="1" align="center">
+<table width="95%" height="100%" border="0" align="center">
 	<tr>
-		
+		<td align="left"><img src="/erp/resources/image/company.png" width="400"></td>
 	</tr>
 </table>
 </div>
