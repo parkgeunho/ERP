@@ -11,12 +11,12 @@
 <link rel="stylesheet" type="text/css" href="/erp/resources/ManagementView.css">
 <script type="text/javascript">
 
-
+/* 
 function sendChildValue(name,num){
 	
 	opener.setChildValue(name,num);
 	window.close();
-}
+} */
 
 
 
@@ -87,9 +87,7 @@ function sendChildValue(name,num){
 	
 	
 </div>
-<c:if test="${checked=='note' }">
-<div style="margin-top: 10px; margin-left: 50%" class="buttonsq" onclick="sendChildValue(${dto.id},${dto.num });">선택</div>
-</c:if>
+
 
 
 </body>

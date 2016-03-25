@@ -9,6 +9,7 @@ PUBLIC "-/mybatis.org//DTD Confing 3.0//EN"
 
 	<properties>
 
+
 		<property name="driver" value="oracle.jdbc.driver.OracleDrvier"/>
 		<property name="url" value="jdbc:oracle:thin:@14.32.170.30:1521:TestDB"/>
 		<property name="username" value="SUZI"/>

@@ -88,11 +88,17 @@ function notices(boardNum) {
 	open ("board/article.action?listNum=1&boardNum="+boardNum,"Mail","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, width=1200, height=800"); 
 }
 
+function openArticle(noteNum){
+	
+	window.open("note/article?noteNum="+noteNum,"","width=520px,height=450px;")
+	
+}
+
 </script>
 </head>
 <body style="width: 100%">
 
-<div style="width:100%; height: 807px;">
+<div style="width:100%; height: 807px; background-image: url('/erp/resources/image/white.jpg');">
 
 
 <!-- 왼쪽 첫번재 div -->
@@ -104,7 +110,7 @@ function notices(boardNum) {
 			<div id="ex" class="sub">
 				<c:forEach var="note" items="${NoteList }">
 				<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
-				${note.content }
+				<a href="javascript:openArticle(${note.noteNum })">${note.content }</a>
 				</div>
 				
 				</c:forEach>
