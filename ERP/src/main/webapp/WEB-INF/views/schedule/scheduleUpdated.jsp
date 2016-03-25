@@ -72,6 +72,10 @@
 	}
 	
 	function deleteSche(){
+	    
+	    if (!confirm("정말 일정을 삭제하시겠습니까?")) {
+            return;
+        }
 		
 		var f = document.myform;
 		

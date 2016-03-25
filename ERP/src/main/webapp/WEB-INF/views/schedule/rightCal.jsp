@@ -136,10 +136,6 @@
 		    },
 		    
 		    eventDrop: function(event, start) {
-
-		        if (!confirm("정말 날짜(시간)를 변경하시겠습니까?")) {
-		            revertFunc();
-		        }
 				
 				$.ajax({
 					url:'scheduleDrop',
