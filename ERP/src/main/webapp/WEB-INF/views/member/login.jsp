@@ -56,7 +56,7 @@ function login(){
 
  	<table border="0" width="1000" height="200" align="center" style="margin-top: 150px;">
 		<tr>
-			<td align="center" style="vertical-align: bottom;">이미지들어갈부분</td>
+			<td align="center" style="vertical-align: bottom;"><img alt="" src="/erp/resources/image/Login.png" height="150"> </td>
 		</tr>
 	</table>
 	
@@ -96,13 +96,13 @@ function login(){
 
 <tr height="30">
 	<td colspan="2" align="left">
-	&nbsp;<font style="font-family: 고딕; font-size: 13pt; font-weight: bold;">※아이디 또는 비밀번호 분실시 관리자에게 간식을 가져다주세요.</font>
+	&nbsp;<font style="font-family: 고딕; font-size: 13pt; font-weight: bold; color: orange;">※아이디 또는 비밀번호 분실시 관리자에게 간식을 가져다주세요.</font>
 	</td>
 </tr>	
 <tr height="5"><td colspan="2" bgcolor="#ffffff"></td></tr>
 <tr>
 <td colspan="2" align="center">	
-	
+	<img alt="" src="/erp/resources/image/LoginG.jpg">
 </td>
 </tr>
 
