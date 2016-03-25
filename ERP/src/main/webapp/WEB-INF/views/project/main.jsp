@@ -236,29 +236,28 @@ function openArticle(noteNum){
 			<div id="Calendar" class="ma">일정</div>
 			<div class="sub" id="non" >
 					<div style="padding-top :10px; float:left; width: 40%;">
-					<span id="leftCal" style="width: 270px; display: none;"></span></div>
-					<div style="padding-top:10px; float:left;">
-					<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 100%; font-style: 나눔고딕코딩; font-size: 13pt;">
-							<tr style="height: 28px;">
-								<td style="width: 130px;" align="center">Title</td>
-								<td style="width: 100px;" align="center">Start Date</td>
-								<td style="width: 100px;" align="center">Due Date</td></tr>
-					
-					<c:forEach var="dto" items="${scheduleListMain }" begin="1" end="5" step="1">
-					
-							<tr style="height: 28px;">
-								<td style="border-right:1px solid #CCCCCC; width: 130px;" align="center">
-								<font size="2px">
-								${dto.title }</font></td>
-								<td style="border-right:1px solid #CCCCCC; width: 100px;" align="center">
-								<font size="2px">
-								${dto.startDate }</br>${dto.startTime }</font></td>
-								<td style="width: 100px;" align="center">
-								<font size="2px">
-								${dto.endDate }</br>${dto.endTime }</font></td></tr>
-					</c:forEach>
-					</table>
-					
+						<span id="leftCal" style="width: 270px; display: none;"></span></div>
+					<div style="padding-top:15px; float:left;">
+						<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 93%; font-style: 나눔고딕코딩; font-size: 13pt;">
+								<tr style="background-color:#CCCCCC; height: 28px;">
+									<td style="border-left:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 130px;" align="center">Title</td>
+									<td style="border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">Start Date</td>
+									<td style="border-right:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">Due Date</td></tr>
+						
+						<c:forEach var="dto" items="${scheduleListMain }" begin="0" end="5" step="1">
+						
+								<tr style="height: 28px;">
+									<td style="border-left:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; border-right:1px solid #CCCCCC; width: 130px;" align="center">
+									<font size="2px">
+									${dto.title }</font></td>
+									<td style="border-bottom:1px solid #CCCCCC; border-right:1px solid #CCCCCC; width: 100px;" align="center">
+									<font size="2px">
+									${dto.startDate }</br>${dto.startTime }</font></td>
+									<td style="border-right:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">
+									<font size="2px">
+									${dto.endDate }</br>${dto.endTime }</font></td></tr>
+						</c:forEach>
+						</table>
 					</div>
 			</div>
 		</div>
