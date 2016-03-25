@@ -29,13 +29,14 @@ function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_hei
 		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", 0);", banner_delay);
 	}
 
+	
+	
 	return true;
 }
 
 
 </script>
-
-
+	
 
 
 <script type="text/javascript">
@@ -78,10 +79,15 @@ $(document).ready(function(){
     	
         $("#do1").slideToggle("slow");
     });
-               
+             
     
 	 
 });
+
+
+function winOpen(approvalNum){
+	window.open('http://192.168.16.167:8080/erp/approvalArticle?approvalNum='+approvalNum,'', 'width=1000, height=1000, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
+}
 
 function notices(boardNum) { 
 	
@@ -122,7 +128,13 @@ function openArticle(noteNum){
 	<div style="margin-top: 40px;" class="line">
 			<div id="check" class="ma">결재함</div>
 			<div id="dod" class="sub">
-				아무것도없음
+				<c:forEach var="dto" items="${approvalList}">
+					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
+			
+					<a href="javascript:winOpen('${dto.approvalNum}')" style="text-decoration: none; color: black;">
+						${dto.subject }</a>
+					</div> 
+				</c:forEach>
 			</div>	
 	</div>	
 	
@@ -138,8 +150,7 @@ function openArticle(noteNum){
 					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
 					
 					<a href="#" onclick="notices(${notice.boardNum })" class="hyperLine" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
-						${notice.subject }
-					</a>
+							${notice.subject }</a>
 					</div>
 				</c:forEach>
 			</div>

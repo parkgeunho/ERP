@@ -23,6 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.approval.ApprovalDAO;
+import com.exe.approval.ApprovalDTO;
 import com.exe.board.BoardDAO;
 import com.exe.board.BoardDTO;
 import com.exe.board.MyUtil;
@@ -44,6 +46,10 @@ public class HomeController {
 	
 	@Autowired
 	MyUtil myUtil;
+	
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
 	
 	@Autowired
 	@Qualifier("memberDAO")
@@ -70,7 +76,8 @@ public class HomeController {
 		request.setAttribute("LoginimagePath",LoginimagePath);
 		//상단바 개인 사진을 불러오기 위한 값
 		
-		
+		//상단바 결재할 문서값 불러오기
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
 		
 		BuseoDTO bdto = insaDAO.readBuseo(Integer.parseInt(LoginDTO.getDepth1()));
 		String buseo = bdto.getBuseoName();
@@ -170,6 +177,12 @@ public class HomeController {
 			
 		}
 		
+		
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalNextIngList(LoginDTO.getId());
+		
+		request.setAttribute("approvalList", approvalList);
+		request.setAttribute("approvalCount", approvalCount);
 		request.setAttribute("nextBirth", nextBirth);
 		request.setAttribute("nowBirth", nowBirth);
 		
