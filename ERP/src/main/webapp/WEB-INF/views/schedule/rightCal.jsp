@@ -157,6 +157,12 @@
 			eventStartEditable: true,
 			
 			eventDurationEditable: true,
+		    
+			eventMouseover: function(event) {
+				
+				/* window.showModalDialog('Title : ' + event.title + 'Start Date : ' + event.start.format('YYYY-MM-DD:HH:mm')
+						+ 'End Date : ' + event.end.format('YYYY-MM-DD:HH:mm')); */
+		    },
 			
 			eventResize: function(event) {
 				
@@ -170,7 +176,6 @@
                     }
 	   			});
 		    }
-
 	    });
 	});
 

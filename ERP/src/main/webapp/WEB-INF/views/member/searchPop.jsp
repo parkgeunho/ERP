@@ -25,16 +25,8 @@
 	
 
 	function article(num){
-
-	
-
-		var checked = document.getElementById("checked").value;
 		
-	winob = window.open("search_ok.action?num="+num+"&checked="+checked,"","width=500px,height=600px");
-
-	
-		
-		
+		winob = window.open("search_ok.action?num="+num ,"width=500px,height=600px");
 		
 	}
 	
