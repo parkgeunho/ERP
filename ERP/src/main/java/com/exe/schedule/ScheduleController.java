@@ -384,6 +384,42 @@ public class ScheduleController {
 		
 		return "schedule/agendaDayCal";
 	}
+	
+	@RequestMapping(value = "/scheduleResize", method={RequestMethod.GET,RequestMethod.POST})
+	public void scheduleResize(ScheduleDTO dto, HttpServletRequest request , HttpServletResponse response) throws Exception{
+		
+		String scheduleNum = request.getParameter("scheduleNum");
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
+		
+		System.out.println(scheduleNum);
+		System.out.println(start);
+		System.out.println(end);
+		
+		String startDate, stH, stMin;
+		String endDate, endH, endMin;
+		
+		StringTokenizer st = new StringTokenizer(start,":");
+		startDate = st.nextToken();
+		stH = st.nextToken();
+		stMin = st.nextToken();
+		
+		st = new StringTokenizer(end,":");
+		endDate = st.nextToken();
+		endH = st.nextToken();
+		endMin = st.nextToken();
+		
+		String startTime = stH +":"+ stMin;
+		String endTime = endH +":"+ endMin;
+		
+		dto.setScheduleNum(Integer.parseInt(scheduleNum));
+		dto.setStartDate(startDate);
+		dto.setEndDate(endDate);
+		dto.setStartTime(startTime);
+		dto.setEndTime(endTime);
+		
+		dao.dropData(dto);
+	}
 }
 
 	

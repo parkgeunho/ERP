@@ -135,7 +135,7 @@
 				window.open('./scheduleUpdated?scheduleNum='+event.id, 'window', 'width=1100, height=900,scroll=yes');
 		    },
 		    
-		    eventDrop: function(event, start) {
+		    eventDrop: function(event) {
 				
 				$.ajax({
 					url:'scheduleDrop',
@@ -156,7 +156,21 @@
 			
 			eventStartEditable: true,
 			
-			eventDurationEditable: true
+			eventDurationEditable: true,
+			
+			eventResize: function(event) {
+				
+				$.ajax({
+					url:'scheduleResize',
+					data:{scheduleNum:event.id, start:event.start.format('YYYY-MM-DD:HH:mm'),
+						end:event.end.format('YYYY-MM-DD:HH:mm')},
+					type:'POST',
+                    success: function(args){
+						
+                    }
+	   			});
+		    }
+
 	    });
 	});
 
