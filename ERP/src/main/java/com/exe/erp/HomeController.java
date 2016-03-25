@@ -1,5 +1,6 @@
 package com.exe.erp;
 
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.ParseException;
@@ -56,18 +57,18 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) throws ParseException {
 		
+		
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
-		int readCount = NoteDAO.ReadCount(LoginDTO.getName());
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
 
 		request.setAttribute("readCount", readCount);
 		request.setAttribute("LoginDTO", LoginDTO);
 		//상단바 개인 사진을 불러오기 위한 값
-		String imagePath = request.getContextPath() + "/resources/memberImage";
-		request.setAttribute("imagePath",imagePath);
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
 		//상단바 개인 사진을 불러오기 위한 값
-		
 		
 		
 		
@@ -111,7 +112,7 @@ public class HomeController {
 		//공지사항 에 필요한 값
 		
 		//안읽은쪽지
-		List<NoteDTO> NoteList = NoteDAO.readList(LoginDTO.getName());
+		List<NoteDTO> NoteList = NoteDAO.readList(Integer.toString(LoginDTO.getNum()));
 		request.setAttribute("NoteList", NoteList);
 		//안읽은쪽지
 		
@@ -184,7 +185,16 @@ public class HomeController {
 		
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
-		
+		String noteNum = request.getParameter("noteNum");
+		System.out.println("????"+noteNum);
+		if(null!=noteNum){
+			NoteDTO noteDTO = NoteDAO.ReadOne(Integer.parseInt(noteNum));
+			int reader = Integer.parseInt(noteDTO.getWriter());
+			MemberDTO memberDTO = Memberdao.readOne(reader);
+			String dummy = memberDTO.getName();
+			request.setAttribute("reader", Integer.toString(reader));
+			request.setAttribute("dummy", dummy);
+		}
 		
 		request.setAttribute("LoginDTO", LoginDTO);
 		return "note/write";
@@ -200,6 +210,31 @@ public class HomeController {
 		System.out.println("숫자" + dto.getNoteNum());
 		System.out.println("내용확인" + dto.getContent());
 		NoteDAO.insertData(dto);
+		
+		
+		
+		
+		try {
+            
+			
+            PrintWriter writer = response.getWriter();
+
+            writer.println("<script type='text/javascript'>");
+
+            writer.println(" window.opener.location.reload();");
+
+            writer.println("window.close();");
+
+            writer.println("</script>");
+
+            writer.flush();
+           
+        	
+           
+            
+         } catch (Exception e) {
+         
+         }
 		
 		
 		
@@ -221,7 +256,7 @@ public class HomeController {
 	      
 	      
 	      
-	      int dataCount = NoteDAO.getCount(LoginDTO.getName());
+	      int dataCount = NoteDAO.getCount(Integer.toString(LoginDTO.getNum()));
 	      
 	      int numPerPage = 13;
 	      int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -232,7 +267,7 @@ public class HomeController {
 	      int start = (currentPage-1)*numPerPage +1;
 	      int end = currentPage*numPerPage;
 	      
-	      List<NoteDTO> lists = NoteDAO.readList(start, end, LoginDTO.getName());
+	      List<NoteDTO> lists = NoteDAO.readList(start, end, Integer.toString(LoginDTO.getNum()));
 	     
 	      Iterator<NoteDTO> it = lists.iterator();
 	      
@@ -266,6 +301,9 @@ public class HomeController {
 		int noteNum = Integer.parseInt(request.getParameter("noteNum")) ;
 		
 		dto = NoteDAO.ReadOne(noteNum);
+		System.out.println("값확인" + dto.getWriter());
+		MemberDTO mDTO =  Memberdao.readOne(Integer.parseInt(dto.getWriter()));
+		dto.setWriter(mDTO.getName());
 		NoteDAO.ReadTime(noteNum);
 		request.setAttribute("NoteDTO",dto );
 		return "note/article";
@@ -277,6 +315,156 @@ public class HomeController {
 		
 		NoteDAO.deleteData(noteNum);
 		
+	}
+	@RequestMapping(value = "/note/find", method = {RequestMethod.GET,RequestMethod.POST})
+	public String searchPop(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+	
+		
+		
+		String searchKey = request.getParameter("searchKey");
+		String searchValue = request.getParameter("searchValue");
+		
+		if(null==searchKey){
+			
+			searchKey="usernum";
+			searchValue="";
+			
+			return "note/searchPop";
+		}
+		
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		
+		hMap.put("searchKey", searchKey);
+		hMap.put("searchValue", searchValue);
+		
+		
+		
+		List<MemberDTO> searchlists = Memberdao.memberList(hMap);
+		
+		
+		
+		request.setAttribute("searchlists", searchlists);
+		
+		
+		
+		
+		
+		return "note/searchPop";
+	}
+	@RequestMapping(value = "/note/search_ok", method = {RequestMethod.GET,RequestMethod.POST})
+	public String search_ok(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		/*String checked = request.getParameter("checked");
+		
+		if(null!=checked){
+			System.out.println("확인2" + checked);
+			request.setAttribute("checked", checked);
+			
+		}*/
+		
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		String imagePath = request.getContextPath() + "/resources/memberImage";
+		
+		MemberDTO Mdto = Memberdao.readOne(num);
+		
+		//주민번호로 나이 구하기
+		Calendar cal = Calendar.getInstance();
+		
+		String age = Mdto.getJumin();
+		age.trim(); //불러온 주민번호 앞뒤 공백제거
+		age = age.substring(0, 2); // 주민번호에서 앞자리 2자리만 추출
+		
+		int ageOk = Integer.parseInt(age);
+		String year = Integer.toString(cal.get(Calendar.YEAR)); //현재년도 불러옴
+		year = year.substring(2, 4);// 년도에서 뒤에 2자리 추출
+		int yearOk = Integer.parseInt(year);
+		
+		ageOk = (yearOk + 100) - ageOk;//만 나이 구해짐
+		ageOk = ageOk + 1; //한국나이로 바꾸기위해 +1 해줌
+		
+		
+		//주민번호로 성별 구하기
+		
+		String sex = Mdto.getJumin();
+		sex.trim();
+		int sexOk = Integer.parseInt(sex.substring(7, 8));
+		
+		if(sexOk==1 || sexOk==3){
+			sex = "남";
+		}
+		
+		if(sexOk==2 || sexOk==4){
+			sex = "여";
+		}
+		
+		//주민 번호로 생년월일 구하기
+		
+		String birth = Mdto.getJumin();
+		sex.trim();
+		
+		birth = birth.substring(2, 4) + "월"+ birth.substring(4, 6) + "일";
+		
+		//부서 출력
+		
+		String depth = null;
+		
+		BuseoDTO bdto = null;
+		
+		if(!Mdto.getDepth1().equals("no")){
+			
+			bdto = insaDAO.readBuseo(Integer.parseInt(Mdto.getDepth1()));
+			
+			depth = bdto.getBuseoName();
+			
+			if(!Mdto.getDepth2().equals("no")){
+				
+				bdto = insaDAO.readBuseo(Integer.parseInt(Mdto.getDepth2()));
+				
+				depth += " ▶ " + bdto.getBuseoName();
+				
+				if(!Mdto.getDepth3().equals("no")){
+					
+					bdto = insaDAO.readBuseo(Integer.parseInt(Mdto.getDepth3()));
+					
+					depth += " ▶ " + bdto.getBuseoName();
+					
+					if(!Mdto.getDepth4().equals("no")){
+						
+						bdto = insaDAO.readBuseo(Integer.parseInt(Mdto.getDepth4()));
+						
+						depth += " ▶ " + bdto.getBuseoName();
+						
+						if(!Mdto.getDepth5().equals("no")){
+							
+							bdto = insaDAO.readBuseo(Integer.parseInt(Mdto.getDepth5()));
+							
+							depth += " ▶ " + bdto.getBuseoName();
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+		
+		
+		
+		
+		request.setAttribute("depth", depth);
+		request.setAttribute("birth", birth);
+		request.setAttribute("sex", sex);
+		request.setAttribute("ageOk", ageOk);
+		request.setAttribute("Mdto", Mdto);
+		request.setAttribute("imagePath", imagePath);
+		
+		
+		
+		return "note/searchView";
 	}
 	
 	

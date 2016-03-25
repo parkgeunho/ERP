@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
@@ -39,9 +41,37 @@ public class ListController {
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
 	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
+	
 	
 	@RequestMapping(value = "/con", method = {RequestMethod.GET,RequestMethod.POST})
 	public String controlMain(HttpServletRequest request,HttpServletResponse response) {
+		
+		
+		
+		
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		List<ListDTO> lists = listDAO.boardList();
 		

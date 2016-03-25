@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exe.board.MyUtil;
+import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDTO;
 
 
@@ -37,6 +38,9 @@ public class InsaController {
 	@Autowired
 	MyUtil myUtil;
 	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
 	
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/insa", method = {RequestMethod.GET,RequestMethod.POST})
@@ -44,8 +48,28 @@ public class InsaController {
 			
 		HttpSession session = request.getSession();
 		session.setAttribute("buseoNum", "1");
+
+		
+		
+		
+		
 		
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		
+		
+		
+		
 		
 		List<BuseoDTO> lists = insaDAO.buseoList();
 		
