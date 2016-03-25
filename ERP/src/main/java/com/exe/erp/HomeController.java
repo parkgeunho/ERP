@@ -33,6 +33,7 @@ import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 import com.exe.schedule.ScheduleDAO;
+import com.exe.schedule.ScheduleDTO;
 
 @Controller
 public class HomeController {
@@ -79,14 +80,18 @@ public class HomeController {
 		//상단바 개인 사진을 불러오기 위한 값
 		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
 		request.setAttribute("LoginimagePath",LoginimagePath);
-		//상단바 개인 사진을 불러오기 위한 값
-		
+		//상단바 개인 사진을 불러오기 위한 값		
 		
 		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
 
 	
 		request.setAttribute("approvalCount", approvalCount);
 		
+		// 일정 : 메인
+		List<ScheduleDTO> scheduleListMain = dao.getListsMain(LoginDTO.getId());
+		request.setAttribute("scheduleListMain",scheduleListMain);
+		
+		// 일정: 메뉴바
 		int scheduleCount = dao.getDataCount(LoginDTO.getId());
 		request.setAttribute("scheduleCount",scheduleCount);
 		

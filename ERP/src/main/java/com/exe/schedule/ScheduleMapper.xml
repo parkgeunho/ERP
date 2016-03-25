@@ -42,6 +42,11 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteData" parameterType="string"> 
 		delete schedule where scheduleNum=#{scheduleNum} 
 	</delete>
+	
+	<select id="getListsMain" resultType="com.exe.schedule.ScheduleDTO" parameterType="string"> 
+		select * from ( select rownum rnum, data.* from ( select title,startDate,endDate,startTime,endTime
+		from schedule where id=#{id}) data) 
+	</select>
 
 </mapper>
 

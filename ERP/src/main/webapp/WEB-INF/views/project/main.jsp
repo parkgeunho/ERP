@@ -237,7 +237,23 @@ function openArticle(noteNum){
 			<div class="sub" id="non" >
 					<div style="float:left;width: 40%;">
 					<span id="leftCal" style="padding-top :50px; width: 270px; display: none;"></span></div>
-					<div style="float:left;">개인일정 전사일정 <br/>들어갈자리</div>
+					<div style="padding-top:10px; float:left;">
+					<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 100%; font-style: 나눔고딕코딩; font-size: 13pt;">
+							<tr style="height: 28px;">
+								<td style="width: 100px;" align="center">Title</td>
+								<td style="width: 100px;" align="center">Start Date</td>
+								<td style="width: 100px;" align="center">Due Date</td></tr>
+					
+					<c:forEach var="dto" items="${scheduleListMain }">
+					
+							<tr style="height: 28px;">
+								<td style="border-right:1px solid #CCCCCC; width: 100px;" align="center">${dto.title }</td>
+								<td style="border-right:1px solid #CCCCCC; width: 100px;" align="center">${dto.startDate }</br>${dto.startTime }</td>
+								<td style="width: 100px;" align="center">${dto.endDate }</br>${dto.endTime }</td></tr>
+					</c:forEach>
+					</table>
+					
+					</div>
 			</div>
 		</div>
 	
