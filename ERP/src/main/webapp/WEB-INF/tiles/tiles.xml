@@ -15,6 +15,7 @@
 
     <definition name="scheTile" extends="temp">
 		<put-attribute name="main" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/project/menubar.jsp" />
 	</definition>
 	
 	<!-- <definition name="rightCalendar" extends="temp">

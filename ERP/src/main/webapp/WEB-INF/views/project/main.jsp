@@ -94,6 +94,22 @@ function openArticle(noteNum){
 	
 }
 
+	$(function(){
+		leftCal();
+	});
+	
+	function leftCal(){
+
+		var url = "leftCalChange";
+		
+		$.post(url,function(args){
+			
+			$("#leftCal").html(args);
+		});
+		
+		$("#leftCal").show();
+	}
+
 </script>
 </head>
 <body style="width: 100%">
@@ -208,7 +224,8 @@ function openArticle(noteNum){
 		
 			<div id="Calendar" class="ma">일정</div>
 			<div class="sub" id="non" >
-					<div style="float:left;width: 40%;">여기는 달력이 들어갈 자리입니다</div>
+					<div style="float:left;width: 40%;">
+					<span id="leftCal" style="padding-top :50px; width: 270px; display: none;"></span></div>
 					<div style="float:left;">개인일정 전사일정 <br/>들어갈자리</div>
 			</div>
 		</div>
