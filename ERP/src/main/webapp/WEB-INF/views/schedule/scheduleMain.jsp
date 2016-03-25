@@ -144,8 +144,8 @@
 			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
 			onmouseout="this.style.textDecoration='none';" href="javascript:rightCal()"><font color="black" style="font-style: 나눔고딕코딩;">나의일정</font></a></dd>
 			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
-			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd>
+			<!-- <a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd> -->
 			<!-- <dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
 			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
 			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">전사일정</font></a></dd> -->
