@@ -98,7 +98,7 @@ function openArticle(noteNum){
 </head>
 <body style="width: 100%">
 
-<div style="width:100%; height: 807px; background-image: url('/erp/resources/image/white.jpg');">
+<div style="width:100%; height: 822px; background-image: url('/erp/resources/image/white.jpg');">
 
 
 <!-- 왼쪽 첫번재 div -->

@@ -12,7 +12,7 @@
 
 
 <script type="text/javascript">
-/* var winob = null; */
+
 	function search(){
 		
 		var f = document.myForm;
@@ -28,9 +28,9 @@
 
 	
 
-		var checked = document.getElementById("checked").value;
+	
 		
-	winob = window.open("search_ok.action?num="+num+"&checked="+checked,"","width=500px,height=600px");
+	 window.open("search_ok.action?num="+num,"","width=500px,height=600px");
 
 	
 		
@@ -38,12 +38,7 @@
 		
 	}
 	
-	/* function setChildValue(name,num){
-		opener.setChildValue(name,num);
-		window.close();
-	}
-	 */
-
+	
 	
 
 
@@ -66,7 +61,7 @@
 		<tr><td height="1" width="100%" style="background-color: #cccccc;"></td></tr>
 		
 	</table>
-	<%-- <input type="hidden" name="checked" id="checked" value="${checked }"> --%>
+	
 </div>
 
 	<div style="margin-top: 15px;">

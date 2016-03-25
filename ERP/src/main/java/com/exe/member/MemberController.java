@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +26,7 @@ import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 
 @Controller
+@SessionAttributes("ApproDTO")
 public class MemberController {
 	
 	@Autowired
@@ -95,8 +97,13 @@ public class MemberController {
 		if(dto.getId().equals(id) && dto.getPwd().equals(pwd)){
 			
 			session.setAttribute("dto", dto);
+			
+			session.setAttribute("ApprosDTO", dto);
 			System.out.println("여기 들어와서 dto 올렷음");
+			
 			return "redirect:/main";
+			
+			
 			
 		}
 	

@@ -19,13 +19,16 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.exe.board.MyUtil;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDTO;
 
+
 @Controller
+@SessionAttributes("ApproDTO")
 public class ApprovalController {
 
 	@Autowired
@@ -225,7 +228,7 @@ public class ApprovalController {
 	      
 	      HttpSession session = request.getSession();
 	      
-	      MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+	      MemberDTO LoginDTO = (MemberDTO)session.getAttribute("ApproDTO");
 	            
 	      int num = Integer.parseInt(request.getParameter("num"));
 	      
