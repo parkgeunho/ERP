@@ -66,7 +66,7 @@
 	    	
 	        events: events_array,
 		         
-			eventColor: '#378006',
+			eventColor: 'rgba(55,128,6,0.7)',
 	
 		    header: {
 		        left: 'prev,next,prevYear,nextYear today ',
