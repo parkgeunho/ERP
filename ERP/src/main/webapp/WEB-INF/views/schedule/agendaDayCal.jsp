@@ -74,7 +74,9 @@
 		        right: 'month,agendaWeek,agendaDay'
 		    },
 		    
-		    defaultView: 'month',
+		    defaultView: 'agendaDay',
+		    
+		    defaultDate: '${defaultDate}',
 		    
 		    views: {
 		    	month: {

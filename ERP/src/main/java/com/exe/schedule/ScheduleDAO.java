@@ -57,6 +57,16 @@ public class ScheduleDAO {
 
 		sessionTemplate.update("ScheduleMapper.updateData",dto);
 	}
+
+	public void dropData(ScheduleDTO dto){
+
+		sessionTemplate.update("ScheduleMapper.dropData",dto);
+	}
+
+	public void deleteData(String ScheduleNum){
+
+		sessionTemplate.delete("ScheduleMapper.deleteData",ScheduleNum);
+	}
 }
 
 
