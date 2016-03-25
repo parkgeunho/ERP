@@ -48,6 +48,13 @@
 		window.open("smallUpdated.action","","width=400px,height=580px");
 		
 	}
+	function openapproval(){
+		
+		window.open('http://localhost:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
+		
+	}
+	
+	
 
 
 </script>
@@ -64,9 +71,9 @@
 	쪽지 쓰기
 	</div>
 	
-	
-	
+
 	<div class="Smenu" onClick="window.open('http://192.168.16.167:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;" >
+
 	
 	<img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
 	결재 작성

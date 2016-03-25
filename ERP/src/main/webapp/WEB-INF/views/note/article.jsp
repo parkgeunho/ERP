@@ -34,8 +34,15 @@ function deleted(){
 	
 }
 function sendIt(){
+	var f= document.noteForm
+	f.action = "<%=cp%>/NoteWrite";
+	f.submit();
 	
+}
+function closed(){
 	
+	window.opener.location.reload();
+	window.close();
 	
 }
 
@@ -58,8 +65,9 @@ function sendIt(){
 	<div style="height: 300px;  padding-top: 20px;" >
 	<div><textarea name="content" rows="13" cols="58" style="overflow-y:auto;" onFocus="this.blur()" >${NoteDTO.content }</textarea></div>
 	<div style="margin-top: 40px;" >
-	<div class="chk" align="center" style="float: left; margin-left: 175px;" onclick="sendIt()">답장</div>
+	<div class="chk" align="center" style="float: left; margin-left: 125px;" onclick="sendIt()">답장</div>
 	<div class="chk" align="center" style="float: left; margin-left: 10px; " onclick="deleted()">삭제</div>
+	<div class="chk" align="center" style="float: left; margin-left: 10px; " onclick="closed()">학인</div>
 	<input type="hidden" name="noteNum" value="${NoteDTO.noteNum }">
 	</div>
 	

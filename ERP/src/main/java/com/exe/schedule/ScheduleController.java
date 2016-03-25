@@ -135,6 +135,11 @@ public class ScheduleController {
 			request.setAttribute("ScheduleList", scheduleList);
 		}
 		
+		if(count == 0){
+			
+			request.setAttribute("jsonObject", 0);
+		}
+		
 		return "schedule/rightCal";
 	}
 	

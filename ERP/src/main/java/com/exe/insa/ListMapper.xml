@@ -121,7 +121,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<select id="NotegetCount" resultType="integer">
+	<select id="NotegetCount" resultType="integer" parameterType="String">
 		select nvl(count(*),0) from note where reader=#{reader}
 	
 	</select>

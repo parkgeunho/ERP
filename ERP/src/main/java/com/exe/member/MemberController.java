@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.exe.erp.NoteDAO;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 
@@ -34,6 +35,9 @@ public class MemberController {
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
 	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
@@ -135,6 +139,31 @@ public class MemberController {
 	@RequestMapping(value = "/insaView.action" , method = {RequestMethod.POST,RequestMethod.GET})
 	public String insaView(HttpServletRequest request,HttpServletResponse response) {
 		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -192,7 +221,7 @@ public class MemberController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("imagePath",imagePath);
 		
-		return "member/insaView";
+		return "insaView";
 	}
 	
 	@RequestMapping(value = "/created_ok.action" , method = {RequestMethod.POST,RequestMethod.GET})
@@ -599,14 +628,14 @@ public class MemberController {
 	@RequestMapping(value = "/searchPop.action", method = {RequestMethod.GET,RequestMethod.POST})
 	public String searchPop(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+		/*
 		String checked = request.getParameter("checked");
 		
 		if(null!=checked){
 			System.out.println("확인" + checked);
 			request.setAttribute("checked", checked);
 			
-		}
+		}*/
 		
 		
 		String searchKey = request.getParameter("searchKey");
@@ -645,19 +674,19 @@ public class MemberController {
 	public String search_ok(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		String checked = request.getParameter("checked");
+		/*String checked = request.getParameter("checked");
 		
 		if(null!=checked){
 			System.out.println("확인2" + checked);
 			request.setAttribute("checked", checked);
 			
-		}
+		}*/
 		
-		String id = request.getParameter("id");
+		int num = Integer.parseInt(request.getParameter("num"));
 		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
-		MemberDTO dto = dao.readOne(id);
+		MemberDTO dto = dao.readOne(num);
 		
 		//주민번호로 나이 구하기
 		Calendar cal = Calendar.getInstance();
