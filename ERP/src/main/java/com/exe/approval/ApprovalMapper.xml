@@ -47,6 +47,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 		select name from insadb where id = #{id}
 	</select>
 	
+	<select id="getNum" resultType="String" parameterType="String">
+		select num from insadb where id = #{id}
+	</select>
+	
 	<select id="approvalChk3" resultType="String" parameterType="HashMap">
 		select approval3 from approval where approvalNum=#{approvalNum}
 	</select>

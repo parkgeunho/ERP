@@ -80,6 +80,13 @@ public class ApprovalDAO {
 		return returnId;
 	}
 	
+	public String getNum(String id){
+		
+		String returnNum = sessionTemplate.selectOne("com.exe.approval.getNum",id);
+		
+		return returnNum;
+	}
+	
 	
 	public int approvalFormMaxNum(){			
 		int num = sessionTemplate.selectOne("com.exe.approval.approvalFormMaxNum");

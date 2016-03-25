@@ -222,25 +222,31 @@ public class ApprovalController {
 		MemberInfoDTO nameDTO = new MemberInfoDTO();
 		
 		int approvalDepth = dto.getApprovalDepth();
-				
+		
 		for(int i = 1; i < approvalDepth+1; i++ ){	
 			if(i==1){
-				nameDTO.setDepth1(approvalDAO.getName(dto.id));	
+				nameDTO.setDepth1(approvalDAO.getName(dto.id));
+				nameDTO.setNum1(approvalDAO.getNum(dto.id));
 			}
 			if(i==2){
-				nameDTO.setDepth2(approvalDAO.getName(dto.approval2));	
+				nameDTO.setDepth2(approvalDAO.getName(dto.approval2));
+				nameDTO.setNum2(approvalDAO.getNum(dto.approval2));
 			}
 			if(i==3){
-				nameDTO.setDepth3(approvalDAO.getName(dto.approval3));	
+				nameDTO.setDepth3(approvalDAO.getName(dto.approval3));
+				nameDTO.setNum3(approvalDAO.getNum(dto.approval3));
 			}
 			if(i==4){
-				nameDTO.setDepth4(approvalDAO.getName(dto.approval4));	
+				nameDTO.setDepth4(approvalDAO.getName(dto.approval4));
+				nameDTO.setNum4(approvalDAO.getNum(dto.approval4));
 			}
 			if(i==5){
-				nameDTO.setDepth5(approvalDAO.getName(dto.approval5));	
+				nameDTO.setDepth5(approvalDAO.getName(dto.approval5));
+				nameDTO.setNum5(approvalDAO.getNum(dto.approval5));
 			}
 			if(i==6){
-				nameDTO.setDepth6(approvalDAO.getName(dto.approval6));	
+				nameDTO.setDepth6(approvalDAO.getName(dto.approval6));
+				nameDTO.setNum6(approvalDAO.getNum(dto.approval6));
 			}		
 		}
 				
