@@ -29,12 +29,12 @@
 	
 
 	
-		
+
 	 window.open("search_ok.action?num="+num,"","width=500px,height=600px");
 
 	
 		
-		
+
 		
 	}
 	
