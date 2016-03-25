@@ -314,7 +314,11 @@
 		alert("결재 상신 완료.");
 		window.close();
 		
-		
+		window.opener.location.reload();
+	}
+	
+	function openWin(i) {
+	    window.open('./search_ok.action?num='+i, '','width=500, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');
 	}
 </script>
 

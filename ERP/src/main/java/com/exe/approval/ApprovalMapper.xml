@@ -18,6 +18,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	<select id="approvalNextIngList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
 		select * from approval where info = 'ing' and nextapproval = #{id}
 	</select>
+	
+	<select id="approvalNextIngCount" resultType="Integer" parameterType="String">
+		select count(*) from approval where info = 'ing' and nextapproval = #{id}
+	</select>	
 
 	<select id="approvalSuccessList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
 		select * from approval where id = #{id} and info = 'success'
@@ -32,7 +36,7 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="approvalNextList" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
-		select * from approval where info= 'ing' and (approval2=#{id} or approval3=#{id} or approval4=#{id} or approval5=#{id} or approval6=#{id}) 
+		select * from approval where info= 'ing' and nextapproval != #{id} and (approval2=#{id} or approval3=#{id} or approval4=#{id} or approval5=#{id} or approval6=#{id}) 
 	</select>
 
 	<select id="getLeadData" resultType="com.exe.approval.ApprovalDTO" parameterType="String">
@@ -41,6 +45,10 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getName" resultType="String" parameterType="String">
 		select name from insadb where id = #{id}
+	</select>
+	
+	<select id="getNum" resultType="String" parameterType="String">
+		select num from insadb where id = #{id}
 	</select>
 	
 	<select id="approvalChk3" resultType="String" parameterType="HashMap">

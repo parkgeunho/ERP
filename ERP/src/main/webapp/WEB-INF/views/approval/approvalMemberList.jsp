@@ -17,7 +17,9 @@
 				</td>	
 				<td width="1" bgcolor=""></td>
 				<td width="80" align="center">
-					<font style="font-size: 9pt;">${dto.name }</font>
+					<font style="font-size: 9pt;">
+					<a href="javascript:openWin('${dto.num }')">${dto.name }</a>
+					</font>
 				</td>
 				<td width="1" bgcolor=""></td>
 				<td width="80" align="center">

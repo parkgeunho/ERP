@@ -35,6 +35,13 @@ public class ScheduleDAO {
 	      
 		return lists;
 	}
+	
+	public List<ScheduleDTO> getListsMain(String id){
+	      
+		List<ScheduleDTO> lists = sessionTemplate.selectList("ScheduleMapper.getListsMain", id);
+	      
+		return lists;
+	}
 	   
 	   //전체 데이터수 구하기
 	public int getDataCount(String id){
@@ -56,6 +63,16 @@ public class ScheduleDAO {
 	public void updateData(ScheduleDTO dto){
 
 		sessionTemplate.update("ScheduleMapper.updateData",dto);
+	}
+
+	public void dropData(ScheduleDTO dto){
+
+		sessionTemplate.update("ScheduleMapper.dropData",dto);
+	}
+
+	public void deleteData(String ScheduleNum){
+
+		sessionTemplate.delete("ScheduleMapper.deleteData",ScheduleNum);
 	}
 }
 

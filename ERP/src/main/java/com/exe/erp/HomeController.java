@@ -23,6 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.approval.ApprovalDAO;
+import com.exe.approval.ApprovalDTO;
 import com.exe.board.BoardDAO;
 import com.exe.board.BoardDTO;
 import com.exe.board.MyUtil;
@@ -30,6 +32,8 @@ import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
+import com.exe.schedule.ScheduleDTO;
 
 @Controller
 public class HomeController {
@@ -46,6 +50,10 @@ public class HomeController {
 	MyUtil myUtil;
 	
 	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
+	
+	@Autowired
 	@Qualifier("memberDAO")
 	MemberDAO Memberdao;
 	
@@ -53,11 +61,15 @@ public class HomeController {
 	@Qualifier("NoteDAO")
 	NoteDAO NoteDAO;
 	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) throws ParseException {
 		
-		
+		//상단 메뉴바 관련 
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
@@ -68,7 +80,33 @@ public class HomeController {
 		//상단바 개인 사진을 불러오기 위한 값
 		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
 		request.setAttribute("LoginimagePath",LoginimagePath);
-		//상단바 개인 사진을 불러오기 위한 값
+		//상단바 개인 사진을 불러오기 위한 값		
+		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		// 일정 : 메인
+		List<ScheduleDTO> scheduleListMain = dao.getListsMain(LoginDTO.getId());
+		request.setAttribute("scheduleListMain",scheduleListMain);
+		
+		// 일정: 메뉴바
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
+		
+		//상단 메뉴바 관련 
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -170,6 +208,10 @@ public class HomeController {
 			
 		}
 		
+		
+		List<ApprovalDTO> approvalList = approvalDAO.approvalNextIngList(LoginDTO.getId());
+		
+		request.setAttribute("approvalList", approvalList);
 		request.setAttribute("nextBirth", nextBirth);
 		request.setAttribute("nowBirth", nowBirth);
 		
