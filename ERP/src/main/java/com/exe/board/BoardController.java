@@ -33,11 +33,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.exe.approval.ApprovalDAO;
 import com.exe.erp.NoteDAO;
 import com.exe.insa.ListDAO;
 import com.exe.insa.ListDTO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
 
 
 @Controller
@@ -63,6 +65,11 @@ public class BoardController {
 	NoteDAO NoteDAO;
 	
 	
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO ScheduleDAO;
+	
 
 	/*@Autowired
 	@Qualifier("BoardFileDAO")
@@ -71,6 +78,11 @@ public class BoardController {
 	@Autowired
 	@Qualifier("boardFileDAO")
 	BoardFileDAO boardfileDAO;
+	
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
+	
 
 	
 	@RequestMapping(value="/board/created.action")
@@ -516,7 +528,8 @@ public class BoardController {
 		public String boardMain(HttpServletRequest request,HttpServletResponse response,String ckpoint) throws IOException {
 		  			  
 
-		  
+			
+			//상단 메뉴바 관련 
 			HttpSession session = request.getSession();
 			MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 			
@@ -528,6 +541,18 @@ public class BoardController {
 			String LoginimagePath = request.getContextPath() + "/resources/memberImage";
 			request.setAttribute("LoginimagePath",LoginimagePath);
 			//상단바 개인 사진을 불러오기 위한 값
+			
+			
+			int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+		
+			request.setAttribute("approvalCount", approvalCount);
+			
+			int scheduleCount = ScheduleDAO.getDataCount(LoginDTO.getId());
+			request.setAttribute("scheduleCount",scheduleCount);
+			
+			//상단 메뉴바 관련 
+			
 		  
 		  
 		  

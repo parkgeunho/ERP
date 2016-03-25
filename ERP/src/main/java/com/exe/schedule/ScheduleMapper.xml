@@ -6,21 +6,42 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="ScheduleMapper">
 
-<select resultType="int" id="maxNum"> select nvl(max(scheduleNum),0) from schedule </select>
-
-<insert id="insertData" parameterType="com.exe.schedule.ScheduleDTO"> insert into schedule (scheduleNum,id,title,content,created,startDate,endDate,startTime,endTime) values (#{scheduleNum},#{id},#{title},#{content},sysdate,#{startDate},#{endDate},#{startTime},#{endTime}) </insert>
-
-<select resultType="int" id="getDataCount" parameterType="string"> select nvl(count(*),0) from schedule where id=#{id} </select>
-
-<select resultType="com.exe.schedule.ScheduleDTO" id="getLists" parameterType="string"> select * from ( select rownum rnum, data.* from ( select scheduleNum,id,title,to_char(created,'YYYY-MM-DD') created,startDate,endDate,startTime,endTime from schedule where id=#{id}) data) </select>
-
-<select resultType="com.exe.schedule.ScheduleDTO" id="getReadData" parameterType="string"> select scheduleNum,id,title,content,to_char(created,'YYYY-MM-DD') created,startDate,endDate,startTime,endTime from schedule where scheduleNum=#{scheduleNum} </select>
-
-<update id="updateData" parameterType="com.exe.schedule.ScheduleDTO"> update schedule set title=#{title},content=#{content},startDate=#{startDate},endDate=#{endDate},startTime=#{startTime},endTime=#{endTime} where scheduleNum=#{scheduleNum} </update>
-
-<update id="dropData" parameterType="com.exe.schedule.ScheduleDTO"> update schedule set startDate=#{startDate},endDate=#{endDate},startTime=#{startTime},endTime=#{endTime} where scheduleNum=#{scheduleNum} </update>
-
-<delete id="deleteData" parameterType="string"> delete schedule where scheduleNum=#{scheduleNum} </delete>
+	<select id="maxNum" resultType="int" > 
+		select nvl(max(scheduleNum),0) from schedule 
+	</select>
+	
+	<insert id="insertData" parameterType="com.exe.schedule.ScheduleDTO"> 
+		insert into schedule (scheduleNum,id,title,content,created,startDate,endDate,startTime,endTime) 
+		values (#{scheduleNum},#{id},#{title},#{content},sysdate,#{startDate},#{endDate},#{startTime},#{endTime}) 
+	</insert>
+	
+	<select id="getDataCount" resultType="int" parameterType="string"> 
+		select nvl(count(*),0) from schedule where id=#{id} 
+	</select>
+	
+	<select id="getLists" resultType="com.exe.schedule.ScheduleDTO" parameterType="string"> 
+		select * from ( select rownum rnum, data.* from ( select scheduleNum,id,title,to_char(created,'YYYY-MM-DD') created,
+		startDate,endDate,startTime,endTime from schedule where id=#{id}) data) 
+	</select>
+	
+	<select id="getReadData" resultType="com.exe.schedule.ScheduleDTO" parameterType="string"> 
+		select scheduleNum,id,title,content,to_char(created,'YYYY-MM-DD') created,startDate,endDate,
+		startTime,endTime from schedule where scheduleNum=#{scheduleNum} 
+	</select>
+	
+	<update id="updateData" parameterType="com.exe.schedule.ScheduleDTO"> 
+		update schedule set title=#{title},content=#{content},startDate=#{startDate},endDate=#{endDate},
+		startTime=#{startTime},endTime=#{endTime} where scheduleNum=#{scheduleNum} 
+	</update>
+	
+	<update id="dropData" parameterType="com.exe.schedule.ScheduleDTO"> 
+		update schedule set startDate=#{startDate},endDate=#{endDate},startTime=#{startTime},
+		endTime=#{endTime} where scheduleNum=#{scheduleNum} 
+	</update>
+	
+	<delete id="deleteData" parameterType="string"> 
+		delete schedule where scheduleNum=#{scheduleNum} 
+	</delete>
 
 </mapper>
 

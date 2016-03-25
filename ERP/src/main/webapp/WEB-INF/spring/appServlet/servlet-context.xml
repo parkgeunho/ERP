@@ -50,7 +50,10 @@
 		<interceptor>
 			<mapping path="/main"/>
 			<mapping path="/insaView.*"/>
-			<mapping path="/con"/>
+			<mapping path="/con.*"/>
+			<mapping path="/boardMain"/>
+			<mapping path="approval*"/>
+			<mapping path="schedule*"/>
 			<beans:bean class="com.exe.member.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
