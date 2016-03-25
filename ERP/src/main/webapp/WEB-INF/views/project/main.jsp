@@ -110,7 +110,7 @@ function openArticle(noteNum){
 			<div id="ex" class="sub">
 				<c:forEach var="note" items="${NoteList }">
 				<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
-				<a href="javascript:openArticle(${note.noteNum })">${note.content }</a>
+				<a href="javascript:openArticle(${note.noteNum })" class="hyperLine" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${note.content }</a>
 				</div>
 				
 				</c:forEach>
@@ -137,7 +137,7 @@ function openArticle(noteNum){
 				<c:forEach var="notice" items="${notice }">
 					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
 					
-					<a href="#" onclick="notices(${notice.boardNum })">
+					<a href="#" onclick="notices(${notice.boardNum })" class="hyperLine" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
 						${notice.subject }
 					</a>
 					</div>

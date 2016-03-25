@@ -223,13 +223,13 @@ public class ApprovalController {
 		
 		System.out.println("approvalCreated.Controller");
 	      
-	      HttpSession session = request.getSession();
+	    HttpSession session = request.getSession();
 	      
-	      MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+	    MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 	            
-	      int num = Integer.parseInt(request.getParameter("num"));
+	    int num = Integer.parseInt(request.getParameter("num"));
 	      
-	      System.out.println(num);
+	    System.out.println(num);
 	      
 	      ApprovalFormDTO dto = approvalDAO.getApprovalForm(num);
 	                  
@@ -453,6 +453,8 @@ public class ApprovalController {
 	@RequestMapping(value = "/approvalPop", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalPop(HttpServletRequest request , HttpServletResponse response) throws Exception{
 			
+		HttpSession session = request.getSession();
+		
 		System.out.println("approvalPop.Controller");
 				
 		List<ApprovalFormDTO> lists = approvalDAO.approvalFormList();
