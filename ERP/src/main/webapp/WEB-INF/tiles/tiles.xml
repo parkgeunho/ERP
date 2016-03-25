@@ -6,7 +6,6 @@
 
    <definition name="temp" template="/WEB-INF/views/layout.jsp">
       <put-attribute name="title"      value="타일즈테스트" />
-      
       <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />
       <put-attribute name="menu"      value="/WEB-INF/views/project/sidemenu.jsp" />
       <put-attribute name="main"   value="/WEB-INF/views/project/main.jsp" />

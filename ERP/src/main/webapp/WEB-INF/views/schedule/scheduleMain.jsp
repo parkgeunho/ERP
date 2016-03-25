@@ -103,6 +103,22 @@
 		
 		$("#rightCal").show();
 	}
+	
+	function agendaDayCall(day){
+		
+		var year = $("#year").val();
+		var month = $("#month").val();
+		var day = day;
+
+		var url = "agendaDayCall";
+		
+		$.post(url,{year:year,month:month,day:day},function(args){
+			
+			$("#rightCal").html(args);
+		});
+		
+		$("#rightCal").show();
+	}
 
 </script>
 
@@ -133,7 +149,7 @@
 			<!-- <dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
 			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
 			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">전사일정</font></a></dd> -->
-			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd>
+			<!-- <dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd> -->
 			<!-- <dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">회의실예약</font></dd>	 -->		
 		</dl>
 	</div>

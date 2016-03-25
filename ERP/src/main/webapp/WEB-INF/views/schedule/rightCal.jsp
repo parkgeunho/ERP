@@ -23,40 +23,29 @@
 
 	$(document).ready(function() {
 		
-		var arr = '${jsonObject}';
-    	
-    	var obj = JSON.parse(arr);		// 문자열을 다시 배열로 변환
-    	
-    	/* alert(obj.scheduleList[0].created);  */
-    	
-    	var events_array = [];
-
-    	/* var arr = '${jsonObject}';
-    	
-    	alert(arr);
-    	
-    	var text = JSON.stringify(arr);		// 배열을 JSON 문자열로 변환
-    	
-    	alert(text);
-    	
-    	var obj = JSON.parse(text);		// 문자열을 다시 배열로 변환
-    	
-    	alert(obj);
-    	
-    	var events_array = []; */
-    	
-		for(var i=0; i<obj.scheduleList.length; i++){
-
-    		var schedule_object = {
-
-    			id : obj.scheduleList[i].scheduleNum,
-    			title : obj.scheduleList[i].title,
-    			start : obj.scheduleList[i].startDate,
-    			end : obj.scheduleList[i].endDate
-    		};
-
-    		events_array.push(schedule_object);
-    	}
+		var events_array = [];
+		
+		if( '${jsonObject}' != 0 ){
+		
+			var arr = '${jsonObject}';
+	    	
+	    	var obj = JSON.parse(arr);		// 문자열을 다시 배열로 변환
+	    	
+			for(var i=0; i<obj.scheduleList.length; i++){
+	
+	    		var schedule_object = {
+	
+	    			id : obj.scheduleList[i].scheduleNum,
+	    			title : obj.scheduleList[i].title,
+	    			start : obj.scheduleList[i].startDate  + ' ' + obj.scheduleList[i].startTime,
+	    			end : obj.scheduleList[i].endDate  + ' ' + obj.scheduleList[i].endTime
+	    			
+	    			
+	    		};
+	
+	    		events_array.push(schedule_object);
+	    	}
+		}
     	
     	/* for(var i in obj.scheduleList){
 
@@ -84,6 +73,8 @@
 		        center: 'title',
 		        right: 'month,agendaWeek,agendaDay'
 		    },
+		    
+		    defaultView: 'month',
 		    
 		    views: {
 		    	month: {
@@ -120,6 +111,8 @@
 			
 			selectable: true,
 			
+			unselectAuto: true,
+			
 			selectOverlap: true,
 			
 			eventTextColor: '#FFFFD2',
@@ -141,6 +134,25 @@
 				
 				window.open('./scheduleUpdated?scheduleNum='+event.id, 'window', 'width=1100, height=900,scroll=yes');
 		    },
+		    
+		    eventDrop: function(event, start) {
+
+		        if (!confirm("정말 날짜(시간)를 변경하시겠습니까?")) {
+		            revertFunc();
+		        }
+				
+				$.ajax({
+					url:'scheduleDrop',
+					data:{scheduleNum:event.id, start:event.start.format('YYYY-MM-DD:HH:mm'),
+						end:event.end.format('YYYY-MM-DD:HH:mm')},
+					type:'POST',
+                    success: function(args){
+						
+                    }
+	   			});
+		    },
+		    
+		    selectHelper: true,
 		    
 		    droppable: true,
 			
