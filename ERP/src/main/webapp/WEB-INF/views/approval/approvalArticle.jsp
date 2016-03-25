@@ -510,7 +510,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="javascript:approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="javascript:approvalReturn();"/>
-<input type="hidden" name="mydepth" value="2"/>2
+<input type="hidden" name="mydepth" value="2"/>
 </td></tr>
 </c:when>
 
@@ -518,7 +518,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="approvalReturn();"/>
-<input type="hidden" name="mydepth" value="3"/>3
+<input type="hidden" name="mydepth" value="3"/>
 </td></tr>
 </c:when>
 
@@ -526,7 +526,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="approvalReturn();"/>
-<input type="hidden" name="mydepth" value="4"/>4
+<input type="hidden" name="mydepth" value="4"/>
 </td></tr>
 </c:when>
 

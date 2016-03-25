@@ -314,7 +314,7 @@
 		alert("결재 상신 완료.");
 		window.close();
 		
-		
+		window.opener.location.reload();
 	}
 </script>
 
