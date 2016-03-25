@@ -49,7 +49,7 @@
 
          </li>
          
-         <li><label onClick="window.open('http://localhost:8080/erp/approvalFormCreated','결재 양식 생성','width=900, height=1200, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;">양식추가</label></li>
+         <li><label onClick="window.open('http://192.168.16.167:8080/erp/approvalFormCreated','결재 양식 생성','width=900, height=1200, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;">양식추가</label></li>
          <li>
          <label onclick="javascript:location.href='<%=cp%>/con'">게시판관리</label>
          
