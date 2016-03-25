@@ -96,7 +96,7 @@
 	 				
 	 			}else{
 	 				
-	 				document.getElementById(v).style.backgroundColor = "#D4F4FA";
+	 				document.getElementById(v).style.backgroundColor = "#F6F6F6";
 	 			}
  			
  			}

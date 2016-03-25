@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
 
@@ -34,10 +35,28 @@ public class ScheduleController {
 	@Autowired
 	@Qualifier("memberDAO")
 	MemberDAO memberDAO;
+	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
 
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/schedule", method={RequestMethod.GET,RequestMethod.POST})
 	public String scheduleMain(ScheduleDTO dto, HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
 		
 		return "scheTile";
 	}

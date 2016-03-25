@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.exe.board.MyUtil;
+import com.exe.erp.NoteDAO;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
 
 @Controller
 public class ApprovalController {
@@ -40,11 +42,44 @@ public class ApprovalController {
 	@Qualifier("myUtil")
 	MyUtil myUtil;
 	
+	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
+	
+	
 	@RequestMapping(value = "/approval", method={RequestMethod.GET,RequestMethod.POST})
 	public String approval(HttpServletRequest request,HttpServletResponse response) {
 		
+		//상단 메뉴바 관련 
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
+		
+		//상단 메뉴바 관련 
 		String userId = LoginDTO.getId();
 		
 		String head = "진행중 - 상신한 문서";

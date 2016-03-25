@@ -479,8 +479,10 @@ function Add(){
 							
 							
 							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
-								<div style="margin-left: 20px;">
-								┖<label id="bus-${depth1.buseoNum }" >${depth1.buseoName }</label>
+								<div style="margin-left: 10px;">
+								<img src="/erp/resources/insa/ㄴ1.png" align="middle">
+								<img src="/erp/resources/insa/folder2.png" align="middle">
+								<label id="bus-${depth1.buseoNum }" >${depth1.buseoName }</label>
 								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
 								</div>
 								<div>

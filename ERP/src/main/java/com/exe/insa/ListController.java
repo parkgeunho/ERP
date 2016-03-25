@@ -20,9 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.approval.ApprovalDAO;
 import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
 
 
 
@@ -45,14 +47,21 @@ public class ListController {
 	@Qualifier("NoteDAO")
 	NoteDAO NoteDAO;
 	
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
+	
 	
 	@RequestMapping(value = "/con", method = {RequestMethod.GET,RequestMethod.POST})
 	public String controlMain(HttpServletRequest request,HttpServletResponse response) {
 		
 		
-		
-		
-		
+		//상단 메뉴바 관련 
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
@@ -64,6 +73,18 @@ public class ListController {
 		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
 		request.setAttribute("LoginimagePath",LoginimagePath);
 		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
+		
+		
+		//상단 메뉴바 관련 
 		
 		
 		
