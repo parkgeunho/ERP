@@ -23,6 +23,11 @@
 	   $(".content").mCustomScrollbar();
       
       $('[id^="fold-"]').click(function(){
+    	  
+    	  
+    	  
+   
+    	  
          
          var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
            $(this).attr('src',src);
@@ -39,6 +44,24 @@
    
    $('[id^="buseo-"]').click(function(){
        
+	   
+	   
+	
+	   
+	   
+	   
+		var folderNum = this.id.substr(5);
+    	
+    	
+	       var foldersrc = ($("#folder-"+folderNum).attr('src')=='/erp/resources/insa/folder.png')?'/erp/resources/insa/folder2.png':'/erp/resources/insa/folder.png';
+	       $("#folder-"+folderNum).attr('src',foldersrc);
+	   
+	   
+	   
+	   
+	   
+	   
+	   
        var src = ($(this).attr('src')=='/erp/resources/image/minus.png') ?'/erp/resources/image/plus.png':'/erp/resources/image/minus.png';
          $(this).attr('src',src);
        
@@ -73,7 +96,7 @@
 	 				
 	 			}else{
 	 				
-	 				document.getElementById(v).style.backgroundColor = "#D4F4FA";
+	 				document.getElementById(v).style.backgroundColor = "#F6F6F6";
 	 			}
  			
  			}

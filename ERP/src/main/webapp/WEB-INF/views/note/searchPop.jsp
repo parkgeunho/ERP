@@ -12,12 +12,12 @@
 
 
 <script type="text/javascript">
-
+var winob = null;
 	function search(){
 		
 		var f = document.myForm;
 		
-		f.action = "<%=cp%>/searchPop.action";
+		f.action = "<%=cp%>/note/find";
 		
 		f.submit();
 		
@@ -28,17 +28,22 @@
 
 	
 
-	
-
-	 window.open("search_ok.action?num="+num,"","width=500px,height=600px");
+		
+		
+		winob = window.open("search_ok?num="+num,"","width=500px,height=600px");
 
 	
 		
-
+		
 		
 	}
 	
-	
+	 function setChildValue(name,num){
+		opener.setChildValue(name,num);
+		window.close();
+	}
+	 
+
 	
 
 
@@ -97,11 +102,11 @@
 			<td></td>
 		</tr>
 		
-		<c:forEach items="${lists}" var="dto">
+		<c:forEach items="${searchlists}" var="searchDTO">
 		<tr >
-			<td align="center" width="50%">${dto.usernum}</td>
-			<td align="center"><a href="javascript:article(${dto.num });">${dto.name}</a></td>
-			<td align="center">${dto.grade}</td>
+			<td align="center" width="50%">${searchDTO.usernum}</td>
+			<td align="center"><a href="javascript:article(${searchDTO.num });">${searchDTO.name}</a></td>
+			<td align="center">${searchDTO.grade}</td>
 		</tr>
 		</c:forEach>
 	</table>	

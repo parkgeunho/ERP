@@ -13,7 +13,7 @@
 	var approvalNum = "";
 
 	function winOpen(approvalNum){
-		window.open('http://localhost:8080/erp/approvalArticle?approvalNum='+approvalNum,'', 'width=1000, height=1000, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
+		window.open('http://192.168.16.167:8080/erp/approvalArticle?approvalNum='+approvalNum,'', 'width=1000, height=1000, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
 	}
 </script>
 

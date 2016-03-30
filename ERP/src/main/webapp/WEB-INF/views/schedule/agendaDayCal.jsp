@@ -74,7 +74,9 @@
 		        right: 'month,agendaWeek,agendaDay'
 		    },
 		    
-		    defaultView: 'month',
+		    defaultView: 'agendaDay',
+		    
+		    defaultDate: '${defaultDate}',
 		    
 		    views: {
 		    	month: {
@@ -135,7 +137,11 @@
 				window.open('./scheduleUpdated?scheduleNum='+event.id, 'window', 'width=1100, height=900,scroll=yes');
 		    },
 		    
-		    eventDrop: function(event) {
+		    eventDrop: function(event, start) {
+
+		        if (!confirm("정말 날짜(시간)를 변경하시겠습니까?")) {
+		            revertFunc();
+		        }
 				
 				$.ajax({
 					url:'scheduleDrop',
@@ -156,26 +162,7 @@
 			
 			eventStartEditable: true,
 			
-			eventDurationEditable: true,
-		    
-			eventMouseover: function(event) {
-				
-				/* window.showModalDialog('Title : ' + event.title + 'Start Date : ' + event.start.format('YYYY-MM-DD:HH:mm')
-						+ 'End Date : ' + event.end.format('YYYY-MM-DD:HH:mm')); */
-		    },
-			
-			eventResize: function(event) {
-				
-				$.ajax({
-					url:'scheduleResize',
-					data:{scheduleNum:event.id, start:event.start.format('YYYY-MM-DD:HH:mm'),
-						end:event.end.format('YYYY-MM-DD:HH:mm')},
-					type:'POST',
-                    success: function(args){
-						
-                    }
-	   			});
-		    }
+			eventDurationEditable: true
 	    });
 	});
 

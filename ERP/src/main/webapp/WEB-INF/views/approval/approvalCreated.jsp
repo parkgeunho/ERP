@@ -314,7 +314,11 @@
 		alert("결재 상신 완료.");
 		window.close();
 		
-		
+		window.opener.location.reload();
+	}
+	
+	function openWin(i) {
+	    window.open('./search_ok.action?num='+i, '','width=500, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');
 	}
 </script>
 
@@ -675,10 +679,10 @@
 	<td width="1" bgcolor=""></td>
 	<td bgcolor="" colspan="5" style="font-size: 10pt">
 	<select id="selectX" multiple="multiple" style="width: 265px; height: 350px">
-		<option value="${LoginDTO.id }">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${LoginDTO.name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${LoginDTO.grade }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;${LoginDTO.depth2 }&nbsp;&nbsp;&nbsp;&nbsp;
+		<option value="${sessionScope.ApprosDTO.id }">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.ApprosDTO.name }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.ApprosDTO.grade }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;${sessionScope.ApprosDTO.depth2 }&nbsp;&nbsp;&nbsp;&nbsp;
 		</option>
 	</select>
 	</td>	
@@ -765,7 +769,7 @@
   <tr><td width="110" height="28" bgcolor="#EAEAEA" align="center"><font style="font-size: 10pt; font-weight: bold;">기안</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
   
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
-  <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">${LoginDTO.name }</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
+  <tr><td width="110" height="28" align="center"><font style="font-size: 9pt;">${sessionScope.ApprosDTO.name}</font></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>
   
   <tr><td width="110" height="1" bgcolor="#BDBDBD"></td><td width="1" height="1" bgcolor="#BDBDBD"></td></tr>
   <tr><td width="110" height="28" align="center"></td><td width="1" height="" bgcolor="#BDBDBD"></td></tr>

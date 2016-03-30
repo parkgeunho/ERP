@@ -19,13 +19,18 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.exe.board.MyUtil;
+import com.exe.erp.NoteDAO;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
+
 
 @Controller
+@SessionAttributes("ApproDTO")
 public class ApprovalController {
 
 	@Autowired
@@ -40,11 +45,44 @@ public class ApprovalController {
 	@Qualifier("myUtil")
 	MyUtil myUtil;
 	
+	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
+	
+	
 	@RequestMapping(value = "/approval", method={RequestMethod.GET,RequestMethod.POST})
 	public String approval(HttpServletRequest request,HttpServletResponse response) {
 		
+		//상단 메뉴바 관련 
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
+		
+		//상단 메뉴바 관련 
 		String userId = LoginDTO.getId();
 		
 		String head = "진행중 - 상신한 문서";
@@ -187,25 +225,31 @@ public class ApprovalController {
 		MemberInfoDTO nameDTO = new MemberInfoDTO();
 		
 		int approvalDepth = dto.getApprovalDepth();
-				
+		
 		for(int i = 1; i < approvalDepth+1; i++ ){	
 			if(i==1){
-				nameDTO.setDepth1(approvalDAO.getName(dto.id));	
+				nameDTO.setDepth1(approvalDAO.getName(dto.id));
+				nameDTO.setNum1(approvalDAO.getNum(dto.id));
 			}
 			if(i==2){
-				nameDTO.setDepth2(approvalDAO.getName(dto.approval2));	
+				nameDTO.setDepth2(approvalDAO.getName(dto.approval2));
+				nameDTO.setNum2(approvalDAO.getNum(dto.approval2));
 			}
 			if(i==3){
-				nameDTO.setDepth3(approvalDAO.getName(dto.approval3));	
+				nameDTO.setDepth3(approvalDAO.getName(dto.approval3));
+				nameDTO.setNum3(approvalDAO.getNum(dto.approval3));
 			}
 			if(i==4){
-				nameDTO.setDepth4(approvalDAO.getName(dto.approval4));	
+				nameDTO.setDepth4(approvalDAO.getName(dto.approval4));
+				nameDTO.setNum4(approvalDAO.getNum(dto.approval4));
 			}
 			if(i==5){
-				nameDTO.setDepth5(approvalDAO.getName(dto.approval5));	
+				nameDTO.setDepth5(approvalDAO.getName(dto.approval5));
+				nameDTO.setNum5(approvalDAO.getNum(dto.approval5));
 			}
 			if(i==6){
-				nameDTO.setDepth6(approvalDAO.getName(dto.approval6));	
+				nameDTO.setDepth6(approvalDAO.getName(dto.approval6));
+				nameDTO.setNum6(approvalDAO.getNum(dto.approval6));
 			}		
 		}
 				
@@ -223,13 +267,15 @@ public class ApprovalController {
 		
 		System.out.println("approvalCreated.Controller");
 	      
-	      HttpSession session = request.getSession();
+	    HttpSession session = request.getSession();
 	      
-	      MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+
+	    MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+
 	            
-	      int num = Integer.parseInt(request.getParameter("num"));
+	    int num = Integer.parseInt(request.getParameter("num"));
 	      
-	      System.out.println(num);
+	    System.out.println(num);
 	      
 	      ApprovalFormDTO dto = approvalDAO.getApprovalForm(num);
 	                  
@@ -453,6 +499,8 @@ public class ApprovalController {
 	@RequestMapping(value = "/approvalPop", method={RequestMethod.GET,RequestMethod.POST})
 	public String approvalPop(HttpServletRequest request , HttpServletResponse response) throws Exception{
 			
+		HttpSession session = request.getSession();
+		
 		System.out.println("approvalPop.Controller");
 				
 		List<ApprovalFormDTO> lists = approvalDAO.approvalFormList();

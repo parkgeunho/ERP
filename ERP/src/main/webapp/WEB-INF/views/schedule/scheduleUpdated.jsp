@@ -6,16 +6,24 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 	
-	String start = request.getParameter("start");
-	String end = request.getParameter("end");
+	String start = (String)request.getAttribute("start");
+	String end = (String)request.getAttribute("end");
+	String startTime = (String)request.getAttribute("startTime");
+	String endTime = (String)request.getAttribute("endTime");
 	
 	String stY, stM, stD, stH, stMin;
 	String endY, endM, endD, endH, endMin;
+	
+	System.out.print(start);
+	System.out.print(end);
+	System.out.print(startTime);
+	System.out.print(endTime);
 	
 	StringTokenizer st = new StringTokenizer(start,"-");
 	stY = st.nextToken();
 	stM = st.nextToken();
 	stD = st.nextToken();
+	st = new StringTokenizer(startTime,":");
 	stH = st.nextToken();
 	stMin = st.nextToken();
 	
@@ -23,6 +31,7 @@
 	endY = st.nextToken();
 	endM = st.nextToken();
 	endD = st.nextToken();
+	st = new StringTokenizer(endTime,":");
 	endH = st.nextToken();
 	endMin = st.nextToken();
 %>
@@ -58,6 +67,24 @@
 	    f.submit();
 	    
 		window.close();
+		
+		opener.location.reload();
+	}
+	
+	function deleteSche(){
+	    
+	    if (!confirm("정말 일정을 삭제하시겠습니까?")) {
+            return;
+        }
+		
+		var f = document.myform;
+		
+		f.action = "<%=cp%>/scheduleDeleted_ok";
+	    f.submit();
+	    
+		window.close();
+		
+		opener.location.reload();
 	}
 
 	function sel() {
@@ -121,7 +148,6 @@
 		}
 		
 		var sCalendarSt = f.calendarSt;
-		<%= stM = "0" + stM%>
 		sCalendarSt.value = <%= stY%> + '-' + <%= stM%> + '-' + <%= stD%>;
 		
 		var sCalendarEnd = f.calendarEnd;
@@ -149,12 +175,12 @@
 											dayNamesShort: ['일','월','화','수','목','금','토'],
 											dayNamesMin: ['일','월','화','수','목','금','토'],
 											weekHeader: 'Wk',
-											dateFormat: 'yy-mm-dd',
+											dateFormat: 'yy-m-d',
 											firstDay: 0,
 											isRTL: false,
 											showMonthAfterYear: true,
 											yearSuffix: ''},
-										{dateFormat:'yy-mm-dd'});
+										{dateFormat:'yy-m-d'});
 
 		$('[id^="calendar"]').datepicker({
 			
@@ -819,6 +845,7 @@ $(document).ready(function(){
 	<tr height="40">
 		<td align="right" colspan="3" >
 			<font style="font-style: 나눔고딕코딩;">
+			<input type="button" id="scheDelete" value="삭제" onclick="deleteSche()"/>
 			<input type="button" id="scheUpdate" value="수정" onclick="updateSche()"/>
 			<input type="button" id="scheClose" value="닫기" onclick="closeSche()"/></font></td></tr> 
 	</table>

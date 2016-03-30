@@ -6,7 +6,6 @@
 
    <definition name="temp" template="/WEB-INF/views/layout.jsp">
       <put-attribute name="title"      value="타일즈테스트" />
-      
       <put-attribute name="header"   value="/WEB-INF/views/project/menubar.jsp" />
       <put-attribute name="menu"      value="/WEB-INF/views/project/sidemenu.jsp" />
       <put-attribute name="main"   value="/WEB-INF/views/project/main.jsp" />
@@ -16,6 +15,7 @@
 
     <definition name="scheTile" extends="temp">
 		<put-attribute name="main" value="/WEB-INF/views/schedule/scheduleMain.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/project/menubar.jsp" />
 	</definition>
 	
 	<!-- <definition name="rightCalendar" extends="temp">
@@ -93,6 +93,11 @@
    <definition name="insa" extends="temp">
       <put-attribute name="main"   value="/WEB-INF/views/project/ManagementView.jsp" />
    </definition>
+   
+    <definition name="insaView" extends="temp">
+      <put-attribute name="main"   value="/WEB-INF/views/member/insaView.jsp" />
+   </definition>
+   
    
    <definition name="ep" template="/WEB-INF/views/layout2.jsp">
       <put-attribute name="title"      value="타일즈테스트" />

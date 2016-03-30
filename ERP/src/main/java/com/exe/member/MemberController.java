@@ -17,13 +17,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.exe.erp.NoteDAO;
 import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 
 @Controller
+@SessionAttributes("ApproDTO")
 public class MemberController {
 	
 	@Autowired
@@ -34,6 +37,9 @@ public class MemberController {
 	@Qualifier("insaDAO")
 	InsaDAO insaDAO;
 	
+	@Autowired
+	@Qualifier("NoteDAO")
+	NoteDAO NoteDAO;
 	
 	@RequestMapping(value = "/login.action")
 	public String loginView() {
@@ -91,8 +97,13 @@ public class MemberController {
 		if(dto.getId().equals(id) && dto.getPwd().equals(pwd)){
 			
 			session.setAttribute("dto", dto);
+			
+			session.setAttribute("ApprosDTO", dto);
 			System.out.println("여기 들어와서 dto 올렷음");
+			
 			return "redirect:/main";
+			
+			
 			
 		}
 	
@@ -134,6 +145,31 @@ public class MemberController {
 	
 	@RequestMapping(value = "/insaView.action" , method = {RequestMethod.POST,RequestMethod.GET})
 	public String insaView(HttpServletRequest request,HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
+		
+		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
+
+		request.setAttribute("readCount", readCount);
+		request.setAttribute("LoginDTO", LoginDTO);
+		//상단바 개인 사진을 불러오기 위한 값
+		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
+		request.setAttribute("LoginimagePath",LoginimagePath);
+		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		String imagePath = request.getContextPath() + "/resources/memberImage";
 		
@@ -192,7 +228,7 @@ public class MemberController {
 		request.setAttribute("dto", dto);
 		request.setAttribute("imagePath",imagePath);
 		
-		return "member/insaView";
+		return "insaView";
 	}
 	
 	@RequestMapping(value = "/created_ok.action" , method = {RequestMethod.POST,RequestMethod.GET})

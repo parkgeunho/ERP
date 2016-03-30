@@ -71,9 +71,9 @@
 	쪽지 쓰기
 	</div>
 	
-	
-	
-	<div class="Smenu" onClick="openapproval();" >
+
+	<div class="Smenu" onClick="window.open('http://192.168.16.167:8080/erp/approvalPop','결재양식함','width=420, height=550, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');return false;" >
+
 	
 	<img style="margin-top: 10px;" src="/erp/resources/image/write.png"><br/>
 	결재 작성
@@ -85,7 +85,7 @@
 	직원 검색
 	</div>
 	
-	
+	                                                                                           
 
 	<div class="Smenu"><img style="margin-top: 10px;" src="/erp/resources/image/help.png"><br/>
 	도움말
