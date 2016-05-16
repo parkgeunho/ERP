@@ -20,9 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.approval.ApprovalDAO;
 import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDAO;
 import com.exe.member.MemberDTO;
+import com.exe.schedule.ScheduleDAO;
 
 
 
@@ -45,14 +47,21 @@ public class ListController {
 	@Qualifier("NoteDAO")
 	NoteDAO NoteDAO;
 	
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
+	
+	@Autowired
+	@Qualifier("scheduleDAO")
+	ScheduleDAO dao;
+	
+	
 	
 	@RequestMapping(value = "/con", method = {RequestMethod.GET,RequestMethod.POST})
 	public String controlMain(HttpServletRequest request,HttpServletResponse response) {
 		
 		
-		
-		
-		
+		//상단 메뉴바 관련 
 		HttpSession session = request.getSession();
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
@@ -66,6 +75,16 @@ public class ListController {
 		//상단바 개인 사진을 불러오기 위한 값
 		
 		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		int scheduleCount = dao.getDataCount(LoginDTO.getId());
+		request.setAttribute("scheduleCount",scheduleCount);
+		
+		
+		//상단 메뉴바 관련 
 		
 		
 		
@@ -73,9 +92,11 @@ public class ListController {
 		
 		
 		
-		List<ListDTO> lists = listDAO.boardList();
 		
-		ListIterator<ListDTO> it = lists.listIterator();
+		
+		List<ListDTO> boardlists = listDAO.boardList();
+		
+		ListIterator<ListDTO> it = boardlists.listIterator();
 		
 		int depth = -1;
 		int n =0;
@@ -90,14 +111,14 @@ public class ListController {
 	         
 	        depth = vo.getDepth();
 			n++;
-			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
+		/*	hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
 			hMap.put("listNum",Integer.toString(vo.getListNum()));
 			
 			vo.setReplyNum(listDAO.replyNum(hMap));
 
 			hMap.put("replyNum", vo.getReplyNum());
-			listDAO.updateReply(hMap);
+			listDAO.updateReply(hMap);*/
 
 		}
 		
@@ -108,7 +129,7 @@ public class ListController {
 		request.setAttribute("depths", depths);
 		request.setAttribute("parent", parent);
 		request.setAttribute("restDiv",n);
-		request.setAttribute("lists", lists);
+		request.setAttribute("boardlists", boardlists);
 		
 		
 		
@@ -153,6 +174,35 @@ public class ListController {
 
 
 		List<MemberDTO> memberList = listDAO.memberList();
+		
+		Iterator<MemberDTO> ck = memberList.iterator();
+		while(ck.hasNext()){
+			
+			MemberDTO MemberDTO = ck.next();
+			
+			String ckdepth = null;
+			
+			if(!(MemberDTO.getDepth1().equals("no"))){
+				ckdepth = MemberDTO.getDepth1();
+			}
+			if(!(MemberDTO.getDepth2().equals("no"))){
+				ckdepth = MemberDTO.getDepth2();
+			}
+			if(!(MemberDTO.getDepth3().equals("no"))){
+				ckdepth = MemberDTO.getDepth3();
+			}
+			if(!(MemberDTO.getDepth4().equals("no"))){
+				ckdepth = MemberDTO.getDepth4();
+			}
+			if(!(MemberDTO.getDepth5().equals("no"))){
+				ckdepth = MemberDTO.getDepth5();
+			}
+			
+			MemberDTO.setCkdepth(ckdepth);
+			
+			System.out.println( MemberDTO.getName() + "이사람의 댑스=" + MemberDTO.getCkdepth());
+		}
+		
 		int memberMaxNum = memberDAO.maxNum();
 		request.setAttribute("memberMaxNum", memberMaxNum);
 		request.setAttribute("memberList", memberList);

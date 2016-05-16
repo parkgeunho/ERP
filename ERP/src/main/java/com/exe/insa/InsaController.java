@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.exe.approval.ApprovalDAO;
 import com.exe.board.MyUtil;
 import com.exe.erp.NoteDAO;
 import com.exe.member.MemberDTO;
@@ -42,6 +43,10 @@ public class InsaController {
 	@Qualifier("NoteDAO")
 	NoteDAO NoteDAO;
 	
+	@Autowired
+	@Qualifier("approvalDAO")
+	ApprovalDAO approvalDAO;
+	
 	//메인 홈페이지 이동
 	@RequestMapping(value = "/insa", method = {RequestMethod.GET,RequestMethod.POST})
 	public String mainboard(HttpServletRequest request,HttpServletResponse response) {
@@ -53,7 +58,8 @@ public class InsaController {
 		
 		
 		
-		
+		//상단 메뉴바 관련 
+			
 		MemberDTO LoginDTO = (MemberDTO)session.getAttribute("dto");
 		
 		int readCount = NoteDAO.ReadCount(Integer.toString(LoginDTO.getNum()));
@@ -64,6 +70,14 @@ public class InsaController {
 		String LoginimagePath = request.getContextPath() + "/resources/memberImage";
 		request.setAttribute("LoginimagePath",LoginimagePath);
 		//상단바 개인 사진을 불러오기 위한 값
+		
+		
+		int approvalCount = approvalDAO.approvalNextIngCount(LoginDTO.getId());
+
+	
+		request.setAttribute("approvalCount", approvalCount);
+		
+		//상단 메뉴바 관련 
 		
 		
 		
@@ -86,7 +100,7 @@ public class InsaController {
 	         
 	        depth = vo.getDepth();
 			n++;
-			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
+/*			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
 			hMap.put("buseoNum",(vo.getBuseoNum()));
 			
@@ -94,7 +108,7 @@ public class InsaController {
 			
 			
 			hMap.put("replyNum", vo.getReplyNum());
-			insaDAO.updateReply(hMap);
+			insaDAO.updateReply(hMap);*/
 			
 			
 		}
@@ -155,28 +169,33 @@ public class InsaController {
 		while(it.hasNext()){
 			
 			BuseoDTO vo = it.next();
-	
-			
 			vo.setDepthGap(depth - vo.getDepth() + 1);
-	         
+	        
+	        
 	        depth = vo.getDepth();
 			n++;
-			hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
+			
+			/*hMap.put("groupNum", Integer.toString(vo.getGroupNum()));
 			hMap.put("depth", Integer.toString(vo.getDepth()));
 			hMap.put("buseoNum",(vo.getBuseoNum()));
-			
 			vo.setReplyNum(insaDAO.replyNum(hMap));
 			
 			
 			hMap.put("replyNum", vo.getReplyNum());
-			insaDAO.updateReply(hMap);
+			insaDAO.updateReply(hMap);*/
 			
 			
 		}
 		
+		
+		List<BuseoDTO> parentList = insaDAO.parentList();
+		
+		
+		
 		int maxNum = insaDAO.maxNum();
 		List<BuseoDTO> parent = insaDAO.getGroup();
 		List<BuseoDTO> depths = insaDAO.getDepth();
+		request.setAttribute("parentList", parentList);
 		request.setAttribute("maxNum", maxNum);
 		request.setAttribute("depths", depths);
 		request.setAttribute("parent", parent);
@@ -202,6 +221,7 @@ public class InsaController {
 			dto.setDepth(0);
 			dto.setOrderNo(0);
 			dto.setParent(0);
+			dto.setReplyNum(0);
 			insaDAO.buseoCreated(dto);
 		}else{
 			dto = insaDAO.readData(buseoNum);
@@ -213,7 +233,9 @@ public class InsaController {
 			Map<String, Object> hMap = new HashMap<String, Object>();
 		      hMap.put("groupNum", dto.getGroupNum());
 		      hMap.put("orderNo", dto.getOrderNo());
+		      hMap.put("buseoNum", dto.getBuseoNum());
 		      insaDAO.updateOrder(hMap);
+		      
 		      
 		      dto.setParent(Integer.parseInt(dto.getBuseoNum()));
 		      int maxNum = insaDAO.maxNum()+1;
@@ -221,9 +243,12 @@ public class InsaController {
 		      dto.setBuseoName("수정해주세요");
 		      dto.setDepth(dto.getDepth()+1);
 		      dto.setOrderNo(dto.getOrderNo()+1);
+		      dto.setReplyNum(0);
 		      
 		      insaDAO.buseoCreated(dto);
-		      
+		      int replyNum = insaDAO.replyNum(hMap);
+		      hMap.put("replyNum", replyNum);
+		      insaDAO.updateReply(hMap);
 			
 		}
 		
@@ -240,7 +265,7 @@ public class InsaController {
 		String num = request.getParameter("num");
 		int buseoNum = Integer.parseInt(num);
 		response.setCharacterEncoding("UTF-8");
-		
+		Map<String, Object> hMap = new HashMap<String, Object>();
 		
 		//원래 여기에 조건을 줘서 인사쪽을 확인하고 나서 있냐 없냐 여부 확인 후 없으면 삭제를 진행
 		String depth1 = num;
@@ -275,8 +300,27 @@ public class InsaController {
 		}
 		
 		
+		
+		
+		BuseoDTO BDTO = insaDAO.readBuseo(buseoNum);
+		System.out.println("먼데+"+buseoNum);
+	
+		
 		//아니면 에러 처리를 실행해서 삭제가 안되게 해야됨
 		insaDAO.deleteBuseo(buseoNum);
+		
+		if(BDTO.getParent()!=0){
+			
+			hMap.put("buseoNum", BDTO.getParent());
+			int replyNum = insaDAO.replyNum(hMap);
+			hMap.put("replyNum", replyNum);
+			insaDAO.updateReply(hMap);
+		}
+		
+		
+		
+		
+		
 		
 		return buseolist(request, response);
 	}

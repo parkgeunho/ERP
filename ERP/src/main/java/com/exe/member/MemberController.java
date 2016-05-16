@@ -3,6 +3,7 @@ package com.exe.member;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -25,6 +28,7 @@ import com.exe.insa.BuseoDTO;
 import com.exe.insa.InsaDAO;
 
 @Controller
+@SessionAttributes("ApproDTO")
 public class MemberController {
 	
 	@Autowired
@@ -39,13 +43,13 @@ public class MemberController {
 	@Qualifier("NoteDAO")
 	NoteDAO NoteDAO;
 	
-	@RequestMapping(value = "/login.action")
+/*	@RequestMapping(value = "/login.action")
 	public String loginView() {
 		
 		return "member/login";
 		
 	}
-	
+	*/
 	@RequestMapping(value = "/login_ok.action")
 	public String login_ok(HttpServletRequest request,HttpServletResponse response) {
 		
@@ -95,8 +99,13 @@ public class MemberController {
 		if(dto.getId().equals(id) && dto.getPwd().equals(pwd)){
 			
 			session.setAttribute("dto", dto);
+			
+			session.setAttribute("ApprosDTO", dto);
 			System.out.println("여기 들어와서 dto 올렷음");
+			
 			return "redirect:/main";
+			
+			
 			
 		}
 	
@@ -583,7 +592,9 @@ public class MemberController {
 		return "redirect:/insaView.action?num=" + dto.getNum();
 	}
 	
+	
 	@RequestMapping(value = "/deleted_ok.action", method = {RequestMethod.GET})
+	
 	public String deleted_ok(HttpServletRequest request,
 			HttpServletResponse response,MemberDTO dto) throws Exception {
 		
@@ -595,12 +606,12 @@ public class MemberController {
 		//파일삭제
 		
 		
-		File d = new File(path + "/" + upload);
+/*		File d = new File(path + "/" + upload);
 		System.out.println("이게뭔지1:" + d);
 		
 		if(d.exists()){
 		 d.delete();
-		}
+		}*/
 		
 		
 		

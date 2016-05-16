@@ -109,17 +109,17 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 </script>
 
 
-
 <form name="myForm" id="myForm" onsubmit="return false" >
 <div style="height: 500px;" class="mCustomScrollbar" data-mcs-theme="minimal-dark">
 
 <c:forEach var="dto" items="${lists }">
    <c:forEach begin="1" end="${dto.depthGap }" step="1">
    </div>
+   <% System.out.println("a"); %> 
    <% restDiv = restDiv - 1;%>
    </c:forEach>
-<div class="fold-${dto.parent}" id="lists">
-  
+<div class="fold-${dto.parent}" id=-lists">
+   <% System.out.println("b"); %>
          <c:if test="${dto.depth != 0}">
             <c:forEach begin="1" end="${dto.depth }" step="1">
                &nbsp;
@@ -131,7 +131,7 @@ int restDiv = (Integer)request.getAttribute("restDiv");
          <c:if test="${dto.replyNum != 0}">
          <img id="fold-${dto.buseoNum}" src="/erp/resources/image/minus.png"/>
          </c:if>
-           <c:if test="${dto.replyNum == 0}">
+           <c:if test="${dto.replyNum == 0 && dto.parent!=0}">
           <img src="/erp/resources/insa/ㄴ.png">
          </c:if>
        
@@ -150,9 +150,10 @@ int restDiv = (Integer)request.getAttribute("restDiv");
 		<input type="hidden" class="numedit-${dto.buseoNum}" value="${dto.buseoNum }" >
 </c:forEach>
    <% for(int i=0; i<restDiv; i++){ %>
+   <% System.out.println("c"); %>
    </div>
    <%} %>
-	</div>
+	
 </div>
 	
 </form>

@@ -29,9 +29,19 @@ public class MemberDTO {
 	private String depth4;
 	private String depth5;
 	private String upload;
+	private String ckdepth;
 	
 	
 	
+	
+
+	public String getCkdepth() {
+		return ckdepth;
+	}
+
+	public void setCkdepth(String ckdepth) {
+		this.ckdepth = ckdepth;
+	}
 
 	public int getNum() {
 		return num;

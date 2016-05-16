@@ -17,6 +17,8 @@ public class BoardDAO {
 	   //1.num의 최대값
 	   public int getMaxNum(){
 	      
+		   
+		  
 	      int result = 0;
 	      
 	      result = sessionTemplate.selectOne("com.exe.board.BoardMapper.maxNum");

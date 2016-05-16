@@ -64,8 +64,11 @@ $(document).ready(function(){
 	
 	$('[id^="bus-"]').click(function(){
 		
+		group=this.id.substring(4);
 		
-		group= "Bus-" + $('.num'+this.id).val();
+		group= "Bus-" + group;
+		
+		
 		var buseoMaxNum = ${buseoMaxNum};
 		var memberMaxNum = ${memberMaxNum};
 		
@@ -77,7 +80,7 @@ $(document).ready(function(){
 				if(v==this.id){
 					document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
 				}else{
-					document.getElementById(v).style.backgroundColor = "#F6F6F6";
+					document.getElementById(v).style.backgroundColor = "#FFFFFF";
 				}
 				
 			}
@@ -87,7 +90,7 @@ $(document).ready(function(){
 				
 				if($("#"+v).length>0){
 					
-						document.getElementById(v).style.backgroundColor = "#F6F6F6";
+						document.getElementById(v).style.backgroundColor = "#FFFFFF";
 					
 					
 				}
@@ -103,7 +106,10 @@ $(document).ready(function(){
 
 		var buseoMaxNum = ${buseoMaxNum};
 		var memberMaxNum = ${memberMaxNum};
-		group= "Mem-" + $('.num'+this.id).val();
+		group=this.id.substring(4);
+		alert(group);
+		group= "Mem-" + group;
+		alert(group);
 
 		 for(var i=1;i<memberMaxNum+1;i++){
 			var v = "Mem-"+i;
@@ -112,7 +118,7 @@ $(document).ready(function(){
 				if(v==this.id){
 					document.getElementById(this.id).style.backgroundColor = "#E8D9FF";
 				}else{
-					document.getElementById(v).style.backgroundColor = "#F6F6F6";
+					document.getElementById(v).style.backgroundColor = "#FFFFFF";
 				}
 				
 			}
@@ -122,7 +128,7 @@ $(document).ready(function(){
 				
 				if($("#"+v).length>0){
 					
-						document.getElementById(v).style.backgroundColor = "#F6F6F6";
+						document.getElementById(v).style.backgroundColor = "#FFFFFF";
 					
 					
 				}
@@ -239,303 +245,84 @@ function Add(){
 		<div style=" height: 720px; width: 1250px; margin-left: 50px;">
 		
 			<div style="margin-top: 10px; margin-left: 10px; height: 720px; border: 1px solid #D5D5D5; width: 300px; float: left;">
-				
-			<div style="overflow-y:scroll; height: 720px; width: 300px; background-color: #F6F6F6; ">
-			<c:forEach var="parent" items="${buseoParent }">
-				<c:forEach var="depth0" items="${buseolists }">
-					<c:choose>
-					
-					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && depth0.replyNum>0}">
-					<div>
-					<img id="buseo-${depth0.buseoNum}" src="/erp/resources/image/minus.png"/>
-					<img id="folder-${depth0.buseoNum}" src="/erp/resources/insa/folder.png"/>
-					<label id="bus-${depth0.buseoNum}" style="font-weight: bold;" >${depth0.buseoName }</label>
-					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
-					</div>
-						<div class="buseo-${depth0.buseoNum}">
-					
-							<c:forEach var="member1" items="${memberList }">
-								<c:if test="${member1.depth1==depth0.buseoNum && member1.depth2=='no' }">
-									<div  style="margin-left: 10px; color: #6B9900" >
-									<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-									<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-									<label id="Mem-${member1.num }" >${member1.name }</label>
-									
-									</div>
-									<input type="hidden" class="numMem-${member1.num }" value="${member1.num }">
-								</c:if>
-							
-							</c:forEach>
-						
-						
-						<c:forEach var="depth1" items="${buseolists }">
-										
-							<c:choose>
-							
-							
-							<c:when test="${depth1.parent==depth0.buseoNum && depth1.replyNum>0 }">
-								<div style="margin-left: 20px;">
-								<img id="buseo-${depth1.buseoNum}" src="/erp/resources/image/minus.png"/>
-								<img id="folder-${depth1.buseoNum}" src="/erp/resources/insa/folder.png"/>
-								<label id="bus-${depth1.buseoNum }">${depth1.buseoName }</label>
-								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
-								</div>
-								<div class="buseo-${depth1.buseoNum}">
-								
-									<c:forEach var="member2" items="${memberList }">
-									<c:if test="${member2.depth2==depth1.buseoNum && member2.depth3=='no' }">
-										<div style="margin-left: 30px; color: #6B9900" >
-										<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-										<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
-										<label id="Mem-${member2.num }"> ${member2.name }</label>
-										</div>
-										<input type="hidden" class="numMem-${member2.num }" value="${member2.num }">
-									</c:if>
-								
-									</c:forEach>
-								
-								
-								
-								
-								
-								
-								
-								
-									<c:forEach var="depth2" items="${buseolists}">
-																		
-									<c:choose>
-									
-									
-										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum>0}">
-											<div style="margin-left: 40px;">
-											<img id="buseo-${depth2.buseoNum}" src="/erp/resources/image/minus.png"/>
-											<img id="folder-${depth2.buseoNum}" src="/erp/resources/insa/folder.png"/>
-											<label id="bus-${depth2.buseoNum }" > ${depth2.buseoName }</label>
-											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
-											</div>
-											
-											<div class="buseo-${depth2.buseoNum}">
-											
-											
-											
-											
-											
-												 <c:forEach var="member3" items="${memberList }">
-												<c:if test="${member3.depth3==depth2.buseoNum && member3.depth4=='no' }">
-													<div  style="margin-left: 35px; color: #6B9900" >
-													<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-													<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
-													<label id="Mem-${member3.num }"> ${member3.name }</label>
-													
-													</div>
-													<input type="hidden" class="numMem-${member3.num }" value="${member3.num }">
-												</c:if>
-											
-												</c:forEach> 
-											
-											
-											
-											
-											
-											
-											
-												<c:forEach var="depth3" items="${buseolists }" >
-												
-													<c:choose>
-													
-													
-													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum>0 }">
-														<div style="margin-left: 60px;">
-														<img id="buseo-${depth3.buseoNum}" src="/erp/resources/image/minus.png"/>
-														<img id="folder-${depth3.buseoNum}" src="/erp/resources/insa/folder.png"/>
-														<label id="bus-${depth3.buseoNum }"> ${depth3.buseoName }</label>
-														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
-														
-														</div>
-														<div class="buseo-${depth3.buseoNum}">
-															
-															
-																<c:forEach var="member4" items="${memberList }">
-																<c:if test="${member4.depth4==depth3.buseoNum && member4.depth5=='no' }">
-																	<div  style="margin-left: 60px;  color: #6B9900" >
-																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-																	<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-																	<label id="Mem-${member4.num }">${member4.name }</label>
-																	
-																	</div>
-																	<input type="hidden" class="numMem-${member4.num }" value="${member4.num }">
-																</c:if>
-															
-																</c:forEach>
-															
-															
-														<c:forEach var="depth4" items="${buseolists }">
-														
-															<c:choose>
-															
-																<c:when test="${depth3.buseoNum==depth4.parent }">
-																	<div style="margin-left: 70px;">
-																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-																	<img id="folder-${depth0.buseoNum}" src="/erp/resources/insa/folder2.png"/>
-																	
-																	<label id="bus-${depth4.buseoNum }"> ${depth4.buseoName }</label>
-																	<input type="hidden" class="numbus-${depth4.buseoNum }" value="${depth4.buseoNum }">
-																	</div>
-																	<div class="buseo-${depth4.buseoNum }">
-																	
-																	
-																				<c:forEach var="member5" items="${memberList }">
-																				<c:if test="${member5.depth5==depth4.buseoNum }">
-																					<div  style="margin-left: 90px; color: #6B9900" >
-																					<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-																					<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
-																					<label id="Mem-${member5.num }">${member5.name }</label>
-																					 
-																					</div>
-																					<input type="hidden" class="numMem-${member5.num }" value="${member5.num }">
-																				</c:if>
-																			
-																				</c:forEach>
-										 
-																	
-																	</div>
-																</c:when>
-															</c:choose>
-														
-														</c:forEach>
-														</div>
-													</c:when>
-													
-													
-													
-													
-													
-													
-													
-													<c:when test="${depth3.parent==depth2.buseoNum && depth3.replyNum==0 }">
-														<div style="margin-left: 35px;">
-														<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-														<img id="folder-${depth0.buseoNum}" src="/erp/resources/insa/folder2.png"/>
-														<label id="bus-${depth3.buseoNum }" > ${depth3.buseoName }</label>
-														<input type="hidden" class="numbus-${depth3.buseoNum }" value="${depth3.buseoNum }">
-														</div>
-														
-														<div>
-																<c:forEach var="member4" items="${memberList }">
-																<c:if test="${member4.depth4==depth3.buseoNum && member4.depth4=='no' }">
-																	<div  style="margin-left: 35px; color: #6B9900" >
-																	<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-																	<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-																	<label id="Mem-${member4.num }" >${member4.name }</label>
-																																	
-																	</div>
-																	<input type="hidden" class="numMem-${member4.num }" value="${member4.num }">
-																</c:if>
-															
-																</c:forEach>
-														
-														
-														</div>
-														
-													</c:when>
-												
-													</c:choose>
-												</c:forEach>
-											</div>
-										</c:when>
-										
-										
-										<c:when test="${depth2.parent==depth1.buseoNum && depth2.replyNum==0 }">
-											<div style="margin-left: 30px;">
-											<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-											<img src="/erp/resources/insa/folder2.png" align="middle">
-											<label id="bus-${depth2.buseoNum }" >${depth2.buseoName }</label>
-											<input type="hidden" class="numbus-${depth2.buseoNum }" value="${depth2.buseoNum }">
-											</div>
-											
-											<div>
-											
-												<c:forEach var="member3" items="${memberList }">
-													<c:if test="${member3.depth3==depth2.buseoNum && member3.depth4=='no' }">
-														<div  style="margin-left: 30px; color: #6B9900" >
-														<img src="/erp/resources/insa/ㄴ1.png" align="middle">
-														<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/>
-														<label id="Mem-${member3.num }">${member3.name }</label>
-														 
-														</div>
-														<input type="hidden" class="numMem-${member3.num }" value="${member3.num }">
-													</c:if>
-												
-												</c:forEach>
-											
-											</div>
-										</c:when>
-									</c:choose>
-								
-									</c:forEach>
-								</div>
-							</c:when>
-							
-							
-							
-							<c:when test="${depth1.parent==depth0.buseoNum &&depth1.replyNum==0 }">
-								<div style="margin-left: 20px;">
-								┖<label id="bus-${depth1.buseoNum }" >${depth1.buseoName }</label>
-								<input type="hidden" class="numbus-${depth1.buseoNum }" value="${depth1.buseoNum }">
-								</div>
-								<div>
-								<c:forEach var="member2" items="${memberList }">
-									<c:if test="${member2.depth2==depth1.buseoNum && member2.depth3=='no' }">
-										<div  style="margin-left: 30px;  color: #6B9900" >
-										<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-										<label id="Mem-${member2.num }" >${member2.name }</label>
-										
-										</div>
-										<input type="hidden" class="numMem-${member2.num }" value="${member2.num }">
-									</c:if>
-								
-								</c:forEach>
-								</div>
-								
-							</c:when>
-							
-							</c:choose>
-						</c:forEach>
-						</div>
-								
-					</c:when>
-					<c:when test="${depth0.parent==0 && depth0.groupNum==parent.groupNum && parent.replyNum==1}">
-					<div>
-					<label id="bus-${depth0.buseoNum }">${depth0.buseoName }</label>
-					<input type="hidden" class="numbus-${depth0.buseoNum }" value="${depth0.buseoNum }">
+			
+			
+			
+			<c:forEach var="dto" items="${buseolists }">
+			   <c:forEach begin="1" end="${dto.depthGap }" step="1">
+			   		</div>
+			   		<c:set var="buseoN" value="${buseoN-1 }"/>
 
-					</div>
-					<div>
-						<c:forEach var="member1" items="${memberList }">
-							<c:if test="${member1.depth1==depth0.buseoNum && member1.depth2=='no' }">
-								<div  style="margin-left: 30px; color: #6B9900" >
-								<img src="/erp/resources/image/team_test.png" alt="멍미" align="middle"/> 
-								<label id="Mem-${member1.num }" >${member1.name }</label>
-								
-								</div>
-								<input type="hidden" class="numMem-${member1.num }" value="${member1.num }">
-							</c:if>
-						
-						</c:forEach>
-					</div>
-					
-					
-					
-					
-					
-					
+			   </c:forEach>
+			<div class="fold-${dto.parent}" id=-lists">
+			
+		
+			   
+			         <c:if test="${dto.depth != 0}">
+			            <c:forEach begin="1" end="${dto.depth }" step="1">
+			               <span style="width: 33px;">&nbsp;</span>
+			            </c:forEach>
+			         </c:if>
+			         <c:if test="${dto.replyNum == 0 && dto.depth != 0}">
+			            
+			         </c:if>
+			         <c:if test="${dto.replyNum != 0}">
+			         	<img id="fold-${dto.buseoNum}" src="/erp/resources/image/minus.png"/>
+			         </c:if>
+			         
+			         
+			         <c:if test="${dto.replyNum == 0 && dto.parent!=0}">
+			         	<img src="/erp/resources/insa/ㄴ.png">
+			         </c:if>
+			       	
+			       
+			        <c:choose>
+			        	<c:when test="${dto.checked!='a' }">
+			        	<img src="/erp/resources/insa/folder.png">
+			        	 <label id="bus-${dto.buseoNum}">
+			        	 
+			        	 ${dto.buseoName }</label>
+			        	</c:when>
+			        </c:choose>
+			        
+			        
+			        <c:forEach var="member" items="${memberList }">
+				<c:choose>
+				
+					<c:when test="${dto.buseoNum==member.ckdepth }">
+					<div class="fold-${dto.buseoNum}" style="margin-left: 10px;">
+						<c:if test="${dto.depth != 0}">
+				            <c:forEach begin="1" end="${dto.depth }" step="1">
+				               <span style="width: 30px;">&nbsp;&nbsp;</span>
+				            </c:forEach>
+			         	</c:if>
+			         <img src="/erp/resources/insa/ㄴ.png">
+			         <label id="Mem-${member.num }">${member.name }</label>
+			         <input type="hidden" class="Mem-${member.num }" value="">
+			         </div>
 					
 					</c:when>
-					</c:choose>
-				</c:forEach>
+				</c:choose>
+			
+			
 			</c:forEach>
-			</div>
-		</div>
+			        
+			        
+			        
+			        
+					<input type="hidden" class="numedit-${dto.buseoNum}" value="${dto.buseoNum }" >
+			</c:forEach>
+			   <c:forEach begin="0" step="1" end="${buseoN }">
+			    	</div>
+			   </c:forEach>
+			
+			
+			
+			
+			
+			
+			
+			
 			<div style="height: 100px;width:30px;line-height:100px; float: left;  margin-top: 25%" class="buttonsq" onclick="Add()">
 				<label style="font-size: 25px; font-weight: bolder;">+</label>
 			</div>

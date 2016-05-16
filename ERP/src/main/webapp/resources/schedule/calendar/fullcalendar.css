@@ -5,6 +5,9 @@
  */
 
 
+.fc-sat {color:blue;}
+.fc-sun {color:red;}
+
 .fc {
 	direction: ltr;
 	text-align: left;

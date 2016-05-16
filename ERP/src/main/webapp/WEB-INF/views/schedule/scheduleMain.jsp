@@ -64,14 +64,23 @@
 		$('[id^="fold-"]').click(function(){
 			
 			var src = ($(this).attr('src')=='/erp/resources/schedule/image/minus.png') ?'/erp/resources/schedule/image/plus.png':'/erp/resources/schedule/image/minus.png';
-		     $(this).attr('src',src);
+		    $(this).attr('src',src);
+		     
+		    var src2 = ($('#fol').attr('src')=='/erp/resources/schedule/image/열린폴더.png') ?'/erp/resources/schedule/image/닫힌폴더.png':'/erp/resources/schedule/image/열린폴더.png';
+		    $('#fol').attr('src',src2);
 			
 			var obj = $('.'+ this.id);
+
+			var obj2 = $('#fol').id;
 			
-			if(obj.css('display')=='none')
+			if(obj.css('display')=='none'){
 				obj.show();
-			else
+				obj2.show();
+			}
+			else{
 				obj.hide();
+				obj2.hide();
+			}
 		});
 	});
 	
@@ -103,6 +112,22 @@
 		
 		$("#rightCal").show();
 	}
+	
+	function agendaDayCall(day){
+		
+		var year = $("#year").val();
+		var month = $("#month").val();
+		var day = day;
+
+		var url = "agendaDayCall";
+		
+		$.post(url,{year:year,month:month,day:day},function(args){
+			
+			$("#rightCal").html(args);
+		});
+		
+		$("#rightCal").show();
+	}
 
 </script>
 
@@ -122,18 +147,23 @@
 		
 	<div style="border-bottom:1px solid #CCCCCC; height: 584px; float:left; text-align:left; padding-left:0px; padding-top:0px; width: 270px;">
 		<dl>
-			<dd style="text-align: left; padding-left:0px; ">	
-				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>&nbsp;<font color="black" style="font-style: 나눔고딕코딩;">일정</font></dd>
-			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
+			<dd style="text-align: left; padding-left:0px; ">
+				<img id="fold-1" src="/erp/resources/schedule/image/minus.png"/>
+				<img style="vertical-align: middle;" id="fol" src="/erp/resources/schedule/image/열린폴더.png"/>
+				<font color="black" style="vertical-align:middle; font-style: 나눔고딕코딩;">일정</font></dd>
+			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;
+			<img style="vertical-align:middle;" src="/erp/resources/schedule/image/점선.png"/>
+			<img style="vertical-align:middle;" src="/erp/resources/schedule/image/닫힌폴더.png"/>
 			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="javascript:rightCal()"><font color="black" style="font-style: 나눔고딕코딩;">나의일정</font></a></dd>
-			<dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
-			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
-			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd>
+			onmouseout="this.style.textDecoration='none';" href="javascript:rightCal()">
+			<font color="black" style="font-style: 나눔고딕코딩;">나의일정</font></a></dd>
+			<!-- <dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/> -->
+			<!-- <a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
+			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">그룹일정</font></a></dd> -->
 			<!-- <dd style="text-align: left; padding-left:0px; " class="fold-1">&nbsp;&nbsp;&nbsp;<img src="/erp/resources/schedule/image/re.gif"/>
 			<a style="text-decoration: none;" onmouseover="this.style.textDecoration='underline';" 
 			onmouseout="this.style.textDecoration='none';" href="calendar2"><font color="black" style="font-style: 나눔고딕코딩;">전사일정</font></a></dd> -->
-			<dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd>
+			<!-- <dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">할일작성</font></dd> -->
 			<!-- <dd style="text-align: left; padding-left:0px; "><font color="black" style="font-style: 나눔고딕코딩;">회의실예약</font></dd>	 -->		
 		</dl>
 	</div>

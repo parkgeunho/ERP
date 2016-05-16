@@ -6,12 +6,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.exe.member.MemberDTO;
 
 
 
 public class InsaDAO {
+	
+	
 	
 	
 	
@@ -140,6 +145,13 @@ public class InsaDAO {
 		
 		int result = sessionTemplate.selectOne("com.exe.insa.deletecheck",params);
 		return result;
+	}
+	
+	public List<BuseoDTO> parentList(){
+		
+		List<BuseoDTO> lists = sessionTemplate.selectList("com.exe.insa.parentList");
+		return lists;
+		
 	}
 	
 	

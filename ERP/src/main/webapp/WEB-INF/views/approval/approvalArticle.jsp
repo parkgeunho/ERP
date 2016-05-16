@@ -60,6 +60,10 @@
 		window.close();
 	}
 	
+	function openWin(i) {
+	    window.open('./search_ok.action?num='+i, '','width=500, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');
+	}
+	
 </script>
 
 
@@ -117,16 +121,22 @@
 		<c:choose>
 				
 			<c:when test="${dto.approvalDepth==2}">
+					<a href="javascript:openWin('${nameDTO.num2 }')">
 					${nameDTO.depth2}
+					</a>
 			</c:when>
 			
 			<c:when test="${dto.approvalDepth==3}">		
 			<c:choose>
 				<c:when test="${i==1 }">
+				<a href="javascript:openWin('${nameDTO.num3 }')">
 					${nameDTO.depth3}
+				</a>
 				</c:when>
 				<c:when test="${i==2 }">
-					${nameDTO.depth2} 
+				<a href="javascript:openWin('${nameDTO.num2 }')">
+					${nameDTO.depth2}
+				</a> 
 				</c:when>
 			</c:choose>
 			</c:when>
@@ -134,13 +144,19 @@
 			<c:when test="${dto.approvalDepth==4}">
 			<c:choose>
 				<c:when test="${i==1 }">
+				<a href="javascript:openWin('${nameDTO.num4 }')">
 					${nameDTO.depth4}
+				</a>
 				</c:when>
 				<c:when test="${i==2 }">
+				<a href="javascript:openWin('${nameDTO.num3 }')">
 					${nameDTO.depth3}
+				</a>
 				</c:when>
 				<c:when test="${i==3 }">
+				<a href="javascript:openWin('${nameDTO.num2 }')">
 					${nameDTO.depth2}
+				</a>
 				</c:when>
 			</c:choose>
 			</c:when>
@@ -148,16 +164,24 @@
 			<c:when test="${dto.approvalDepth==5}">
 			<c:choose>
 				<c:when test="${i==1 }">
-					${nameDTO.depth4}
+				<a href="javascript:openWin('${nameDTO.num5 }')">
+					${nameDTO.depth5}
+				</a>
 				</c:when>
 				<c:when test="${i==2 }">
+				<a href="javascript:openWin('${nameDTO.num4 }')">
+					${nameDTO.depth4}
+				</a>
+				</c:when>
+				<c:when test="${i==3 }">
+				<a href="javascript:openWin('${nameDTO.num3 }')">
 					${nameDTO.depth3}
+				</a>
 				</c:when>
 				<c:when test="${i==3 }">
+				<a href="javascript:openWin('${nameDTO.num2 }')">
 					${nameDTO.depth2}
-				</c:when>
-				<c:when test="${i==3 }">
-					${nameDTO.depth2}
+				</a>
 				</c:when>
 			</c:choose>
 			</c:when>
@@ -165,19 +189,29 @@
 			<c:when test="${dto.approvalDepth==6}">
 			<c:choose>
 				<c:when test="${i==1 }">
+				<a href="javascript:openWin('${nameDTO.num6 }')">
 					${nameDTO.depth6}
+				</a>
 				</c:when>
 				<c:when test="${i==2 }">
+				<a href="javascript:openWin('${nameDTO.num5 }')">
 					${nameDTO.depth5}
+				</a>
 				</c:when>
 				<c:when test="${i==3 }">
+				<a href="javascript:openWin('${nameDTO.num4 }')">
 					${nameDTO.depth4}
+				</a>
 				</c:when>
 				<c:when test="${i==4 }">
+				<a href="javascript:openWin('${nameDTO.num3 }')">
 					${nameDTO.depth3}
+				</a>
 				</c:when>
 				<c:when test="${i==5 }">
+				<a href="javascript:openWin('${nameDTO.num2 }')">
 					${nameDTO.depth2}
+				</a>
 				</c:when>
 			</c:choose>
 			</c:when>
@@ -510,7 +544,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="javascript:approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="javascript:approvalReturn();"/>
-<input type="hidden" name="mydepth" value="2"/>2
+<input type="hidden" name="mydepth" value="2"/>
 </td></tr>
 </c:when>
 
@@ -518,7 +552,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="approvalReturn();"/>
-<input type="hidden" name="mydepth" value="3"/>3
+<input type="hidden" name="mydepth" value="3"/>
 </td></tr>
 </c:when>
 
@@ -526,7 +560,7 @@
 <tr height="60"><td colspan="4" align="center">
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="결재" onclick="approvalOK();"/>&nbsp;&nbsp;&nbsp;
 <input type="button" style="width: 100px; height: 30px; font-size: 10pt; font-family: 고딕;" name="" value="반려" onclick="approvalReturn();"/>
-<input type="hidden" name="mydepth" value="4"/>4
+<input type="hidden" name="mydepth" value="4"/>
 </td></tr>
 </c:when>
 

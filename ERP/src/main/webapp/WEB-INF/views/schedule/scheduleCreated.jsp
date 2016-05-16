@@ -9,6 +9,8 @@
 	String start = request.getParameter("start");
 	String end = request.getParameter("end");
 	
+	System.out.print(start);
+	
 	String stY, stM, stD, stH, stMin;
 	String endY, endM, endD, endH, endMin;
 	
@@ -18,6 +20,8 @@
 	stD = st.nextToken();
 	stH = st.nextToken();
 	stMin = st.nextToken();
+	
+	System.out.print(stM);
 	
 	st = new StringTokenizer(end,"-");
 	endY = st.nextToken();
@@ -58,6 +62,8 @@
 	    f.submit();
 	    
 		window.close();
+		
+		opener.location.reload();
 	}
 
 	function sel() {
@@ -121,7 +127,6 @@
 		}
 		
 		var sCalendarSt = f.calendarSt;
-		<%= stM = "0" + stM%>
 		sCalendarSt.value = <%= stY%> + '-' + <%= stM%> + '-' + <%= stD%>;
 		
 		var sCalendarEnd = f.calendarEnd;
@@ -149,12 +154,12 @@
 											dayNamesShort: ['일','월','화','수','목','금','토'],
 											dayNamesMin: ['일','월','화','수','목','금','토'],
 											weekHeader: 'Wk',
-											dateFormat: 'yy-mm-dd',
+											dateFormat: 'yy-m-d',
 											firstDay: 0,
 											isRTL: false,
 											showMonthAfterYear: true,
 											yearSuffix: ''},
-										{dateFormat:'yy-mm-dd'});
+										{dateFormat:'yy-m-d'});
 
 		$('[id^="calendar"]').datepicker({
 			
@@ -164,7 +169,8 @@
 			buttonImageOnly: true,
 			buttonImage:'/erp/resources/schedule/image/cal.png',
 			showButtonPanel: true,
-			showAnim: 'fold'
+			showAnim: 'fold',
+			dateFormat: 'yy-m-d'
 		});
 		
 		$('img.ui-datepicker-trigger').css({'cursor':'pointer','vertical-align':'middle','margin-left':'3px',

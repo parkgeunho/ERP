@@ -71,6 +71,7 @@ function setChildValue(name,num){
 	<div style="height: 40px; line-height: 40px; width: 490px;">쪽지 쓰기</div>
 	<div style="border-bottom: 1px solid;border-top: 1px solid; height: 40px; line-height: 40px; width: 490px;">
 		<div style="float: left;">받는사람</div>
+
 		<div style="float: left;margin-top: 9px; margin-left: 15px; "><input type="text" size="49" name="dummy" id="dummy" value="${dummy }"></div>
 		<div class="chk" align="center" style="float: left; margin-left: 10px;margin-top: 9px; " onclick="searchPop()">주소록</div>
 	</div>
@@ -82,8 +83,10 @@ function setChildValue(name,num){
 	</div>
 	
 	</div>
+
 	<input type="hidden" name="writer" value="${LoginDTO.num }">
 	<input type="hidden" name="reader" id="reader" value="${reader }">
+
 	</div>
 	
 	<div>

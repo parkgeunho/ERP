@@ -29,13 +29,14 @@ function banner_roll(div_id, banner_height, banner_delay, banner_speed, this_hei
 		setTimeout("banner_roll('" + div_id + "', " + banner_height + ", " + banner_delay + ", " + banner_speed + ", 0);", banner_delay);
 	}
 
+	
+	
 	return true;
 }
 
 
 </script>
-
-
+	
 
 
 <script type="text/javascript">
@@ -78,10 +79,15 @@ $(document).ready(function(){
     	
         $("#do1").slideToggle("slow");
     });
-               
+             
     
 	 
 });
+
+
+function winOpen(approvalNum){
+	window.open('http://localhost:8080/erp/approvalArticle?approvalNum='+approvalNum,'', 'width=1000, height=1000, toolbar=no, menubar=no, scrollbars=yes, resizable=yes');
+}
 
 function notices(boardNum) { 
 	
@@ -94,11 +100,27 @@ function openArticle(noteNum){
 	
 }
 
+	$(function(){
+		leftCal();
+	});
+	
+	function leftCal(){
+
+		var url = "leftCalChange";
+		
+		$.post(url,function(args){
+			
+			$("#leftCal").html(args);
+		});
+		
+		$("#leftCal").show();
+	}
+
 </script>
 </head>
 <body style="width: 100%">
 
-<div style="width:100%; height: 807px; background-image: url('/erp/resources/image/white.jpg');">
+<div style="width:100%; height: 822px; background-image: url('/erp/resources/image/white.jpg');">
 
 
 <!-- 왼쪽 첫번재 div -->
@@ -110,7 +132,7 @@ function openArticle(noteNum){
 			<div id="ex" class="sub">
 				<c:forEach var="note" items="${NoteList }">
 				<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
-				<a href="javascript:openArticle(${note.noteNum })">${note.content }</a>
+				<a href="javascript:openArticle(${note.noteNum })" class="hyperLine" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${note.content }</a>
 				</div>
 				
 				</c:forEach>
@@ -122,7 +144,13 @@ function openArticle(noteNum){
 	<div style="margin-top: 40px;" class="line">
 			<div id="check" class="ma">결재함</div>
 			<div id="dod" class="sub">
-				아무것도없음
+				<c:forEach var="dto" items="${approvalList}">
+					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
+			
+					<a href="javascript:winOpen('${dto.approvalNum}')" style="text-decoration: none; color: black;">
+						${dto.subject }</a>
+					</div> 
+				</c:forEach>
 			</div>	
 	</div>	
 	
@@ -137,9 +165,8 @@ function openArticle(noteNum){
 				<c:forEach var="notice" items="${notice }">
 					<div  style="height: 25px; line-height: 25px; width: 550px; border-bottom: 1px solid #EAEAEA;">● 
 					
-					<a href="#" onclick="notices(${notice.boardNum })">
-						${notice.subject }
-					</a>
+					<a href="#" onclick="notices(${notice.boardNum })" class="hyperLine" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+							${notice.subject }</a>
 					</div>
 				</c:forEach>
 			</div>
@@ -208,8 +235,30 @@ function openArticle(noteNum){
 		
 			<div id="Calendar" class="ma">일정</div>
 			<div class="sub" id="non" >
-					<div style="float:left;width: 40%;">여기는 달력이 들어갈 자리입니다</div>
-					<div style="float:left;">개인일정 전사일정 <br/>들어갈자리</div>
+					<div style="padding-top :10px; float:left; width: 40%;">
+						<span id="leftCal" style="width: 270px; display: none;"></span></div>
+					<div style="padding-top:15px; float:left;">
+						<table border="0" cellpadding="0" cellspacing="0" align="center" style="width: 93%; font-style: 나눔고딕코딩; font-size: 13pt;">
+								<tr style="background-color:#CCCCCC; height: 28px;">
+									<td style="border-left:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 130px;" align="center">Title</td>
+									<td style="border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">Start Date</td>
+									<td style="border-right:1px solid #CCCCCC; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">Due Date</td></tr>
+						
+						<c:forEach var="dto" items="${scheduleListMain }" begin="0" end="5" step="1">
+						
+								<tr style="height: 28px;">
+									<td style="border-left:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; border-right:1px solid #CCCCCC; width: 130px;" align="center">
+									<font size="2px">
+									${dto.title }</font></td>
+									<td style="border-bottom:1px solid #CCCCCC; border-right:1px solid #CCCCCC; width: 100px;" align="center">
+									<font size="2px">
+									${dto.startDate }</br>${dto.startTime }</font></td>
+									<td style="border-right:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; width: 100px;" align="center">
+									<font size="2px">
+									${dto.endDate }</br>${dto.endTime }</font></td></tr>
+						</c:forEach>
+						</table>
+					</div>
 			</div>
 		</div>
 	

@@ -70,7 +70,8 @@
 			<font style="vertical-align: middle;" size="3px">&nbsp;&nbsp;&nbsp;&nbsp;${year}년</font>
 			<c:if test="${month<10 }">&nbsp;</c:if>
 			<font style="vertical-align: middle;" size="3pt">${month}월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
-		
+			<input type="hidden" id="year" name="year" value="${year }">
+			<input type="hidden" id="month" name="month" value="${month }">
 		<img style="cursor: pointer; vertical-align: middle;" id="calRight" src="/erp/resources/schedule/image/right.jpg" width="20" height="17" border="0"/>
 		</td>
 	</tr>
@@ -105,7 +106,7 @@
 			
 			String bgColor = (nowYear==year)&&(nowMonth==month)&&(nowDay==i)?"#e6e4e6":"#ffffff";
 			
-			out.print("<td width=\"25px\" onclick=\"window.location='http://kin.naver.com'\" style=\"cursor: pointer;\" align='center' bgcolor='" + bgColor + "'><font size=\"2pt\" color='" + fontColor + "'>" + i + "</font></td>");
+			out.print("<td width=\"25px\" onclick=\"agendaDayCall(" + i + ")\" style=\"cursor: pointer;\" align='center' bgcolor='" + bgColor + "'><font size=\"2pt\" color='" + fontColor + "'>" + i + "</font></td>");
 			
 			newLine++;
 			
@@ -124,6 +125,6 @@
 		
 		out.print("</tr>");
 	%>
-	
+
 </table>
 

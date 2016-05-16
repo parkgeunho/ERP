@@ -13,20 +13,20 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 생성 -->
 	<insert id="buseoCreated" parameterType="com.exe.insa.BuseoDTO">
-	insert into buseo(buseoNum,groupNum,depth,orderNo,parent)
-	values (#{buseoNum},#{groupNum},#{depth},#{orderNo},#{parent})
+	insert into buseo(buseoNum,groupNum,depth,orderNo,parent,replyNum)
+	values (#{buseoNum},#{groupNum},#{depth},#{orderNo},#{parent},#{replyNum})
 	</insert>
 	
 	<!-- 리스트출력 -->
 	<select id="list" resultType="com.exe.insa.BuseoDTO">
 	
-	select buseoNum,buseoName,groupNum,depth,orderNo,parent,checked from buseo order by groupNum desc, orderNo asc
+	select buseoNum,buseoName,groupNum,depth,orderNo,parent,checked,replyNum from buseo order by groupNum desc, orderNo asc
 	
 	</select>
 	
 	<!-- 하위 개수 -->
    <select id="replyNum" resultType="Integer" parameterType="map">
-      select count(*) from buseo where groupNum=#{groupNum} and depth=#{depth}+1 and parent=#{buseoNum}
+      select count(*) from buseo where parent=#{buseoNum}
    </select>
    
    <!-- 하위갯수변경 -->
@@ -114,6 +114,12 @@ PUBLIC "-/mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
+	
+	<select id="parentList" resultType="com.exe.insa.BuseoDTO">
+	
+	select parent from buseo group by parent having parent!=0
+	
+	</select>
 	
 	
 </mapper>

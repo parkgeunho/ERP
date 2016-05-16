@@ -58,6 +58,14 @@ public class ApprovalDAO {
 		return lists;
 	}
 	
+	public int approvalNextIngCount(String id){
+		
+		int count = 0;
+		
+		return count = sessionTemplate.selectOne("com.exe.approval.approvalNextIngCount", id);
+		
+	}
+	
 	public ApprovalDTO getLeadData(String approvalNum){
 		
 		ApprovalDTO dto = sessionTemplate.selectOne("com.exe.approval.getLeadData",approvalNum);
@@ -70,6 +78,13 @@ public class ApprovalDAO {
 		String returnId = sessionTemplate.selectOne("com.exe.approval.getName",id);
 		
 		return returnId;
+	}
+	
+	public String getNum(String id){
+		
+		String returnNum = sessionTemplate.selectOne("com.exe.approval.getNum",id);
+		
+		return returnNum;
 	}
 	
 	
